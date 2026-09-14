@@ -1,5 +1,5 @@
 ---
-title: "Workshop 2 - Exploratory Data Analysis - extension"
+title: "Workshop 2 - Exploratory Data Analysis - Extension"
 format:
   html:
     theme: yeti
@@ -69,4 +69,332 @@ A measure of how spread out the values are around the mean.
 Our mean and our standard deviation are the most commonly used summary statistics. The mean gives us an idea of the central tendency of the data, while the standard deviation tells us how much the data varies from the mean. 
 
 **Skewness**
+
+
+
+### Checking Data 
+
+Let's use what we've learnt using a dataset. 
+
+![*The mouse*](images/ch2.mouse.jpg){fig-align="left"}
+
+Meet *Apodemus sylvaticus*, the [wood mouse](https://www.wildlifetrusts.org/wildlife-explorer/mammals/wood-mouse). *Apodemus sylvaticus* can often be found with the parasite, gastrointestinal roundworm, *Heligmosomoides polygyrus*.
+
+We have a dataset where researchers took a sample of 60 different *Apodemus sylvaticus*, checked their (i) sex, (ii) weight, and (iii) the count of parasites present. 
+
+Let's first read in this dataset, found in `data/mouse_parasite_counts.csv`. 
+
+Before we do this, as you'll remember, you'll need a package to do this. If you rememeber from earlier (), we used the function, `read_csv()`, this is from the package`readr`. However readr, is part of the `tidyverse` package, which actually contains A LOT. Read about this in one of the appendices. 
+```{r, results='hide', message=FALSE, warning=FALSE}
+library(tidyverse)
+library(janitor)
+library(webexercises)
+```
+
+
+
+
+If the `tidyverse()` package is installed, you should be able to read in the dataset. 
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+mice_parasites <- read_csv("data/mouse_parasite_counts.csv")
+```
+
+
+
+Let's use a bit about what we learnt earlier with checking the data. We played with finding out about the data and2 split them into 3 different categories: (i) Dimensions/Size, (ii). Structure/variable names,  (iii). Viewing the actual data, and (iv) starting to summarise the data.
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+# (1). Dimensions/Size:
+nrow(mice_parasites) # number of rows, Base R
+ncol(mice_parasites) # number of columns, Base R
+
+# (2). Structure/Variable Names:
+colnames(mice_parasites) # variable names, Base R
+str(mice_parasites) # summary of the data structure, Base R
+glimpse(mice_parasites) # summary of the data structure, tidyverse
+
+# (3). Viewing the Actual Data: 
+head(mice_parasites) # first 6 rows, Base R
+tail(mice_parasites) # last 6 rows, Base R
+
+# (4). Starting to Summarise the Data: 
+summary(mice_parasites) # summary of the data, Base R
+tabyl(mice_parasites, sex) # frequency, janitor
+```
+
+
+::: {.callout-note collapse="true" title="Dimensions/Size"}
+```{r}
+nrow(mice_parasites) # number of rows, Base R
+ncol(mice_parasites) # number of columns, Base R
+```
+:::
+
+::: {.callout-note collapse="true" title="Structure/Variable Names"}
+```{r}
+colnames(mice_parasites) # variable names, Base R
+str(mice_parasites) # summary of the data structure, Base R
+glimpse(mice_parasites) # summary of the data structure, tidyverse
+```
+:::
+
+::: {.callout-note collapse="true" title="Viewing the Actual Data"}
+```{r}
+head(mice_parasites) # first 6 rows, Base R
+tail(mice_parasites) # last 6 rows, Base R
+```
+:::
+
+::: {.callout-note collapse="true" title="Starting to Summarise the Data"}
+```{r}
+summary(mice_parasites) # summary of the data, Base R
+tabyl(mice_parasites, sex) # frequency, janitor
+```
+
+:::
+
+        
+Have a little run of the functions, then answer the following questions.
+
+**1. How many rows does the dataset contain?** In this case, it will tell us how many different samples of *Apodemus sylvaticus* were taken. 
+
+`r mcq(c("30", "45", answer = "60", "75"))`
+
+**2. How many variables (columns) are in the dataset?** In this case, it will tell us how many different measurements were taken for each sample.
+
+`r mcq(c("2", answer = "4", "5", "6"))`
+
+**3. Which function would you use to see the first few rows of the data?**
+
+`r mcq(c("tail()", answer = "head()", "glimpse()", "nrow()"))`
+
+**4. Which package does `glimpse()` come from?**
+
+`r mcq(c("base R", answer = "dplyr (tidyverse)", "janitor", "readr"))`
+
+**5. What is `tabyl()` used for?**
+
+`r mcq(c(answer = "frequency table of a categorical variable", "calculating the mean", "reading in a csv file", "plotting a graph"))`
+
+**6. Which package is `tabyl()` from?**
+
+`r mcq(c("tidyverse", answer = "janitor", "base R", "readr"))`
+
+### Using Histograms to Visualise the Data
+
+```{r}
+ggplot(mice_parasites, aes(x = parasite_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") 
+```
+
+Early on, what can we tell about where the data is concentrated? Is it skewed? If so, in which direction?
+
+### Summary / Description Statistics
+
+As described above, we learnt about the Mean, Standard Deviation, Median, Mode, Range, and Skewness. Let's calculate some of these for the `parasite_count` variable.
+
+In R, we learnt about the group_by and summarise functions. 
+
+```{r}
+
+mice_parasites_sex_summary <- mice_parasites %>%
+group_by(sex) %>%
+    summarise(
+      n = n(),
+      mean_parasite_count = mean(parasite_count)) 
+
+mice_parasites_sex_summary
+
+
+```
+
+
+
+
+We are able to interpret a little bit from this; the mean parasite count for male and female mice. Like how parasite count differs by sex. Please answer the following questions 
+
+**1. What's this saying about how parasite counts differs by sex** 
+
+`r mcq(c("Male mice have a higher mean parasite count than female mice", answer = "Female mice have a higher mean parasite count than male mice", "Male and female mice have exactly the same mean parasite count", "There's no way to tell from this table"))`
+
+
+If we look at sex, we can tell it's higher in a certain sex. We can also look at the mean parasite count by weight. This is a little different though. Going back to knowing our 4 different variables in our different categories. How we can list the 4 different variables we have? 
+
+To help you out, lets run this code again: 
+```{r}
+colnames(mice_parasites) # variable names, Base R
+```
+
+Our output shows the four things that were measured: 
+
+"host_id", "sex", "weight_g", "parasite_count"
+
+Categorise each of these variables:
+
+**"host_id"** 
+`r mcq(c("continuous", "discrete", "ordinal", answer = "nominal"))`
+
+**"sex"** 
+`r mcq(c("continuous", "discrete", "ordinal", answer = "nominal"))`
+
+**"weight_g"**
+`r mcq(c(answer = "continuous", "discrete", "ordinal", "nominal"))`
+
+**"parasite_count"**
+`r mcq(c("continuous", answer = "discrete", "ordinal", "nominal"))`
+
+Now that we know what type of data we have, we can use the appropriate summary statistics to describe the weight. 
+
+If you completed the questions above, you would see that `weight_g` is a continuous variable. Unlike `sex`, which is categorical, we can't summarise weight into two simple categories like males and females — instead we can first use the mean to describe it.
+
+```{r}
+mice_parasites_weight_summary <- mice_parasites %>%
+  summarise(
+    mean_weight = mean(weight_g),
+    mean_parasite_count = mean(parasite_count),
+  )
+
+mice_parasites_weight_summary
+```
+
+Although this shows something, it's hard to tell what trend there really is just from these numbers. One thing we can do instead is **visualise** the data.
+
+
+We can first use the histogram we have already learnt about.. 
+```{r}
+# Distribution of weight on its own
+ggplot(mice_parasites, aes(x = weight_g)) +
+  geom_histogram(binwidth = 2) +
+  labs(x = "Weight (g)")
+```
+
+So, from this plot - although we cannot infer anything about parasite count, we can tell that more mice are in the 20-30g range than in the 30-40g range, or below 20g, this makes sense by looking at our `mice_parasites_weight_summary` table above.
+
+
+We still have a bit more to look at, we have looked at the mean in multiple different corners, but we haven't looked at the other factors mentioned. We understand what the mean shows, now lets look at what everything else shows.
+
+Like earlier, and in the main workbook, we can use the `summarise()` function to also calculate the median, mode, range and standard deviation, and range of these variables.
+
+
+We learnt in the main workbook, that the standard deviation can simply be calculated using the `sd()` function, and median can be calculated using the `median()` function. 
+
+```{r}
+mice_parasites_weight_summary <- mice_parasites %>%
+  summarise(
+    median_weight = median(weight_g),
+    mean_weight = mean(weight_g),
+    sd_weight = sd(weight_g),
+    median_parasite_count = median(parasite_count),
+    mean_parasite_count = mean(parasite_count),
+    sd_parasite_count = sd(parasite_count),
+  )
+
+mice_parasites_weight_summary
+```
+
+Remembering what the definition of each of these terms are, what can we tell about the data? 
+
+
+**1. Comparing the mean (21.5) and median (21.0) for `weight_g`, what can we say about its distribution?**
+
+`r mcq(c(answer = "It's roughly symmetric, since the mean and median are close together", "It's strongly right-skewed", "It's strongly left-skewed", "There isn't enough information to tell"))`
+
+**2. Comparing the mean (3.42) and median (0.5) for `parasite_count`, what can we say about its distribution?**
+
+`r mcq(c("It's roughly symmetric", answer = "It's right-skewed, since the mean is pulled well above the median", "It's left-skewed, since the mean is pulled well below the median", "The two values should always be identical"))`
+
+**3. Why is the mean so much higher than the median for `parasite_count`?**
+
+`r mcq(c("Because most mice have very high parasite counts", answer = "Because a small number of mice with unusually high parasite counts are pulling the mean upward", "Because the median is calculated incorrectly for count data", "Because parasite count is a categorical variable"))`
+
+**4. The standard deviation for `parasite_count` (6.17) is larger than its mean (3.42). What does this suggest?**
+
+`r mcq(c("The data is very tightly clustered around the mean", answer = "The data is highly variable, with some values far from the mean", "There must be a calculation error", "Standard deviation cannot be compared to the mean"))`
+
+**5. Based on the summary statistics, which variable would the mean and SD alone summarise more reliably?**
+
+`r mcq(c(answer = "weight_g, since its mean and median are close and its SD is small relative to the mean", "parasite_count, since it has a higher mean", "Both equally", "Neither, since summary statistics are never reliable"))`
+
+**6. What would be a good next step before drawing firm conclusions about `parasite_count` from summary statistics alone?**
+
+`r mcq(c("Nothing, the mean and SD tell us everything we need", answer = "Visualise the distribution, e.g. with a histogram, to check for skew and outliers", "Delete the outliers from the dataset", "Recalculate the mean using only male mice"))`
+
+Hopefully now we've got a better understanding of the mean, median and SD. But we still have some remaining; Mode, Range and Skewness, as these aren't commonly used IN summarise. 
+
+
+There are a couple of ways to calclulate the range. One of them is what we learnt in the main workbook, as the range is the largest number - the smallest number, we could just do this. 
+
+```{r}
+range <- max(mice_parasites$parasite_count)-min(mice_parasites$parasite_count)
+range
+```
+
+There is also a function, we can use. this is the `diff()` function from base R, which calculates the difference between the maximum and minimum values of a variable.
+
+```{r}
+diff(range(mice_parasites$parasite_count))
+```
+
+Next lets look at the mode. As we learnt, the quickest way to do this is to write a small function. 
+
+```{r}
+get_mode <- function(x) {
+  freq_table <- table(x)
+  names(freq_table)[freq_table == max(freq_table)]
+}
+
+get_mode(mice_parasites$parasite_count)
+```
+
+but if you want to load up another package and function, you can, don't forget to install packages in the console before you load them up.
+
+```{r}
+library(DescTools)
+Mode(mice_parasites$parasite_count)
+
+```
+
+Our mode uis 0, and desc tools shows 30 of our samples are 0
+
+Now let's put this in one big summary statistics table! 
+
+```{r}
+
+mice_parasites_full_summary <- mice_parasites %>%
+  summarise(
+    mean_weight = mean(weight_g),
+    median_weight = median(weight_g),
+    sd_weight = sd(weight_g),
+    range_weight = diff(range(weight_g)),
+    
+    mean_parasite_count = mean(parasite_count),
+    median_parasite_count = median(parasite_count),
+    mode_parasite_count = Mode(parasite_count),
+    sd_parasite_count = sd(parasite_count),
+    range_parasite_count = diff(range(parasite_count))
+  )
+
+
+library(kableExtra)
+kable(mice_parasites_full_summary, digits = 2) %>%
+  kable_styling()
+```
+
+
+## The End 
+
+If you made it to here, you should be pretty certain on how everything syummary statistics works. We will soon go onto how things move together, but as an additional let's look at this.    
+            
+```{r}
+# Relationship between weight and parasite count 
+ggplot(mice_parasites, aes(x = weight_g, y = parasite_count)) +
+  geom_point() +
+  labs(x = "Weight (g)", y = "Parasite count")
+```
+
+
+**What can we tell from this plot?**
+
+`r mcq(c("Parasite count increases steadily and linearly with weight", answer = "Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g", "Weight has no effect on parasite count at all, since every mouse has exactly the same count"))`
 

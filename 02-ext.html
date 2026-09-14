@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Workshop 2 - Exploratory Data Analysis - extension</title>
+<title>Workshop 2 - Exploratory Data Analysis - Extension</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,6 +72,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="02-ext_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="02-ext_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="02-ext_files/libs/bootstrap/bootstrap-19216fa8bb71272e13fc45993650fab3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="02-ext_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="02-ext_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="style.css">
@@ -88,6 +90,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#terminology" id="toc-terminology" class="nav-link active" data-scroll-target="#terminology">TERMINOLOGY !</a></li>
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary Statistics</a></li>
+  <li><a href="#checking-data" id="toc-checking-data" class="nav-link" data-scroll-target="#checking-data">Checking Data</a></li>
+  <li><a href="#using-histograms-to-visualise-the-data" id="toc-using-histograms-to-visualise-the-data" class="nav-link" data-scroll-target="#using-histograms-to-visualise-the-data">Using Histograms to Visualise the Data</a></li>
+  <li><a href="#summary-description-statistics" id="toc-summary-description-statistics" class="nav-link" data-scroll-target="#summary-description-statistics">Summary / Description Statistics</a></li>
+  <li><a href="#the-end" id="toc-the-end" class="nav-link" data-scroll-target="#the-end">The End</a></li>
   </ul>
 </nav>
 </div>
@@ -95,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Workshop 2 - Exploratory Data Analysis - extension</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Workshop 2 - Exploratory Data Analysis - Extension</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -160,9 +166,450 @@ The difference between the largest and smallest values.</p>
 A measure of how spread out the values are around the mean.</p>
 <p>Our mean and our standard deviation are the most commonly used summary statistics. The mean gives us an idea of the central tendency of the data, while the standard deviation tells us how much the data varies from the mean.</p>
 <p><strong>Skewness</strong></p>
+</section>
+</section>
+<section id="checking-data" class="level3">
+<h3 class="anchored" data-anchor-id="checking-data">Checking Data</h3>
+<p>Let’s use what we’ve learnt using a dataset.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/ch2.mouse.jpg" class="img-fluid figure-img"></p>
+<figcaption><em>The mouse</em></figcaption>
+</figure>
+</div>
+<p>Meet <em>Apodemus sylvaticus</em>, the <a href="https://www.wildlifetrusts.org/wildlife-explorer/mammals/wood-mouse">wood mouse</a>. <em>Apodemus sylvaticus</em> can often be found with the parasite, gastrointestinal roundworm, <em>Heligmosomoides polygyrus</em>.</p>
+<p>We have a dataset where researchers took a sample of 60 different <em>Apodemus sylvaticus</em>, checked their (i) sex, (ii) weight, and (iii) the count of parasites present.</p>
+<p>Let’s first read in this dataset, found in <code>data/mouse_parasite_counts.csv</code>.</p>
+<p>Before we do this, as you’ll remember, you’ll need a package to do this. If you rememeber from earlier (), we used the function, <code>read_csv()</code>, this is from the package<code>readr</code>. However readr, is part of the <code>tidyverse</code> package, which actually contains A LOT. Read about this in one of the appendices.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webexercises)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If the <code>tidyverse()</code> package is installed, you should be able to read in the dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mice_parasites <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/mouse_parasite_counts.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s use a bit about what we learnt earlier with checking the data. We played with finding out about the data and2 split them into 3 different categories: (i) Dimensions/Size, (ii). Structure/variable names, (iii). Viewing the actual data, and (iv) starting to summarise the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (1). Dimensions/Size:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mice_parasites) <span class="co"># number of rows, Base R</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(mice_parasites) <span class="co"># number of columns, Base R</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (2). Structure/Variable Names:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mice_parasites) <span class="co"># variable names, Base R</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mice_parasites) <span class="co"># summary of the data structure, Base R</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (3). Viewing the Actual Data: </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice_parasites) <span class="co"># first 6 rows, Base R</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mice_parasites) <span class="co"># last 6 rows, Base R</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># (4). Starting to Summarise the Data: </span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mice_parasites) <span class="co"># summary of the data, Base R</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mice_parasites, sex) <span class="co"># frequency, janitor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Dimensions/Size">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Dimensions/Size
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mice_parasites) <span class="co"># number of rows, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(mice_parasites) <span class="co"># number of columns, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Structure/Variable Names">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Structure/Variable Names
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mice_parasites) <span class="co"># variable names, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "host_id"        "sex"            "weight_g"       "parasite_count"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mice_parasites) <span class="co"># summary of the data structure, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [60 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ host_id       : chr [1:60] "H001" "H002" "H003" "H004" ...
+ $ sex           : chr [1:60] "F" "M" "M" "M" ...
+ $ weight_g      : num [1:60] 24.8 21 22.2 25.8 22.9 21.9 19.4 24.7 20.5 23.7 ...
+ $ parasite_count: num [1:60] 0 0 0 0 0 0 0 8 1 0 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   host_id = col_character(),
+  ..   sex = col_character(),
+  ..   weight_g = col_double(),
+  ..   parasite_count = col_double()
+  .. )
+ - attr(*, "problems")=&lt;pointer: 0x9101e4040&gt; </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 60
+Columns: 4
+$ host_id        &lt;chr&gt; "H001", "H002", "H003", "H004", "H005", "H006", "H007",…
+$ sex            &lt;chr&gt; "F", "M", "M", "M", "M", "M", "M", "M", "F", "M", "F", …
+$ weight_g       &lt;dbl&gt; 24.8, 21.0, 22.2, 25.8, 22.9, 21.9, 19.4, 24.7, 20.5, 2…
+$ parasite_count &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 8, 1, 0, 0, 5, 0, 0, 1, 0, 0, 1, 2…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Viewing the Actual Data">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Viewing the Actual Data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice_parasites) <span class="co"># first 6 rows, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  host_id sex   weight_g parasite_count
+  &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;          &lt;dbl&gt;
+1 H001    F         24.8              0
+2 H002    M         21                0
+3 H003    M         22.2              0
+4 H004    M         25.8              0
+5 H005    M         22.9              0
+6 H006    M         21.9              0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mice_parasites) <span class="co"># last 6 rows, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  host_id sex   weight_g parasite_count
+  &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;          &lt;dbl&gt;
+1 H055    F         18.9              1
+2 H056    M         24.1              0
+3 H057    M         20.3              1
+4 H058    F         20.7              0
+5 H059    M         25.8              2
+6 H060    M         20.3              4</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Starting to Summarise the Data">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Starting to Summarise the Data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mice_parasites) <span class="co"># summary of the data, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      host_id          sex        weight_g     parasite_count  
+ Length   :60   Length   :60   Min.   :13.00   Min.   : 0.000  
+ N.unique :60   N.unique : 2   1st Qu.:20.00   1st Qu.: 0.000  
+ N.blank  : 0   N.blank  : 0   Median :21.05   Median : 0.500  
+ Min.nchar: 4   Min.nchar: 1   Mean   :21.55   Mean   : 3.417  
+ Max.nchar: 4   Max.nchar: 1   3rd Qu.:23.40   3rd Qu.: 4.000  
+                               Max.   :28.20   Max.   :27.000  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mice_parasites, sex) <span class="co"># frequency, janitor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> sex  n   percent
+   F 26 0.4333333
+   M 34 0.5666667</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Have a little run of the functions, then answer the following questions.</p>
+<p><strong>1. How many rows does the dataset contain?</strong> In this case, it will tell us how many different samples of <em>Apodemus sylvaticus</em> were taken.</p>
+<p><select class="webex-select"><option value="blank"></option><option value="">30</option><option value="">45</option><option value="answer">60</option><option value="">75</option></select></p>
+<p><strong>2. How many variables (columns) are in the dataset?</strong> In this case, it will tell us how many different measurements were taken for each sample.</p>
+<p><select class="webex-select"><option value="blank"></option><option value="">2</option><option value="answer">4</option><option value="">5</option><option value="">6</option></select></p>
+<p><strong>3. Which function would you use to see the first few rows of the data?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">tail()</option><option value="answer">head()</option><option value="">glimpse()</option><option value="">nrow()</option></select></p>
+<p><strong>4. Which package does <code>glimpse()</code> come from?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">base R</option><option value="answer">dplyr (tidyverse)</option><option value="">janitor</option><option value="">readr</option></select></p>
+<p><strong>5. What is <code>tabyl()</code> used for?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="answer">frequency table of a categorical variable</option><option value="">calculating the mean</option><option value="">reading in a csv file</option><option value="">plotting a graph</option></select></p>
+<p><strong>6. Which package is <code>tabyl()</code> from?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">tidyverse</option><option value="answer">janitor</option><option value="">base R</option><option value="">readr</option></select></p>
+</section>
+<section id="using-histograms-to-visualise-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="using-histograms-to-visualise-the-data">Using Histograms to Visualise the Data</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_parasites, <span class="fu">aes</span>(<span class="at">x =</span> parasite_count)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-ext_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Early on, what can we tell about where the data is concentrated? Is it skewed? If so, in which direction?</p>
+</section>
+<section id="summary-description-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="summary-description-statistics">Summary / Description Statistics</h3>
+<p>As described above, we learnt about the Mean, Standard Deviation, Median, Mode, Range, and Skewness. Let’s calculate some of these for the <code>parasite_count</code> variable.</p>
+<p>In R, we learnt about the group_by and summarise functions.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_sex_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count)) </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>mice_parasites_sex_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  sex       n mean_parasite_count
+  &lt;chr&gt; &lt;int&gt;               &lt;dbl&gt;
+1 F        26                4.08
+2 M        34                2.91</code></pre>
+</div>
+</div>
+<p>We are able to interpret a little bit from this; the mean parasite count for male and female mice. Like how parasite count differs by sex. Please answer the following questions</p>
+<p><strong>1. What’s this saying about how parasite counts differs by sex</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Male mice have a higher mean parasite count than female mice</option><option value="answer">Female mice have a higher mean parasite count than male mice</option><option value="">Male and female mice have exactly the same mean parasite count</option><option value="">There’s no way to tell from this table</option></select></p>
+<p>If we look at sex, we can tell it’s higher in a certain sex. We can also look at the mean parasite count by weight. This is a little different though. Going back to knowing our 4 different variables in our different categories. How we can list the 4 different variables we have?</p>
+<p>To help you out, lets run this code again:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mice_parasites) <span class="co"># variable names, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "host_id"        "sex"            "weight_g"       "parasite_count"</code></pre>
+</div>
+</div>
+<p>Our output shows the four things that were measured:</p>
+<p>“host_id”, “sex”, “weight_g”, “parasite_count”</p>
+<p>Categorise each of these variables:</p>
+<p><strong>“host_id”</strong> <select class="webex-select"><option value="blank"></option><option value="">continuous</option><option value="">discrete</option><option value="">ordinal</option><option value="answer">nominal</option></select></p>
+<p><strong>“sex”</strong> <select class="webex-select"><option value="blank"></option><option value="">continuous</option><option value="">discrete</option><option value="">ordinal</option><option value="answer">nominal</option></select></p>
+<p><strong>“weight_g”</strong> <select class="webex-select"><option value="blank"></option><option value="answer">continuous</option><option value="">discrete</option><option value="">ordinal</option><option value="">nominal</option></select></p>
+<p><strong>“parasite_count”</strong> <select class="webex-select"><option value="blank"></option><option value="">continuous</option><option value="answer">discrete</option><option value="">ordinal</option><option value="">nominal</option></select></p>
+<p>Now that we know what type of data we have, we can use the appropriate summary statistics to describe the weight.</p>
+<p>If you completed the questions above, you would see that <code>weight_g</code> is a continuous variable. Unlike <code>sex</code>, which is categorical, we can’t summarise weight into two simple categories like males and females — instead we can first use the mean to describe it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight =</span> <span class="fu">mean</span>(weight_g),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_weight mean_parasite_count
+        &lt;dbl&gt;               &lt;dbl&gt;
+1        21.5                3.42</code></pre>
+</div>
+</div>
+<p>Although this shows something, it’s hard to tell what trend there really is just from these numbers. One thing we can do instead is <strong>visualise</strong> the data.</p>
+<p>We can first use the histogram we have already learnt about..</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of weight on its own</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_parasites, <span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Weight (g)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-ext_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So, from this plot - although we cannot infer anything about parasite count, we can tell that more mice are in the 20-30g range than in the 30-40g range, or below 20g, this makes sense by looking at our <code>mice_parasites_weight_summary</code> table above.</p>
+<p>We still have a bit more to look at, we have looked at the mean in multiple different corners, but we haven’t looked at the other factors mentioned. We understand what the mean shows, now lets look at what everything else shows.</p>
+<p>Like earlier, and in the main workbook, we can use the <code>summarise()</code> function to also calculate the median, mode, range and standard deviation, and range of these variables.</p>
+<p>We learnt in the main workbook, that the standard deviation can simply be calculated using the <code>sd()</code> function, and median can be calculated using the <code>median()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_g),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight =</span> <span class="fu">mean</span>(weight_g),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight =</span> <span class="fu">sd</span>(weight_g),</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_parasite_count =</span> <span class="fu">median</span>(parasite_count),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_parasite_count =</span> <span class="fu">sd</span>(parasite_count),</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  median_weight mean_weight sd_weight median_parasite_count mean_parasite_count
+          &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;                 &lt;dbl&gt;               &lt;dbl&gt;
+1          21.0        21.5      2.73                   0.5                3.42
+# ℹ 1 more variable: sd_parasite_count &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Remembering what the definition of each of these terms are, what can we tell about the data?</p>
+<p><strong>1. Comparing the mean (21.5) and median (21.0) for <code>weight_g</code>, what can we say about its distribution?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="answer">It’s roughly symmetric, since the mean and median are close together</option><option value="">It’s strongly right-skewed</option><option value="">It’s strongly left-skewed</option><option value="">There isn’t enough information to tell</option></select></p>
+<p><strong>2. Comparing the mean (3.42) and median (0.5) for <code>parasite_count</code>, what can we say about its distribution?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">It’s roughly symmetric</option><option value="answer">It’s right-skewed, since the mean is pulled well above the median</option><option value="">It’s left-skewed, since the mean is pulled well below the median</option><option value="">The two values should always be identical</option></select></p>
+<p><strong>3. Why is the mean so much higher than the median for <code>parasite_count</code>?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Because most mice have very high parasite counts</option><option value="answer">Because a small number of mice with unusually high parasite counts are pulling the mean upward</option><option value="">Because the median is calculated incorrectly for count data</option><option value="">Because parasite count is a categorical variable</option></select></p>
+<p><strong>4. The standard deviation for <code>parasite_count</code> (6.17) is larger than its mean (3.42). What does this suggest?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">The data is very tightly clustered around the mean</option><option value="answer">The data is highly variable, with some values far from the mean</option><option value="">There must be a calculation error</option><option value="">Standard deviation cannot be compared to the mean</option></select></p>
+<p><strong>5. Based on the summary statistics, which variable would the mean and SD alone summarise more reliably?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="answer">weight_g, since its mean and median are close and its SD is small relative to the mean</option><option value="">parasite_count, since it has a higher mean</option><option value="">Both equally</option><option value="">Neither, since summary statistics are never reliable</option></select></p>
+<p><strong>6. What would be a good next step before drawing firm conclusions about <code>parasite_count</code> from summary statistics alone?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Nothing, the mean and SD tell us everything we need</option><option value="answer">Visualise the distribution, e.g.&nbsp;with a histogram, to check for skew and outliers</option><option value="">Delete the outliers from the dataset</option><option value="">Recalculate the mean using only male mice</option></select></p>
+<p>Hopefully now we’ve got a better understanding of the mean, median and SD. But we still have some remaining; Mode, Range and Skewness, as these aren’t commonly used IN summarise.</p>
+<p>There are a couple of ways to calclulate the range. One of them is what we learnt in the main workbook, as the range is the largest number - the smallest number, we could just do this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>range <span class="ot">&lt;-</span> <span class="fu">max</span>(mice_parasites<span class="sc">$</span>parasite_count)<span class="sc">-</span><span class="fu">min</span>(mice_parasites<span class="sc">$</span>parasite_count)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>range</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27</code></pre>
+</div>
+</div>
+<p>There is also a function, we can use. this is the <code>diff()</code> function from base R, which calculates the difference between the maximum and minimum values of a variable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(mice_parasites<span class="sc">$</span>parasite_count))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27</code></pre>
+</div>
+</div>
+<p>Next lets look at the mode. As we learnt, the quickest way to do this is to write a small function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>get_mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  freq_table <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(freq_table)[freq_table <span class="sc">==</span> <span class="fu">max</span>(freq_table)]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mode</span>(mice_parasites<span class="sc">$</span>parasite_count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0"</code></pre>
+</div>
+</div>
+<p>but if you want to load up another package and function, you can, don’t forget to install packages in the console before you load them up.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(mice_parasites<span class="sc">$</span>parasite_count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0
+attr(,"freq")
+[1] 30</code></pre>
+</div>
+</div>
+<p>Our mode uis 0, and desc tools shows 30 of our samples are 0</p>
+<p>Now let’s put this in one big summary statistics table!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_full_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight =</span> <span class="fu">mean</span>(weight_g),</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_g),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight =</span> <span class="fu">sd</span>(weight_g),</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">range_weight =</span> <span class="fu">diff</span>(<span class="fu">range</span>(weight_g)),</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_parasite_count =</span> <span class="fu">median</span>(parasite_count),</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">mode_parasite_count =</span> <span class="fu">Mode</span>(parasite_count),</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_parasite_count =</span> <span class="fu">sd</span>(parasite_count),</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">range_parasite_count =</span> <span class="fu">diff</span>(<span class="fu">range</span>(parasite_count))</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'kableExtra'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(mice_parasites_full_summary, <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean_weight</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">median_weight</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sd_weight</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">range_weight</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean_parasite_count</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">median_parasite_count</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mode_parasite_count</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sd_parasite_count</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">range_parasite_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">21.55</td>
+<td style="text-align: right;">21.05</td>
+<td style="text-align: right;">2.73</td>
+<td style="text-align: right;">15.2</td>
+<td style="text-align: right;">3.42</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.17</td>
+<td style="text-align: right;">27</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="the-end" class="level2">
+<h2 class="anchored" data-anchor-id="the-end">The End</h2>
+<p>If you made it to here, you should be pretty certain on how everything syummary statistics works. We will soon go onto how things move together, but as an additional let’s look at this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Relationship between weight and parasite count </span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_parasites, <span class="fu">aes</span>(<span class="at">x =</span> weight_g, <span class="at">y =</span> parasite_count)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Weight (g)"</span>, <span class="at">y =</span> <span class="st">"Parasite count"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-ext_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What can we tell from this plot?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Parasite count increases steadily and linearly with weight</option><option value="answer">Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</option><option value="">Weight has no effect on parasite count at all, since every mouse has exactly the same count</option></select></p>
 <!-- -->
 
-</section>
 </section>
 
 </main>
@@ -905,77 +1352,404 @@ window.onload = function() {
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 2 - Exploratory Data Analysis - extension"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: yeti</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    css: [style.css, include/webex.css]</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: include/webex.js</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: katex</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> false</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Using what we learnt in the Exploratory Data Analysis chapter, we will now explore our skills using various case studies to answer some questions. </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>To recap... </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### TERMINOLOGY ! </span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>We learnt about **4 types of data**, within **2 different groups.**   </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Quantitative/Numerical data</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Data that can be measured and expressed numerically. It can be further classified into discrete and continuous data.</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>**Discrete data:** Data that can only take *specific* values, often counted. Examples include the *number of students in a class* or the *number of cars in a parking lot*.</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>**Continuous data:** Data that can take any value within a range, often measured. Examples include *height*  and *temperature*.</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ch2.1.png)</span>{width=60%, fig-align="center"}</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Qualitative/Categorical data</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Data that can be divided into categories or groups. It can be further classified into nominal and ordinal data.</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>**Nominal data:** Data that represents categories without any inherent order. Examples include; *eye color*, and *types of fruits*.</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>**Ordinal data:** Data that represents categories with a meaningful order. Examples include *education level*, *satisfaction ratings*, and *size of clothing*.</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ch2.2.png)</span>{width=60%, fig-align="center"}</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary Statistics </span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>Summary Statistics are used to summarise and describe the main features of a dataset. They provide a quick overview of the data, allowing us to understand its central tendency, variability, and distribution.</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Measures of averages:</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>**Mean**           </span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>The total of all the values divided by the number of values.</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>**Median**  </span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>The middle value when the data is arranged in order.</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>                                     </span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>**Mode**                            </span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>The value that occurs most often.</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Measures of spread:</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>**Range**          </span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>The difference between the largest and smallest values.</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>                 </span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>**Standard deviation**                </span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>A measure of how spread out the values are around the mean.</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>Our mean and our standard deviation are the most commonly used summary statistics. The mean gives us an idea of the central tendency of the data, while the standard deviation tells us how much the data varies from the mean. </span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>**Skewness**</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 2 - Exploratory Data Analysis - Extension"</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: yeti</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co">    css: [style.css, include/webex.css]</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: include/webex.js</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: katex</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> false</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>Using what we learnt in the Exploratory Data Analysis chapter, we will now explore our skills using various case studies to answer some questions. </span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>To recap... </span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### TERMINOLOGY ! </span></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>We learnt about **4 types of data**, within **2 different groups.**   </span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Quantitative/Numerical data</span></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>Data that can be measured and expressed numerically. It can be further classified into discrete and continuous data.</span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>**Discrete data:** Data that can only take *specific* values, often counted. Examples include the *number of students in a class* or the *number of cars in a parking lot*.</span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>**Continuous data:** Data that can take any value within a range, often measured. Examples include *height*  and *temperature*.</span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ch2.1.png)</span>{width=60%, fig-align="center"}</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Qualitative/Categorical data</span></span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>Data that can be divided into categories or groups. It can be further classified into nominal and ordinal data.</span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a>**Nominal data:** Data that represents categories without any inherent order. Examples include; *eye color*, and *types of fruits*.</span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>**Ordinal data:** Data that represents categories with a meaningful order. Examples include *education level*, *satisfaction ratings*, and *size of clothing*.</span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ch2.2.png)</span>{width=60%, fig-align="center"}</span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary Statistics </span></span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a>Summary Statistics are used to summarise and describe the main features of a dataset. They provide a quick overview of the data, allowing us to understand its central tendency, variability, and distribution.</span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Measures of averages:</span></span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a>**Mean**           </span>
+<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a>The total of all the values divided by the number of values.</span>
+<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a>**Median**  </span>
+<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a>The middle value when the data is arranged in order.</span>
+<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a>                                     </span>
+<span id="cb45-58"><a href="#cb45-58" aria-hidden="true" tabindex="-1"></a>**Mode**                            </span>
+<span id="cb45-59"><a href="#cb45-59" aria-hidden="true" tabindex="-1"></a>The value that occurs most often.</span>
+<span id="cb45-60"><a href="#cb45-60" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb45-61"><a href="#cb45-61" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Measures of spread:</span></span>
+<span id="cb45-62"><a href="#cb45-62" aria-hidden="true" tabindex="-1"></a>**Range**          </span>
+<span id="cb45-63"><a href="#cb45-63" aria-hidden="true" tabindex="-1"></a>The difference between the largest and smallest values.</span>
+<span id="cb45-64"><a href="#cb45-64" aria-hidden="true" tabindex="-1"></a>                 </span>
+<span id="cb45-65"><a href="#cb45-65" aria-hidden="true" tabindex="-1"></a>**Standard deviation**                </span>
+<span id="cb45-66"><a href="#cb45-66" aria-hidden="true" tabindex="-1"></a>A measure of how spread out the values are around the mean.</span>
+<span id="cb45-67"><a href="#cb45-67" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb45-68"><a href="#cb45-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-69"><a href="#cb45-69" aria-hidden="true" tabindex="-1"></a>Our mean and our standard deviation are the most commonly used summary statistics. The mean gives us an idea of the central tendency of the data, while the standard deviation tells us how much the data varies from the mean. </span>
+<span id="cb45-70"><a href="#cb45-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-71"><a href="#cb45-71" aria-hidden="true" tabindex="-1"></a>**Skewness**</span>
+<span id="cb45-72"><a href="#cb45-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-73"><a href="#cb45-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-74"><a href="#cb45-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-75"><a href="#cb45-75" aria-hidden="true" tabindex="-1"></a><span class="fu">### Checking Data </span></span>
+<span id="cb45-76"><a href="#cb45-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-77"><a href="#cb45-77" aria-hidden="true" tabindex="-1"></a>Let's use what we've learnt using a dataset. </span>
+<span id="cb45-78"><a href="#cb45-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-79"><a href="#cb45-79" aria-hidden="true" tabindex="-1"></a><span class="al">![*The mouse*](images/ch2.mouse.jpg)</span>{fig-align="left"}</span>
+<span id="cb45-80"><a href="#cb45-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-81"><a href="#cb45-81" aria-hidden="true" tabindex="-1"></a>Meet *Apodemus sylvaticus*, the [wood mouse](https://www.wildlifetrusts.org/wildlife-explorer/mammals/wood-mouse). *Apodemus sylvaticus* can often be found with the parasite, gastrointestinal roundworm, *Heligmosomoides polygyrus*.</span>
+<span id="cb45-82"><a href="#cb45-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-83"><a href="#cb45-83" aria-hidden="true" tabindex="-1"></a>We have a dataset where researchers took a sample of 60 different *Apodemus sylvaticus*, checked their (i) sex, (ii) weight, and (iii) the count of parasites present. </span>
+<span id="cb45-84"><a href="#cb45-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-85"><a href="#cb45-85" aria-hidden="true" tabindex="-1"></a>Let's first read in this dataset, found in <span class="in">`data/mouse_parasite_counts.csv`</span>. </span>
+<span id="cb45-86"><a href="#cb45-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-87"><a href="#cb45-87" aria-hidden="true" tabindex="-1"></a>Before we do this, as you'll remember, you'll need a package to do this. If you rememeber from earlier (), we used the function, <span class="in">`read_csv()`</span>, this is from the package<span class="in">`readr`</span>. However readr, is part of the <span class="in">`tidyverse`</span> package, which actually contains A LOT. Read about this in one of the appendices. </span>
+<span id="cb45-88"><a href="#cb45-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE}</span></span>
+<span id="cb45-89"><a href="#cb45-89" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb45-90"><a href="#cb45-90" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb45-91"><a href="#cb45-91" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webexercises)</span>
+<span id="cb45-92"><a href="#cb45-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-93"><a href="#cb45-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-94"><a href="#cb45-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-95"><a href="#cb45-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-96"><a href="#cb45-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-97"><a href="#cb45-97" aria-hidden="true" tabindex="-1"></a>If the <span class="in">`tidyverse()`</span> package is installed, you should be able to read in the dataset. </span>
+<span id="cb45-98"><a href="#cb45-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-99"><a href="#cb45-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE}</span></span>
+<span id="cb45-100"><a href="#cb45-100" aria-hidden="true" tabindex="-1"></a>mice_parasites <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/mouse_parasite_counts.csv"</span>)</span>
+<span id="cb45-101"><a href="#cb45-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-102"><a href="#cb45-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-103"><a href="#cb45-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-104"><a href="#cb45-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-105"><a href="#cb45-105" aria-hidden="true" tabindex="-1"></a>Let's use a bit about what we learnt earlier with checking the data. We played with finding out about the data and2 split them into 3 different categories: (i) Dimensions/Size, (ii). Structure/variable names,  (iii). Viewing the actual data, and (iv) starting to summarise the data.</span>
+<span id="cb45-106"><a href="#cb45-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-107"><a href="#cb45-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE}</span></span>
+<span id="cb45-108"><a href="#cb45-108" aria-hidden="true" tabindex="-1"></a><span class="co"># (1). Dimensions/Size:</span></span>
+<span id="cb45-109"><a href="#cb45-109" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mice_parasites) <span class="co"># number of rows, Base R</span></span>
+<span id="cb45-110"><a href="#cb45-110" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(mice_parasites) <span class="co"># number of columns, Base R</span></span>
+<span id="cb45-111"><a href="#cb45-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-112"><a href="#cb45-112" aria-hidden="true" tabindex="-1"></a><span class="co"># (2). Structure/Variable Names:</span></span>
+<span id="cb45-113"><a href="#cb45-113" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mice_parasites) <span class="co"># variable names, Base R</span></span>
+<span id="cb45-114"><a href="#cb45-114" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mice_parasites) <span class="co"># summary of the data structure, Base R</span></span>
+<span id="cb45-115"><a href="#cb45-115" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span>
+<span id="cb45-116"><a href="#cb45-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-117"><a href="#cb45-117" aria-hidden="true" tabindex="-1"></a><span class="co"># (3). Viewing the Actual Data: </span></span>
+<span id="cb45-118"><a href="#cb45-118" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice_parasites) <span class="co"># first 6 rows, Base R</span></span>
+<span id="cb45-119"><a href="#cb45-119" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mice_parasites) <span class="co"># last 6 rows, Base R</span></span>
+<span id="cb45-120"><a href="#cb45-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-121"><a href="#cb45-121" aria-hidden="true" tabindex="-1"></a><span class="co"># (4). Starting to Summarise the Data: </span></span>
+<span id="cb45-122"><a href="#cb45-122" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mice_parasites) <span class="co"># summary of the data, Base R</span></span>
+<span id="cb45-123"><a href="#cb45-123" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mice_parasites, sex) <span class="co"># frequency, janitor</span></span>
+<span id="cb45-124"><a href="#cb45-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-125"><a href="#cb45-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-126"><a href="#cb45-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-127"><a href="#cb45-127" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true" title="Dimensions/Size"}</span>
+<span id="cb45-130"><a href="#cb45-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-131"><a href="#cb45-131" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mice_parasites) <span class="co"># number of rows, Base R</span></span>
+<span id="cb45-132"><a href="#cb45-132" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(mice_parasites) <span class="co"># number of columns, Base R</span></span>
+<span id="cb45-133"><a href="#cb45-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-134"><a href="#cb45-134" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb45-135"><a href="#cb45-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-136"><a href="#cb45-136" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true" title="Structure/Variable Names"}</span>
+<span id="cb45-139"><a href="#cb45-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-140"><a href="#cb45-140" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mice_parasites) <span class="co"># variable names, Base R</span></span>
+<span id="cb45-141"><a href="#cb45-141" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mice_parasites) <span class="co"># summary of the data structure, Base R</span></span>
+<span id="cb45-142"><a href="#cb45-142" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span>
+<span id="cb45-143"><a href="#cb45-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-144"><a href="#cb45-144" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb45-145"><a href="#cb45-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-146"><a href="#cb45-146" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true" title="Viewing the Actual Data"}</span>
+<span id="cb45-149"><a href="#cb45-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-150"><a href="#cb45-150" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice_parasites) <span class="co"># first 6 rows, Base R</span></span>
+<span id="cb45-151"><a href="#cb45-151" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mice_parasites) <span class="co"># last 6 rows, Base R</span></span>
+<span id="cb45-152"><a href="#cb45-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-153"><a href="#cb45-153" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb45-154"><a href="#cb45-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-155"><a href="#cb45-155" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true" title="Starting to Summarise the Data"}</span>
+<span id="cb45-158"><a href="#cb45-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-159"><a href="#cb45-159" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mice_parasites) <span class="co"># summary of the data, Base R</span></span>
+<span id="cb45-160"><a href="#cb45-160" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mice_parasites, sex) <span class="co"># frequency, janitor</span></span>
+<span id="cb45-161"><a href="#cb45-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-162"><a href="#cb45-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-163"><a href="#cb45-163" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb45-164"><a href="#cb45-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-165"><a href="#cb45-165" aria-hidden="true" tabindex="-1"></a><span class="in">        </span></span>
+<span id="cb45-166"><a href="#cb45-166" aria-hidden="true" tabindex="-1"></a>Have a little run of the functions, then answer the following questions.</span>
+<span id="cb45-167"><a href="#cb45-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-168"><a href="#cb45-168" aria-hidden="true" tabindex="-1"></a>**1. How many rows does the dataset contain?** In this case, it will tell us how many different samples of *Apodemus sylvaticus* were taken. </span>
+<span id="cb45-169"><a href="#cb45-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-170"><a href="#cb45-170" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("30", "45", answer = "60", "75"))`</span></span>
+<span id="cb45-171"><a href="#cb45-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-172"><a href="#cb45-172" aria-hidden="true" tabindex="-1"></a>**2. How many variables (columns) are in the dataset?** In this case, it will tell us how many different measurements were taken for each sample.</span>
+<span id="cb45-173"><a href="#cb45-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-174"><a href="#cb45-174" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("2", answer = "4", "5", "6"))`</span></span>
+<span id="cb45-175"><a href="#cb45-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-176"><a href="#cb45-176" aria-hidden="true" tabindex="-1"></a>**3. Which function would you use to see the first few rows of the data?**</span>
+<span id="cb45-177"><a href="#cb45-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-178"><a href="#cb45-178" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("tail()", answer = "head()", "glimpse()", "nrow()"))`</span></span>
+<span id="cb45-179"><a href="#cb45-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-180"><a href="#cb45-180" aria-hidden="true" tabindex="-1"></a>**4. Which package does `glimpse()` come from?**</span>
+<span id="cb45-181"><a href="#cb45-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-182"><a href="#cb45-182" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("base R", answer = "dplyr (tidyverse)", "janitor", "readr"))`</span></span>
+<span id="cb45-183"><a href="#cb45-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-184"><a href="#cb45-184" aria-hidden="true" tabindex="-1"></a>**5. What is `tabyl()` used for?**</span>
+<span id="cb45-185"><a href="#cb45-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-186"><a href="#cb45-186" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(answer = "frequency table of a categorical variable", "calculating the mean", "reading in a csv file", "plotting a graph"))`</span></span>
+<span id="cb45-187"><a href="#cb45-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-188"><a href="#cb45-188" aria-hidden="true" tabindex="-1"></a>**6. Which package is `tabyl()` from?**</span>
+<span id="cb45-189"><a href="#cb45-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-190"><a href="#cb45-190" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("tidyverse", answer = "janitor", "base R", "readr"))`</span></span>
+<span id="cb45-191"><a href="#cb45-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-192"><a href="#cb45-192" aria-hidden="true" tabindex="-1"></a><span class="fu">### Using Histograms to Visualise the Data</span></span>
+<span id="cb45-193"><a href="#cb45-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-196"><a href="#cb45-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-197"><a href="#cb45-197" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_parasites, <span class="fu">aes</span>(<span class="at">x =</span> parasite_count)) <span class="sc">+</span></span>
+<span id="cb45-198"><a href="#cb45-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) </span>
+<span id="cb45-199"><a href="#cb45-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-200"><a href="#cb45-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-201"><a href="#cb45-201" aria-hidden="true" tabindex="-1"></a>Early on, what can we tell about where the data is concentrated? Is it skewed? If so, in which direction?</span>
+<span id="cb45-202"><a href="#cb45-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-203"><a href="#cb45-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary / Description Statistics</span></span>
+<span id="cb45-204"><a href="#cb45-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-205"><a href="#cb45-205" aria-hidden="true" tabindex="-1"></a>As described above, we learnt about the Mean, Standard Deviation, Median, Mode, Range, and Skewness. Let's calculate some of these for the <span class="in">`parasite_count`</span> variable.</span>
+<span id="cb45-206"><a href="#cb45-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-207"><a href="#cb45-207" aria-hidden="true" tabindex="-1"></a>In R, we learnt about the group_by and summarise functions. </span>
+<span id="cb45-208"><a href="#cb45-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-211"><a href="#cb45-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-212"><a href="#cb45-212" aria-hidden="true" tabindex="-1"></a>mice_parasites_sex_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb45-213"><a href="#cb45-213" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb45-214"><a href="#cb45-214" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb45-215"><a href="#cb45-215" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb45-216"><a href="#cb45-216" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count)) </span>
+<span id="cb45-217"><a href="#cb45-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-218"><a href="#cb45-218" aria-hidden="true" tabindex="-1"></a>mice_parasites_sex_summary</span>
+<span id="cb45-219"><a href="#cb45-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-220"><a href="#cb45-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-221"><a href="#cb45-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-222"><a href="#cb45-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-223"><a href="#cb45-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-224"><a href="#cb45-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-225"><a href="#cb45-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-226"><a href="#cb45-226" aria-hidden="true" tabindex="-1"></a>We are able to interpret a little bit from this; the mean parasite count for male and female mice. Like how parasite count differs by sex. Please answer the following questions </span>
+<span id="cb45-227"><a href="#cb45-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-228"><a href="#cb45-228" aria-hidden="true" tabindex="-1"></a>**1. What's this saying about how parasite counts differs by sex** </span>
+<span id="cb45-229"><a href="#cb45-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-230"><a href="#cb45-230" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Male mice have a higher mean parasite count than female mice", answer = "Female mice have a higher mean parasite count than male mice", "Male and female mice have exactly the same mean parasite count", "There's no way to tell from this table"))`</span></span>
+<span id="cb45-231"><a href="#cb45-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-232"><a href="#cb45-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-233"><a href="#cb45-233" aria-hidden="true" tabindex="-1"></a>If we look at sex, we can tell it's higher in a certain sex. We can also look at the mean parasite count by weight. This is a little different though. Going back to knowing our 4 different variables in our different categories. How we can list the 4 different variables we have? </span>
+<span id="cb45-234"><a href="#cb45-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-235"><a href="#cb45-235" aria-hidden="true" tabindex="-1"></a>To help you out, lets run this code again: </span>
+<span id="cb45-238"><a href="#cb45-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-239"><a href="#cb45-239" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mice_parasites) <span class="co"># variable names, Base R</span></span>
+<span id="cb45-240"><a href="#cb45-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-241"><a href="#cb45-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-242"><a href="#cb45-242" aria-hidden="true" tabindex="-1"></a>Our output shows the four things that were measured: </span>
+<span id="cb45-243"><a href="#cb45-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-244"><a href="#cb45-244" aria-hidden="true" tabindex="-1"></a>"host_id", "sex", "weight_g", "parasite_count"</span>
+<span id="cb45-245"><a href="#cb45-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-246"><a href="#cb45-246" aria-hidden="true" tabindex="-1"></a>Categorise each of these variables:</span>
+<span id="cb45-247"><a href="#cb45-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-248"><a href="#cb45-248" aria-hidden="true" tabindex="-1"></a>**"host_id"** </span>
+<span id="cb45-249"><a href="#cb45-249" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("continuous", "discrete", "ordinal", answer = "nominal"))`</span></span>
+<span id="cb45-250"><a href="#cb45-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-251"><a href="#cb45-251" aria-hidden="true" tabindex="-1"></a>**"sex"** </span>
+<span id="cb45-252"><a href="#cb45-252" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("continuous", "discrete", "ordinal", answer = "nominal"))`</span></span>
+<span id="cb45-253"><a href="#cb45-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-254"><a href="#cb45-254" aria-hidden="true" tabindex="-1"></a>**"weight_g"**</span>
+<span id="cb45-255"><a href="#cb45-255" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(answer = "continuous", "discrete", "ordinal", "nominal"))`</span></span>
+<span id="cb45-256"><a href="#cb45-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-257"><a href="#cb45-257" aria-hidden="true" tabindex="-1"></a>**"parasite_count"**</span>
+<span id="cb45-258"><a href="#cb45-258" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("continuous", answer = "discrete", "ordinal", "nominal"))`</span></span>
+<span id="cb45-259"><a href="#cb45-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-260"><a href="#cb45-260" aria-hidden="true" tabindex="-1"></a>Now that we know what type of data we have, we can use the appropriate summary statistics to describe the weight. </span>
+<span id="cb45-261"><a href="#cb45-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-262"><a href="#cb45-262" aria-hidden="true" tabindex="-1"></a>If you completed the questions above, you would see that <span class="in">`weight_g`</span> is a continuous variable. Unlike <span class="in">`sex`</span>, which is categorical, we can't summarise weight into two simple categories like males and females — instead we can first use the mean to describe it.</span>
+<span id="cb45-263"><a href="#cb45-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-266"><a href="#cb45-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-267"><a href="#cb45-267" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb45-268"><a href="#cb45-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb45-269"><a href="#cb45-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight =</span> <span class="fu">mean</span>(weight_g),</span>
+<span id="cb45-270"><a href="#cb45-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb45-271"><a href="#cb45-271" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-272"><a href="#cb45-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-273"><a href="#cb45-273" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary</span>
+<span id="cb45-274"><a href="#cb45-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-275"><a href="#cb45-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-276"><a href="#cb45-276" aria-hidden="true" tabindex="-1"></a>Although this shows something, it's hard to tell what trend there really is just from these numbers. One thing we can do instead is **visualise** the data.</span>
+<span id="cb45-277"><a href="#cb45-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-278"><a href="#cb45-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-279"><a href="#cb45-279" aria-hidden="true" tabindex="-1"></a>We can first use the histogram we have already learnt about.. </span>
+<span id="cb45-282"><a href="#cb45-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-283"><a href="#cb45-283" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of weight on its own</span></span>
+<span id="cb45-284"><a href="#cb45-284" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_parasites, <span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span></span>
+<span id="cb45-285"><a href="#cb45-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb45-286"><a href="#cb45-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Weight (g)"</span>)</span>
+<span id="cb45-287"><a href="#cb45-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-288"><a href="#cb45-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-289"><a href="#cb45-289" aria-hidden="true" tabindex="-1"></a>So, from this plot - although we cannot infer anything about parasite count, we can tell that more mice are in the 20-30g range than in the 30-40g range, or below 20g, this makes sense by looking at our <span class="in">`mice_parasites_weight_summary`</span> table above.</span>
+<span id="cb45-290"><a href="#cb45-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-291"><a href="#cb45-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-292"><a href="#cb45-292" aria-hidden="true" tabindex="-1"></a>We still have a bit more to look at, we have looked at the mean in multiple different corners, but we haven't looked at the other factors mentioned. We understand what the mean shows, now lets look at what everything else shows.</span>
+<span id="cb45-293"><a href="#cb45-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-294"><a href="#cb45-294" aria-hidden="true" tabindex="-1"></a>Like earlier, and in the main workbook, we can use the <span class="in">`summarise()`</span> function to also calculate the median, mode, range and standard deviation, and range of these variables.</span>
+<span id="cb45-295"><a href="#cb45-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-296"><a href="#cb45-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-297"><a href="#cb45-297" aria-hidden="true" tabindex="-1"></a>We learnt in the main workbook, that the standard deviation can simply be calculated using the <span class="in">`sd()`</span> function, and median can be calculated using the <span class="in">`median()`</span> function. </span>
+<span id="cb45-298"><a href="#cb45-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-301"><a href="#cb45-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-302"><a href="#cb45-302" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb45-303"><a href="#cb45-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb45-304"><a href="#cb45-304" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_g),</span>
+<span id="cb45-305"><a href="#cb45-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight =</span> <span class="fu">mean</span>(weight_g),</span>
+<span id="cb45-306"><a href="#cb45-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight =</span> <span class="fu">sd</span>(weight_g),</span>
+<span id="cb45-307"><a href="#cb45-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_parasite_count =</span> <span class="fu">median</span>(parasite_count),</span>
+<span id="cb45-308"><a href="#cb45-308" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb45-309"><a href="#cb45-309" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_parasite_count =</span> <span class="fu">sd</span>(parasite_count),</span>
+<span id="cb45-310"><a href="#cb45-310" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-311"><a href="#cb45-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-312"><a href="#cb45-312" aria-hidden="true" tabindex="-1"></a>mice_parasites_weight_summary</span>
+<span id="cb45-313"><a href="#cb45-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-314"><a href="#cb45-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-315"><a href="#cb45-315" aria-hidden="true" tabindex="-1"></a>Remembering what the definition of each of these terms are, what can we tell about the data? </span>
+<span id="cb45-316"><a href="#cb45-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-317"><a href="#cb45-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-318"><a href="#cb45-318" aria-hidden="true" tabindex="-1"></a>**1. Comparing the mean (21.5) and median (21.0) for `weight_g`, what can we say about its distribution?**</span>
+<span id="cb45-319"><a href="#cb45-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-320"><a href="#cb45-320" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(answer = "It's roughly symmetric, since the mean and median are close together", "It's strongly right-skewed", "It's strongly left-skewed", "There isn't enough information to tell"))`</span></span>
+<span id="cb45-321"><a href="#cb45-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-322"><a href="#cb45-322" aria-hidden="true" tabindex="-1"></a>**2. Comparing the mean (3.42) and median (0.5) for `parasite_count`, what can we say about its distribution?**</span>
+<span id="cb45-323"><a href="#cb45-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-324"><a href="#cb45-324" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("It's roughly symmetric", answer = "It's right-skewed, since the mean is pulled well above the median", "It's left-skewed, since the mean is pulled well below the median", "The two values should always be identical"))`</span></span>
+<span id="cb45-325"><a href="#cb45-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-326"><a href="#cb45-326" aria-hidden="true" tabindex="-1"></a>**3. Why is the mean so much higher than the median for `parasite_count`?**</span>
+<span id="cb45-327"><a href="#cb45-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-328"><a href="#cb45-328" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Because most mice have very high parasite counts", answer = "Because a small number of mice with unusually high parasite counts are pulling the mean upward", "Because the median is calculated incorrectly for count data", "Because parasite count is a categorical variable"))`</span></span>
+<span id="cb45-329"><a href="#cb45-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-330"><a href="#cb45-330" aria-hidden="true" tabindex="-1"></a>**4. The standard deviation for `parasite_count` (6.17) is larger than its mean (3.42). What does this suggest?**</span>
+<span id="cb45-331"><a href="#cb45-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-332"><a href="#cb45-332" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("The data is very tightly clustered around the mean", answer = "The data is highly variable, with some values far from the mean", "There must be a calculation error", "Standard deviation cannot be compared to the mean"))`</span></span>
+<span id="cb45-333"><a href="#cb45-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-334"><a href="#cb45-334" aria-hidden="true" tabindex="-1"></a>**5. Based on the summary statistics, which variable would the mean and SD alone summarise more reliably?**</span>
+<span id="cb45-335"><a href="#cb45-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-336"><a href="#cb45-336" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(answer = "weight_g, since its mean and median are close and its SD is small relative to the mean", "parasite_count, since it has a higher mean", "Both equally", "Neither, since summary statistics are never reliable"))`</span></span>
+<span id="cb45-337"><a href="#cb45-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-338"><a href="#cb45-338" aria-hidden="true" tabindex="-1"></a>**6. What would be a good next step before drawing firm conclusions about `parasite_count` from summary statistics alone?**</span>
+<span id="cb45-339"><a href="#cb45-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-340"><a href="#cb45-340" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Nothing, the mean and SD tell us everything we need", answer = "Visualise the distribution, e.g. with a histogram, to check for skew and outliers", "Delete the outliers from the dataset", "Recalculate the mean using only male mice"))`</span></span>
+<span id="cb45-341"><a href="#cb45-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-342"><a href="#cb45-342" aria-hidden="true" tabindex="-1"></a>Hopefully now we've got a better understanding of the mean, median and SD. But we still have some remaining; Mode, Range and Skewness, as these aren't commonly used IN summarise. </span>
+<span id="cb45-343"><a href="#cb45-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-344"><a href="#cb45-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-345"><a href="#cb45-345" aria-hidden="true" tabindex="-1"></a>There are a couple of ways to calclulate the range. One of them is what we learnt in the main workbook, as the range is the largest number - the smallest number, we could just do this. </span>
+<span id="cb45-346"><a href="#cb45-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-349"><a href="#cb45-349" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-350"><a href="#cb45-350" aria-hidden="true" tabindex="-1"></a>range <span class="ot">&lt;-</span> <span class="fu">max</span>(mice_parasites<span class="sc">$</span>parasite_count)<span class="sc">-</span><span class="fu">min</span>(mice_parasites<span class="sc">$</span>parasite_count)</span>
+<span id="cb45-351"><a href="#cb45-351" aria-hidden="true" tabindex="-1"></a>range</span>
+<span id="cb45-352"><a href="#cb45-352" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-353"><a href="#cb45-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-354"><a href="#cb45-354" aria-hidden="true" tabindex="-1"></a>There is also a function, we can use. this is the <span class="in">`diff()`</span> function from base R, which calculates the difference between the maximum and minimum values of a variable.</span>
+<span id="cb45-355"><a href="#cb45-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-358"><a href="#cb45-358" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-359"><a href="#cb45-359" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(mice_parasites<span class="sc">$</span>parasite_count))</span>
+<span id="cb45-360"><a href="#cb45-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-361"><a href="#cb45-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-362"><a href="#cb45-362" aria-hidden="true" tabindex="-1"></a>Next lets look at the mode. As we learnt, the quickest way to do this is to write a small function. </span>
+<span id="cb45-363"><a href="#cb45-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-366"><a href="#cb45-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-367"><a href="#cb45-367" aria-hidden="true" tabindex="-1"></a>get_mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb45-368"><a href="#cb45-368" aria-hidden="true" tabindex="-1"></a>  freq_table <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
+<span id="cb45-369"><a href="#cb45-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(freq_table)[freq_table <span class="sc">==</span> <span class="fu">max</span>(freq_table)]</span>
+<span id="cb45-370"><a href="#cb45-370" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-371"><a href="#cb45-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-372"><a href="#cb45-372" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mode</span>(mice_parasites<span class="sc">$</span>parasite_count)</span>
+<span id="cb45-373"><a href="#cb45-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-374"><a href="#cb45-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-375"><a href="#cb45-375" aria-hidden="true" tabindex="-1"></a>but if you want to load up another package and function, you can, don't forget to install packages in the console before you load them up.</span>
+<span id="cb45-376"><a href="#cb45-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-379"><a href="#cb45-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-380"><a href="#cb45-380" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb45-381"><a href="#cb45-381" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(mice_parasites<span class="sc">$</span>parasite_count)</span>
+<span id="cb45-382"><a href="#cb45-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-383"><a href="#cb45-383" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-384"><a href="#cb45-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-385"><a href="#cb45-385" aria-hidden="true" tabindex="-1"></a>Our mode uis 0, and desc tools shows 30 of our samples are 0</span>
+<span id="cb45-386"><a href="#cb45-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-387"><a href="#cb45-387" aria-hidden="true" tabindex="-1"></a>Now let's put this in one big summary statistics table! </span>
+<span id="cb45-388"><a href="#cb45-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-391"><a href="#cb45-391" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-392"><a href="#cb45-392" aria-hidden="true" tabindex="-1"></a>mice_parasites_full_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb45-393"><a href="#cb45-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb45-394"><a href="#cb45-394" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight =</span> <span class="fu">mean</span>(weight_g),</span>
+<span id="cb45-395"><a href="#cb45-395" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_g),</span>
+<span id="cb45-396"><a href="#cb45-396" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight =</span> <span class="fu">sd</span>(weight_g),</span>
+<span id="cb45-397"><a href="#cb45-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">range_weight =</span> <span class="fu">diff</span>(<span class="fu">range</span>(weight_g)),</span>
+<span id="cb45-398"><a href="#cb45-398" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-399"><a href="#cb45-399" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb45-400"><a href="#cb45-400" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_parasite_count =</span> <span class="fu">median</span>(parasite_count),</span>
+<span id="cb45-401"><a href="#cb45-401" aria-hidden="true" tabindex="-1"></a>    <span class="at">mode_parasite_count =</span> <span class="fu">Mode</span>(parasite_count),</span>
+<span id="cb45-402"><a href="#cb45-402" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_parasite_count =</span> <span class="fu">sd</span>(parasite_count),</span>
+<span id="cb45-403"><a href="#cb45-403" aria-hidden="true" tabindex="-1"></a>    <span class="at">range_parasite_count =</span> <span class="fu">diff</span>(<span class="fu">range</span>(parasite_count))</span>
+<span id="cb45-404"><a href="#cb45-404" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-405"><a href="#cb45-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-406"><a href="#cb45-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-407"><a href="#cb45-407" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb45-408"><a href="#cb45-408" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(mice_parasites_full_summary, <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-409"><a href="#cb45-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span>
+<span id="cb45-410"><a href="#cb45-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-411"><a href="#cb45-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-412"><a href="#cb45-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-413"><a href="#cb45-413" aria-hidden="true" tabindex="-1"></a><span class="fu">## The End </span></span>
+<span id="cb45-414"><a href="#cb45-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-415"><a href="#cb45-415" aria-hidden="true" tabindex="-1"></a>If you made it to here, you should be pretty certain on how everything syummary statistics works. We will soon go onto how things move together, but as an additional let's look at this.    </span>
+<span id="cb45-416"><a href="#cb45-416" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb45-419"><a href="#cb45-419" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-420"><a href="#cb45-420" aria-hidden="true" tabindex="-1"></a><span class="co"># Relationship between weight and parasite count </span></span>
+<span id="cb45-421"><a href="#cb45-421" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_parasites, <span class="fu">aes</span>(<span class="at">x =</span> weight_g, <span class="at">y =</span> parasite_count)) <span class="sc">+</span></span>
+<span id="cb45-422"><a href="#cb45-422" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb45-423"><a href="#cb45-423" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Weight (g)"</span>, <span class="at">y =</span> <span class="st">"Parasite count"</span>)</span>
+<span id="cb45-424"><a href="#cb45-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-425"><a href="#cb45-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-426"><a href="#cb45-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-427"><a href="#cb45-427" aria-hidden="true" tabindex="-1"></a>**What can we tell from this plot?**</span>
+<span id="cb45-428"><a href="#cb45-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-429"><a href="#cb45-429" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Parasite count increases steadily and linearly with weight", answer = "Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g", "Weight has no effect on parasite count at all, since every mouse has exactly the same count"))`</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
