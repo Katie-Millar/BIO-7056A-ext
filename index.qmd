@@ -1,0 +1,22 @@
+---
+title: "Statistics for Biologists"
+author: "Dr Ellen Bell"
+date: "`r Sys.Date()`"
+format:
+  html:
+    theme: yeti
+    toc: true
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+jupyter: false
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+# Welcome to the Statistics Coursebook {#c1}

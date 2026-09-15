@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistics for Biologists",
+    "section": "",
+    "text": "1 Welcome to the Statistics Coursebook",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Statistics for Biologists</span>"
+    ]
+  },
+  {
+    "objectID": "02-ext.html",
+    "href": "02-ext.html",
+    "title": "2  Workshop 2 - Exploratory Data Analysis - Extension",
+    "section": "",
+    "text": "2.0.1 Getting the Terminology Right !\nUsing what we have just learnt in the Exploratory Data Analysis chapter, we will now do a small recap, and explore these skills using an example.\nTo recap…\nWe learnt about 4 types of data, within 2 different groups.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Workshop 2 - Exploratory Data Analysis - Extension</span>"
+    ]
+  },
+  {
+    "objectID": "02-ext.html#the-end",
+    "href": "02-ext.html#the-end",
+    "title": "2  Workshop 2 - Exploratory Data Analysis - Extension",
+    "section": "2.1 The End",
+    "text": "2.1 The End\nIf you made it to here, you should be pretty certain on how everything summary statistics works. We will soon go onto how the data actually moves together, but as an ‘for luck’ extra, have a quick visualisation of how weight and parasite moves together.\n\n# Relationship between weight and parasite count \nggplot(mice_parasites, aes(x = weight_g, y = parasite_count)) +\n  geom_point() +\n  labs(x = \"Weight (g)\", y = \"Parasite count\")\n\n\n\n\n\n\n\n\nWhat can we tell from this plot?\n\n Parasite count increases steadily and linearly with weight Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g Weight has no effect on parasite count at all, since every mouse has exactly the same count",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Workshop 2 - Exploratory Data Analysis - Extension</span>"
+    ]
+  },
+  {
+    "objectID": "appendix.html",
+    "href": "appendix.html",
+    "title": "3  Appendix - Knowing your R & Statistics",
+    "section": "",
+    "text": "3.0.1 Using tidyverse()\nYou will most certainly come across the tidyverse package a lot in your R. This is a collection of packages that are designed to work together, and make data analysis easier. The tidyverse includes packages like ggplot2, dplyr, tidyr, readr, purrr, and more. So as long as you have tidyverse installed, you can use all of these packages without having to install them individually.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix - Knowing your R & Statistics</span>"
+    ]
+  }
+]
