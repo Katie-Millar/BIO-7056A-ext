@@ -1,0 +1,15 @@
+---
+title: "Appendix - Knowing your R & Statistics"
+format:
+  html:
+    theme: yeti
+    toc: true
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+jupyter: false
+---
+
+### tidyverse 
