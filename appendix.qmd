@@ -12,6 +12,7 @@ format:
 jupyter: false
 ---
 
+<<<<<<< HEAD
 ### Using `tidyverse()`
 
 You will most certainly come across the `tidyverse` package a lot in your R. This is a collection of packages that are designed to work together, and make data analysis easier. The tidyverse includes packages like `ggplot2`, `dplyr`, `tidyr`, `readr`, `purrr`, and more. So as long as you have `tidyverse` installed, you can use all of these packages without having to install them individually.
@@ -22,3 +23,6 @@ You will most certainly come across the `tidyverse` package a lot in your R. Thi
 
 
 
+=======
+### tidyverse 
+>>>>>>> c30a83bca97024c689d041620a1a3b07182852c3
