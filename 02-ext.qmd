@@ -16,22 +16,22 @@ Using what we have just learnt in the [Exploratory Data Analysis chapter](https:
 
 To recap... 
 
-### Getting the Terminology Right ! 
+## Getting the Terminology Right ! 
 
 We learnt about **4 types of data**, within **2 different groups.**   
 
-#### Quantitative/Numerical data
+### Quantitative/Numerical data
 
 Data that can be measured and expressed numerically. It can be further classified into discrete and continuous data.
 
-**Discrete data:** Data that can only take *specific* values, often counted. Examples include the *number of students in a class* or the *number of cars in a parking lot*.
+**Discrete data:** Data that can only take *specific* values, often counted. Examples include the *number of students in a class* or the *number of cars in a car park*.
 
 **Continuous data:** Data that can take any value within a range, often measured. Examples include *height*  and *temperature*.
 
 ![](images/ch2.1.png){width=60%, fig-align="center"}
 
 
-#### Qualitative/Categorical data
+### Qualitative/Categorical data
 
 Data that can be divided into categories or groups. It can be further classified into nominal and ordinal data.
 
@@ -43,12 +43,12 @@ Data that can be divided into categories or groups. It can be further classified
 
 
 
-### Summary Statistics 
+## Summary Statistics 
 
 Summary Statistics are used to summarise and describe the main features of a dataset. They provide a quick overview of the data, allowing us to understand its central tendency, variability, and distribution.
 
 
-#### Measures of averages:
+### Measures of averages:
 **Mean**           
 The total of all the values divided by the number of values.
 
@@ -58,18 +58,20 @@ The middle value when the data is arranged in order.
 **Mode**                            
 The value that occurs most often.
         
-#### Measures of spread:
+### Measures of spread:
 **Range**          
 The difference between the largest and smallest values.
                  
 **Standard deviation**                
 A measure of how spread out the values are around the mean.
      
-**Skewness**
-The measure of asymmetry in the distribution of data. A positive skew indicates a longer tail on the right side, while a negative skew indicates a longer tail on the left side. Skewness tells you where the outliers or extreme values are pulling the distribution, relative to where most of your data sits.
+**Skewness**              
+The measure of asymmetry in the distribution of data.          
+A positive skew indicates a longer tail on the right side, while a negative skew indicates a longer tail on the left side.               
+Skewness tells you where the outliers or extreme values are pulling the distribution, relative to where most of your data sits.          
 
 
-### Checking Data - The Wood Mouse! 
+## Checking Data for real -  Using the Wood Mouse! 
 
 Let's use what we've learnt using a dataset. 
 
@@ -82,17 +84,21 @@ We have a dataset where researchers took a sample of 60 different *Apodemus sylv
 Let's first read in this dataset, found in `data/mouse_parasite_counts.csv`. 
 
 Before we do this, as you'll remember, you'll need a package to do this. If you rememeber from earlier (), we used the function, `read_csv()`, this is from the package`readr`. However readr, is part of the `tidyverse` package, which actually contains A LOT. Read about this in one of the appendices. 
+
+Good practice alert!! It is *excellent* practice to load up all the packages you will need at the start of your code, so you don't forget to load them later on, and they are not dropped all over your code. 
+
+We will need the following packages throughout this script, make sure they are installed from the console first!
 ```{r, results='hide', message=FALSE, warning=FALSE}
 library(tidyverse)
 library(janitor)
-library(webexercises)
 library(kableExtra)
 ```
 
+```{r, results='hide', message=FALSE, warning=FALSE, echo=FALSE}
+library(webexercises)
+```
 
-
-
-If the `tidyverse()` package is installed, you should be able to read in the dataset. 
+If the `tidyverse()` package is installed and loaded up, you should be able to read in the dataset. 
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 mice_parasites <- read_csv("data/mouse_parasite_counts.csv")
@@ -346,7 +352,7 @@ Hopefully now we've got a better understanding of the **Mean**, **Median** and *
 
 
 
-Let's start with the **Range**. There are a couple of ways to calclulate this. One of them is what we learnt in the [main workbook](https://www.wildlifetrusts.org/wildlife-explorer/mammals/wood-mouse), as the **range** is the smallest number subtracted from the largest number, we could just do that in code.
+Let's start with the **Range**. There are a couple of ways to calclulate this. One of them is what we learnt in the [main workbook](), as the **range** is the smallest number subtracted from the largest number, we could just do that in code.
 
 ```{r}
 max(mice_parasites$parasite_count)-min(mice_parasites$parasite_count)

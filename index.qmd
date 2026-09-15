@@ -1,6 +1,6 @@
 ---
-title: "Statistics for Biologists"
-author: "Dr Ellen Bell"
+title: "Statistics for Biologists - Extension"
+author: "Katie Millar"
 date: "`r Sys.Date()`"
 format:
   html:
@@ -19,4 +19,5 @@ jupyter: false
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-# Welcome to the Statistics Coursebook {#c1}
+# Statistics for Biologists - Extension Coursebook
+This coursebook is aimed to test your knowledge. 
