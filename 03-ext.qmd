@@ -1,0 +1,129 @@
+---
+title: "Workshop 3 - Sampling Distributions and Testing for Differences - Extension"
+format:
+  html:
+    theme: yeti
+    toc: true
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+jupyter: false
+---
+
+
+```{r, results='hide', echo=FALSE, warning=FALSE, message=FALSE}
+library(webexercises)
+library(tidyverse)
+```
+
+
+`r hide("Click to expand: recap of key terms")`
+
+
+## Recapping our definitions
+**Sampling**
+Selecting a **subset (sample)** of individuals or observations from a larger population to estimate characteristics of the whole population; without measuring everything.
+
+**Sampling error**
+The difference between a **sample statistic** and the **true population parameter**, arising because a sample may not perfectly represent the population.
+
+**Probability**
+A numerical measure (**between 0 and 1**) of the likelihood that a specific event will occur.
+
+**Variance**
+A measure of how much values differ from the **mean**, calculated as the **average of the squared differences** from the mean.
+
+**Standard deviation**
+The **square root of the variance**, expressed in the original units of the data.
+
+**Standard error of the mean (SEM)**
+An estimate of how much a sample mean is likely to vary from the true population mean: **SD / sqrt(n)**.
+
+**Confidence intervals**
+A range of values, calculated from sample data, likely to contain the **true population parameter** at a given confidence level (e.g. **95%**).
+
+**T-tests**
+Tests whether the difference between two means is **larger than sampling error alone** would explain.
+
+- *One-sample t-test*: compares a single sample mean to a hypothesised population mean.
+- *Two-sample t-test*: compares the means of two independent samples, using the **standard error of the difference between means**.
+
+**Statistical significance**
+A result is significant when its **p-value** falls below a chosen threshold (conventionally **p < 0.05**) — meaning the result is unlikely to be due to sampling error, not that the effect is large or important.
+
+`r unhide()`
+
+## Sampling Distributions - a case study 
+
+A UEA research team wants to know the average number of **Medflies (*Ceratitis capitata*) per apple tree** in a large commercial orchard containing 2,000 trees. Counting flies on every tree is impractical, so the team selects **40 trees at random** and counts the flies caught in a trap on each one.
+
+Results from the 40 sampled trees:
+
+- Sample mean: **14.2 flies/tree**
+- Sample standard deviation: **6.5 flies/tree**
+- The true mean across all 2,000 trees (found later from a full census) is **13.1 flies/tree**
+
+The team also compares mean fly counts on **edge trees** vs **interior trees** (20 each).
+
+**1. What is the population in this scenario?**                
+`r mcq(c( "The 40 trees that were sampled", answer = "All 2,000 trees in the orchard", "The flies caught in the traps", "The research team"))`
+
+
+ 
+
+**2. What term describes the 40 trees selected for sampling?** 
+`r mcq(c("The parameter", "The population", answer = "The sample", "The confidence interval"))`
+
+**3. The true population mean turned out to be 13.1, but the sample mean was 14.2. This difference is best described as:**          
+`r mcq(c(  "A calculation mistake", answer = "Sampling error", "A statistically significant effect", "The standard deviation"))`
+
+**4. A colleague argues: *"Since our sample mean (14.2) differs from the true population mean (13.1), our sampling method must have been biased."* Which response best evaluates this claim?**                
+`r longmcq(c( "Correct - any difference between sample and population mean indicates bias in how trees were selected.",answer = paste("Incorrect - a difference between a sample statistic and the true parameter is expected even with","random, unbiased sampling, because of sampling error; only asystematic pattern (e.g. always missing","certain trees) would indicate bias."),"Incorrect - the difference is too small to matter, so no explanation is needed.","Correct, but only because the sample size (40) was too small to ever be unbiased."))`
+
+
+
+**5. A 95% CI from the sample is 12.0–16.4 flies/tree. Correct interpretation?:**
+`r mcq(c(  "95% probability any single tree has 12.0-16.4 flies","95% of sampled trees had 12.0-16.4 flies",answer = "We are 95% confident this range contains the true population mean", "The population mean is definitely in this range"))`
+
+**6.  Comparing edge trees vs interior trees calls for?:**
+`r mcq(c(  "One-sample t-test", answer = "Two-sample t-test","A confidence interval alone", "Calculating variance only"))`
+
+
+
+**7.  A student claims p = 0.03 for the edge-vs-interior test "proves edge trees definitely have more flies, and the effect must be biologically important." What's the flaw?:**
+`r longmcq(c( "No flaw - p < 0.05 proves both statistical and biological significance.", answer = paste("Flawed - statistical significance (p < 0.05) means the difference is unlikely to be due to sampling", "error alone; it does not 'prove' anything with certainty, and it says nothing about whether the","size of the effect is biologically meaningful."),"Flawed - p = 0.03 actually indicates no significant difference.", "Flawed only because the sample sizes for edge and interior trees were unequal."))`
+
+
+
+## Sampling and Testing for Differences
+
+Let's go back to our wood mouse data, we left our wood mouse data at the point of doing a little bit of data visualisation.
+
+To recap, in our data, we had the following variables: 
+
+`"host_id"`, `"sex"`, `"weight_g"`, `"parasite_count"`
+
+**There's more than one sensible pairing you *could* visualise from these variables, but just looking at the options below, which pair would be sensible to visualise together, and what plot would best show their relationship?**
+
+`r longmcq(c("<code>host_id</code> and <code>sex</code> — as a scatterplot", answer = "<code>sex</code> and <code>weight_g</code> — as a boxplot, to compare weight distributions between males and females", "<code>host_id</code> and <code>parasite_count</code> — as a bar chart, since host_id is a meaningful numeric scale", "<code>weight_g</code> and <code>parasite_count</code> — as a bar chart"))`
+
+Let's do some visualisation! 
+
+First we gotta do our reading in of the data, have a practice at loading packages at the beginning of the script, and reading our data in. 
+
+
+
+```{r, echo=FALSE, results='hide'}
+mice_parasites <- read.csv("data/mouse_parasite_counts.csv")
+```
+
+```{r}
+mice_parasites_plot <- mice_parasites %>%
+  ggplot(aes(x = sex, y = parasite_count)) +
+  jitter(weight_g, width = 0.1, alpha = 0.5) +
+  geom_boxplot()
+
+mice_parasites_plot
+```
