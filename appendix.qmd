@@ -31,6 +31,6 @@ Quarto
 central tenden
 
 
-the pipe !!
+the pipe
 
 

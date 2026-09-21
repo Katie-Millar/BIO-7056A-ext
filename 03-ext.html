@@ -86,8 +86,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sampling-distributions---a-case-study" id="toc-sampling-distributions---a-case-study" class="nav-link active" data-scroll-target="#sampling-distributions---a-case-study">Sampling Distributions - a case study</a></li>
+  <li><a href="#recapping-our-definitions" id="toc-recapping-our-definitions" class="nav-link active" data-scroll-target="#recapping-our-definitions">Recapping our Definitions</a></li>
+  <li><a href="#sampling-distributions---a-case-study" id="toc-sampling-distributions---a-case-study" class="nav-link" data-scroll-target="#sampling-distributions---a-case-study">Sampling Distributions - a case study</a></li>
   <li><a href="#sampling-and-testing-for-differences" id="toc-sampling-and-testing-for-differences" class="nav-link" data-scroll-target="#sampling-and-testing-for-differences">Sampling and Testing for Differences</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics">Descriptive Statistics</a></li>
+  <li><a href="#parametric-and-non-parametric-tests" id="toc-parametric-and-non-parametric-tests" class="nav-link" data-scroll-target="#parametric-and-non-parametric-tests">Parametric and Non-Parametric Tests</a></li>
+  <li><a href="#an-example-descriptive-statistics-on-the-data" id="toc-an-example-descriptive-statistics-on-the-data" class="nav-link" data-scroll-target="#an-example-descriptive-statistics-on-the-data">An example: Descriptive statistics on the data</a>
+  <ul class="collapse">
+  <li><a href="#does-sex-affect-the-parasite-count-in-mice" id="toc-does-sex-affect-the-parasite-count-in-mice" class="nav-link" data-scroll-target="#does-sex-affect-the-parasite-count-in-mice">Does sex affect the parasite count in mice?</a></li>
+  <li><a href="#does-sex-affect-weight-in-mice" id="toc-does-sex-affect-weight-in-mice" class="nav-link" data-scroll-target="#does-sex-affect-weight-in-mice">Does sex affect weight in mice?</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -112,12 +120,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Welcome to today’s workshop extension! In this session, like last time, we will be focusing on summarising and testing our knowledge from what we learnt in the main workbook. We will be covering <strong>Sampling Distributions</strong> and <strong>Testing for Differences</strong>. We will also be revisiting some of the key terms and concepts from the main workbook, and applying them to a different dataset.</p>
+<section id="recapping-our-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="recapping-our-definitions">Recapping our Definitions</h2>
+<p>Let’s first recap some definitions and key terms from the main workbook. Have a play with the ‘Click to expand’ button below to familiarise yourself with the definitions, and then we will apply them to a case study.</p>
 <div class="webex-solution">
 <button>
 Click to expand: recap of key terms
 </button>
-<section id="recapping-our-definitions" class="level2">
-<h2 class="anchored" data-anchor-id="recapping-our-definitions">Recapping our definitions</h2>
 <p><strong>Sampling</strong> Selecting a <strong>subset (sample)</strong> of individuals or observations from a larger population to estimate characteristics of the whole population; without measuring everything.</p>
 <p><strong>Sampling error</strong> The difference between a <strong>sample statistic</strong> and the <strong>true population parameter</strong>, arising because a sample may not perfectly represent the population.</p>
 <p><strong>Probability</strong> A numerical measure (<strong>between 0 and 1</strong>) of the likelihood that a specific event will occur.</p>
@@ -131,10 +141,15 @@ Click to expand: recap of key terms
 <li><em>Two-sample t-test</em>: compares the means of two independent samples, using the <strong>standard error of the difference between means</strong>.</li>
 </ul>
 <p><strong>Statistical significance</strong> A result is significant when its <strong>p-value</strong> falls below a chosen threshold (conventionally <strong>p &lt; 0.05</strong>) — meaning the result is unlikely to be due to sampling error, not that the effect is large or important.</p>
-</section>
 </div>
+</section>
 <section id="sampling-distributions---a-case-study" class="level2">
 <h2 class="anchored" data-anchor-id="sampling-distributions---a-case-study">Sampling Distributions - a case study</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 <p>A UEA research team wants to know the average number of <strong>Medflies (<em>Ceratitis capitata</em>) per apple tree</strong> in a large commercial orchard containing 2,000 trees. Counting flies on every tree is impractical, so the team selects <strong>40 trees at random</strong> and counts the flies caught in a trap on each one.</p>
 <p>Results from the 40 sampled trees:</p>
 <ul>
@@ -150,40 +165,39 @@ Click to expand: recap of key terms
 <select class="webex-select"><option value="blank"></option><option value="">A calculation mistake</option><option value="answer">Sampling error</option><option value="">A statistically significant effect</option><option value="">The standard deviation</option></select></p>
 <strong>4. A colleague argues: <em>“Since our sample mean (14.2) differs from the true population mean (13.1), our sampling method must have been biased.”</em> Which response best evaluates this claim?</strong><br>
 
-<div id="radio_IZZLICBQJP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IZZLICBQJP" value=""> <span>Correct - any difference between sample and population mean indicates bias in how trees were selected.</span></label><label><input type="radio" autocomplete="off" name="radio_IZZLICBQJP" value="answer"> <span>Incorrect - a difference between a sample statistic and the true parameter is expected even with random, unbiased sampling, because of sampling error; only asystematic pattern (e.g.&nbsp;always missing certain trees) would indicate bias.</span></label><label><input type="radio" autocomplete="off" name="radio_IZZLICBQJP" value=""> <span>Incorrect - the difference is too small to matter, so no explanation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_IZZLICBQJP" value=""> <span>Correct, but only because the sample size (40) was too small to ever be unbiased.</span></label>
+<div id="radio_AEHYCJJZJP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AEHYCJJZJP" value=""> <span>Correct - any difference between sample and population mean indicates bias in how trees were selected.</span></label><label><input type="radio" autocomplete="off" name="radio_AEHYCJJZJP" value="answer"> <span>Incorrect - a difference between a sample statistic and the true parameter is expected even with random, unbiased sampling, because of sampling error; only a systematic pattern (e.g.&nbsp;always missing certain trees) would indicate bias.</span></label><label><input type="radio" autocomplete="off" name="radio_AEHYCJJZJP" value=""> <span>Incorrect - the difference is too small to matter, so no explanation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_AEHYCJJZJP" value=""> <span>Correct, but only because the sample size (40) was too small to ever be unbiased.</span></label>
 </div>
 <p><strong>5. A 95% CI from the sample is 12.0–16.4 flies/tree. Correct interpretation?:</strong> <select class="webex-select"><option value="blank"></option><option value="">95% probability any single tree has 12.0-16.4 flies</option><option value="">95% of sampled trees had 12.0-16.4 flies</option><option value="answer">We are 95% confident this range contains the true population mean</option><option value="">The population mean is definitely in this range</option></select></p>
 <p><strong>6. Comparing edge trees vs interior trees calls for?:</strong> <select class="webex-select"><option value="blank"></option><option value="">One-sample t-test</option><option value="answer">Two-sample t-test</option><option value="">A confidence interval alone</option><option value="">Calculating variance only</option></select></p>
-<strong>7. A student claims p = 0.03 for the edge-vs-interior test “proves edge trees definitely have more flies, and the effect must be biologically important.” What’s the flaw?:</strong>
-<div id="radio_LUSVDFGWRX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LUSVDFGWRX" value=""> <span>No flaw - p &lt; 0.05 proves both statistical and biological significance.</span></label><label><input type="radio" autocomplete="off" name="radio_LUSVDFGWRX" value="answer"> <span>Flawed - statistical significance (p &lt; 0.05) means the difference is unlikely to be due to sampling error alone; it does not 'prove' anything with certainty, and it says nothing about whether the size of the effect is biologically meaningful.</span></label><label><input type="radio" autocomplete="off" name="radio_LUSVDFGWRX" value=""> <span>Flawed - p = 0.03 actually indicates no significant difference.</span></label><label><input type="radio" autocomplete="off" name="radio_LUSVDFGWRX" value=""> <span>Flawed only because the sample sizes for edge and interior trees were unequal.</span></label>
+<strong>7. A student claims p = 0.03 for the edge-vs-interior test “proves edge trees definitely have more flies, and the effect must be biologically important.” Is there any flaw with this statement?:</strong>
+<div id="radio_IRYXSXZLWS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IRYXSXZLWS" value=""> <span>No flaw - p &lt; 0.05 definitely proves both statistical and biological significance.</span></label><label><input type="radio" autocomplete="off" name="radio_IRYXSXZLWS" value="answer"> <span>Yes - statistical significance (p &lt; 0.05) means the difference is unlikely to be due to sampling error alone; it does not prove anything with certainty.</span></label><label><input type="radio" autocomplete="off" name="radio_IRYXSXZLWS" value=""> <span>Yes - p = 0.03 actually indicates no significant difference.</span></label><label><input type="radio" autocomplete="off" name="radio_IRYXSXZLWS" value=""> <span>Yes - only because the sample sizes for edge and interior trees were unequal.</span></label>
 </div>
+<p>We will now put this case study to the side for a bit, and go back to our wood mice and the parasites, introduced in the previous workshop.</p>
 </section>
 <section id="sampling-and-testing-for-differences" class="level2">
 <h2 class="anchored" data-anchor-id="sampling-and-testing-for-differences">Sampling and Testing for Differences</h2>
-<p>Let’s go back to our wood mouse data, we left our wood mouse data at the point of doing a little bit of data visualisation.</p>
-<p>To recap, in our data, we had the following variables:</p>
-<p><code>"host_id"</code>, <code>"sex"</code>, <code>"weight_g"</code>, <code>"parasite_count"</code></p>
-<p><strong>There’s more than one sensible pairing you <em>could</em> visualise from these variables, but just looking at the options below, which pair would be sensible to visualise together, and what plot would best show their relationship?</strong></p>
-<div id="radio_NBNDEKHQOG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NBNDEKHQOG" value=""> <span><code>host_id</code> and <code>sex</code> — as a scatterplot</span></label><label><input type="radio" autocomplete="off" name="radio_NBNDEKHQOG" value="answer"> <span><code>sex</code> and <code>weight_g</code> — as a boxplot, to compare weight distributions between males and females</span></label><label><input type="radio" autocomplete="off" name="radio_NBNDEKHQOG" value=""> <span><code>host_id</code> and <code>parasite_count</code> — as a bar chart, since host_id is a meaningful numeric scale</span></label><label><input type="radio" autocomplete="off" name="radio_NBNDEKHQOG" value=""> <span><code>weight_g</code> and <code>parasite_count</code> — as a bar chart</span></label>
-</div>
-<p>Let’s do some visualisation!</p>
-<p>First we gotta do our reading in of the data, have a practice at loading packages at the beginning of the script, and reading our data in.</p>
+<p><strong>!Task Alert!</strong><br>
+First, we need to load our packages and read in the data. As in the previous workshop, we’ll use the <code>tidyverse</code> package, along with the <code>mouse_parasite_counts.csv</code> dataset. <strong>Please read these in</strong>.</p>
+<p>We learnt about using histograms to see the distritribution of the data, learning about it’s shape, centre and spread.</p>
+<p>Let’s now make two histograms of the <code>parasite_count</code> variable, one for female mice and one for male mice. This will allow us to visualise the distribution of parasite counts for each sex, and see if there are any differences between them.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_plot <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> parasite_count, <span class="at">fill =</span> weight_g)) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mice_parasites_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The following aesthetics were dropped during statistical transformation: fill.
-ℹ This can happen when ggplot fails to infer the correct grouping structure in
-  the data.
-ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-  variable into a factor?</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_F <span class="ot">&lt;-</span>  mice_parasites <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span><span class="st">"F"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>parasite_count)) <span class="sc">+</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_M <span class="ot">&lt;-</span>  mice_parasites <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span><span class="st">"M"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>parasite_count)) <span class="sc">+</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_F</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -191,9 +205,197 @@ Click to expand: recap of key terms
 </figure>
 </div>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_M</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-ext_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Looking at the two histograms of <code>parasite_count</code> for female and male mice above, which statement best describes what you see?</strong></p>
+<div id="radio_OUYRPUYHPX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OUYRPUYHPX" value=""> <span>Both distributions are roughly symmetric (normal), so the mean is a good summary of typical parasite count for each sex.</span></label><label><input type="radio" autocomplete="off" name="radio_OUYRPUYHPX" value="answer"> <span>Both distributions are strongly right-skewed - most mice have very low parasite counts, with a small number of individuals carrying much higher burdens. Because of this skew, the mean will be pulled upward by the few high-count individuals and won't represent a 'typical' mouse as well as the median would.</span></label><label><input type="radio" autocomplete="off" name="radio_OUYRPUYHPX" value=""> <span>Females have a wider spread of parasite counts than males, since the female plot has more bars.</span></label><label><input type="radio" autocomplete="off" name="radio_OUYRPUYHPX" value=""> <span>The two histograms can't be compared because they don't have the same y-axis maximum.</span></label>
+</div>
+</section>
+<section id="descriptive-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="descriptive-statistics">Descriptive Statistics</h2>
+<p>In Workshop 2 in the last session, we covered <strong>Exploratory Data Analysis</strong> and how descriptive statistics help us understand our data before running any statistical tests.</p>
+<p>The key terms learnt were: <strong>Mean</strong>, <strong>Median</strong>, <strong>Mode</strong>, <strong>Range</strong>, <strong>Standard deviation</strong>, and <strong>Skewness</strong>.</p>
+<p>In the main workbook in today’s workshop (Workshop 3), you were asked to calculate the <strong>mean</strong>, <strong>standard deviation</strong>, and <strong>standard error of the mean (SEM)</strong> for the yield and virus data.</p>
+<p><strong>How should you write the standard error of the mean in the code?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">sd(x)</option><option value="">sd(x) * n</option><option value="">sd(x) * sqrt(n)</option><option value="answer">sd(x) / sqrt(n)</option></select></p>
+<div class="webex-solution">
+<button>
+Show explanation
+</button>
+<p>The standard error of the mean tells you how much variation you’d expect in the sample mean if you repeated your sampling many times. It’s calculated as the standard deviation divided by the square root of the sample size: <code>sd(x) / sqrt(n)</code>. Dividing by a larger <code>n</code> shrinks the SEM, reflecting the fact that larger samples give a more precise estimate of the true population mean.</p>
+</div>
+<p>Just as you would have done in the previous workbook with that data, below is a worked example of how to calculate the <strong>mean</strong>, <strong>standard deviation</strong>, and <strong>standard error of the mean (SEM)</strong> for this data, the parasite count by sex using <code>group_by()</code> and <code>summarise()</code></p>
+<div class="webex-solution">
+<button>
+Show explanation
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mouse_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_parasite_count =</span> <span class="fu">sd</span>(parasite_count),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sem_parasite_count =</span> <span class="fu">sd</span>(parasite_count) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>mouse_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  sex   mean_parasite_count sd_parasite_count sem_parasite_count
+  &lt;chr&gt;               &lt;dbl&gt;             &lt;dbl&gt;              &lt;dbl&gt;
+1 F                    4.08              7.13              1.40 
+2 M                    2.91              5.38              0.923</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="parametric-and-non-parametric-tests" class="level2">
+<h2 class="anchored" data-anchor-id="parametric-and-non-parametric-tests">Parametric and Non-Parametric Tests</h2>
+<p>We learnt in the main workbook about parametric and non-parametric tests, and how to choose between them.</p>
+<p><strong>What is a parametric test and what is a non-parametric test?</strong></p>
+<div id="radio_AVGNZXURIB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AVGNZXURIB" value=""> <span>A parametric test makes no assumption about the distribution of the data; a non-parametric test assumes the data follow a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_AVGNZXURIB" value=""> <span>Both parametric and non-parametric tests assume the data follow a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_AVGNZXURIB" value=""> <span>Neither parametric nor non-parametric tests make any assumptions about the distribution of the data.</span></label><label><input type="radio" autocomplete="off" name="radio_AVGNZXURIB" value="answer"> <span>A parametric test assumes the data follow a normal distribution; a non-parametric test makes no assumption about the distribution of the data.</span></label>
+</div>
+<p>Before running any statistical test, it’s good practice to visualise the data first. A quick plot can reveal the shape of the distribution, potential outliers, or patterns you’d otherwise miss, and this shapes which test is actually appropriate to use.</p>
+<p><strong>Parametric tests</strong> (like the t-test) assume that the underlying data are normally distributed. If your visualisation (like a histogram) shows the data are skewed, that assumption may be violated, which can make the test’s results unreliable. However, this doesn’t automatically mean the test result is wrong — it depends on how much the skew is actually affecting the outcome, which we can check in two ways:</p>
+<ul>
+<li><strong>Remove the influential point(s):</strong> Re-run the test excluding the datapoint(s) responsible for the skew. If the conclusion changes, the skew is likely having a real effect on your result.</li>
+<li><strong>Compare test types:</strong> Run both a parametric test (e.g.&nbsp;t-test) and its non-parametric equivalent on the same data. If they agree, you can be more confident the skew isn’t distorting your conclusion.</li>
+</ul>
+<p>We also need to check the assumption of <strong>equal variances</strong> between groups before running a two-sample t-test. We can do this using <strong>Levene’s test</strong>, which we learnt about in the main workbook.</p>
+</section>
+<section id="an-example-descriptive-statistics-on-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="an-example-descriptive-statistics-on-the-data">An example: Descriptive statistics on the data</h2>
+<section id="does-sex-affect-the-parasite-count-in-mice" class="level3">
+<h3 class="anchored" data-anchor-id="does-sex-affect-the-parasite-count-in-mice">Does sex affect the parasite count in mice?</h3>
+<p>As we saw in the histograms above, the parasite count data are strongly right-skewed for both sexes.</p>
+<p>If you remember from the previous workbook; there were two assumptions of a two-sample t-test.</p>
+<ol type="1">
+<li>The data should be normally distributed within each group.</li>
+<li>The variances of the two groups should be approximately equal.</li>
+</ol>
+<p>We know that parasite count is not normally distributed for either sex - as seen above.</p>
+<p><strong>Now we will run a two-sample t-test on the full dataset</strong>, comparing parasite counts between male and female mice, using the result of Levene’s test above to decide whether to set <code>var.equal = TRUE</code> or <code>FALSE</code>. As there was no significant result, we can use <code>var.equal = TRUE</code> in our t-test.</p>
+<p><strong>Now let’s remove the extreme high-count values and re-run</strong>, to check whether the skew we saw in the histograms is driving this result.</p>
+<p>Let’s remove the extreme datapoints, which we can see are &gt;15 in both sexes, and re-run the t-test to see if it changes the conclusion.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_no_outliers <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(parasite_count <span class="sc">&lt;</span> <span class="dv">15</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_no_outliers <span class="ot">&lt;-</span> mice_parasites_no_outliers <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> parasite_count)) <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_no_outliers</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-ext_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, as you can see, there are fewer extreme values and more of a smooth distribution.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>two_sided_t_no_outliers <span class="ot">&lt;-</span> <span class="fu">t.test</span>(parasite_count <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites_no_outliers, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>two_sided_t_no_outliers</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  parasite_count by sex
+t = -0.65365, df = 52, p-value = 0.5162
+alternative hypothesis: true difference in means between group F and group M is not equal to 0
+95 percent confidence interval:
+ -1.8846552  0.9585188
+sample estimates:
+mean in group F mean in group M 
+       1.318182        1.781250 </code></pre>
+</div>
+</div>
+<p>We found that the conclusion is the same both times — it is nowhere near significant in either case, so the skew is not driving the result here. Before running our t-test, let’s check Levene’s test for equality of variances.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(parasite_count <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in leveneTest.default(y = y, group = group, ...): group coerced to
+factor.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  1   0.492 0.4858
+      58               </code></pre>
+</div>
+</div>
+<p><strong>Why is the leveneTest sometimes used?</strong></p>
+<div id="radio_APEHPNKWCT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_APEHPNKWCT" value=""> <span>To test whether the data follow a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_APEHPNKWCT" value=""> <span>To test whether the variances of the groups are approximately equal.</span></label><label><input type="radio" autocomplete="off" name="radio_APEHPNKWCT" value=""> <span>To test whether the means of the groups are significantly different.</span></label><label><input type="radio" autocomplete="off" name="radio_APEHPNKWCT" value=""> <span>To test whether the data are independent.</span></label><label><input type="radio" autocomplete="off" name="radio_APEHPNKWCT" value="answer"> <span>To test whether the variances of the groups are approximately equal.</span></label>
+</div>
+<p>The P value from Levene’s test is P = 0.47, which is not significant (P &gt; 0.05). This indicates that the variances of the groups are approximately equal, and we can proceed with the assumption of equal variances in our t-test.</p>
+</section>
+<section id="does-sex-affect-weight-in-mice" class="level3">
+<h3 class="anchored" data-anchor-id="does-sex-affect-weight-in-mice">Does sex affect weight in mice?</h3>
+<p>Let’s first implement what we just learnt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_weight <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_weight</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-ext_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This data is only slightly left-skewed — a little more data lies on the right side of the mean — but it’s nowhere near as extreme as the parasite count data. Since there is only mild skew and no clear outliers, we don’t need to adjust the dataset here.</p>
+<p>As we learnt above, before running a t-test we should check Levene’s test for equality of variances.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(weight_g <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in leveneTest.default(y = y, group = group, ...): group coerced to
+factor.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  1  0.1357  0.714
+      58               </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>two_sided_t_weight <span class="ot">&lt;-</span> <span class="fu">t.test</span>(weight_g <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>two_sided_t_weight</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  weight_g by sex
+t = -1.0969, df = 58, p-value = 0.2772
+alternative hypothesis: true difference in means between group F and group M is not equal to 0
+95 percent confidence interval:
+ -2.1966269  0.6414233
+sample estimates:
+mean in group F mean in group M 
+       21.10769        21.88529 </code></pre>
+</div>
 </div>
 <!-- -->
 
+</section>
 </section>
 
 </main>
@@ -936,134 +1138,307 @@ window.onload = function() {
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 3 - Sampling Distributions and Testing for Differences - Extension"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: yeti</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">    css: [style.css, include/webex.css]</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: include/webex.js</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: katex</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> false</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', echo=FALSE, warning=FALSE, message=FALSE}</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webexercises)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to expand: recap of key terms")`</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## Recapping our definitions</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>**Sampling**</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>Selecting a **subset (sample)** of individuals or observations from a larger population to estimate characteristics of the whole population; without measuring everything.</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>**Sampling error**</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>The difference between a **sample statistic** and the **true population parameter**, arising because a sample may not perfectly represent the population.</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>**Probability**</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>A numerical measure (**between 0 and 1**) of the likelihood that a specific event will occur.</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>**Variance**</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>A measure of how much values differ from the **mean**, calculated as the **average of the squared differences** from the mean.</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>**Standard deviation**</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>The **square root of the variance**, expressed in the original units of the data.</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>**Standard error of the mean (SEM)**</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>An estimate of how much a sample mean is likely to vary from the true population mean: **SD / sqrt(n)**.</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>**Confidence intervals**</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>A range of values, calculated from sample data, likely to contain the **true population parameter** at a given confidence level (e.g. **95%**).</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>**T-tests**</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>Tests whether the difference between two means is **larger than sampling error alone** would explain.</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*One-sample t-test*: compares a single sample mean to a hypothesised population mean.</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Two-sample t-test*: compares the means of two independent samples, using the **standard error of the difference between means**.</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>**Statistical significance**</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>A result is significant when its **p-value** falls below a chosen threshold (conventionally **p &lt; 0.05**) — meaning the result is unlikely to be due to sampling error, not that the effect is large or important.</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sampling Distributions - a case study </span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>A UEA research team wants to know the average number of **Medflies (*Ceratitis capitata*) per apple tree** in a large commercial orchard containing 2,000 trees. Counting flies on every tree is impractical, so the team selects **40 trees at random** and counts the flies caught in a trap on each one.</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>Results from the 40 sampled trees:</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sample mean: **14.2 flies/tree**</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sample standard deviation: **6.5 flies/tree**</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The true mean across all 2,000 trees (found later from a full census) is **13.1 flies/tree**</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>The team also compares mean fly counts on **edge trees** vs **interior trees** (20 each).</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>**1. What is the population in this scenario?**                </span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c( "The 40 trees that were sampled", answer = "All 2,000 trees in the orchard", "The flies caught in the traps", "The research team"))`</span></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>**2. What term describes the 40 trees selected for sampling?** </span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("The parameter", "The population", answer = "The sample", "The confidence interval"))`</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>**3. The true population mean turned out to be 13.1, but the sample mean was 14.2. This difference is best described as:**          </span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(  "A calculation mistake", answer = "Sampling error", "A statistically significant effect", "The standard deviation"))`</span></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>**4. A colleague argues: *"Since our sample mean (14.2) differs from the true population mean (13.1), our sampling method must have been biased."* Which response best evaluates this claim?**                </span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c( "Correct - any difference between sample and population mean indicates bias in how trees were selected.",answer = paste("Incorrect - a difference between a sample statistic and the true parameter is expected even with","random, unbiased sampling, because of sampling error; only asystematic pattern (e.g. always missing","certain trees) would indicate bias."),"Incorrect - the difference is too small to matter, so no explanation is needed.","Correct, but only because the sample size (40) was too small to ever be unbiased."))`</span></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>**5. A 95% CI from the sample is 12.0–16.4 flies/tree. Correct interpretation?:**</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(  "95% probability any single tree has 12.0-16.4 flies","95% of sampled trees had 12.0-16.4 flies",answer = "We are 95% confident this range contains the true population mean", "The population mean is definitely in this range"))`</span></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>**6.  Comparing edge trees vs interior trees calls for?:**</span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(  "One-sample t-test", answer = "Two-sample t-test","A confidence interval alone", "Calculating variance only"))`</span></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>**7.  A student claims p = 0.03 for the edge-vs-interior test "proves edge trees definitely have more flies, and the effect must be biologically important." What's the flaw?:**</span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c( "No flaw - p &lt; 0.05 proves both statistical and biological significance.", answer = paste("Flawed - statistical significance (p &lt; 0.05) means the difference is unlikely to be due to sampling", "error alone; it does not 'prove' anything with certainty, and it says nothing about whether the","size of the effect is biologically meaningful."),"Flawed - p = 0.03 actually indicates no significant difference.", "Flawed only because the sample sizes for edge and interior trees were unequal."))`</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sampling and Testing for Differences</span></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>Let's go back to our wood mouse data, we left our wood mouse data at the point of doing a little bit of data visualisation.</span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>To recap, in our data, we had the following variables: </span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">`"host_id"`</span>, <span class="in">`"sex"`</span>, <span class="in">`"weight_g"`</span>, <span class="in">`"parasite_count"`</span></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>**There's more than one sensible pairing you *could* visualise from these variables, but just looking at the options below, which pair would be sensible to visualise together, and what plot would best show their relationship?**</span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("&lt;code&gt;host_id&lt;/code&gt; and &lt;code&gt;sex&lt;/code&gt; — as a scatterplot", answer = "&lt;code&gt;sex&lt;/code&gt; and &lt;code&gt;weight_g&lt;/code&gt; — as a boxplot, to compare weight distributions between males and females", "&lt;code&gt;host_id&lt;/code&gt; and &lt;code&gt;parasite_count&lt;/code&gt; — as a bar chart, since host_id is a meaningful numeric scale", "&lt;code&gt;weight_g&lt;/code&gt; and &lt;code&gt;parasite_count&lt;/code&gt; — as a bar chart"))`</span></span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>Let's do some visualisation! </span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>First we gotta do our reading in of the data, have a practice at loading packages at the beginning of the script, and reading our data in. </span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, results='hide'}</span></span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>mice_parasites <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/mouse_parasite_counts.csv"</span>)</span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>mice_parasites_plot <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> parasite_count, <span class="at">fill =</span> weight_g)) <span class="sc">+</span></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>mice_parasites_plot</span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 3 - Sampling Distributions and Testing for Differences - Extension"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: yeti</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">    css: [style.css, include/webex.css]</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: include/webex.js</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: katex</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> false</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', echo=FALSE, warning=FALSE, message=FALSE}</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webexercises)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>Welcome to today's workshop extension! In this session, like last time, we will be focusing on summarising and testing our knowledge from what we learnt in the main workbook. We will be covering **Sampling Distributions** and **Testing for Differences**. We will also be revisiting some of the key terms and concepts from the main workbook, and applying them to a different dataset.</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Recapping our Definitions</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>Let's first recap some definitions and key terms from the main workbook. Have a play with the 'Click to expand' button below to familiarise yourself with the definitions, and then we will apply them to a case study.</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to expand: recap of key terms")`</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>**Sampling**</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>Selecting a **subset (sample)** of individuals or observations from a larger population to estimate characteristics of the whole population; without measuring everything.</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>**Sampling error**</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>The difference between a **sample statistic** and the **true population parameter**, arising because a sample may not perfectly represent the population.</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>**Probability**</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>A numerical measure (**between 0 and 1**) of the likelihood that a specific event will occur.</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>**Variance**</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>A measure of how much values differ from the **mean**, calculated as the **average of the squared differences** from the mean.</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>**Standard deviation**</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>The **square root of the variance**, expressed in the original units of the data.</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>**Standard error of the mean (SEM)**</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>An estimate of how much a sample mean is likely to vary from the true population mean: **SD / sqrt(n)**.</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>**Confidence intervals**</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>A range of values, calculated from sample data, likely to contain the **true population parameter** at a given confidence level (e.g. **95%**).</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>**T-tests**</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>Tests whether the difference between two means is **larger than sampling error alone** would explain.</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*One-sample t-test*: compares a single sample mean to a hypothesised population mean.</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Two-sample t-test*: compares the means of two independent samples, using the **standard error of the difference between means**.</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>**Statistical significance**</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>A result is significant when its **p-value** falls below a chosen threshold (conventionally **p &lt; 0.05**) — meaning the result is unlikely to be due to sampling error, not that the effect is large or important.</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sampling Distributions - a case study</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ch3-1.png)</span>{width=60%, fig-align="center"}</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>A UEA research team wants to know the average number of **Medflies (*Ceratitis capitata*) per apple tree** in a large commercial orchard containing 2,000 trees. Counting flies on every tree is impractical, so the team selects **40 trees at random** and counts the flies caught in a trap on each one.</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>Results from the 40 sampled trees:</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sample mean: **14.2 flies/tree**</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sample standard deviation: **6.5 flies/tree**</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The true mean across all 2,000 trees (found later from a full census) is **13.1 flies/tree**</span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a>The team also compares mean fly counts on **edge trees** vs **interior trees** (20 each).</span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a>**1. What is the population in this scenario?**                </span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c( "The 40 trees that were sampled", answer = "All 2,000 trees in the orchard", "The flies caught in the traps", "The research team"))`</span></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>**2. What term describes the 40 trees selected for sampling?** </span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("The parameter", "The population", answer = "The sample", "The confidence interval"))`</span></span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>**3. The true population mean turned out to be 13.1, but the sample mean was 14.2. This difference is best described as:**          </span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(  "A calculation mistake", answer = "Sampling error", "A statistically significant effect", "The standard deviation"))`</span></span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>**4. A colleague argues: *"Since our sample mean (14.2) differs from the true population mean (13.1), our sampling method must have been biased."* Which response best evaluates this claim?**                </span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c( "Correct - any difference between sample and population mean indicates bias in how trees were selected.",answer = paste("Incorrect - a difference between a sample statistic and the true parameter is expected even with","random, unbiased sampling, because of sampling error; only a systematic pattern (e.g. always missing","certain trees) would indicate bias."),"Incorrect - the difference is too small to matter, so no explanation is needed.","Correct, but only because the sample size (40) was too small to ever be unbiased."))`</span></span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>**5. A 95% CI from the sample is 12.0–16.4 flies/tree. Correct interpretation?:**</span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(  "95% probability any single tree has 12.0-16.4 flies","95% of sampled trees had 12.0-16.4 flies",answer = "We are 95% confident this range contains the true population mean", "The population mean is definitely in this range"))`</span></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>**6.  Comparing edge trees vs interior trees calls for?:**</span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(  "One-sample t-test", answer = "Two-sample t-test","A confidence interval alone", "Calculating variance only"))`</span></span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>**7.  A student claims p = 0.03 for the edge-vs-interior test "proves edge trees definitely have more flies, and the effect must be biologically important." Is there any flaw with this statement?:**</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c( "No flaw - p &lt; 0.05 definitely proves both statistical and biological significance.", answer = paste("Yes - statistical significance (p &lt; 0.05) means the difference is unlikely to be due to sampling error alone; it does not prove anything with certainty."),"Yes - p = 0.03 actually indicates no significant difference.", "Yes - only because the sample sizes for edge and interior trees were unequal."))`</span></span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>We will now put this case study to the side for a bit, and go back to our wood mice and the parasites, introduced in the previous workshop. </span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sampling and Testing for Differences</span></span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>**!Task Alert!**                </span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>First, we need to load our packages and read in the data. As in the previous workshop, we'll use the <span class="in">`tidyverse`</span> package, along with the <span class="in">`mouse_parasite_counts.csv`</span> dataset. **Please read these in**.  </span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, results='hide'}</span></span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>mice_parasites <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/mouse_parasite_counts.csv"</span>)</span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>We learnt about using histograms to see the distritribution of the data, learning about it's shape, centre and spread. </span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>Let's now make two histograms of the <span class="in">`parasite_count`</span> variable, one for female mice and one for male mice. This will allow us to visualise the distribution of parasite counts for each sex, and see if there are any differences between them.</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_F <span class="ot">&lt;-</span>  mice_parasites <span class="sc">%&gt;%</span> </span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span><span class="st">"F"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>parasite_count)) <span class="sc">+</span> </span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_M <span class="ot">&lt;-</span>  mice_parasites <span class="sc">%&gt;%</span> </span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span><span class="st">"M"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>parasite_count)) <span class="sc">+</span> </span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_F</span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_M</span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>**Looking at the two histograms of `parasite_count` for female and male mice above, which statement best describes what you see?**</span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Both distributions are roughly symmetric (normal), so the mean is a good summary of typical parasite count for each sex.", answer = paste("Both distributions are strongly right-skewed - most mice have very low parasite counts, with a small number", "of individuals carrying much higher burdens. Because of this skew, the mean will be pulled upward by the", "few high-count individuals and won't represent a 'typical' mouse as well as the median would."), "Females have a wider spread of parasite counts than males, since the female plot has more bars.", "The two histograms can't be compared because they don't have the same y-axis maximum."))`</span></span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Descriptive Statistics</span></span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>In Workshop 2 in the last session, we covered **Exploratory Data Analysis** and how descriptive statistics help us understand our data before running any statistical tests.</span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>The key terms learnt were: **Mean**, **Median**, **Mode**, **Range**, **Standard deviation**, and **Skewness**.</span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>In the main workbook in today's workshop (Workshop 3), you were asked to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for the yield and virus data.           </span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>                        </span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>**How should you write the standard error of the mean in the code?**</span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("sd(x)", "sd(x) * n", "sd(x) * sqrt(n)", answer = "sd(x) / sqrt(n)"))`</span></span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Show explanation")`</span></span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>The standard error of the mean tells you how much variation you'd expect in the sample mean if you repeated your sampling many times. It's calculated as the standard deviation divided by the square root of the sample size: <span class="in">`sd(x) / sqrt(n)`</span>. Dividing by a larger <span class="in">`n`</span> shrinks the SEM, reflecting the fact that larger samples give a more precise estimate of the true population mean.</span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>Just as you would have done in the previous workbook with that data, below is a worked example of how to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for this data, the parasite count by sex using <span class="in">`group_by()`</span> and <span class="in">`summarise()`</span> </span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Show explanation")`</span></span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>mouse_summary <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_parasite_count =</span> <span class="fu">mean</span>(parasite_count),</span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_parasite_count =</span> <span class="fu">sd</span>(parasite_count),</span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>    <span class="at">sem_parasite_count =</span> <span class="fu">sd</span>(parasite_count) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>mouse_summary</span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## Parametric and Non-Parametric Tests</span></span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a>We learnt in the main workbook about parametric and non-parametric tests, and how to choose between them.</span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a>**What is a parametric test and what is a non-parametric test?**</span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("A parametric test makes no assumption about the distribution of the data; a non-parametric test assumes the data follow a normal distribution.", "Both parametric and non-parametric tests assume the data follow a normal distribution.", "Neither parametric nor non-parametric tests make any assumptions about the distribution of the data.", answer = "A parametric test assumes the data follow a normal distribution; a non-parametric test makes no assumption about the distribution of the data."))`</span></span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a>Before running any statistical test, it's good practice to visualise the data first. A quick plot can reveal the shape of the distribution, potential outliers, or patterns you'd otherwise miss, and this shapes which test is actually appropriate to use.</span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a>**Parametric tests** (like the t-test) assume that the underlying data are normally distributed. If your visualisation (like a histogram) shows the data are skewed, that assumption may be violated, which can make the test's results unreliable. However, this doesn't automatically mean the test result is wrong — it depends on how much the skew is actually affecting the outcome, which we can check in two ways:</span>
+<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Remove the influential point(s):** Re-run the test excluding the datapoint(s) responsible for the skew. If the conclusion changes, the skew is likely having a real effect on your result.</span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Compare test types:** Run both a parametric test (e.g. t-test) and its non-parametric equivalent on the same data. If they agree, you can be more confident the skew isn't distorting your conclusion.</span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a>We also need to check the assumption of **equal variances** between groups before running a two-sample t-test. We can do this using **Levene's test**, which we learnt about in the main workbook.</span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## An example: Descriptive statistics on the data</span></span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a><span class="fu">### Does sex affect the parasite count in mice?</span></span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>As we saw in the histograms above, the parasite count data are strongly right-skewed for both sexes. </span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a>If you remember from the previous workbook; there were two assumptions of a two-sample t-test. </span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>The data should be normally distributed within each group.</span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The variances of the two groups should be approximately equal.</span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a>We know that parasite count is not normally distributed for either sex - as seen above. </span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a>**Now we will run a two-sample t-test on the full dataset**, comparing parasite counts between male and female mice, using the result of Levene's test above to decide whether to set <span class="in">`var.equal = TRUE`</span> or <span class="in">`FALSE`</span>. As there was no significant result, we can use <span class="in">`var.equal = TRUE`</span> in our t-test. </span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a>**Now let's remove the extreme high-count values and re-run**, to check whether the skew we saw in the histograms is driving this result.</span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a>Let's remove the extreme datapoints, which we can see are &gt;15 in both sexes, and re-run the t-test to see if it changes the conclusion.</span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>mice_parasites_no_outliers <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(parasite_count <span class="sc">&lt;</span> <span class="dv">15</span>)  </span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_no_outliers <span class="ot">&lt;-</span> mice_parasites_no_outliers <span class="sc">%&gt;%</span> </span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> parasite_count)) <span class="sc">+</span> </span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_no_outliers</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>Now, as you can see, there are fewer extreme values and more of a smooth distribution.</span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>two_sided_t_no_outliers <span class="ot">&lt;-</span> <span class="fu">t.test</span>(parasite_count <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites_no_outliers, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>two_sided_t_no_outliers</span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a>We found that the conclusion is the same both times — it is nowhere near significant in either case, so the skew is not driving the result here.</span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a> Before running our t-test, let's check Levene's test for equality of variances.</span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(parasite_count <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites)</span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>**Why is the leveneTest sometimes used?**</span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("To test whether the data follow a normal distribution.","To test whether the variances of the groups are approximately equal.", "To test whether the means of the groups are significantly different.","To test whether the data are independent.", answer = "To test whether the variances of the groups are approximately equal."))`</span></span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>The P value from Levene's test is P = 0.47, which is not significant (P &gt; 0.05). This indicates that the variances of the groups are approximately equal, and we can proceed with the assumption of equal variances in our t-test. </span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a><span class="fu">### Does sex affect weight in mice?</span></span>
+<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>Let's first implement what we just learnt.</span>
+<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_weight <span class="ot">&lt;-</span> mice_parasites <span class="sc">%&gt;%</span> </span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span> </span>
+<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">6</span>) </span>
+<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>mice_parasites_histogram_weight</span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a>This data is only slightly left-skewed — a little more data lies on the right side of the mean — but it's nowhere near as extreme as the parasite count data. Since there is only mild skew and no clear outliers, we don't need to adjust the dataset here.</span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a>As we learnt above, before running a t-test we should check Levene's test for equality of variances.</span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(weight_g <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites)</span>
+<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a>two_sided_t_weight <span class="ot">&lt;-</span> <span class="fu">t.test</span>(weight_g <span class="sc">~</span> sex, <span class="at">data =</span> mice_parasites, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>two_sided_t_weight</span>
+<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
