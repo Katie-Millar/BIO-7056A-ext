@@ -1,0 +1,36 @@
+---
+title: "Appendix - Knowing your R & Statistics"
+format:
+  html:
+    theme: yeti
+    toc: true
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+jupyter: false
+---
+
+
+## Housekeeping for things 
+
+### Loading and installing packages 
+Let's get the difference on loading and installing packages down. 
+
+
+## Using `tidyverse()`
+
+You will most certainly come across the tidyverse package a lot in your R. This is a collection of packages that are designed to work together, and make data analysis easier. The tidyverse includes packages like ggplot2, dplyr, tidyr, readr, purrr, and more. So as long as you have tidyverse installed, you can use all of these packages without having to install them individually.
+
+## Other fun tools
+Quarto 
+
+
+## Definitions!!!
+central tenden
+
+
+the pipe !!
+
+

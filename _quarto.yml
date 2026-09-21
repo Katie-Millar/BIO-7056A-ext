@@ -1,0 +1,17 @@
+project:
+  type: book
+
+book:
+  title: "Statistics for Biologists"
+  chapters:
+    - index.qmd
+    - 02-ext.qmd
+    - appendix.qmd
+
+format:
+  html:
+    theme: yeti
+    toc: true
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
