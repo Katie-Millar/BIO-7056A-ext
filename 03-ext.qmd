@@ -20,6 +20,18 @@ library(car)
 
 Welcome to today's workshop extension! In this session, like last time, we will be focusing on summarising and testing our knowledge from what we learnt in the main workbook. We will be covering **Sampling Distributions** and **Testing for Differences**. We will also be revisiting some of the key terms and concepts from the main workbook, and applying them to a different dataset.
 
+### Your Route Through This Workshop
+
+Here's the plan for this session:
+
+1. **Recap**: ensure you have some understanding of the key terms from the main workbook today (sampling, SEM, CIs, t-tests, and friends).
+2. **Medfly case study**: put those terms to work counting flies in an orchard.
+3. **Parametric vs non-parametric**: the difference between these two types of test, and why it matters.
+4. **Meet the mice**: load the data and plot histograms for females and males, which give us a first look at the shape of the data.
+5. **Descriptive stats**: calculate the mean, standard deviation, and SEM for each sex.
+7. **The verdict**: run Levene's test to check equal variances, then decide whether a t-test is actually appropriate. Including testing for normality; using Q-Q plots and the Shapiro-Wilk test to formally check whether the data are normally distributed.
+
+By the end, you'll have learned *how* to justify your decisions statistically.
 
 ## Recapping our Definitions
 
@@ -27,29 +39,28 @@ Let's first recap some definitions and key terms from the main workbook. Have a 
 
 `r hide("Click to expand: recap of key terms")`
 
-
-**Sampling**
+**Sampling**       
 Selecting a **subset (sample)** of individuals or observations from a larger population to estimate characteristics of the whole population; without measuring everything.
 
-**Sampling error**
+**Sampling error**        
 The difference between a **sample statistic** and the **true population parameter**, arising because a sample may not perfectly represent the population.
 
-**Probability**
+**Probability**              
 A numerical measure (**between 0 and 1**) of the likelihood that a specific event will occur.
 
-**Variance**
+**Variance**               
 A measure of how much values differ from the **mean**, calculated as the **average of the squared differences** from the mean.
 
-**Standard deviation**
+**Standard deviation**            
 The **square root of the variance**, expressed in the original units of the data.
 
-**Standard error of the mean (SEM)**
+**Standard error of the mean (SEM)**          
 An estimate of how much a sample mean is likely to vary from the true population mean: **SD / sqrt(n)**.
 
-**Confidence intervals**
+**Confidence intervals**          
 A range of values, calculated from sample data, likely to contain the **true population parameter** at a given confidence level (e.g. **95%**).
 
-**T-tests**
+**T-tests**                        
 Tests whether the difference between two means is **larger than sampling error alone** would explain.
 
 - *One-sample t-test*: compares a single sample mean to a hypothesised population mean.
@@ -60,10 +71,56 @@ A result is significant when its **p-value** falls below a chosen threshold (con
 
 `r unhide()`
 
+
+Now the definitions *should ideally be* fresh in your mind, let's check your understanding with a few multiple choice questions.
+
+**What is a sample?**
+
+`r mcq(c( answer = "A subset of individuals selected from a larger population", "The true value we're trying to estimate", "A calculation error"))`
+
+**What is sampling error?**
+
+`r mcq(c("A mistake in data collection", answer = "The difference between a sample statistic and the true population parameter", "The same as the standard deviation", "A sign that the sampling method was biased"))`
+
+**What is probability?**
+
+`r mcq(c(answer = "A numerical measure between 0 and 1 of how likely an event is", "A measure of spread in the data", "The same as statistical significance", "A range of plausible values for a parameter"))`
+
+**How is variance calculated?**
+
+`r mcq(c("The average of the data values", answer = "The average of the squared differences from the mean", "The square root of the standard deviation", "The difference between two sample means"))`
+
+**What is the standard deviation?**
+
+`r mcq(c("The average of the data", "The same as variance", answer = "The square root of the variance", "SD divided by the square root of n"))`
+
+**How is the standard error of the mean (SEM) calculated?**
+
+`r mcq(c("SD * sqrt(n)", "SD * n", answer = "SD / sqrt(n)", "The same as the standard deviation"))`
+
+**What is a confidence interval?**
+
+`r mcq(c("A range guaranteed to contain every individual value", answer = "A range of values, calculated from sample data, likely to contain the true population parameter at a given confidence level", "The same as the standard deviation", "A test of statistical significance"))`
+
+**What does a t-test assess?**
+
+`r mcq(c(answer = "Whether the difference between two means is larger than sampling error alone would explain", "Whether a sample is biased", "Whether the data are normally distributed", "Whether the variances of two groups are equal"))`
+
+**What does a one-sample t-test do?**
+
+`r mcq(c("Compares two independent samples", answer = "Compares a single sample mean to a hypothesised population mean", "Tests whether variances are equal", "Tests for normality"))`
+
+**What does a two-sample t-test do?**
+
+`r mcq(c(answer = "Compares the means of two independent samples using the standard error of the difference between means", "Compares a sample mean to a fixed value", "Tests whether the data are skewed", "Calculates a confidence interval"))`
+
+**What does statistical significance (p < 0.05) actually tell you?**                        
+
+`r mcq(c("That the effect is large and important", answer = "That the result is unlikely to be due to sampling error alone", "That the sampling method was biased", "That the null hypothesis is definitely false"))`
+
 ## Sampling Distributions - a case study
 
-
-![](images/ch3-1.png){width=60%, fig-align="center"}
+![](images/ch3-1.png){width=100% fig-align="center"}
 
 A UEA research team wants to know the average number of **Medflies (*Ceratitis capitata*) per apple tree** in a large commercial orchard containing 2,000 trees. Counting flies on every tree is impractical, so the team selects **40 trees at random** and counts the flies caught in a trap on each one.
 
@@ -75,109 +132,39 @@ Results from the 40 sampled trees:
 
 The team also compares mean fly counts on **edge trees** vs **interior trees** (20 each).
 
-**1. What is the population in this scenario?**                
-`r mcq(c( "The 40 trees that were sampled", answer = "All 2,000 trees in the orchard", "The flies caught in the traps", "The research team"))`
+**1. What is the population in this scenario?**
 
+`r mcq(c("The 40 trees that were sampled", answer = "All 2,000 trees in the orchard", "The flies caught in the traps", "The research team"))`
 
- 
+**2. What term describes the 40 trees selected for sampling?**
 
-**2. What term describes the 40 trees selected for sampling?** 
 `r mcq(c("The parameter", "The population", answer = "The sample", "The confidence interval"))`
 
-**3. The true population mean turned out to be 13.1, but the sample mean was 14.2. This difference is best described as:**          
-`r mcq(c(  "A calculation mistake", answer = "Sampling error", "A statistically significant effect", "The standard deviation"))`
+**3. The true population mean turned out to be 13.1, but the sample mean was 14.2. This difference is best described as:**
 
-**4. A colleague argues: *"Since our sample mean (14.2) differs from the true population mean (13.1), our sampling method must have been biased."* Which response best evaluates this claim?**                
-`r longmcq(c( "Correct - any difference between sample and population mean indicates bias in how trees were selected.",answer = paste("Incorrect - a difference between a sample statistic and the true parameter is expected even with","random, unbiased sampling, because of sampling error; only a systematic pattern (e.g. always missing","certain trees) would indicate bias."),"Incorrect - the difference is too small to matter, so no explanation is needed.","Correct, but only because the sample size (40) was too small to ever be unbiased."))`
+`r mcq(c("A calculation mistake", answer = "Sampling error", "A statistically significant effect", "The standard deviation"))`
 
+**4. A colleague argues: *"Since our sample mean (14.2) differs from the true population mean (13.1), our sampling method must have been biased."* Which response best evaluates this claim?**
 
+`r longmcq(c("Correct - any difference between sample and population mean indicates bias in how trees were selected.",answer = paste("Incorrect - a difference between a sample statistic and the true parameter is expected even with","random, unbiased sampling, because of sampling error; only a systematic pattern (e.g. always missing","certain trees) would indicate bias."),"Incorrect - the difference is too small to matter, so no explanation is needed.","Correct, but only because the sample size (40) was too small to ever be unbiased."))`
 
-**5. A 95% CI from the sample is 12.0–16.4 flies/tree. Correct interpretation?:**
-`r mcq(c(  "95% probability any single tree has 12.0-16.4 flies","95% of sampled trees had 12.0-16.4 flies",answer = "We are 95% confident this range contains the true population mean", "The population mean is definitely in this range"))`
+**5. A 95% CI from the sample is 12.0-16.4 flies/tree. Correct interpretation?**
 
-**6.  Comparing edge trees vs interior trees calls for?:**
-`r mcq(c(  "One-sample t-test", answer = "Two-sample t-test","A confidence interval alone", "Calculating variance only"))`
+`r mcq(c("95% probability any single tree has 12.0-16.4 flies","95% of sampled trees had 12.0-16.4 flies",answer = "We are 95% confident this range contains the true population mean","The population mean is definitely in this range"))`
 
+**6. Comparing edge trees vs interior trees calls for?**
 
+`r mcq(c("One-sample t-test", answer = "Two-sample t-test", "A confidence interval alone", "Calculating variance only"))`
 
-**7.  A student claims p = 0.03 for the edge-vs-interior test "proves edge trees definitely have more flies, and the effect must be biologically important." Is there any flaw with this statement?:**
-`r longmcq(c( "No flaw - p < 0.05 definitely proves both statistical and biological significance.", answer = paste("Yes - statistical significance (p < 0.05) means the difference is unlikely to be due to sampling error alone; it does not prove anything with certainty."),"Yes - p = 0.03 actually indicates no significant difference.", "Yes - only because the sample sizes for edge and interior trees were unequal."))`
+**7. A student claims p = 0.03 for the edge-vs-interior test "proves edge trees definitely have more flies, and the effect must be biologically important." Is there any flaw with this statement?**
 
-
-We will now put this case study to the side for a bit, and go back to our wood mice and the parasites, introduced in the previous workshop. 
+`r longmcq(c("No flaw - p < 0.05 definitely proves both statistical and biological significance.",answer = "Yes - statistical significance (p < 0.05) means the difference is unlikely to be due to sampling error alone; it does not prove anything with certainty.", "Yes - p = 0.03 actually indicates no significant difference.", "Yes - only because the sample sizes for edge and interior trees were unequal."))`
 
 
-## Sampling and Testing for Differences
-
-**!Task Alert!**                
-First, we need to load our packages and read in the data. As in the previous workshop, we'll use the `tidyverse` package, along with the `mouse_parasite_counts.csv` dataset. **Please read these in**.  
-
-```{r, echo=FALSE, results='hide'}
-mice_parasites <- read.csv("data/mouse_parasite_counts.csv")
-```
-
-We learnt about using histograms to see the distritribution of the data, learning about it's shape, centre and spread. 
-
-Let's now make two histograms of the `parasite_count` variable, one for female mice and one for male mice. This will allow us to visualise the distribution of parasite counts for each sex, and see if there are any differences between them.
-```{r}
-mice_parasites_histogram_F <-  mice_parasites %>% 
-  filter(sex =="F") %>% 
-  ggplot(., aes(x=parasite_count)) + 
-  geom_histogram(bins = 6) 
-
-
-mice_parasites_histogram_M <-  mice_parasites %>% 
-  filter(sex =="M") %>% 
-  ggplot(., aes(x=parasite_count)) + 
-  geom_histogram(bins = 6) 
+We will now put this case study to the side for a bit. Before we get back to our wood mice and their parasites, let's recap parametric and non-parametric tests, since we'll need that distinction shortly.
 
 
 
-
-mice_parasites_histogram_F
-mice_parasites_histogram_M
-```
-
-**Looking at the two histograms of `parasite_count` for female and male mice above, which statement best describes what you see?**
-
-`r longmcq(c("Both distributions are roughly symmetric (normal), so the mean is a good summary of typical parasite count for each sex.", answer = paste("Both distributions are strongly right-skewed - most mice have very low parasite counts, with a small number", "of individuals carrying much higher burdens. Because of this skew, the mean will be pulled upward by the", "few high-count individuals and won't represent a 'typical' mouse as well as the median would."), "Females have a wider spread of parasite counts than males, since the female plot has more bars.", "The two histograms can't be compared because they don't have the same y-axis maximum."))`
-
-
-## Descriptive Statistics
-
-In Workshop 2 in the last session, we covered **Exploratory Data Analysis** and how descriptive statistics help us understand our data before running any statistical tests.
-
-The key terms learnt were: **Mean**, **Median**, **Mode**, **Range**, **Standard deviation**, and **Skewness**.
-
-In the main workbook in today's workshop (Workshop 3), you were asked to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for the yield and virus data.           
-                        
-**How should you write the standard error of the mean in the code?**
-
-`r mcq(c("sd(x)", "sd(x) * n", "sd(x) * sqrt(n)", answer = "sd(x) / sqrt(n)"))`
-
-`r hide("Show explanation")`
-
-The standard error of the mean tells you how much variation you'd expect in the sample mean if you repeated your sampling many times. It's calculated as the standard deviation divided by the square root of the sample size: `sd(x) / sqrt(n)`. Dividing by a larger `n` shrinks the SEM, reflecting the fact that larger samples give a more precise estimate of the true population mean.
-
-`r unhide()`
-
-Just as you would have done in the previous workbook with that data, below is a worked example of how to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for this data, the parasite count by sex using `group_by()` and `summarise()` 
-
-`r hide("Show explanation")`
-
-```{r}
-mouse_summary <- mice_parasites %>%
-  group_by(sex) %>%
-  summarise(
-    mean_parasite_count = mean(parasite_count),
-    sd_parasite_count = sd(parasite_count),
-    sem_parasite_count = sd(parasite_count) / sqrt(n())
-  )
-
-mouse_summary
-```
-
-`r unhide()`
 
 ## Parametric and Non-Parametric Tests
 
@@ -196,25 +183,135 @@ Before running any statistical test, it's good practice to visualise the data fi
 
 
 
-## An example: Descriptive statistics on the data
 
-### Does sex affect the parasite count in mice?
+**!Task Alert!**
 
-As we saw in the histograms above, the parasite count data are strongly right-skewed for both sexes. 
+First, we need to load our packages and read in the data. As in the previous workshop, we'll use the `tidyverse` package, along with the `mouse_parasite_counts.csv` dataset. **Please read these in**, calling your object `mice_parasites`.
+               
+               
 
-If you remember from the previous workbook; there were two assumptions of a two-sample t-test. 
+                    
+                            
+                                    
+                      
+
+```{r, echo=FALSE, results='hide'}
+mice_parasites <- read.csv("data/mouse_parasite_counts.csv")
+```
+
+We learnt about using histograms to see the distribution of the data, learning about its shape, centre and spread.
+
+Let's now make two histograms of the `parasite_count` variable, one for female mice and one for male mice. This will allow us to visualise the distribution of parasite counts for each sex, and see if there are any differences between them.
+
+```{r}
+mice_parasites_histogram_F <- mice_parasites %>%
+  filter(sex == "F") %>%
+  ggplot(., aes(x = parasite_count)) +
+  geom_histogram(bins = 6)
+
+mice_parasites_histogram_F
+```
+
+
+```{r}
+
+mice_parasites_histogram_M <- mice_parasites %>%
+  filter(sex == "M") %>%
+  ggplot(., aes(x = parasite_count)) +
+  geom_histogram(bins = 6)
+
+mice_parasites_histogram_M
+```
+
+
+
+**Looking at the two histograms of `parasite_count` for female and male mice above, which statement best describes what you see?**
+
+`r longmcq(c("Both distributions are roughly symmetric (normal), so the mean is a good summary of typical parasite count for each sex.",answer = paste("Both distributions are strongly right-skewed - most mice have very low parasite counts, with a small number","of individuals carrying much higher burdens. Because of this skew, the mean will be pulled upward by the","few high-count individuals and won't represent a 'typical' mouse as well as the median would."),"Females have a wider spread of parasite counts than males, since the female plot has more bars.","The two histograms can't be compared because they don't have the same y-axis maximum."))`
+
+
+## Descriptive Statistics
+
+In Workshop 2 in the last session, we covered **Exploratory Data Analysis** and how descriptive statistics help us understand our data before running any statistical tests.
+
+The key terms learnt were: **Mean**, **Median**, **Mode**, **Range**, **Standard deviation**, and **Skewness**.
+
+In the main workbook in today's workshop (Workshop 3), you were asked to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for the yield and virus data.
+
+**How should you write the standard error of the mean in the code?**
+
+`r mcq(c("sd(x)", "sd(x) * n", "sd(x) * sqrt(n)", answer = "sd(x) / sqrt(n)"))`
+
+`r hide("Show explanation")`
+
+The standard error of the mean tells you how much variation you'd expect in the sample mean if you repeated your sampling many times. It's calculated as the standard deviation divided by the square root of the sample size: `sd(x) / sqrt(n)`. Dividing by a larger `n` shrinks the SEM, reflecting the fact that larger samples give a more precise estimate of the true population mean.
+
+`r unhide()`
+
+Just as you would have done in the previous workbook with that data, below is a worked example of how to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for this data, the parasite count by sex, using `group_by()` and `summarise()`.
+
+`r hide("Show explanation")`
+
+```{r}
+mouse_summary <- mice_parasites %>%
+  group_by(sex) %>%
+  summarise(
+    mean_parasite_count = mean(parasite_count),
+    sd_parasite_count = sd(parasite_count),
+    sem_parasite_count = sd(parasite_count) / sqrt(n())
+  )
+
+mouse_summary
+```
+
+`r unhide()`
+
+## Checking whether a t-test is appropriate
+
+**Can we use a t-test to look for an effect of sex on parasite count in mice?**
+
+In the previous workbook, we learned that a two-sample t-test makes two assumptions:
 
 1. The data should be normally distributed within each group.
 2. The variances of the two groups should be approximately equal.
 
-We know that parasite count is not normally distributed for either sex - as seen above. 
+### Digging Deeper - The Q-Q Plot and Shapiro-Wilk Test for Normality 
 
-We also need to check the assumption of **equal variances** between groups before running a two-sample t-test. We can do this using **Levene's test**, which we learnt about in the main workbook.
+The histogram can give us some idea of normality, but we can also use a **Q-Q plot** to check for normality.
+
+A Q-Q plot compares the quantiles of the data to the quantiles of a normal distribution. If the points fall approximately along a straight line, the data are likely normally distributed. There is also a common first test, called the **Shapiro-Wilk test**.
+
+```{r}
+mice_parasites_qq_F <- mice_parasites %>%
+  filter(sex == "F") %>%
+  ggplot(., aes(sample = parasite_count)) +
+  stat_qq(colour = "steelblue", alpha = 0.7) +
+  stat_qq_line(colour = "darkred", linewidth = 1)
+
+mice_parasites_qq_M <- mice_parasites %>%
+  filter(sex == "M") %>%
+  ggplot(., aes(sample = parasite_count)) +
+  stat_qq(colour = "steelblue", alpha = 0.7) +
+  stat_qq_line(colour = "darkred", linewidth = 1)
+
+mice_parasites_qq_F
+mice_parasites_qq_M
+```
+
+```{r}
+shapiro.test(mice_parasites$parasite_count[mice_parasites$sex == "F"])
+shapiro.test(mice_parasites$parasite_count[mice_parasites$sex == "M"])
+```
+
+**What do these results tell you about the normality of the parasite count data for each sex?**
+
+`r longmcq(c("Both sexes have normally distributed parasite counts, so we can use parametric tests.","Females have normally distributed parasite counts, but males do not.",answer = "Neither sex has normally distributed parasite counts, so we should use non-parametric tests.","Males have normally distributed parasite counts, but females do not."))`
 
 
 
 
 
+We've already established that parasite count is not normally distributed for either sex (see histograms above), so a t-test is already on shaky ground — but let's check the second assumption too, using **Levene's test**, which we learnt about in the main workbook.
 
 ```{r}
 leveneTest(parasite_count ~ sex, data = mice_parasites)
@@ -222,53 +319,16 @@ leveneTest(parasite_count ~ sex, data = mice_parasites)
 
 **Why is the leveneTest sometimes used?**
 
-`r longmcq(c("To test whether the data follow a normal distribution.","To test whether the variances of the groups are approximately equal.", "To test whether the means of the groups are significantly different.","To test whether the data are independent.", answer = "To test whether the variances of the groups are approximately equal."))`
+`r longmcq(c("To test whether the data follow a normal distribution.","To test whether the variances of the groups are approximately equal.","To test whether the means of the groups are significantly different.","To test whether the data are independent.",answer = "To test whether the variances of the groups are approximately equal."))`
 
-The P value from Levene's test is P = 0.47, which is not significant (P > 0.05). This indicates that the variances of the groups are approximately equal, and we can proceed with the assumption of equal variances in our t-test. 
+The P value from Levene's test is P = 0.47, which is not significant (P > 0.05). This indicates that the variances of the groups are approximately equal, so that assumption is satisfied.
 
-
-
-
+So, we have a mixed picture: the equal-variances assumption holds, but the normality assumption does not. Since a t-test requires **both** assumptions to be met, it isn't appropriate here — we should use a non-parametric alternative instead.
 
 
 
 
 
 
+## The End 
 
-
-
-
-
-
-
-
-
-
-
-
-### Does sex affect weight in mice?
-
-Let's first implement what we just learnt.
-
-```{r}
-mice_parasites_histogram_weight <- mice_parasites %>% 
-  ggplot(., aes(x = weight_g)) + 
-  geom_histogram(bins = 6) 
-
-mice_parasites_histogram_weight
-```
-
-This data is only slightly left-skewed — a little more data lies on the right side of the mean — but it's nowhere near as extreme as the parasite count data. Since there is only mild skew and no clear outliers, we don't need to adjust the dataset here.
-
-As we learnt above, before running a t-test we should check Levene's test for equality of variances.
-
-```{r}
-leveneTest(weight_g ~ sex, data = mice_parasites)
-```
-
-```{r}
-two_sided_t_weight <- t.test(weight_g ~ sex, data = mice_parasites, var.equal = TRUE)
-
-two_sided_t_weight
-```
