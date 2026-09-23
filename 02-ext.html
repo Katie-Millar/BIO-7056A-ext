@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Workshop 2 - Exploratory Data Analysis - Extension – Statistics for Biologists</title>
+<title>2&nbsp; Workshop 2 - Exploratory Data Analysis - Extension – Statistics for Biologists - Extension Coursebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Statistics for Biologists</a> 
+      <a href="./">Statistics for Biologists - Extension Coursebook</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Statistics for Biologists - Extension</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducing this Workbook</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -376,7 +376,7 @@ Skewness tells you where the outliers or extreme values are pulling the distribu
   ..   weight_g = col_double(),
   ..   parasite_count = col_double()
   .. )
- - attr(*, "problems")=&lt;pointer: 0xb57371f90&gt; </code></pre>
+ - attr(*, "problems")=&lt;pointer: 0xc333f16e0&gt; </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -495,8 +495,8 @@ $ parasite_count &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 8, 1, 0, 0, 5, 0, 0, 1, 0, 0, 
 </div>
 </div>
 <p><strong>What can we tell about where the data is concentrated? Is it skewed? If so, in which direction?</strong></p>
-<div id="radio_QGZIPCXLIL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_HEIBQRGZNW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HEIBQRGZNW" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_HEIBQRGZNW" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_HEIBQRGZNW" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_HEIBQRGZNW" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -576,8 +576,8 @@ Show explanation
 </div>
 </div>
 <p><strong>In which direction is the data skewed?</strong></p>
-<div id="radio_CKRHFSENVI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_IMZNSEZGYQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IMZNSEZGYQ" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_IMZNSEZGYQ" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_IMZNSEZGYQ" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_IMZNSEZGYQ" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -735,8 +735,8 @@ attr(,"freq")
 </div>
 </div>
 <p><strong>What can we tell from this plot?</strong></p>
-<div id="radio_BLACEUPJYZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BLACEUPJYZ" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_BLACEUPJYZ" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_BLACEUPJYZ" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
+<div id="radio_CAAKSUGIVI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CAAKSUGIVI" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_CAAKSUGIVI" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_CAAKSUGIVI" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
 </div>
 
 
@@ -1485,8 +1485,8 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Statistics for Biologists - Extension">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Statistics for Biologists - Extension</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="Introducing this Workbook">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducing this Workbook</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
