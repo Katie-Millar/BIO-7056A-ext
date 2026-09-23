@@ -2,10 +2,11 @@ project:
   type: book
 
 book:
-  title: "Statistics for Biologists"
+  title: "Statistics for Biologists - Extension Coursebook"
   chapters:
     - index.qmd
     - 02-ext.qmd
+    - 03-ext.qmd
     - appendix.qmd
 
 format:

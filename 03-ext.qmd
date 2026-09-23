@@ -20,11 +20,11 @@ library(car)
 
 Welcome to today's workshop extension! In this session, like last time, we will be focusing on summarising and testing our knowledge from what we learnt in the main workbook. We will be covering **Sampling Distributions** and **Testing for Differences**. We will also be revisiting some of the key terms and concepts from the main workbook, and applying them to a different dataset.
 
-### Your Route Through This Workshop
+## Your Route Through This Workshop
 
 Here's the plan for this session:
 
-1. **Recap**: ensure you have some understanding of the key terms from the main workbook today (sampling, SEM, CIs, t-tests, and friends).
+1. **Recap**: ensure you have some understanding of the key terms from the main workbook today (sampling, SEM, CIs, t-tests, and more).
 2. **Medfly case study**: put those terms to work counting flies in an orchard.
 3. **Parametric vs non-parametric**: the difference between these two types of test, and why it matters.
 4. **Meet the mice**: load the data and plot histograms for females and males, which give us a first look at the shape of the data.
@@ -230,41 +230,6 @@ mice_parasites_histogram_M
 `r longmcq(c("Both distributions are roughly symmetric (normal), so the mean is a good summary of typical parasite count for each sex.",answer = paste("Both distributions are strongly right-skewed - most mice have very low parasite counts, with a small number","of individuals carrying much higher burdens. Because of this skew, the mean will be pulled upward by the","few high-count individuals and won't represent a 'typical' mouse as well as the median would."),"Females have a wider spread of parasite counts than males, since the female plot has more bars.","The two histograms can't be compared because they don't have the same y-axis maximum."))`
 
 
-## Descriptive Statistics
-
-In Workshop 2 in the last session, we covered **Exploratory Data Analysis** and how descriptive statistics help us understand our data before running any statistical tests.
-
-The key terms learnt were: **Mean**, **Median**, **Mode**, **Range**, **Standard deviation**, and **Skewness**.
-
-In the main workbook in today's workshop (Workshop 3), you were asked to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for the yield and virus data.
-
-**How should you write the standard error of the mean in the code?**
-
-`r mcq(c("sd(x)", "sd(x) * n", "sd(x) * sqrt(n)", answer = "sd(x) / sqrt(n)"))`
-
-`r hide("Show explanation")`
-
-The standard error of the mean tells you how much variation you'd expect in the sample mean if you repeated your sampling many times. It's calculated as the standard deviation divided by the square root of the sample size: `sd(x) / sqrt(n)`. Dividing by a larger `n` shrinks the SEM, reflecting the fact that larger samples give a more precise estimate of the true population mean.
-
-`r unhide()`
-
-Just as you would have done in the previous workbook with that data, below is a worked example of how to calculate the **mean**, **standard deviation**, and **standard error of the mean (SEM)** for this data, the parasite count by sex, using `group_by()` and `summarise()`.
-
-`r hide("Show explanation")`
-
-```{r}
-mouse_summary <- mice_parasites %>%
-  group_by(sex) %>%
-  summarise(
-    mean_parasite_count = mean(parasite_count),
-    sd_parasite_count = sd(parasite_count),
-    sem_parasite_count = sd(parasite_count) / sqrt(n())
-  )
-
-mouse_summary
-```
-
-`r unhide()`
 
 ## Checking whether a t-test is appropriate
 
@@ -317,18 +282,20 @@ We've already established that parasite count is not normally distributed for ei
 leveneTest(parasite_count ~ sex, data = mice_parasites)
 ```
 
-**Why is the leveneTest sometimes used?**
+**Why is the `leveneTest` sometimes used?**
 
 `r longmcq(c("To test whether the data follow a normal distribution.","To test whether the variances of the groups are approximately equal.","To test whether the means of the groups are significantly different.","To test whether the data are independent.",answer = "To test whether the variances of the groups are approximately equal."))`
 
 The P value from Levene's test is P = 0.47, which is not significant (P > 0.05). This indicates that the variances of the groups are approximately equal, so that assumption is satisfied.
 
-So, we have a mixed picture: the equal-variances assumption holds, but the normality assumption does not. Since a t-test requires **both** assumptions to be met, it isn't appropriate here — we should use a non-parametric alternative instead.
+So, we have a mixed picture: the equal-variances assumption holds, but the normality assumption does not. Since a t-test requires **both** assumptions to be met, it isn't appropriate here — **we should use a non-parametric alternative instead.**
 
+
+## Using a non-parametric test 
 
 
 
 
 
 ## The End 
-
+Today's workbook was a step up from last weeks, and we covered a lot of ground. We recapped the key terms from the main workbook, and applied them to a case study on medflies. We also revisited parametric and non-parametric tests, and applied them to the wood mice parasite data.

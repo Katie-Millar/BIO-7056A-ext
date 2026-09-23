@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix.html" rel="next">
+<link href="./03-ext.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Statistics for Biologists - Extension</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducing this Workbook</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -163,8 +163,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./03-ext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -370,7 +376,7 @@ Skewness tells you where the outliers or extreme values are pulling the distribu
   ..   weight_g = col_double(),
   ..   parasite_count = col_double()
   .. )
- - attr(*, "problems")=&lt;pointer: 0xb96d88040&gt; </code></pre>
+ - attr(*, "problems")=&lt;pointer: 0xb57371f90&gt; </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -489,8 +495,8 @@ $ parasite_count &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 8, 1, 0, 0, 5, 0, 0, 1, 0, 0, 
 </div>
 </div>
 <p><strong>What can we tell about where the data is concentrated? Is it skewed? If so, in which direction?</strong></p>
-<div id="radio_EHFZDCCQZV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EHFZDCCQZV" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_EHFZDCCQZV" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_EHFZDCCQZV" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_EHFZDCCQZV" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_QGZIPCXLIL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_QGZIPCXLIL" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -570,8 +576,8 @@ Show explanation
 </div>
 </div>
 <p><strong>In which direction is the data skewed?</strong></p>
-<div id="radio_YWQAKYQFGN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YWQAKYQFGN" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_YWQAKYQFGN" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_YWQAKYQFGN" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_YWQAKYQFGN" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_CKRHFSENVI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_CKRHFSENVI" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -729,8 +735,8 @@ attr(,"freq")
 </div>
 </div>
 <p><strong>What can we tell from this plot?</strong></p>
-<div id="radio_JNPIPRAPVJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JNPIPRAPVJ" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_JNPIPRAPVJ" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_JNPIPRAPVJ" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
+<div id="radio_BLACEUPJYZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BLACEUPJYZ" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_BLACEUPJYZ" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_BLACEUPJYZ" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
 </div>
 
 
@@ -1479,13 +1485,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Statistics for Biologists - Extension">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Statistics for Biologists - Extension</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="Introducing this Workbook">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducing this Workbook</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix.html" class="pagination-link" aria-label="Appendix - Knowing your R &amp; Statistics">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03-ext.html" class="pagination-link" aria-label="Workshop 3 - Sampling Distributions and Testing for Differences - Extension">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

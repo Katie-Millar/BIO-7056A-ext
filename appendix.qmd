@@ -13,24 +13,117 @@ jupyter: false
 ---
 
 
-## Housekeeping for things 
+## Loading and installing packages 
+Let's get the difference on loading and installing packages down. A general rule of good practice is to load only the packages you need for each project within the appropriate scripts and to do this at the top, you can install them in a way that doesn't clutter your global environment. 
 
-### Loading and installing packages 
-Let's get the difference on loading and installing packages down. 
+## The pipe: `|>` and `%>%`
+As you work through these examples, you'll notice code written with a pipe: `%>%`. As you may know already, or as you research around at other resources, the pipe can also sometime be written as `|>`. 
 
+`%>%` comes from the magrittr package (loaded with tidyverse). It's been around since ~2014.
+`|>` is the native pipe, built into base R itself since R 4.1.0 (2021). No package needed.
+
+These are functionally near-identical, and for the purposes of this workbook and the main workbook, we'll be using `%>%` throughout. 
 
 ## Using `tidyverse()`
-
 You will most certainly come across the tidyverse package a lot in your R. This is a collection of packages that are designed to work together, and make data analysis easier. The tidyverse includes packages like ggplot2, dplyr, tidyr, readr, purrr, and more. So as long as you have tidyverse installed, you can use all of these packages without having to install them individually.
 
 ## Other fun tools
-Quarto 
 
 
-## Definitions!!!
-central tenden
 
 
-the pipe
 
 
+
+
+
+## Definitions used in this coursebook
+
+### Workshop 2
+
+#### Data Types
+
+**Quantitative/Numerical data**  
+Data that can be measured and expressed numerically.
+
+**Discrete data**  
+Data that can only take specific values, often counted (e.g. number of students in a class).
+
+**Continuous data**  
+Data that can take any value within a range, often measured (e.g. height, temperature).
+
+**Qualitative/Categorical data**  
+Data that can be divided into categories or groups.
+
+**Nominal data**  
+Categorical data with no inherent order (e.g. eye colour, type of fruit).
+
+**Ordinal data**  
+Categorical data with a meaningful order (e.g. education level, satisfaction rating).
+
+#### Summary statistics
+
+**Mean**  
+The total of all values divided by the number of values.
+
+**Median**  
+The middle value when the data is arranged in order.
+
+**Mode**  
+The value that occurs most often.
+
+**Range**  
+The difference between the largest and smallest values.
+
+**Standard deviation**  
+A measure of how spread out the values are around the mean; the square root of the variance.
+
+**Variance**  
+A measure of how much values differ from the mean, calculated as the average of the squared differences from the mean.
+
+**Skewness**  
+A measure of asymmetry in the distribution of data. A positive skew indicates a longer tail on the right; a negative skew indicates a longer tail on the left.
+
+### Workshop 3 
+#### Sampling and inference
+
+**Sampling**  
+Selecting a subset (sample) of individuals or observations from a larger population to estimate characteristics of the whole population, without measuring everything.
+
+**Sampling error**  
+The difference between a sample statistic and the true population parameter, arising because a sample may not perfectly represent the population.
+
+**Probability**  
+A numerical measure (between 0 and 1) of the likelihood that a specific event will occur.
+
+**Standard error of the mean (SEM)**  
+An estimate of how much a sample mean is likely to vary from the true population mean: SD / sqrt(n).
+
+**Confidence intervals**  
+A range of values, calculated from sample data, likely to contain the true population parameter at a given confidence level (e.g. 95%).
+
+#### Testing for differences
+
+**T-tests**  
+Test whether the difference between two means is larger than sampling error alone would explain.
+
+- *One-sample t-test*: compares a single sample mean to a hypothesised population mean.
+- *Two-sample t-test*: compares the means of two independent samples, using the standard error of the difference between means.
+
+**Statistical significance**  
+A result is significant when its p-value falls below a chosen threshold (conventionally p < 0.05) — meaning the result is unlikely to be due to sampling error, not that the effect is large or important.
+
+**Parametric test**  
+A test that assumes the data follow a normal distribution.
+
+**Non-parametric test**  
+A test that makes no assumption about the distribution of the data.
+
+**Q-Q plot**  
+A plot comparing the quantiles of the data to the quantiles of a normal distribution; points falling roughly along a straight line indicate normality.
+
+**Shapiro-Wilk test**  
+A formal statistical test for normality.
+
+**Levene's test**  
+A test of whether the variances of two or more groups are approximately equal.
