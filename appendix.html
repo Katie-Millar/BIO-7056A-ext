@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Appendix - Knowing your R &amp; Statistics – Statistics for Biologists</title>
+<title>4&nbsp; Appendix - Knowing your R &amp; Statistics – Statistics for Biologists</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-ext.html" rel="prev">
+<link href="./03-ext.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -160,8 +160,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./03-ext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -174,13 +180,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#housekeeping-for-things" id="toc-housekeeping-for-things" class="nav-link active" data-scroll-target="#housekeeping-for-things"><span class="header-section-number">3.1</span> Housekeeping for things</a>
+  <li><a href="#housekeeping-for-things" id="toc-housekeeping-for-things" class="nav-link active" data-scroll-target="#housekeeping-for-things"><span class="header-section-number">4.1</span> Housekeeping for things</a>
   <ul class="collapse">
-  <li><a href="#loading-and-installing-packages" id="toc-loading-and-installing-packages" class="nav-link" data-scroll-target="#loading-and-installing-packages"><span class="header-section-number">3.1.1</span> Loading and installing packages</a></li>
+  <li><a href="#loading-and-installing-packages" id="toc-loading-and-installing-packages" class="nav-link" data-scroll-target="#loading-and-installing-packages"><span class="header-section-number">4.1.1</span> Loading and installing packages</a></li>
   </ul></li>
-  <li><a href="#using-tidyverse" id="toc-using-tidyverse" class="nav-link" data-scroll-target="#using-tidyverse"><span class="header-section-number">3.2</span> Using <code>tidyverse()</code></a></li>
-  <li><a href="#other-fun-tools" id="toc-other-fun-tools" class="nav-link" data-scroll-target="#other-fun-tools"><span class="header-section-number">3.3</span> Other fun tools</a></li>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">3.4</span> Definitions!!!</a></li>
+  <li><a href="#using-tidyverse" id="toc-using-tidyverse" class="nav-link" data-scroll-target="#using-tidyverse"><span class="header-section-number">4.2</span> Using <code>tidyverse()</code></a></li>
+  <li><a href="#other-fun-tools" id="toc-other-fun-tools" class="nav-link" data-scroll-target="#other-fun-tools"><span class="header-section-number">4.3</span> Other fun tools</a></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">4.4</span> Definitions!!!</a></li>
   </ul>
 </nav>
     </div>
@@ -189,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -206,23 +212,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="housekeeping-for-things" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="housekeeping-for-things"><span class="header-section-number">3.1</span> Housekeeping for things</h2>
-<section id="loading-and-installing-packages" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="loading-and-installing-packages"><span class="header-section-number">3.1.1</span> Loading and installing packages</h3>
+<section id="housekeeping-for-things" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="housekeeping-for-things"><span class="header-section-number">4.1</span> Housekeeping for things</h2>
+<section id="loading-and-installing-packages" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="loading-and-installing-packages"><span class="header-section-number">4.1.1</span> Loading and installing packages</h3>
 <p>Let’s get the difference on loading and installing packages down.</p>
 </section>
 </section>
-<section id="using-tidyverse" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="using-tidyverse"><span class="header-section-number">3.2</span> Using <code>tidyverse()</code></h2>
+<section id="using-tidyverse" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="using-tidyverse"><span class="header-section-number">4.2</span> Using <code>tidyverse()</code></h2>
 <p>You will most certainly come across the tidyverse package a lot in your R. This is a collection of packages that are designed to work together, and make data analysis easier. The tidyverse includes packages like ggplot2, dplyr, tidyr, readr, purrr, and more. So as long as you have tidyverse installed, you can use all of these packages without having to install them individually.</p>
 </section>
-<section id="other-fun-tools" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="other-fun-tools"><span class="header-section-number">3.3</span> Other fun tools</h2>
+<section id="other-fun-tools" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="other-fun-tools"><span class="header-section-number">4.3</span> Other fun tools</h2>
 <p>Quarto</p>
 </section>
-<section id="definitions" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="definitions"><span class="header-section-number">3.4</span> Definitions!!!</h2>
+<section id="definitions" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="definitions"><span class="header-section-number">4.4</span> Definitions!!!</h2>
 <p>central tenden</p>
 <p>the pipe</p>
 
@@ -972,8 +978,8 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02-ext.html" class="pagination-link" aria-label="Workshop 2 - Exploratory Data Analysis - Extension">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Workshop 2 - Exploratory Data Analysis - Extension</span></span>
+      <a href="./03-ext.html" class="pagination-link" aria-label="Workshop 3 - Sampling Distributions and Testing for Differences - Extension">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
