@@ -12,7 +12,8 @@ format:
 jupyter: false
 ---
 
-Using what we have just learnt in the [Exploratory Data Analysis chapter](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html), we will now do a small recap, and explore these skills using an example. 
+Using what we have just learnt in the [Exploratory Data Analysis Chapter](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html), we will now do a small recap, and explore these skills using a
+ different  example. 
 
 To recap... 
 
@@ -45,7 +46,7 @@ Data that can be divided into categories or groups. It can be further classified
 
 ## Summary Statistics 
 
-Summary Statistics are used to summarise and describe the main features of a dataset. They provide a quick overview of the data, allowing us to understand its central tendency, variability, and distribution.
+Summary statistics are used to summarise and describe the main features of a dataset. They provide a quick overview of the data, allowing us to understand its central tendency, variability, and distribution.
 
 
 ### Measures of averages:
@@ -66,16 +67,14 @@ The difference between the largest and smallest values.
 A measure of how spread out the values are around the mean.
      
 **Skewness**              
-The measure of asymmetry in the distribution of data.          
-A positive skew indicates a longer tail on the right side, while a negative skew indicates a longer tail on the left side.               
-Skewness tells you where the outliers or extreme values are pulling the distribution, relative to where most of your data sits.          
+The measure of asymmetry in the distribution of data. A positive skew indicates a longer tail on the right side, while a negative skew indicates a longer tail on the left side. Skewness tells you where the outliers or extreme values are pulling the distribution, relative to where most of your data sits.                         
 
 
 ## Checking Data for real -  Using the Wood Mouse! 
 
 Let's use what we've learnt using a dataset. 
 
-![*The mouse*](images/ch2.mouse.jpg){fig-align="left"}
+![*The mouse!!*](images/ch2.mouse.jpg){fig-align="left"}
 
 Meet *Apodemus sylvaticus*, the [wood mouse](https://www.wildlifetrusts.org/wildlife-explorer/mammals/wood-mouse). *Apodemus sylvaticus* can often be found with the parasite, gastrointestinal roundworm, *Heligmosomoides polygyrus*.
 
@@ -83,11 +82,11 @@ We have a dataset where researchers took a sample of 60 different *Apodemus sylv
 
 Let's first read in this dataset, found in `data/mouse_parasite_counts.csv`. 
 
-Before we do this, as you'll remember, you'll need a package to do this. If you rememeber from earlier (), we used the function, `read_csv()`, this is from the package`readr`. However readr, is part of the `tidyverse` package, which actually contains A LOT. Read about this in one of the appendices. 
+Before we do this, you'll need a package for it to run. If you remember from earlier in the [main workbook](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#task-2-importing-the-data), we used the function `read_csv()`, which comes from the package `readr`. However, `readr` is part of the `tidyverse` package, which actually contains A LOT of different packages - you can read about this in The [Appendix Chapter](appendix.qmd). 
 
-Good practice alert!! It is *excellent* practice to load up all the packages you will need at the start of your code, so you don't forget to load them later on, and they are not dropped all over your code. 
+**Good practice alert!!** It is *excellent* practice to load up all the packages you will need at the start of your code, so you don't forget to load them later on, and they are not scattered all over your code, this is another thing you can read about in the [Appendix Chapter](appendix.qmd).
 
-We will need the following packages throughout this script, make sure they are installed from the console first!
+We will need the following packages throughout this script, make sure they are installed from the **console** first, using `install.packages()`!
 ```{r, results='hide', message=FALSE, warning=FALSE}
 library(tidyverse)
 library(janitor)
