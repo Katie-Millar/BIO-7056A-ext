@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03-ext.html" rel="next">
+<link href="./appendix.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -163,14 +163,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-ext.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -290,7 +284,7 @@ The measure of asymmetry in the distribution of data. A positive skew indicates 
 <p>Let’s first read in this dataset, found in <code>data/mouse_parasite_counts.csv</code>.</p>
 <p>Before we do this, you’ll need a package for it to run. If you remember from earlier in the <a href="https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#task-2-importing-the-data">main workbook</a>, we used the function <code>read_csv()</code>, which comes from the package <code>readr</code>. However, <code>readr</code> is part of the <code>tidyverse</code> package, which actually contains A LOT of different packages - you can read about this in the <a href="./appendix.html">Appendix Chapter</a>.</p>
 <p><strong>Good practice alert!!</strong> It is <em>excellent</em> practice to load up all the packages you will need at the start of your script, so you don’t forget to load them later on, and they are not scattered all over your code, this is another thing you can read about in the <a href="./appendix.html">Appendix Chapter</a>.</p>
-<p>We will use the following packages throughout this script: <code>tidyverse</code> (for data wrangling and visualisation), <code>janitor</code> (for data cleaning), and <code>kableExtra</code> (for creating formatted tables). Make sure these are installed from the <strong>console</strong> using <code>install.packages()</code> <em>before</em> loading them into your script with <code>library()</code>.</p>
+<p>We will use the following packages throughout this script: <code>tidyverse</code> (for data wrangling and visualisation), <code>janitor</code> (for data cleaning), <code>kableExtra</code> (for creating formatted tables) and <code>DescTools</code> (for calculating summary statistics). Make sure these are installed from the <strong>console</strong> using <code>install.packages()</code> <em>before</em> loading them into your script with <code>library()</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
@@ -301,7 +295,7 @@ The measure of asymmetry in the distribution of data. A positive skew indicates 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mice_parasites <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/mouse_parasite_counts.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Let’s apply what we learnt earlier to inspect the data. We explored a number of ways to understand the data. These different data checks can be grouped into different categories:</p>
+<p>Let’s apply what we learnt earlier to inspect the data, using the functions we explored in the main workbook. These different data checks can be grouped into different categories:</p>
 <ol type="i">
 <li>Dimensions/Size<br>
 </li>
@@ -386,7 +380,7 @@ The measure of asymmetry in the distribution of data. A positive skew indicates 
   ..   weight_g = col_double(),
   ..   parasite_count = col_double()
   .. )
- - attr(*, "problems")=&lt;pointer: 0xc55190c40&gt; </code></pre>
+ - attr(*, "problems")=&lt;pointer: 0xadcff15d0&gt; </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -505,8 +499,8 @@ $ parasite_count &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 8, 1, 0, 0, 5, 0, 0, 1, 0, 0, 
 </div>
 <p>You can see that choosing a binwidth of 1 produces a large number of bars, which gives a more detailed view of the distribution. If we were to increase the binwidth, we would see fewer bars, and a smoother overview of the distribution.</p>
 <p><strong>What can we tell about where the data is concentrated? Is it skewed? If so, in which direction?</strong></p>
-<div id="radio_POTZNFZUTS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_POTZNFZUTS" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_POTZNFZUTS" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_POTZNFZUTS" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_POTZNFZUTS" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_RTXVDNARVJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RTXVDNARVJ" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_RTXVDNARVJ" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_RTXVDNARVJ" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_RTXVDNARVJ" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -589,8 +583,8 @@ Show explanation
 </div>
 </div>
 <p><strong>In which direction is the data skewed?</strong></p>
-<div id="radio_QHAQBSDENH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QHAQBSDENH" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QHAQBSDENH" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QHAQBSDENH" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_QHAQBSDENH" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_SPEDGQKJFS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SPEDGQKJFS" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_SPEDGQKJFS" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_SPEDGQKJFS" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_SPEDGQKJFS" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -599,7 +593,7 @@ Show explanation
 <p>The bulk of the data sits in a tight cluster around 19 – 24 g, with the tallest bars there. The longer, thinner tail pointing toward lower values makes it left-skewed.</p>
 </div>
 <p>So, from this plot - although we cannot infer anything about parasite count, we can tell that more mice are in the 20-30g range than below 20g, this makes sense by looking at our <code>mice_parasites_weight_summary</code> table above.</p>
-<p>We still have a bit more to look at, we have looked at the mean of multiple variables, but we haven’t looked at the other summary statistics that we have learned. We understand what the mean shows, now let’s look at what everything else shows.</p>
+<p>We still have a bit more to look at. We have covered the mean of multiple variables, but have not yet explored the remaining summary statistics.</p>
 <p>Like earlier, and in the <a href="https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#summary-statistics">main workbook</a>, we can use the <code>summarise()</code> function to also calculate the median, mode, range and standard deviation of these variables.</p>
 <p>We learnt in the <a href="https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#summary-statistics">main workbook</a>, that the mean can be calculated using the <code>mean()</code> function, the standard deviation can simply be calculated using the <code>sd()</code> function, and median can be calculated using the <code>median()</code> function. All work within <code>summarise()</code>.</p>
 <div class="cell">
@@ -622,7 +616,7 @@ Show explanation
 # ℹ 1 more variable: sd_parasite_count &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Recalling what the definition of each of these terms are, what can we tell about the data?</p>
+<p>Recalling the definitions of these terms, what can we tell about the data?</p>
 <p><strong>1. Comparing the mean (21.5) and median (21.0) for <code>weight_g</code>, what can we say about its distribution?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="answer">It’s roughly symmetric, since the mean and median are close together</option><option value="">It’s strongly right-skewed</option><option value="">It’s strongly left-skewed</option><option value="">There isn’t enough information to tell</option></select></p>
 <p><strong>2. Comparing the mean (3.42) and median (0.5) for <code>parasite_count</code>, what can we say about its distribution?</strong></p>
@@ -641,7 +635,7 @@ Show explanation
 <pre><code>[1] 27</code></pre>
 </div>
 </div>
-<p>However, there is also a function, we can use. This is the <code>diff()</code> function from base R, which calculates the difference between the maximum and minimum values of a variable.</p>
+<p>However, there is also a function we can use. This is the <code>diff()</code> function from base R, which calculates the difference between the maximum and minimum values of a variable.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(mice_parasites<span class="sc">$</span>parasite_count))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -670,7 +664,7 @@ attr(,"freq")
 [1] 30</code></pre>
 </div>
 </div>
-<p>Here there is not only the ‘0’ output, showing the most common number, there is also ‘30’ output, which is the number of times this value occurs in the dataset. The 0 value makes up for half of the data, that’s quite a lot!</p>
+<p>Here there is not only the ‘0’ output, showing the most common number, there is also ‘30’ output, which is the number of times this value occurs in the dataset. The 0 value makes up half of the data, that’s quite a lot!</p>
 </section>
 <section id="putting-it-all-together" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="putting-it-all-together"><span class="header-section-number">2.3.3</span> Putting it all together</h3>
@@ -729,7 +723,7 @@ attr(,"freq")
 </section>
 <section id="the-end" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="the-end"><span class="header-section-number">2.4</span> The End</h2>
-<p>If you made it to here, you should be pretty certain on how summary statistics work. We will soon go onto how the data actually moves together, as a bonus, take a quick look at how weight and parasite count vary together.</p>
+<p>If you made it to here, you should be pretty certain on how summary statistics work. We will soon go on to how the data actually moves together, as a bonus, take a quick look at how weight and parasite count vary together.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Relationship between weight and parasite count </span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_parasites, <span class="fu">aes</span>(<span class="at">x =</span> weight_g, <span class="at">y =</span> parasite_count)) <span class="sc">+</span></span>
@@ -744,8 +738,8 @@ attr(,"freq")
 </div>
 </div>
 <p><strong>What can we tell from this plot?</strong></p>
-<div id="radio_VGIBEZKNBQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VGIBEZKNBQ" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_VGIBEZKNBQ" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_VGIBEZKNBQ" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
+<div id="radio_SPWKQUCGTB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SPWKQUCGTB" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_SPWKQUCGTB" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_SPWKQUCGTB" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
 </div>
 
 
@@ -1499,8 +1493,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-ext.html" class="pagination-link" aria-label="Workshop 3 - Sampling Distributions and Testing for Differences - Extension">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./appendix.html" class="pagination-link" aria-label="Appendix - Knowing your R &amp; Statistics">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1590,7 +1584,7 @@ window.onload = function() {
 <span id="cb43-84"><a href="#cb43-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-85"><a href="#cb43-85" aria-hidden="true" tabindex="-1"></a>**Good practice alert!!** It is *excellent* practice to load up all the packages you will need at the start of your script, so you don't forget to load them later on, and they are not scattered all over your code, this is another thing you can read about in the <span class="co">[</span><span class="ot">Appendix Chapter</span><span class="co">](appendix.qmd)</span>.         </span>
 <span id="cb43-86"><a href="#cb43-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-87"><a href="#cb43-87" aria-hidden="true" tabindex="-1"></a>We will use the following packages throughout this script: <span class="in">`tidyverse`</span> (for data wrangling and visualisation), <span class="in">`janitor`</span> (for data cleaning), and  <span class="in">`kableExtra`</span> (for creating formatted tables). Make sure these are installed from the **console** using <span class="in">`install.packages()`</span> *before* loading them into your script with <span class="in">`library()`</span>.     </span>
+<span id="cb43-87"><a href="#cb43-87" aria-hidden="true" tabindex="-1"></a>We will use the following packages throughout this script: <span class="in">`tidyverse`</span> (for data wrangling and visualisation), <span class="in">`janitor`</span> (for data cleaning), <span class="in">`kableExtra`</span> (for creating formatted tables) and <span class="in">`DescTools`</span> (for calculating summary statistics). Make sure these are installed from the **console** using <span class="in">`install.packages()`</span> *before* loading them into your script with <span class="in">`library()`</span>.     </span>
 <span id="cb43-88"><a href="#cb43-88" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-89"><a href="#cb43-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE}</span></span>
 <span id="cb43-90"><a href="#cb43-90" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -1609,7 +1603,7 @@ window.onload = function() {
 <span id="cb43-103"><a href="#cb43-103" aria-hidden="true" tabindex="-1"></a>mice_parasites <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/mouse_parasite_counts.csv"</span>)</span>
 <span id="cb43-104"><a href="#cb43-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb43-105"><a href="#cb43-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-106"><a href="#cb43-106" aria-hidden="true" tabindex="-1"></a>Let's apply what we learnt earlier to inspect the data. We explored a number of ways to understand the data. These different data checks can be grouped into different categories:             </span>
+<span id="cb43-106"><a href="#cb43-106" aria-hidden="true" tabindex="-1"></a>Let's apply what we learnt earlier to inspect the data, using the functions we explored in the main workbook. These different data checks can be grouped into different categories:             </span>
 <span id="cb43-107"><a href="#cb43-107" aria-hidden="true" tabindex="-1"></a>                                     </span>
 <span id="cb43-108"><a href="#cb43-108" aria-hidden="true" tabindex="-1"></a>(i) Dimensions/Size         </span>
 <span id="cb43-109"><a href="#cb43-109" aria-hidden="true" tabindex="-1"></a>(ii) Structure/variable names           </span>
@@ -1814,7 +1808,7 @@ window.onload = function() {
 <span id="cb43-326"><a href="#cb43-326" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-327"><a href="#cb43-327" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-328"><a href="#cb43-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-329"><a href="#cb43-329" aria-hidden="true" tabindex="-1"></a>We still have a bit more to look at, we have looked at the mean of multiple variables, but we haven't looked at the other summary statistics that we have learned. We understand what the mean shows, now let's look at what everything else shows.</span>
+<span id="cb43-329"><a href="#cb43-329" aria-hidden="true" tabindex="-1"></a>We still have a bit more to look at. We have covered the mean of multiple variables, but have not yet explored the remaining summary statistics.</span>
 <span id="cb43-330"><a href="#cb43-330" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-331"><a href="#cb43-331" aria-hidden="true" tabindex="-1"></a>Like earlier, and in the <span class="co">[</span><span class="ot">main workbook</span><span class="co">](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#summary-statistics)</span>, we can use the <span class="in">`summarise()`</span> function to also calculate the median, mode, range and standard deviation of these variables.</span>
 <span id="cb43-332"><a href="#cb43-332" aria-hidden="true" tabindex="-1"></a></span>
@@ -1834,7 +1828,7 @@ window.onload = function() {
 <span id="cb43-348"><a href="#cb43-348" aria-hidden="true" tabindex="-1"></a>mice_parasites_summary_all</span>
 <span id="cb43-349"><a href="#cb43-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb43-350"><a href="#cb43-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-351"><a href="#cb43-351" aria-hidden="true" tabindex="-1"></a>Recalling what the definition of each of these terms are, what can we tell about the data? </span>
+<span id="cb43-351"><a href="#cb43-351" aria-hidden="true" tabindex="-1"></a>Recalling the definitions of these terms, what can we tell about the data? </span>
 <span id="cb43-352"><a href="#cb43-352" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-353"><a href="#cb43-353" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-354"><a href="#cb43-354" aria-hidden="true" tabindex="-1"></a>**1. Comparing the mean (21.5) and median (21.0) for `weight_g`, what can we say about its distribution?**</span>
@@ -1865,7 +1859,7 @@ window.onload = function() {
 <span id="cb43-381"><a href="#cb43-381" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(mice_parasites<span class="sc">$</span>parasite_count)<span class="sc">-</span><span class="fu">min</span>(mice_parasites<span class="sc">$</span>parasite_count)</span>
 <span id="cb43-382"><a href="#cb43-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb43-383"><a href="#cb43-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-384"><a href="#cb43-384" aria-hidden="true" tabindex="-1"></a>However, there is also a function, we can use. This is the <span class="in">`diff()`</span> function from base R, which calculates the difference between the maximum and minimum values of a variable.</span>
+<span id="cb43-384"><a href="#cb43-384" aria-hidden="true" tabindex="-1"></a>However, there is also a function we can use. This is the <span class="in">`diff()`</span> function from base R, which calculates the difference between the maximum and minimum values of a variable.</span>
 <span id="cb43-385"><a href="#cb43-385" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-388"><a href="#cb43-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-389"><a href="#cb43-389" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(mice_parasites<span class="sc">$</span>parasite_count))</span>
@@ -1892,7 +1886,7 @@ window.onload = function() {
 <span id="cb43-414"><a href="#cb43-414" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(mice_parasites<span class="sc">$</span>parasite_count)</span>
 <span id="cb43-415"><a href="#cb43-415" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb43-416"><a href="#cb43-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-417"><a href="#cb43-417" aria-hidden="true" tabindex="-1"></a>Here there is not only the '0' output, showing the most common number, there is also '30' output, which is the number of times this value occurs in the dataset. The 0 value makes up for half of the data, that's quite a lot! </span>
+<span id="cb43-417"><a href="#cb43-417" aria-hidden="true" tabindex="-1"></a>Here there is not only the '0' output, showing the most common number, there is also '30' output, which is the number of times this value occurs in the dataset. The 0 value makes up half of the data, that's quite a lot! </span>
 <span id="cb43-418"><a href="#cb43-418" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-419"><a href="#cb43-419" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-420"><a href="#cb43-420" aria-hidden="true" tabindex="-1"></a><span class="fu">### Putting it all together</span></span>
@@ -1925,7 +1919,7 @@ window.onload = function() {
 <span id="cb43-451"><a href="#cb43-451" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-452"><a href="#cb43-452" aria-hidden="true" tabindex="-1"></a><span class="fu">## The End </span></span>
 <span id="cb43-453"><a href="#cb43-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-454"><a href="#cb43-454" aria-hidden="true" tabindex="-1"></a>If you made it to here, you should be pretty certain on how summary statistics work. We will soon go onto how the data actually moves together, as a bonus, take a quick look at how weight and parasite count vary together. </span>
+<span id="cb43-454"><a href="#cb43-454" aria-hidden="true" tabindex="-1"></a>If you made it to here, you should be pretty certain on how summary statistics work. We will soon go on to how the data actually moves together, as a bonus, take a quick look at how weight and parasite count vary together. </span>
 <span id="cb43-455"><a href="#cb43-455" aria-hidden="true" tabindex="-1"></a>            </span>
 <span id="cb43-458"><a href="#cb43-458" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-459"><a href="#cb43-459" aria-hidden="true" tabindex="-1"></a><span class="co"># Relationship between weight and parasite count </span></span>
