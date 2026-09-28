@@ -17,11 +17,11 @@ Using what we have just learnt in the [Exploratory Data Analysis Chapter](https:
 
 To recap... 
 
-## Getting the Terminology Right ! 
+## Getting the Terminology Right 
 
 We learnt about **4 types of data**, within **2 different groups.**   
 
-### Quantitative/Numerical data
+### Quantitative data
 
 Data that can be measured and expressed numerically. It can be further classified into discrete and continuous data.
 
@@ -29,24 +29,22 @@ Data that can be measured and expressed numerically. It can be further classifie
 
 **Continuous data:** Data that can take any value within a range, often measured. Examples include *height*  and *temperature*.
 
-![](images/ch2.1.png){width=60%, fig-align="center"}
+![Examples of discrete and continuous data, made on Canva.](images/ch2.1.png){width=60%, fig-align="center"}
 
 
-### Qualitative/Categorical data
+### Qualitative data
 
 Data that can be divided into categories or groups. It can be further classified into nominal and ordinal data.
 
-**Nominal data:** Data that represents categories without any inherent order. Examples include; *eye color*, and *types of fruits*.
-
+**Nominal data:** Data that represents categories without any inherent order. Examples include; *eye colour*, *gender*, and *types of fruit*.
 **Ordinal data:** Data that represents categories with a meaningful order. Examples include *education level*, *satisfaction ratings*, and *size of clothing*.
 
-![](images/ch2.2.png){width=60%, fig-align="center"}
+![Examples of nominal and ordinal data, made on Canva.](images/ch2.2.png){width=60%, fig-align="center"}
 
 
 
 ## Summary Statistics 
-
-Summary statistics are used to summarise and describe the main features of a dataset. They provide a quick overview of the data, allowing us to understand its central tendency, variability, and distribution.
+We know about summary statistics from the [main workbook](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#summary-statistics) - they are used to summarise and describe the main features of a dataset, and provide a quick overview of the data, allowing us to understand its central tendency, variability, and distribution.
 
 
 ### Measures of averages:
@@ -82,30 +80,37 @@ We have a dataset where researchers took a sample of 60 different *Apodemus sylv
 
 Let's first read in this dataset, found in `data/mouse_parasite_counts.csv`. 
 
-Before we do this, you'll need a package for it to run. If you remember from earlier in the [main workbook](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#task-2-importing-the-data), we used the function `read_csv()`, which comes from the package `readr`. However, `readr` is part of the `tidyverse` package, which actually contains A LOT of different packages - you can read about this in The [Appendix Chapter](appendix.qmd). 
+Before we do this, you'll need a package for it to run. If you remember from earlier in the [main workbook](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#task-2-importing-the-data), we used the function `read_csv()`, which comes from the package `readr`. However, `readr` is part of the `tidyverse` package, which actually contains A LOT of different packages - you can read about this in the [Appendix Chapter](appendix.qmd). 
 
-**Good practice alert!!** It is *excellent* practice to load up all the packages you will need at the start of your code, so you don't forget to load them later on, and they are not scattered all over your code, this is another thing you can read about in the [Appendix Chapter](appendix.qmd).
+**Good practice alert!!** It is *excellent* practice to load up all the packages you will need at the start of your script, so you don't forget to load them later on, and they are not scattered all over your code, this is another thing you can read about in the [Appendix Chapter](appendix.qmd).         
 
-We will need the following packages throughout this script, make sure they are installed from the **console** first, using `install.packages()`!
+We will use the following packages throughout this script: `tidyverse` (for data wrangling and visualisation), `janitor` (for data cleaning), `kableExtra` (for creating formatted tables) and `DescTools` (for calculating summary statistics). Make sure these are installed from the **console** using `install.packages()` *before* loading them into your script with `library()`.     
+
 ```{r, results='hide', message=FALSE, warning=FALSE}
 library(tidyverse)
 library(janitor)
 library(kableExtra)
+library(DescTools)
 ```
 
 ```{r, results='hide', message=FALSE, warning=FALSE, echo=FALSE}
 library(webexercises)
 ```
 
-If the `tidyverse()` package is installed and loaded up, you should be able to read in the dataset. 
+If the `tidyverse` package is installed and loaded up, you should be able to read in the dataset. 
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 mice_parasites <- read_csv("data/mouse_parasite_counts.csv")
 ```
 
-
-
-Let's use a bit about what we learnt earlier with checking the data. We played with finding out about the data and2 split them into 3 different categories: (i) Dimensions/Size, (ii). Structure/variable names,  (iii). Viewing the actual data, and (iv) starting to summarise the data.
+Let's apply what we learnt earlier to inspect the data, using the functions we explored in the main workbook. These different data checks can be grouped into different categories:             
+                                     
+(i) Dimensions/Size         
+(ii) Structure/variable names           
+(iii) Viewing the actual data           
+(iv) Starting to summarise the data      
+               
+There are functions you can use on this related to `Base R`, `tidyverse`, and `janitor`. Let's have a look at some of these functions below, and then answer some questions about the data.
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 # (1). Dimensions/Size:
@@ -123,7 +128,7 @@ tail(mice_parasites) # last 6 rows, Base R
 
 # (4). Starting to Summarise the Data: 
 summary(mice_parasites) # summary of the data, Base R
-tabyl(mice_parasites, sex) # frequency, janitor
+tabyl(mice_parasites, sex) # frequency / percentage, janitor
 ```
 
 
@@ -158,8 +163,6 @@ tabyl(mice_parasites, sex) # frequency, janitor
 :::
 
         
-Have a little run of the functions, then answer the following questions.
-
 **1. How many rows does the dataset contain?** In this case, it will tell us how many different samples of *Apodemus sylvaticus* were taken. 
 
 `r mcq(c("30", "45", answer = "60", "75"))`
@@ -196,6 +199,8 @@ ggplot(mice_parasites, aes(x = parasite_count)) +
   geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") 
 ```
 
+You can see that choosing a binwidth of 1 produces a large number of bars, which gives a more detailed view of the distribution. If we were to increase the binwidth, we would see fewer bars, and a smoother overview of the distribution.
+
 **What can we tell about where the data is concentrated? Is it skewed? If so, in which direction?**
 
 `r longmcq(c("answer" = "The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed", "The data is concentrated at high values, with a long left tail, negatively (left) skewed","The data is symmetric with no skew","The data is bimodal with two equal peaks"))`
@@ -205,12 +210,13 @@ ggplot(mice_parasites, aes(x = parasite_count)) +
 Most of the data sits on the left (0–3), and the long thin tail stretches out to the right (up to 27) — and since skew is named after the tail direction, this is positive (right) skew
 `r unhide()`
 
+If data is skewed, this can also tell us about the relationship between the mean and median. If the mean is above the median, this is a good indication that the data is right skewed, and if the mean is below the median, this is a good indication that the data is left skewed.
 
-### Summary / Description Statistics
+### Summary Statistics of the Wood Mouse Data
 
 As described above, we learnt about the Mean, Standard Deviation, Median, Mode, Range, and Skewness. Let's calculate some of these for the `parasite_count` variable.
 
-We learnt about the `group_by()` and `summarise()` functions to look at the mean. 
+We learnt about the `group_by()` and `summarise()` functions to look at the mean. Here, let's look at the mean parasite count by sex. So we've got to group the data by sex, and then summarise the mean parasite count for each sex.
 
 ```{r}
 mice_parasites_sex_summary <- mice_parasites %>%
@@ -224,16 +230,20 @@ mice_parasites_sex_summary
 ```
 
 
-We are able to interpret a little bit from this; the mean parasite count for male and female mice. Like how parasite count differs by sex. Please answer the following questions: 
+
+Now we have looked at how parasite counts differ by sex. Please answer the question below.
 
 **1. What's this saying about how parasite counts differs by sex** 
 
 `r mcq(c(answer = "Male mice have a higher mean parasite count than female mice", "Female mice have a higher mean parasite count than male mice", "Male and female mice have exactly the same mean parasite count", "There's no way to tell from this table"))`
 
 
-If we look at sex, we can tell it's higher in a certain sex. We can also look at the mean parasite count by weight. This is a little different though. Going back to knowing our 4 different variables in our different categories. How we can list the 4 different variables we have? 
 
-To help you out, lets run this code again: 
+We now know that parasite counts differ by sex,  we don't yet know if this is statistically significant though (we will begin looking at this in the next chapter), but for now, let's use what we've learnt today about data types to understand what variables we have in this dataset. 
+
+Going back to [the Terminology section](#getting-the-terminology-right), we know there are different variables / data types in 2 different categories. What data types do we have in this dataset?
+
+To help you out, let's run `colnames()` again, the code which will show us our variable names: 
 ```{r}
 colnames(mice_parasites) # variable names, Base R
 ```
@@ -256,25 +266,26 @@ Categorise each of these variables:
 **"parasite_count"**
 `r mcq(c("continuous", answer = "discrete", "ordinal", "nominal"))`
 
-Now that we know what type of data we have, we can use the appropriate summary statistics to describe the weight. 
+Now that we know what type of data we have, we can see if we can use the appropriate summary statistics to describe the data, including the weight.
 
-If you completed the questions above, you would see that `weight_g` is a continuous variable. Unlike `sex`, which is categorical, we can't summarise weight into two simple categories like males and females — instead we can first use the mean to describe it.
+If you completed the questions above, you will have seen that `weight_g` is a continuous variable. Unlike `sex`, which is categorical, weight cannot be neatly summarised into a small number of groups, and we can't simply see how parasite count differs by weight. However, as a first step, we can instead use the mean to describe the distribution of `weight_g`, and explore whether this differs by sex.
 
 ```{r}
 mice_parasites_weight_summary <- mice_parasites %>%
-  summarise(
-    mean_weight = mean(weight_g),
-    mean_parasite_count = mean(parasite_count),
-  )
+group_by(sex) %>%
+    summarise(
+    mean_weight = mean(weight_g))
 
 mice_parasites_weight_summary
 ```
 
-Although this shows something, it's hard to tell what trend there really is just from these numbers. One thing we can do instead is **visualise** the data.
+While this does not tell us anything about the effect of parasites on weight, we can see that the mean weight of male mice is slightly higher than that of female mice. However, the difference is small and we would need a statistical test to determine if this difference is significant.
+      
+It is also worth noting the relationship between the **mean** and **median** as a measure of symmetry: when the two are close together, this suggests the data are roughly **symmetric**. When they are further apart, this suggests the data are **skewed**.
 
 
 
-We can first use the histogram we have already learnt about, like before, let's keep our bin width as 1 for finer distribution.
+To explore our weight variable further, we can use what we learnt about histograms to visualise the distribution of weight. As before, let's keep the bin width at 1 for a finer view of the distribution.
 ```{r}
 # Distribution of weight on its own
 ggplot(mice_parasites, aes(x = weight_g)) +
@@ -289,21 +300,22 @@ ggplot(mice_parasites, aes(x = weight_g)) +
 
 
 `r hide("Show explanation")`
-The bulk of the data sits in a tight cluster around 19–24 g, with the tallest bars there. The longer, thinner tail pointing toward lower values makes it left-skewed.
+The bulk of the data sits in a tight cluster around 19 – 24 g, with the tallest bars there. The longer, thinner tail pointing toward lower values makes it left-skewed.
 `r unhide()`
 
-So, from this plot - although we cannot infer anything about parasite count, we can tell that more mice are in the 20-30g range than in the 30-40g range, or below 20g, this makes sense by looking at our `mice_parasites_weight_summary` table above.
+So, from this plot - although we cannot infer anything about parasite count, we can tell that more mice are in the 20-30g range than below 20g, this makes sense by looking at our `mice_parasites_weight_summary` table above.
 
 
-We still have a bit more to look at, we have looked at the mean in multiple different corners, but we haven't looked at the other factors mentioned. We understand what the mean shows, now lets look at what everything else shows.
-
-Like earlier, and in the main workbook, we can use the `summarise()` function to also calculate the median, mode, range and standard deviation, and range of these variables.
 
 
-We learnt in the main workbook, that the standard deviation can simply be calculated using the `sd()` function, and median can be calculated using the `median()` function. Both in `summarise()`.
+We still have a bit more to look at. We have covered the mean of multiple variables, but have not yet explored the remaining summary statistics.
+
+Like earlier, and in the [main workbook](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#summary-statistics), we can use the `summarise()` function to also calculate the median, mode, range and standard deviation of these variables.
+
+We learnt in the [main workbook](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#summary-statistics), that the mean can be calculated using the `mean()` function, the standard deviation can simply be calculated using the `sd()` function, and median can be calculated using the `median()` function. All work within `summarise()`.
 
 ```{r}
-mice_parasites_weight_summary <- mice_parasites %>%
+mice_parasites_summary_all <- mice_parasites %>%
   summarise(
     median_weight = median(weight_g),
     mean_weight = mean(weight_g),
@@ -313,10 +325,10 @@ mice_parasites_weight_summary <- mice_parasites %>%
     sd_parasite_count = sd(parasite_count),
   )
 
-mice_parasites_weight_summary
+mice_parasites_summary_all
 ```
 
-Remembering what the definition of each of these terms are, what can we tell about the data? 
+Recalling the definitions of these terms, what can we tell about the data? 
 
 
 **1. Comparing the mean (21.5) and median (21.0) for `weight_g`, what can we say about its distribution?**
@@ -335,38 +347,25 @@ Remembering what the definition of each of these terms are, what can we tell abo
 
 `r mcq(c("The data is very tightly clustered around the mean", answer = "The data is highly variable, with some values far from the mean", "There must be a calculation error", "Standard deviation cannot be compared to the mean"))`
 
-**5. Based on the summary statistics, which variable would the mean and SD alone summarise more reliably?**
-
-`r mcq(c(answer = "weight_g, since its mean and median are close and its SD is small relative to the mean", "parasite_count, since it has a higher mean", "Both equally", "Neither, since summary statistics are never reliable"))`
-
-**6. What would be a good next step before drawing firm conclusions about `parasite_count` from summary statistics alone?**
+**5. What would be a good next step before drawing firm conclusions about `parasite_count` from summary statistics alone?**
 
 `r mcq(c("Nothing, the mean and SD tell us everything we need", answer = "Visualise the distribution, e.g. with a histogram, to check for skew and outliers", "Delete the outliers from the dataset", "Recalculate the mean using only male mice"))`
 
-Hopefully now we've got a better understanding of the **Mean**, **Median** and **Standard Deviation**. But we still have some remaining; **Mode**, **Range** and **Skewness**, as these aren't commonly used within the `summarise` function. 
+Hopefully now we've got a better understanding of the **mean**, **median** and **standard deviation**. But we still have some remaining; **mode**, **range** and **skewness**. 
 
-
-
-
-
-
-
-Let's start with the **Range**. There are a couple of ways to calclulate this. One of them is what we learnt in the [main workbook](), as the **range** is the smallest number subtracted from the largest number, we could just do that in code.
+Let's start with the range. There are a couple of ways to calculate this. One of them is what we learnt in the [main workbook](https://ellenbell.github.io/7056A/workshop-2---explorartory-data-analysis.html#summary-statistics), as the range is the smallest number subtracted from the largest number, we could just do that in code.
 
 ```{r}
 max(mice_parasites$parasite_count)-min(mice_parasites$parasite_count)
 ```
 
-However, there is also a function, we can use. This is the `diff()` function from base R, which calculates the difference between the maximum and minimum values of a variable.
+However, there is also a function we can use. This is the `diff()` function from base R, which calculates the difference between the maximum and minimum values of a variable.
 
 ```{r}
 diff(range(mice_parasites$parasite_count))
 ```
 
-
-
-
-Next lets look at the **mode**. As we learnt in the workbook, one of the best ways to do this is to write a small function. 
+Next let's look at the **mode**. As we learnt in the workbook, one of the best ways to do this is to write a small function. 
 
 ```{r}
 get_mode <- function(x) {
@@ -377,17 +376,17 @@ get_mode <- function(x) {
 get_mode(mice_parasites$parasite_count)
 ```
 
-This outputs 0, as the majority of vlaues are 0 - most mice sampled don't have the parasite. 
+This outputs 0, as the majority of values are 0 - we can infer that most mice sampled don't have the parasite. 
 
 
-However, if you want to load up another package to do this another way, you can, don't forget to `install_packages("")` in the console before you load them up! 
+
+However, to use a pre-made function instead, at the beginning of your script, we loaded up a package called `DescTools`, which contains a function called `Mode()`. Use the following code to calculate the mode of the `parasite_count` variable.
 
 ```{r}
-library(DescTools)
 Mode(mice_parasites$parasite_count)
 ```
 
-Here there is not only the '0' output, showing the most common number, there is also '30' output, which is the number of times this value occurs in the dataset.
+Here there is not only the '0' output, showing the most common number, there is also '30' output, which is the number of times this value occurs in the dataset. The 0 value makes up half of the data, that's quite a lot! 
 
 
 ### Putting it all together
@@ -411,9 +410,9 @@ mice_parasites_full_summary <- mice_parasites %>%
   )
 ```
 
-We can also load this up into a nice table, but you will need to install the `kableExtra` package first.
+We can display this as a formatted table using the `kableExtra` package.
+
 ```{r}
-library(kableExtra)
 kable(mice_parasites_full_summary, digits = 2) %>%
   kable_styling()
 ```
@@ -421,7 +420,7 @@ kable(mice_parasites_full_summary, digits = 2) %>%
 
 ## The End 
 
-If you made it to here, you should be pretty certain on how everything summary statistics works. We will soon go onto how the data actually moves together, but as an 'for luck' extra, have a quick visualisation of how weight and parasite moves together. 
+If you made it to here, you should be pretty certain on how summary statistics work. We will soon go on to how the data actually moves together, as a bonus, take a quick look at how weight and parasite count vary together. 
             
 ```{r}
 # Relationship between weight and parasite count 

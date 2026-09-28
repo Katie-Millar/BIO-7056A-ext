@@ -6,7 +6,6 @@ book:
   chapters:
     - index.qmd
     - 02-ext.qmd
-    - 03-ext.qmd
     - appendix.qmd
 
 format:
