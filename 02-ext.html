@@ -380,7 +380,7 @@ The measure of asymmetry in the distribution of data. A positive skew indicates 
   ..   weight_g = col_double(),
   ..   parasite_count = col_double()
   .. )
- - attr(*, "problems")=&lt;pointer: 0x74ca80920&gt; </code></pre>
+ - attr(*, "problems")=&lt;pointer: 0xb20441ff0&gt; </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -499,8 +499,8 @@ $ parasite_count &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 8, 1, 0, 0, 5, 0, 0, 1, 0, 0, 
 </div>
 <p>You can see that choosing a binwidth of 1 produces a large number of bars, which gives a more detailed view of the distribution. If we were to increase the binwidth, we would see fewer bars, and a smoother overview of the distribution.</p>
 <p><strong>What can we tell about where the data is concentrated? Is it skewed? If so, in which direction?</strong></p>
-<div id="radio_EWOIGKIZVH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EWOIGKIZVH" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_EWOIGKIZVH" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_EWOIGKIZVH" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_EWOIGKIZVH" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_ICGPKGPGFL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ICGPKGPGFL" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_ICGPKGPGFL" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_ICGPKGPGFL" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_ICGPKGPGFL" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -533,7 +533,7 @@ Show explanation
 </div>
 <p>Now we have looked at how parasite counts differ by sex. Please answer the question below.</p>
 <p><strong>1. What’s this saying about how parasite counts differs by sex</strong></p>
-<p><select class="webex-select"><option value="blank"></option><option value="answer">Male mice have a higher mean parasite count than female mice</option><option value="">Female mice have a higher mean parasite count than male mice</option><option value="">Male and female mice have exactly the same mean parasite count</option><option value="">There’s no way to tell from this table</option></select></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Male mice have a higher mean parasite count than female mice</option><option value="answer">Female mice have a higher mean parasite count than male mice</option><option value="">Male and female mice have exactly the same mean parasite count</option><option value="">There’s no way to tell from this table</option></select></p>
 <p>We now know that parasite counts differ by sex, we don’t yet know if this is statistically significant though (we will begin looking at this in the next chapter), but for now, let’s use what we’ve learnt today about data types to understand what variables we have in this dataset.</p>
 <p>Going back to <a href="#getting-the-terminology-right">the Terminology section</a>, we know there are different variables / data types in 2 different categories. What data types do we have in this dataset?</p>
 <p>To help you out, let’s run <code>colnames()</code> again, the code which will show us our variable names:</p>
@@ -583,8 +583,8 @@ Show explanation
 </div>
 </div>
 <p><strong>In which direction is the data skewed?</strong></p>
-<div id="radio_MZJMTKVZMZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MZJMTKVZMZ" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_MZJMTKVZMZ" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_MZJMTKVZMZ" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_MZJMTKVZMZ" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_DRLWCGJFYL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DRLWCGJFYL" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_DRLWCGJFYL" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_DRLWCGJFYL" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_DRLWCGJFYL" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -738,8 +738,8 @@ attr(,"freq")
 </div>
 </div>
 <p><strong>What can we tell from this plot?</strong></p>
-<div id="radio_DLDXFNEMIL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DLDXFNEMIL" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_DLDXFNEMIL" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_DLDXFNEMIL" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
+<div id="radio_FXVWDTTACC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FXVWDTTACC" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_FXVWDTTACC" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_FXVWDTTACC" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
 </div>
 
 
@@ -1735,7 +1735,7 @@ window.onload = function() {
 <span id="cb43-247"><a href="#cb43-247" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-248"><a href="#cb43-248" aria-hidden="true" tabindex="-1"></a>**1. What's this saying about how parasite counts differs by sex** </span>
 <span id="cb43-249"><a href="#cb43-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-250"><a href="#cb43-250" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c(answer = "Male mice have a higher mean parasite count than female mice", "Female mice have a higher mean parasite count than male mice", "Male and female mice have exactly the same mean parasite count", "There's no way to tell from this table"))`</span></span>
+<span id="cb43-250"><a href="#cb43-250" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Male mice have a higher mean parasite count than female mice", answer = "Female mice have a higher mean parasite count than male mice", "Male and female mice have exactly the same mean parasite count", "There's no way to tell from this table"))`</span></span>
 <span id="cb43-251"><a href="#cb43-251" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-252"><a href="#cb43-252" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-253"><a href="#cb43-253" aria-hidden="true" tabindex="-1"></a></span>
