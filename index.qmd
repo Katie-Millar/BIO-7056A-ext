@@ -1,5 +1,5 @@
 ---
-title: "Statistics for Biologists - Extension"
+title: "Introducing this Workbook"
 author: "Katie Millar"
 date: "`r Sys.Date()`"
 format:
@@ -19,5 +19,10 @@ jupyter: false
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-# Statistics for Biologists - Extension Coursebook
-This coursebook is aimed to test your knowledge. 
+# What is this all about? 
+Following going through the tasks and work in the main textbook, this extension coursebook is designed to help you consolidate your knowledge and understanding of the key concepts and skills you have learnt. It will sometimes build on the topics, and introduce new terms. 
+
+
+
+# Contacting 
+I am always happy to help you with any questions or issues you may have. Please email me at **katie.millar@uea.ac.uk**. 
