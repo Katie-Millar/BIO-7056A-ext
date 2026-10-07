@@ -17,7 +17,6 @@ library(webexercises)
 library(tidyverse)
 library(car)
 library(janitor)
-mice_parasites <- read.csv("data/mouse_parasite_counts.csv")
 ```
 
 Welcome to today's workshop extension! In this session, like last time, we will be focusing on summarising and testing our knowledge from what we learnt in the main workbook. We will be covering **Sampling Distributions** and **Testing for Differences**. We will also be revisiting some of the key terms and concepts from the main workbook, and applying them to a different dataset.
@@ -164,7 +163,7 @@ The team also compares mean fly counts on **edge trees** vs **interior trees**.
 
 `r mcq(c("One-sample t-test", answer = "Two-sample t-test", "A confidence interval alone", "Calculating variance only"))`
 
-**7. A student claims p = 0.04y for the edge-vs-interior test "proves edge trees definitely have more flies, and the effect must be biologically important." Is there any flaw with this statement?**
+**7. A student claims p = 0.04 for the edge-vs-interior test "proves edge trees definitely have more flies, and the effect must be biologically important." Is there any flaw with this statement?**
 
 `r longmcq(c("No flaw - p < 0.05 definitely proves both statistical and biological significance.",answer = "Yes - statistical significance (p < 0.05) means the difference is unlikely to be due to sampling error alone, but it does not prove anything with certainty, nor does it tell us whether the effect is biologically meaningful.", "Yes - p = 0.03 actually indicates no significant difference.", "Yes - only because the sample sizes for edge and interior trees were unequal."))`
 
@@ -178,12 +177,12 @@ We learnt in the main workbook about parametric and non-parametric tests, and ho
 
 `r longmcq(c("A parametric test makes no assumption about the distribution of the data; a non-parametric test assumes the data follow a normal distribution.", "Both parametric and non-parametric tests assume the data follow a normal distribution.", "Neither parametric nor non-parametric tests make any assumptions about the distribution of the data.", answer = "A parametric test assumes the data follow a normal distribution; a non-parametric test makes no assumption about the distribution of the data."))`
 
-So to confirm, **parametric tests** (like the t-test) assume that the underlying data are normally distributed. We have previously checked the visualisation of the data using **historgrams** these show the skew of the data. If the data are skewed, that assumption may be violated, which can make the test's results unreliable. However, this doesn't automatically mean the test result is wrong — it depends on how much the skew is actually affecting the outcome, and we learnt that we can check in two ways:
+To summarise, **parametric tests** (like the t-test) assume that the underlying data are normally distributed. We have previously checked the visualisation of the data using **histograms** these show the skew of the data. If the data are skewed, that assumption may be violated, which can make the test's results unreliable. However, this does not automatically mean the test result is wrong — it depends on how much the skew is actually affecting the outcome, and we learnt that we can check in two ways:
 
  **(1) Remove the influential point(s):** Re-run the test excluding the datapoint(s) responsible for the skew, and compare the results. If the conclusion changes, the skew is likely having a meaningful effect on your result.        
   **(2) Compare test types**: Run both a parametric test (e.g. a t-test) and its *non-parametric equivalent* on the same data. If both tests lead to the same conclusion, you can be more confident that the skew is **not** distorting your result.
 
-I have mentioned above that you can use non parametric equivalents when your data don't meet the assumptions of parametric tests. The table below shows the most commonnly known pairings:
+As noted above, non-parametric equivalents can be used when your data do not meet the assumptions of parametric tests: 
 
 | Parametric test | Non-parametric equivalent |
 |---|---|
@@ -191,27 +190,22 @@ I have mentioned above that you can use non parametric equivalents when your dat
 | Two-sample t-test (unpaired) | Mann-Whitney U test |
 | Two-sample t-test (paired) | Wilcoxon signed-rank test |
 | Pearson correlation | Spearman correlation |
-| One-way analysis of variance | Kruskal-Wallis test |
+| One-way analysis of variance | Kruskal-Wallis test |                       
+                       
+: Common parametric tests and their non-parametric equivalents,  (Field, A. (2024)) {.striped .hover}                     
 
-: Common parametric tests and their non-parametric equivalents,  (Field, A. (2024)) {.striped .hover}
-
-                    
+                                      
                                                       
                 
-### Putting this into action                                                                    
-                                
-                                                                                                          
-First, **load your packages and read in the data**. As in the previous workshop, we will use the `tidyverse` package. The dataset `medfly_orchard_data.csv` can be found in the data folder of the `workshop_03_sampling_distributions_ext` space on Posit, but it will also be in blackboard if you would like to practise uploading data to R. Read the data in and name the object `medfly_orchard`. As before, keep your script neat by loading all packages at the top. If you need reminder of how to read in a CSV file, check the previous chapter for a refresher. 
-                                                                                                        
-                                    
-                      
+### Putting this into action: what test can we use on our data?
+
+First, load your packages and read in the data. As in the previous workshop, we will use the `tidyverse` package. The dataset `medfly_orchard_data.csv` can be found in the data folder of the `workshop_03_sampling_distributions_ext` space on Posit, and is also available on Blackboard if you would like to practise uploading data to R. Read the data in and name the object `medfly_orchard`, keeping all packages loaded at the top of your script. If you need a reminder of how to read in a CSV file, refer back to the previous chapter.
 
 ```{r, echo=FALSE, results='hide'}
 medfly_orchard <- read.csv("data/medfly_orchard_data.csv")
 ```
 
-
-We have learned about using histograms to see the distribution of the data, learning about its shape, centre and spread. We want to know if we can use a parametric or a non parametric test on our Medfly data, so lets start with some histograms. There is a lot in our data that we can see, lets first have a quick run of some of the terms we learnt last week. 
+Now that the data are loaded, we want to determine whether a **parametric** or **non-parametric** test is appropriate. To do this, we first need to assess the distribution of the data. We will start with histograms for a visual impression, before moving on to more formal checks.
 
 
 `r hide("Click to show examples of checking out the data")`
@@ -236,8 +230,8 @@ tabyl(medfly_orchard, tree_type) # frequency / percentage, janitor
 ```
        
 `r unhide()`
-
-Let's now make some histograms of the `fly_count` variable in the `medfly_orchard` dataset. We will start by looking at the overall distribution of fly counts across all 40 sampled trees.
+                                     
+Let's now make some histograms of the `fly_count` variable in the `medfly_orchard` dataset, starting with the overall distribution across all 40 sampled trees.
 
 ```{r}
 medfly_orchard_histogram_fly_count <- medfly_orchard %>%  
@@ -248,10 +242,11 @@ medfly_orchard_histogram_fly_count <- medfly_orchard %>%
 medfly_orchard_histogram_fly_count
 ```
 
+Looking at this histogram, the data do not follow a neat bell-shaped curve. Instead, there appear to be **two clusters** — a group of trees with relatively low fly counts (around 1–5 flies), and a larger group with higher fly counts (around 13–17 flies), with a noticeable dip in between. This raises two questions: are the data normally distributed, and why do two groups appear to exist? We can begin to explore this by splitting the data by **tree type** (edge vs interior) and **sex** (female vs male).
 
+**Based on this histogram, what would you say about the distribution of fly counts?**
 
-
-Looking at this histogram, we can see that the data does not follow a neat bell-shaped curve. Instead, there appear to be **two clusters**; a group of trees with relatively low fly counts (around 1–5 flies), and a larger group with higher fly counts (around 13–17 flies), with a noticeable dip in between. This suggests that the data may not be normally distributed, which is an important consideration when deciding whether to use a parametric or non-parametric test. However, it also asks more about what's going on with the data and why there are two groups. We can split the data by tree type (edge vs interior) and sex (male vs female) to see if that explains the two clusters. Let's generate those 4 histograms. 
+`r longmcq(c(answer = "The data appear bimodal and may not be normally distributed, suggesting further checks are needed before choosing a statistical test.", "The data are clearly normally distributed and a parametric test can be used straight away.", "The data are strongly right-skewed, so a non-parametric test must be used.", "The histogram tells us nothing useful about the distribution."))`
 
 ```{r}
 medfly_orchard_histogram_tree_type <- medfly_orchard %>%
@@ -260,54 +255,82 @@ medfly_orchard_histogram_tree_type <- medfly_orchard %>%
   facet_wrap(~ tree_type) +
   labs(x = "Fly count per tree", y = "Number of trees") +
   theme(legend.position = "none")
-medfly_orchard_histogram_tree_type
 
+medfly_orchard_histogram_tree_type
 ```
 
-Edge trees tend to have higher fly counts (peaking around 14–22 flies), while interior trees are more spread out with some very low counts. This likely explains the two clusters we saw in the overall histogram.
+Edge trees tend to have higher fly counts (peaking around 14–22 flies), while interior trees show a more spread-out distribution with some very low counts. This likely explains the two clusters seen in the overall histogram.
+
+**Looking at the tree type histograms, which group appears closest to a normal distribution?**
+
+`r mcq(c(answer = "Interior trees", "Edge trees", "Both groups look equally normal"))`
+
 ```{r}
 medfly_orchard_histogram_sex <- medfly_orchard %>%
   ggplot(aes(x = fly_count, fill = sex)) +
   geom_histogram(binwidth = 2, colour = "black") +
   facet_wrap(~ sex) +
-  labs(x = "Fly count per tree", y = "Number of trees")+
+  labs(x = "Fly count per tree", y = "Number of trees") +
   theme(legend.position = "none")
-
 
 medfly_orchard_histogram_sex
 ```
 
- Female trees show a clearer peak around 15–17 flies, while male trees are more spread out with no obvious pattern — though this may partly reflect the smaller male sample size (n = 15) rather than a true biological difference.
+Female trees show a clearer peak around 15–17 flies, while male trees are more spread out with no obvious pattern — though this may partly reflect the smaller male sample size (n = 15) rather than a true biological difference. Neither group shows a perfectly normal distribution, which is why we will now move on to more formal checks.
 
-So we've just generated a bunch of histograms to look at the distribution of fly counts in our Medfly dataset. We can see that the data may not be normally distributed, and that there are differences between tree types and sexes. Histograms are a good first step in checking for normality, but we can also use a **Q-Q plot**. So we've just generated a bunch of histograms to look at the distribution of fly counts in our Medfly dataset. We can see that the data may not be normally distributed, and that there are differences between tree types and sexes. Histograms are a good first step in checking for normality, but with small sample sizes they can be hard to interpret — a distribution can look irregular simply due to chance rather than reflecting a true departure from normality.     
+**Why might the male histogram look more irregular than the female histogram?**
 
-A more reliable visual tool is a Q-Q plot (quantile-quantile plot). This sounds more complicated than it is — all it does is plot your actual data values against what you would expect to see if the data were perfectly normal. If your data are normally distributed, the points will fall roughly along a straight diagonal line. If the points curve away from the line, this suggests the data are not normally distributed.
+`r longmcq(c(answer = "The male group has a smaller sample size (n = 15), so each bar represents fewer trees and the distribution looks less smooth.", "Male flies are naturally more variable than female flies.", "The binwidth is too large for the male group.", "The male data contain errors and should be removed."))`
 
+Having generated histograms for each group, we can see that the data may not be normally distributed. However, histograms alone are not sufficient to confirm normality, particularly with small sample sizes.                  
+
+A more reliable visual tool is a **Q-Q plot (quantile-quantile plot)**. This sounds more complicated than it is — all it does is plot your actual data values against what you would expect to see if the data were perfectly normal. If your data are normally distributed, the points will fall roughly along a straight diagonal line. If the points curve away from the line, this suggests the data are not normally distributed.
+
+**Before we look at the Q-Q plots for our data, what does it mean if the points on a Q-Q plot fall close to the diagonal line?**
+
+`r mcq(c(answer = "The data are approximately normally distributed", "The data are strongly skewed", "The sample size is too small to draw conclusions", "The data contain outliers"))`
 
 ```{r}
-ggplot(medfly_orchard, aes(sample = fly_count)) +
+ggplot(medfly_orchard, aes(sample = fly_count, colour = tree_type)) +
   stat_qq() +
   stat_qq_line() +
   facet_wrap(~ tree_type) +
   labs(x = "Theoretical quantiles",
-       y = "Sample quantiles")
+       y = "Sample quantiles") +
+  theme(legend.position = "none")
 
-ggplot(medfly_orchard, aes(sample = fly_count)) +
+```
+
+**Looking at the Q-Q plot for tree type, which group shows more deviation from the diagonal line?**
+
+`r mcq(c(answer = "Edge trees", "Interior trees", "Both groups deviate equally", "Neither group deviates from the line"))`
+```{r}
+ggplot(medfly_orchard, aes(sample = fly_count, colour = sex)) +
   stat_qq() +
   stat_qq_line() +
   facet_wrap(~ sex) +
   labs(x = "Theoretical quantiles",
-       y = "Sample quantiles")
-
+       y = "Sample quantiles") +
+  theme(legend.position = "none")
 ```
 
-Neither group shows a perfectly straight line, but none show dramatic departures from normality either. However, visual inspection alone is not enough — we should confirm this with a formal test. We will now use the Shapiro-Wilk test to formally assess whether each group is normally distributed, which will help us decide whether a parametric t-test is appropriate.
 
 
-The Shapiro-Wilk test formally tests whether a dataset is normally distributed. It produces a W statistic and a p-value:
-If p > 0.05 — we do not have enough evidence to reject normality; we can proceed with a parametric test
-If p < 0.05 — the data significantly depart from normality; we should consider a non-parametric test
+**Overall, what do the Q-Q plots suggest about the distribution of fly counts across 
+all four groups?**
 
+`r longmcq(c(answer = "None of the groups show dramatic departures from normality, but visual inspection alone is not sufficient to confirm this; a formal test is needed.", "All four groups are clearly normally distributed and no further checks are needed.", "All four groups show strong departures from normality and a non-parametric test should be used immediately.", "Q-Q plots cannot be used to assess normality."))`
+
+Neither group shows a perfectly straight line, but none show dramatic departures from normality either. However, visual inspection alone is not enough — we should confirm this with a formal test. We will now use the **Shapiro-Wilk test** to formally assess whether each group is normally distributed, which will help us decide whether a parametric t-test is appropriate.
+
+
+The **Shapiro-Wilk test** formally tests whether a dataset is normally distributed. 
+It produces a **W statistic** and a **p-value**:
+
+- If **p > 0.05** — we do not have enough evidence to reject normality; we can proceed with a **parametric test**
+- If **p < 0.05** — the data significantly depart from normality; we should consider a **non-parametric test**
+
+Let's try this out on our medfly dataset, checking normality for each of the four groups (edge trees, interior trees, female trees, male trees).
 ```{r}
 medfly_orchard %>%
   group_by(tree_type) %>%
@@ -324,30 +347,61 @@ medfly_orchard %>%
   )
 ```
 
-All four groups pass the Shapiro-Wilk test (p > 0.05), suggesting that the data are approximately normally distributed within each group. This means the first point of a using a parametric test is satisfied. However, we also need to check the second assumption of a t-test: that the variances of the two groups are approximately equal. We can do this using Levene's test.
+All four groups pass the Shapiro-Wilk test (p > 0.05), suggesting that the data are approximately normally distributed within each group — the first assumption of a parametric test is satisfied. However, we also need to check the second assumption: that the **variances** of the two groups are approximately equal. We can do this using **Levene's test**:
+
+- If **p > 0.05**: variances are approximately equal → proceed with a **standard t-test**
+- If **p < 0.05**: variances are significantly different → use **Welch's t-test** instead
 
 ```{r}
 leveneTest(fly_count ~ tree_type, data = medfly_orchard)
 leveneTest(fly_count ~ sex, data = medfly_orchard)
 ```
 
-Levene's test suggests that the variances between groups are not significantly different for either tree type (p = 0.347) or sex (p = 0.969). This means we can proceed with a standard t-test rather than Welch's t-test.
+**What does Levene's test assess?**
+
+`r mcq(c(answer = "Whether the variances of two groups are approximately equal", "Whether the data are normally distributed", "Whether the sample size is large enough", "Whether the means of two groups are significantly different"))`
+
+Levene's test suggests that the variances between groups are not significantly different for either tree type (p = 0.347) or sex (p = 0.969), meaning we can proceed with a standard t-test rather than Welch's t-test.
+
 Combining this with our Shapiro-Wilk results, both assumptions of the t-test are met:
-✓ Normality — Shapiro-Wilk p > 0.05 for all groups
-✓ Equal variances — Levene's test p > 0.05 for both comparisons
-We can therefore confidently use a standard two-sample t-test to compare fly counts between edge and interior trees, and between female and male trees.
+
+ ✓ **Normality**: Shapiro-Wilk p > 0.05 for all groups                               
+ ✓ **Equal variances**: Levene's test p > 0.05 for both comparisons
+
+We can therefore confidently use a **standard two-sample t-test** to compare fly counts between edge and interior trees, and between female and male trees.
 
 
+Now that we have confirmed both assumptions are met, we can run the **standard 
+two-sample t-test** to compare fly counts between groups.
 
-Now that we have confirmed both assumptions are met, we can run the two-sample t-test to compare fly counts between groups.
 ```{r}
 t.test(fly_count ~ tree_type, data = medfly_orchard, var.equal = TRUE)
 t.test(fly_count ~ sex, data = medfly_orchard, var.equal = TRUE)
 ```
 
-Edge trees had a significantly higher mean fly count than interior trees (edge: 18.33 flies/tree, interior: 12.89 flies/tree; t = 2.566, p = 0.014). This result is statistically significant (p < 0.05), suggesting that tree position within the orchard is associated with fly count.
+**Tree type:**
+Edge trees had a significantly higher mean fly count than interior trees 
+(edge: 18.33 flies/tree, interior: 12.89 flies/tree; t = 2.566, p = 0.014). 
+This suggests that tree position within the orchard is associated with fly count.
 
-There was no statistically significant difference in fly counts between female and male trees (female: 15.48 flies/tree, male: 12.93 flies/tree; t = 1.193, p = 0.240). We therefore do not have enough evidence to conclude that sex is associated with fly count in this sample.
+**Sex:**
+There was no statistically significant difference in fly counts between female and 
+male trees (female: 15.48 flies/tree, male: 12.93 flies/tree; t = 1.193, p = 0.240). 
+We therefore do not have enough evidence to conclude that sex is associated with fly 
+count in this sample.
 
-## The End 
-Today's workbook was a step up from last weeks, and we covered a lot of ground. We recapped the key terms from the main workbook, and applied them to a case study on Medflies. We also revisited parametric and non-parametric tests, and applied them to the wood mice parasite data.
+::: {.callout-note}
+Remember, a statistically significant result (p < 0.05) tells us the difference is 
+unlikely to be due to sampling error alone. It does **not** tell us the effect is 
+large or biologically important, nor does it prove the result with certainty.
+:::
+
+**Based on the t-test results, which statement is correct?**
+
+`r longmcq(c(answer = "Tree type is significantly associated with fly count (p = 0.014), but there is no significant association with sex (p = 0.240).", "Both tree type and sex are significantly associated with fly count.", "Neither tree type nor sex are significantly associated with fly count.", "Sex is significantly associated with fly count but tree type is not."))`
+
+## The End
+
+Well done for making it to the end of this workshop! Today covered a lot of ground, we recapped key statistical terms, applied them to a Medfly case study, and worked through the full process of deciding whether a parametric or non-parametric test is appropriate. Along the way we used histograms, Q-Q plots, the Shapiro-Wilk test, and Levene's test; all building towards a justified, evidence-based choice of statistical test.
+
+In the next workshop, we will apply these skills to a new dataset and continue building on what we have learnt here.
