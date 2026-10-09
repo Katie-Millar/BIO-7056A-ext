@@ -235,7 +235,7 @@ Now we have looked at how parasite counts differ by sex. Please answer the quest
 
 **1. What's this saying about how parasite counts differs by sex** 
 
-`r mcq(c(answer = "Male mice have a higher mean parasite count than female mice", "Female mice have a higher mean parasite count than male mice", "Male and female mice have exactly the same mean parasite count", "There's no way to tell from this table"))`
+`r mcq(c("Male mice have a higher mean parasite count than female mice", answer =  "Female mice have a higher mean parasite count than male mice", "Male and female mice have exactly the same mean parasite count", "There's no way to tell from this table"))`
 
 
 
