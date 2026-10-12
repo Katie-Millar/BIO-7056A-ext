@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-12">
+
+<title>Workshop 4 - Introduction to Design and Analysis of Experiments</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="04-ANOVA_files/libs/clipboard/clipboard.min.js"></script>
+<script src="04-ANOVA_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="04-ANOVA_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="04-ANOVA_files/libs/quarto-html/popper.min.js"></script>
+<script src="04-ANOVA_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="04-ANOVA_files/libs/quarto-html/anchor.min.js"></script>
+<link href="04-ANOVA_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="04-ANOVA_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="04-ANOVA_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="04-ANOVA_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="04-ANOVA_files/libs/bootstrap/bootstrap-19216fa8bb71272e13fc45993650fab3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#the-route-through-todays-workshop" id="toc-the-route-through-todays-workshop" class="nav-link active" data-scroll-target="#the-route-through-todays-workshop"><span class="header-section-number">1</span> The route through today’s workshop</a></li>
+  <li><a href="#randomisation-and-replication" id="toc-randomisation-and-replication" class="nav-link" data-scroll-target="#randomisation-and-replication"><span class="header-section-number">2</span> Randomisation and Replication</a></li>
+  <li><a href="#understanding-experimental-design-the-case-study-of-vegatation." id="toc-understanding-experimental-design-the-case-study-of-vegatation." class="nav-link" data-scroll-target="#understanding-experimental-design-the-case-study-of-vegatation."><span class="header-section-number">3</span> Understanding Experimental Design; the case study of vegatation.</a>
+  <ul class="collapse">
+  <li><a href="#completely-randomised-design-crd" id="toc-completely-randomised-design-crd" class="nav-link" data-scroll-target="#completely-randomised-design-crd"><span class="header-section-number">3.1</span> Completely Randomised Design (CRD)</a></li>
+  <li><a href="#blocked-design" id="toc-blocked-design" class="nav-link" data-scroll-target="#blocked-design"><span class="header-section-number">3.2</span> Blocked Design</a></li>
+  <li><a href="#the-latin-square-design-lsd" id="toc-the-latin-square-design-lsd" class="nav-link" data-scroll-target="#the-latin-square-design-lsd"><span class="header-section-number">3.3</span> The Latin Square Design (LSD)</a></li>
+  <li><a href="#split-plot-design" id="toc-split-plot-design" class="nav-link" data-scroll-target="#split-plot-design"><span class="header-section-number">3.4</span> Split Plot Design</a></li>
+  <li><a href="#repeated-measures-design" id="toc-repeated-measures-design" class="nav-link" data-scroll-target="#repeated-measures-design"><span class="header-section-number">3.5</span> Repeated Measures Design</a></li>
+  </ul></li>
+  <li><a href="#analysis-of-variance-anova" id="toc-analysis-of-variance-anova" class="nav-link" data-scroll-target="#analysis-of-variance-anova"><span class="header-section-number">4</span> Analysis of Variance (ANOVA)</a>
+  <ul class="collapse">
+  <li><a href="#what-is-anova" id="toc-what-is-anova" class="nav-link" data-scroll-target="#what-is-anova"><span class="header-section-number">4.1</span> What is ANOVA?</a></li>
+  <li><a href="#the-null-hypothesis" id="toc-the-null-hypothesis" class="nav-link" data-scroll-target="#the-null-hypothesis"><span class="header-section-number">4.2</span> The Null Hypothesis</a></li>
+  <li><a href="#how-does-anova-work" id="toc-how-does-anova-work" class="nav-link" data-scroll-target="#how-does-anova-work"><span class="header-section-number">4.3</span> How Does ANOVA Work?</a></li>
+  <li><a href="#the-f-ratio" id="toc-the-f-ratio" class="nav-link" data-scroll-target="#the-f-ratio"><span class="header-section-number">4.4</span> The F-ratio</a></li>
+  <li><a href="#running-a-one-way-anova-in-r" id="toc-running-a-one-way-anova-in-r" class="nav-link" data-scroll-target="#running-a-one-way-anova-in-r"><span class="header-section-number">4.5</span> Running a One-Way ANOVA in R</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Workshop 4 - Introduction to Design and Analysis of Experiments</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 12, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-route-through-todays-workshop" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-route-through-todays-workshop"><span class="header-section-number">1</span> The route through today’s workshop</h2>
+</section>
+<section id="randomisation-and-replication" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="randomisation-and-replication"><span class="header-section-number">2</span> Randomisation and Replication</h2>
+<p><strong>Randomisation</strong> is the process of randomly assigning treatments to experimental units. It eliminates systematic bias and ensures results are representative of the population.</p>
+<p><strong>Replication</strong> is the use of multiple experimental units per treatment. It increases the reliability and precision of estimates, and allows you to separate true treatment effects from random variation.</p>
+<hr>
+</section>
+<section id="understanding-experimental-design-the-case-study-of-vegatation." class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="understanding-experimental-design-the-case-study-of-vegatation."><span class="header-section-number">3</span> Understanding Experimental Design; the case study of vegatation.</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch4.1.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>Today we will test our understanding of expeirmental design by looking at a case study of the effect of <strong>vegetation management treatment</strong> on <strong>plant species richness</strong> in a lowland grassland.</p>
+<p>Researchers have 20 grassland plots and want to test the effect of four different treatment on plant species richness. The treatments are:</p>
+<p>The four treatments are:</p>
+<ul>
+<li><strong>T1</strong>: Unmanaged control<br>
+</li>
+<li><strong>T2</strong>: Autumn cutting<br>
+</li>
+<li><strong>T3</strong>: Spring burning<br>
+</li>
+<li><strong>T4</strong>: Sheep grazing</li>
+</ul>
+<p>They can only test one treatment per plot, and they want to have <strong>5 replicates</strong> of each treatment, so they need to know how they can decide which treatment goes in which plot. This will need to be done randomly.</p>
+<p><strong>What is the purpose of randomisation in an experiment?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">To ensure all plots are the same size</option><option value="answer">To eliminate systematic bias and ensure results are representative of the population</option><option value="">To reduce the number of plots needed</option><option value="">To make the experiment easier to manage</option></select></p>
+<p><strong>What is replication in an experimental design?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Repeating the entire experiment from scratch</option><option value="answer">Using multiple experimental units per treatment to increase reliability and precision</option><option value="">Applying the same treatment to every plot</option><option value="">Taking measurements from the same plot twice</option></select></p>
+<p>Using this case study, let’s go through the terms we learnt in the main workbook to establish how we could assign which treatment to which plot.</p>
+<section id="completely-randomised-design-crd" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="completely-randomised-design-crd"><span class="header-section-number">3.1</span> Completely Randomised Design (CRD)</h3>
+<p>In a completely randomised design (CRD), treatments are assigned to experimental units <strong>purely at random</strong>, with no restrictions or grouping. It is the simplest valid experimental design.</p>
+<p>The treatment list is completely <strong>shuffled at random</strong> and assigned to plots. I will show you how this can be done in R code.</p>
+<p>In R, the <code>sample()</code> function randomly shuffles the treatment list, and <code>set.seed()</code> ensures the result is reproducible.</p>
+<div class="webex-solution">
+<button>
+Click to show: R code for plot randomisation
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>), <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>field_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">sample</span>(treatments),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">5</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>field_plan</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   plot     treatment col row
+1     1 Sheep Grazing   1   4
+2     2       Control   2   4
+3     3   Spring Burn   3   4
+4     4       Control   4   4
+5     5    Autumn Cut   5   4
+6     6   Spring Burn   1   3
+7     7       Control   2   3
+8     8    Autumn Cut   3   3
+9     9       Control   4   3
+10   10 Sheep Grazing   5   3
+11   11   Spring Burn   1   2
+12   12    Autumn Cut   2   2
+13   13   Spring Burn   3   2
+14   14   Spring Burn   4   2
+15   15    Autumn Cut   5   2
+16   16 Sheep Grazing   1   1
+17   17 Sheep Grazing   2   1
+18   18    Autumn Cut   3   1
+19   19 Sheep Grazing   4   1
+20   20       Control   5   1</code></pre>
+</div>
+</div>
+</div>
+<p>We can visualise this this using <code>ggplot</code> to see the arrangement of the plots in the field:</p>
+<div class="webex-solution">
+<button>
+Click to show: R code and field layout
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(field_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> plot), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Completely Randomised Design"</span>, <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-ANOVA_files/figure-html/field-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figure 1. Randomised field layout. Each cell represents a 10m x 10m plot.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>As you can see if you visualise it from afar, the treatments are mostly <strong>scattered randomly</strong> across the field. However, there are <em>some</em> of the same treatments right next to eachother and this could be considered a problem.</p>
+<p>Because treatments are assigned <strong>purely at random</strong>, there is no guarantee they will be spread evenly across the field. By chance, all five replicates of one treatment could end up on the same side. This would be a problem if those plots differed systematically in soil moisture, nutrient levels, or light availability, as any observed differences between treatments might simply reflect these <strong>environmental gradients</strong> rather than the treatments themselves.</p>
+<p>In our randomly assigned field layout above, we can see that the treatments are fairly evenly spread, but we were quite lucky in that example. Although what is below is done manually, it could be that random assignement may result in a field layout like below:</p>
+<div class="webex-solution">
+<button>
+Click to show: example of a poor CRD outcome
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bad_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Control"</span>, <span class="dv">5</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span>(<span class="st">"Autumn Cut"</span>, <span class="dv">5</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span>(<span class="st">"Spring Burn"</span>, <span class="dv">5</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span>(<span class="st">"Sheep Grazing"</span>, <span class="dv">5</span>)),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>bad_plan </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   plot     treatment col row
+1     1       Control   1   4
+2     2       Control   2   4
+3     3       Control   3   4
+4     4       Control   4   4
+5     5       Control   5   4
+6     6    Autumn Cut   1   3
+7     7    Autumn Cut   2   3
+8     8    Autumn Cut   3   3
+9     9    Autumn Cut   4   3
+10   10    Autumn Cut   5   3
+11   11   Spring Burn   1   2
+12   12   Spring Burn   2   2
+13   13   Spring Burn   3   2
+14   14   Spring Burn   4   2
+15   15   Spring Burn   5   2
+16   16 Sheep Grazing   1   1
+17   17 Sheep Grazing   2   1
+18   18 Sheep Grazing   3   1
+19   19 Sheep Grazing   4   1
+20   20 Sheep Grazing   5   1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bad_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> plot), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"A poor CRD outcome"</span>, <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-ANOVA_files/figure-html/bad-crd-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figure 2. A poor CRD outcome — all Control plots have ended up on the left-hand side of the field by chance.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>As written above, with a Completely Randomised Design, there is a risk that all replicates of one treatment could end up in the same part of the field (you can see an example of this above), in our case study, this would confound treatment effects with environmental gradients. This is the main weakness of a CRD.</p>
+<p><strong>In a Completely Randomised Design (CRD), how are treatments assigned?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Treatments are assigned in alphabetical order</option><option value="">Treatments are assigned based on plot location</option><option value="answer">Treatments are assigned to experimental units purely at random</option><option value="">Treatments are assigned within blocks</option></select></p>
+<p><strong>What is the main weakness of a Completely Randomised Design?</strong></p>
+<div id="radio_AGRGFEHWZV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value="answer"> <span>By chance, all replicates of one treatment could end up in the same part of the field, confounding treatment effects with environmental gradients.</span></label><label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value=""> <span>It requires too many plots to be practical.</span></label><label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value=""> <span>It cannot be used with more than two treatments.</span></label><label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value=""> <span>It does not allow for replication.</span></label>
+</div>
+</section>
+<section id="blocked-design" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="blocked-design"><span class="header-section-number">3.2</span> Blocked Design</h3>
+<p>In a <strong>blocked design</strong>, the experimental area is divided into <strong>blocks</strong> that are as homogeneous as possible. Within each block, treatments are randomly assigned to the plots. This approach helps to control for variability due to environmental gradients or other factors that might affect the response variable.</p>
+<p>In plain terms: think of the field as being divided into <strong>5 strips</strong> (the repeats), each containing <strong>4 plots</strong> (the treatments). Within each strip, every treatment appears exactly once — but the order is randomised. So instead of scattering all 20 plots randomly across the whole field, we say:</p>
+<blockquote class="blockquote">
+<p><em>“In strip 1, one plot gets Control, one gets Autumn Cut, one gets Spring Burn, and one gets Sheep Grazing — but we randomly decide which plot gets which.”</em></p>
+</blockquote>
+<p>Then we do the same for strips 2, 3, 4 and 5.</p>
+<p>This guarantees that <strong>every treatment appears in every part of the field</strong>. If there is a moisture gradient running across the field, each treatment will experience a range of conditions — rather than one treatment accidentally getting all the wet plots.</p>
+<div class="webex-solution">
+<button>
+Click to show: example of a blocked design outcome
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>blockeddesign_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">block     =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>))),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times =</span> <span class="dv">5</span>),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">4</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(blockeddesign_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"Plot "</span>, plot)), </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add block labels on the left hand side</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fl">0.3</span>, </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>, </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Block"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust =</span> <span class="dv">1</span>, </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">3.5</span>, </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add thick lines between blocks</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>), </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Blocked Design"</span>, </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">4.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-ANOVA_files/figure-html/rcbd-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figure 3. Randomised Complete Block Design. Each row is a block (strip) containing one replicate of each treatment, randomised within the block.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The key advantage of a blocked design is that any differences between blocks — such as a moisture gradient running across the field — are <strong>accounted for in the analysis</strong> rather than absorbed into the error. This makes it much easier to detect true treatment effects. However, the blocked design cannot deal with trends across the experimental area. For example, there are still 3 sheep grazing treatments on the left hand side. Thus, we introduce; The Latin Square Design (LSD).</p>
+<p><strong>In a Randomised Complete Block Design, what is a block?</strong></p>
+<div id="radio_VTNDNAGRGF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VTNDNAGRGF" value=""> <span>A large plot that receives only one treatment</span></label><label><input type="radio" autocomplete="off" name="radio_VTNDNAGRGF" value="answer"> <span>A group of experimental units that are as similar as possible, within which each treatment appears exactly once</span></label><label><input type="radio" autocomplete="off" name="radio_VTNDNAGRGF" value=""> <span>A completely randomised set of plots</span></label><label><input type="radio" autocomplete="off" name="radio_VTNDNAGRGF" value=""> <span>A plot that is left untreated as a control</span></label>
+</div>
+<p><strong>Why is RCBD an improvement over CRD?</strong></p>
+<div id="radio_EHWZVUNLPZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EHWZVUNLPZ" value=""> <span>It requires fewer plots</span></label><label><input type="radio" autocomplete="off" name="radio_EHWZVUNLPZ" value="answer"> <span>It ensures every treatment appears in every part of the field, so environmental gradients are spread evenly across treatments</span></label><label><input type="radio" autocomplete="off" name="radio_EHWZVUNLPZ" value=""> <span>It eliminates all sources of variation</span></label><label><input type="radio" autocomplete="off" name="radio_EHWZVUNLPZ" value=""> <span>It allows more treatments to be tested simultaneously</span></label>
+</div>
+<p><strong>What is the key limitation of the Randomised Complete Block Design?</strong></p>
+<div id="radio_ANVFGOTUOG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value=""> <span>It cannot be used with more than four treatments</span></label><label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value=""> <span>It requires too many replicates</span></label><label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value="answer"> <span>It cannot account for trends that run across the experimental area in more than one direction</span></label><label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value=""> <span>It does not allow randomisation within blocks</span></label>
+</div>
+</section>
+<section id="the-latin-square-design-lsd" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="the-latin-square-design-lsd"><span class="header-section-number">3.3</span> The Latin Square Design (LSD)</h3>
+<p>The Latin Square Design (LSD) is a more complex design that can account for trends in two directions. Imagine that as well as a moisture gradient running left to right across the field, there is also a temperature gradient running top to bottom. A blocked design can control for one of these — but not both at the same time.</p>
+<p>The <strong>Latin Square Design</strong> solves this by controlling for variation in <strong>two directions simultaneously</strong> — across rows <em>and</em> across columns. Every treatment appears exactly once in each row and exactly once in each column</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>The trade-off:</strong> moving to a Latin Square means reducing the number of plots from 20 to 16 in our example. You also need the number of treatments to equal the number of rows and columns, which limits flexibility.</p>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click to show: R code and Latin Square field layout
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lsd_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">"Control"</span>,      <span class="st">"Autumn Cut"</span>,   <span class="st">"Spring Burn"</span>,  <span class="st">"Sheep Grazing"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Autumn Cut"</span>,   <span class="st">"Control"</span>,      <span class="st">"Sheep Grazing"</span>,<span class="st">"Spring Burn"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Spring Burn"</span>,  <span class="st">"Sheep Grazing"</span>,<span class="st">"Control"</span>,      <span class="st">"Autumn Cut"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Sheep Grazing"</span>,<span class="st">"Spring Burn"</span>,  <span class="st">"Autumn Cut"</span>,   <span class="st">"Control"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lsd_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> treatment), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Latin Square Field Layout"</span>, <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-ANOVA_files/figure-html/lsd-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Figure 4. Latin Square Design. Each treatment appears exactly once in each row and each column.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>In a Latin Square Design, how many times does each treatment appear in each row and column?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Never</option><option value="">Twice</option><option value="answer">Exactly once</option><option value="">As many times as there are treatments</option></select></p>
+<p><strong>If you have 4 treatments and want to use a Latin Square Design, how many plots do you need?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">20</option><option value="">12</option><option value="answer">16</option><option value="">8</option></select></p>
+<p><strong>What is the key advantage of a Latin Square Design over RCBD?</strong></p>
+<div id="radio_QVMLYICHWT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value=""> <span>It requires fewer plots</span></label><label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value=""> <span>It allows more replicates per treatment</span></label><label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value="answer"> <span>It controls for variation in two directions simultaneously — across both rows and columns</span></label><label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value=""> <span>It eliminates the need for randomisation</span></label>
+</div>
+</section>
+<section id="split-plot-design" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="split-plot-design"><span class="header-section-number">3.4</span> Split Plot Design</h3>
+<p>Sometimes practical constraints make full randomisation impossible. For example, imagine that our plots are <strong>3m × 3m</strong>, but the equipment needed to apply a treatment covers a minimum area of <strong>12m × 3m</strong>. We cannot apply a different treatment to each small plot individually — the equipment is simply too large.</p>
+<p>Instead, we apply one factor across the larger <strong>12m × 3m</strong> area (the <strong>whole plot</strong>), and then subdivide it into four smaller <strong>3m × 3m</strong> plots (the <strong>split plots</strong>) within which a second factor is randomised.</p>
+<p>In plain terms:</p>
+<blockquote class="blockquote">
+<p><em>One factor is applied to large areas because it has to be — the other is randomised within those large areas at a finer scale.</em></p>
+</blockquote>
+<div class="webex-solution">
+<button>
+Click to show: example of a split plot layout
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>split_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">col        =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">row        =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">whole_plot =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">8</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub_plot   =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(split_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> whole_plot)) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> sub_plot), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"A"</span> <span class="ot">=</span> <span class="st">"grey60"</span>, <span class="st">"B"</span> <span class="ot">=</span> <span class="st">"grey90"</span>)) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Split Plot Layout"</span>, <span class="at">fill =</span> <span class="st">"Whole-plot factor"</span>) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-ANOVA_files/figure-html/split-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figure 4. Split plot design. Grey and white represent the whole-plot factor; numbers represent the split-plot factor, which is completely randomised within each whole plot.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Why might a researcher use a split plot design?</strong></p>
+<div id="radio_KRWJCZJUXU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KRWJCZJUXU" value=""> <span>Because they want to test only one treatment</span></label><label><input type="radio" autocomplete="off" name="radio_KRWJCZJUXU" value=""> <span>Because the plots are too small to measure</span></label><label><input type="radio" autocomplete="off" name="radio_KRWJCZJUXU" value="answer"> <span>Because practical constraints — such as equipment size — prevent full randomisation across all plots</span></label><label><input type="radio" autocomplete="off" name="radio_KRWJCZJUXU" value=""> <span>Because they want to repeat measurements over time</span></label>
+</div>
+<p><strong>In a split plot design, which factor is applied to the larger whole plots?</strong></p>
+<div id="radio_ODQHCGYSSX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value=""> <span>The factor that is easiest to measure</span></label><label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value="answer"> <span>The factor that cannot be randomised at a fine scale due to practical constraints</span></label><label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value=""> <span>The factor with the most levels</span></label><label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value=""> <span>The factor that is least important to the study</span></label>
+</div>
+</section>
+<section id="repeated-measures-design" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="repeated-measures-design"><span class="header-section-number">3.5</span> Repeated Measures Design</h3>
+<p>A <strong>repeated measures design</strong> is used when measurements are taken from the <strong>same experimental unit more than once</strong> — for example, measuring the growth of an animal at several points throughout its life.</p>
+<p>In plain terms:</p>
+<blockquote class="blockquote">
+<p><em>Rather than measuring different animals at each time point, you follow the same animals over time.</em></p>
+</blockquote>
+<p>This matters because observations taken from the same individual are not independent of each other — an animal that is large at week 1 is likely to still be large at week 4. The analysis must account for both the <strong>treatment effect</strong> and the <strong>sequence of measurements over time</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Why does this matter?</strong> Ignoring the repeated nature of the data and treating each time point as independent would inflate your sample size artificially and lead to unreliable results.</p>
+</div>
+</div>
+<p><strong>Why must a repeated measures design be analysed differently from a standard design?</strong></p>
+<div id="radio_EEDCPWKPVZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EEDCPWKPVZ" value=""> <span>Because there are too many data points</span></label><label><input type="radio" autocomplete="off" name="radio_EEDCPWKPVZ" value="answer"> <span>Because observations from the same individual are not independent — the analysis must account for both the treatment effect and the temporal sequence of measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EEDCPWKPVZ" value=""> <span>Because the treatments change over time</span></label><label><input type="radio" autocomplete="off" name="radio_EEDCPWKPVZ" value=""> <span>Because replication is not possible in repeated measures</span></label>
+</div>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Summary of experimental designs:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>Controls for</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CRD</td>
+<td>Nothing</td>
+<td>Plots are uniform</td>
+</tr>
+<tr class="even">
+<td>RCBD</td>
+<td>Variation in one direction</td>
+<td>One known gradient</td>
+</tr>
+<tr class="odd">
+<td>LSD</td>
+<td>Variation in two directions</td>
+<td>Two known gradients</td>
+</tr>
+<tr class="even">
+<td>Split plot</td>
+<td>Practical constraints on randomisation</td>
+<td>Equipment or logistics limit full randomisation</td>
+</tr>
+<tr class="odd">
+<td>Repeated measures</td>
+<td>Non-independence of repeated observations</td>
+<td>Same unit measured multiple times</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>What type of design is used when measurements are taken from the same experimental unit more than once?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Latin Square Design</option><option value="">Split plot design</option><option value="">Completely Randomised Design</option><option value="answer">Repeated measures design</option></select></p>
+<p><strong>Which design would be most appropriate if you know there is a moisture gradient running across your field from left to right?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Completely Randomised Design</option><option value="answer">Randomised Complete Block Design</option><option value="">Repeated measures design</option><option value="">Split plot design</option></select></p>
+<p><strong>Which design would be most appropriate if you know there are gradients running both left to right AND top to bottom across your field?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Completely Randomised Design</option><option value="">Randomised Complete Block Design</option><option value="answer">Latin Square Design</option><option value="">Repeated measures design</option></select></p>
+</section>
+</section>
+<section id="analysis-of-variance-anova" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="analysis-of-variance-anova"><span class="header-section-number">4</span> Analysis of Variance (ANOVA)</h2>
+<section id="what-is-anova" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="what-is-anova"><span class="header-section-number">4.1</span> What is ANOVA?</h3>
+<p>So far we have used t-tests to compare the means of <strong>two groups</strong>. But what if we want to compare <strong>more than two groups</strong> at once? In our grassland experiment, we have four treatments — Control, Autumn Cut, Spring Burn, and Sheep Grazing. When we have more than two groups to compare, we use <strong>ANOVA</strong> (Analysis of Variance).</p>
+<p>ANOVA asks one overarching question:</p>
+<blockquote class="blockquote">
+<p><em>“Is there enough evidence to suggest that at least one treatment produces a different mean response from the others?”</em></p>
+</blockquote>
+</section>
+<section id="the-null-hypothesis" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="the-null-hypothesis"><span class="header-section-number">4.2</span> The Null Hypothesis</h3>
+<p>Like all statistical tests, ANOVA starts with a <strong>null hypothesis</strong> — a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis states that:</p>
+<blockquote class="blockquote">
+<p><em>All treatment means are equal.</em></p>
+</blockquote>
+<p>If the probability of this being true is less than 1 in 20 (p &lt; 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others.</p>
+</section>
+<section id="how-does-anova-work" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="how-does-anova-work"><span class="header-section-number">4.3</span> How Does ANOVA Work?</h3>
+<p>ANOVA works by comparing two types of variation in the data:</p>
+<hr>
+<p><strong>1. Within-group variance — the background noise</strong></p>
+<p>Imagine you have 5 Control plots. You would expect them all to have a similar number of plant species, because they all received the same treatment. But in reality they will not be identical — one plot might have 8 species, another 10, another 7. This is the natural variation that exists even though the treatment was the same.</p>
+<blockquote class="blockquote">
+<p><em>Within-group variance measures how different plots are from each other within the same treatment group — the natural background noise that exists regardless of treatment.</em></p>
+</blockquote>
+<p>To calculate this, we look at how far each plot’s value is from its <strong>group mean</strong>, square those differences (so that negative and positive differences do not cancel each other out), and add them all up. This is called the <strong>within-group sum of squares</strong>.</p>
+<p>In plain terms:</p>
+<blockquote class="blockquote">
+<p><em>For each plot, ask: “how far is this plot from the average for its treatment group?” Square that distance, then add all those squared distances together.</em></p>
+</blockquote>
+<p>A large within-group sum of squares means plots within the same treatment group are very different from each other — a lot of background noise. A small within-group sum of squares means plots within the same treatment group are very similar to each other — very little background noise.</p>
+<p><strong>2. Between-group variance — the treatment signal</strong></p>
+<p>Now imagine comparing the <strong>average</strong> species richness across the four treatment groups. If the treatments have no effect, these averages should all be similar. If treatments do have an effect, the averages will differ more than you would expect from background noise alone.</p>
+<blockquote class="blockquote">
+<p><em>Between-group variance measures how different the treatment group means are from each other — the signal we are hoping to detect.</em></p>
+</blockquote>
+<p>In plain terms: &gt; <em>If Sheep Grazing plots have on average 12 species and Control plots have on average 8 species, that difference contributes to the between-group variance.</em></p>
+</section>
+<section id="the-f-ratio" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="the-f-ratio"><span class="header-section-number">4.4</span> The F-ratio</h3>
+<p>ANOVA combines these two estimates into a single value called the <strong>F-ratio</strong>:</p>
+<p><span class="math display">F = \frac{\text{Between-group variance}}{\text{Within-group variance}}</span></p>
+<p>Think of it as a <strong>signal-to-noise ratio</strong>. Here is what the F-ratio tells us:</p>
+<ul>
+<li>If the between-group variance and within-group variance are <strong>similar in size</strong>, it will be difficult to detect significant differences between treatments — the treatment signal is being drowned out by background noise. In this case, F will be close to <strong>1</strong>.</li>
+<li>If the within-group variance is <strong>small relative to</strong> the between-group variance, the treatment signal stands out clearly above the noise, and significant differences are more likely to be detected. In this case, F will be <strong>much greater than 1</strong>.</li>
+</ul>
+<p>In plain terms:</p>
+<blockquote class="blockquote">
+<p><em>The larger the F-ratio, the more convincing the evidence that at least one treatment is producing a genuinely different result.</em></p>
+</blockquote>
+<p>For a given value of F, and for a given number of treatments and replicates, we can calculate the probability that the null hypothesis is true. As before, our threshold is 1 in 20 — if p &lt; 0.05, we reject the null hypothesis and conclude that at least one treatment mean is significantly different from the others.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Important:</strong> a significant ANOVA result tells you that <em>at least one</em> treatment mean is different — but it does not tell you <em>which</em> treatment differs from which. For that, you need a <strong>post-hoc test</strong>, which we will cover shortly.</p>
+</div>
+</div>
+</section>
+<section id="running-a-one-way-anova-in-r" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="running-a-one-way-anova-in-r"><span class="header-section-number">4.5</span> Running a One-Way ANOVA in R</h3>
+<p>A one-way ANOVA tests the effect of <strong>one factor</strong> (in our case, treatment) on a response variable (species richness). In R, we use the <code>aov()</code> function:</p>
+<div class="webex-solution">
+<button>
+Click to show: R code for one-way ANOVA
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate some species richness data for illustration</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>species_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>), </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">each =</span> <span class="dv">5</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">richness  =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">8</span>,  <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">12</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">14</span>, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the ANOVA</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(richness <span class="sc">~</span> treatment, <span class="at">data =</span> species_data)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+treatment    3  59.76  19.919    2.91 0.0666 .
+Residuals   16 109.51   6.845                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+<p>The <code>summary()</code> output shows:</p>
+<ul>
+<li><strong>Df</strong> — degrees of freedom</li>
+<li><strong>Sum Sq</strong> — the sum of squares (a measure of total variation)</li>
+<li><strong>Mean Sq</strong> — the mean square (sum of squares divided by degrees of freedom)</li>
+<li><strong>F value</strong> — the F-ratio</li>
+<li><strong>Pr(&gt;F)</strong> — the p-value</li>
+</ul>
+<p>If the p-value is less than 0.05, at least one treatment mean is significantly different from the others.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Reminder:</strong> ANOVA is a parametric test, so the same assumptions apply as for the t-test — the data within each group should be approximately normally distributed, and the variances should be approximately equal across groups. Check these with the Shapiro-Wilk test and Levene’s test before running ANOVA.</p>
+</div>
+</div>
+<!-- -->
+
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+var update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+
+  for (var i = 0; i < t.length; i++) {
+    var p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML =
+      correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+};
+
+
+/* webex-solution button toggling function */
+var b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains("open")) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+};
+
+
+/* check answers */
+var check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains("unchecked")) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+};
+
+
+/* function for checking solveme answers */
+var solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "");
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+
+  /* match numeric answers within a specified tolerance */
+  if (Number(this.dataset.tol) > 0) {
+
+    var tol = Number(this.dataset.tol);
+
+    var matches = real_answers.map(function(x) {
+      return Math.abs(x - my_answer) < tol;
+    });
+
+    if (matches.reduce(function(a, b) {
+      return a + b;
+    }, 0) > 0) {
+
+      cl.add("webex-correct");
+
+    } else {
+
+      cl.remove("webex-correct");
+    }
+  }
+
+
+  /* regex checking */
+  if (cl.contains("regex")) {
+
+    var answer_regex = RegExp(real_answers.join("|"));
+
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+};
+
+
+/* function for checking select answers */
+var select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList;
+
+  /* remove previous styles */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+
+  /* add appropriate style */
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+};
+
+
+/* function for checking radiogroups answers */
+var radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector(
+    "input[name=" + this.id + "]:checked"
+  );
+
+  /* make sure something is selected */
+  if (!checked_button) {
+    return;
+  }
+
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of previous styles */
+  for (var i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add appropriate style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+};
+
+
+/* initialise WebEx when page loads */
+window.onload = function() {
+  console.log("webex onload");
+
+
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+
+    if (
+      buttons[i].parentElement &&
+      buttons[i].parentElement.classList.contains("webex-solution")
+    ) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+
+  /* set up WebEx check sections */
+  var check_sections =
+    document.getElementsByClassName("webex-check");
+
+  console.log("check:", check_sections.length);
+
+  for (var i = 0; i < check_sections.length; i++) {
+
+    check_sections[i].classList.add("unchecked");
+
+    var btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+
+    check_sections[i].appendChild(btn);
+
+    var spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+
+    check_sections[i].appendChild(spn);
+  }
+
+
+  /* set up webex-solveme inputs */
+  var solveme =
+    document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete", "off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+
+    solveme[i].value = "";
+
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+
+    solveme[i].dataset.answer = real_answer;
+
+
+    /* attach checking functions */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+
+    /* add WebEx icon */
+    solveme[i].insertAdjacentHTML(
+      "afterend",
+      " <span class='webex-icon'></span>"
+    );
+  }
+
+
+  /* set up radiogroups */
+  var radiogroups =
+    document.getElementsByClassName("webex-radiogroup");
+
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+
+  /* set up selects */
+  var selects =
+    document.getElementsByClassName("webex-select");
+
+  for (var i = 0; i < selects.length; i++) {
+
+    selects[i].onchange = select_func;
+
+    selects[i].insertAdjacentHTML(
+      "afterend",
+      " <span class='webex-icon'></span>"
+    );
+  }
+
+
+  /* update total score */
+  update_total_correct();
+};
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 4 - Introduction to Design and Analysis of Experiments"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: yeti</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-title: "Contents"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">    css: [style.css, include/webex.css]</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: include/webex.js</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: katex</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo    =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webexercises)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## The route through today's workshop </span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Randomisation and Replication </span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>**Randomisation** is the process of randomly assigning treatments to experimental units. It eliminates systematic bias and ensures results are representative of the population.</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>**Replication** is the use of multiple experimental units per treatment. It increases the reliability and precision of estimates, and allows you to separate true treatment effects from random variation.</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Understanding Experimental Design; the case study of vegatation.</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/ch4.1.jpg)</span>{width=100% fig-align="center"}</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>Today we will test our understanding of expeirmental design by looking at a case study of the effect of **vegetation management treatment** on **plant species richness** in a lowland grassland.</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>Researchers have 20 grassland plots and want to test the effect of four different treatment on plant species richness. The treatments are:</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>The four treatments are:</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**T1**: Unmanaged control  </span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**T2**: Autumn cutting  </span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**T3**: Spring burning  </span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**T4**: Sheep grazing  </span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>They can only test one treatment per plot, and they want to have **5 replicates** of each treatment, so they need to know how they can decide which treatment goes in which plot. This will need to be done randomly. </span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>**What is the purpose of randomisation in an experiment?**</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("To ensure all plots are the same size", answer = "To eliminate systematic bias and ensure results are representative of the population", "To reduce the number of plots needed", "To make the experiment easier to manage"))`</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>**What is replication in an experimental design?**</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Repeating the entire experiment from scratch", answer = "Using multiple experimental units per treatment to increase reliability and precision", "Applying the same treatment to every plot", "Taking measurements from the same plot twice"))`</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="in">                                </span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>Using this case study, let's go through the terms we learnt in the main workbook to establish how we could assign which treatment to which plot. </span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### Completely Randomised Design (CRD)</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>In a completely randomised design (CRD), treatments are assigned to experimental units **purely at random**, with no restrictions or grouping. It is the simplest valid experimental design.</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>The treatment list is completely **shuffled at random** and assigned to plots. I will show you how this can be done in R code. </span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>In R, the <span class="in">`sample()`</span> function randomly shuffles the treatment list, and <span class="in">`set.seed()`</span> ensures the result is reproducible.</span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: R code for plot randomisation")`</span>                                                 </span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r randomise}</span></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>), <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>field_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">sample</span>(treatments),</span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">5</span>))</span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>field_plan</span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span>                                 </span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a>                                                                       </span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>We can visualise this this using <span class="in">`ggplot`</span> to see the arrangement of the plots in the field:</span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: R code and field layout")`</span></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r field-plot, fig.cap="Figure 1. Randomised field layout. Each cell represents a 10m x 10m plot.", fig.width=7, fig.height=5}</span></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(field_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> plot), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Completely Randomised Design"</span>, <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span>              </span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>As you can see if you visualise it from afar, the treatments are mostly **scattered randomly** across the field. However, there are *some* of the same treatments right next to eachother and this could be considered a problem. </span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a>Because treatments are assigned **purely at random**, there is no guarantee they will be spread evenly across the field. By chance, all five replicates of one treatment could end up on the same side. This would be a problem if those plots differed systematically in soil moisture, nutrient levels, or light availability, as any observed differences between treatments might simply reflect these **environmental gradients** rather than the treatments themselves.</span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>In our randomly assigned field layout above, we can see that the treatments are fairly evenly spread, but we were quite lucky in that example. Although what is below is done manually, it could be that random assignement may result in a field layout like below: </span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: example of a poor CRD outcome")`</span></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r bad-crd, fig.cap="Figure 2. A poor CRD outcome — all Control plots have ended up on the left-hand side of the field by chance.", fig.width=7, fig.height=5}</span></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a>bad_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Control"</span>, <span class="dv">5</span>),</span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span>(<span class="st">"Autumn Cut"</span>, <span class="dv">5</span>),</span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span>(<span class="st">"Spring Burn"</span>, <span class="dv">5</span>),</span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span>(<span class="st">"Sheep Grazing"</span>, <span class="dv">5</span>)),</span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>bad_plan </span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bad_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> plot), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"A poor CRD outcome"</span>, <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a>As written above, with a Completely Randomised Design, there is a risk that all replicates of one treatment could end up in the same part of the field (you can see an example of this above), in our case study, this would confound treatment effects with environmental gradients. This is the main weakness of a CRD.</span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>**In a Completely Randomised Design (CRD), how are treatments assigned?**</span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Treatments are assigned in alphabetical order", "Treatments are assigned based on plot location", answer = "Treatments are assigned to experimental units purely at random", "Treatments are assigned within blocks"))`</span></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a>**What is the main weakness of a Completely Randomised Design?**</span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "By chance, all replicates of one treatment could end up in the same part of the field, confounding treatment effects with environmental gradients.", "It requires too many plots to be practical.", "It cannot be used with more than two treatments.", "It does not allow for replication."))`</span></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### Blocked Design</span></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a>In a **blocked design**, the experimental area is divided into **blocks** that are as homogeneous as possible. Within each block, treatments are randomly assigned to the plots. This approach helps to control for variability due to environmental gradients or other factors that might affect the response variable.</span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a>In plain terms: think of the field as being divided into **5 strips** (the repeats), each containing **4 plots** (the treatments). Within each strip, every treatment appears exactly once — but the order is randomised. So instead of scattering all 20 plots randomly across the whole field, we say:</span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"In strip 1, one plot gets Control, one gets Autumn Cut, one gets Spring Burn, and one gets Sheep Grazing — but we randomly decide which plot gets which."*</span></span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a>Then we do the same for strips 2, 3, 4 and 5.</span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a>This guarantees that **every treatment appears in every part of the field**. If there is a moisture gradient running across the field, each treatment will experience a range of conditions — rather than one treatment accidentally getting all the wet plots.</span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: example of a blocked design outcome")`</span></span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rcbd, fig.cap="Figure 3. Randomised Complete Block Design. Each row is a block (strip) containing one replicate of each treatment, randomised within the block.", fig.width=7, fig.height=5}</span></span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a>blockeddesign_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot      =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a>  <span class="at">block     =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>)),</span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>))),</span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times =</span> <span class="dv">5</span>),</span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">4</span>)</span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(blockeddesign_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"Plot "</span>, plot)), </span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add block labels on the left hand side</span></span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, </span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fl">0.3</span>, </span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>, </span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Block"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), </span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust =</span> <span class="dv">1</span>, </span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">3.5</span>, </span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a>           <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add thick lines between blocks</span></span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>), </span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Blocked Design"</span>, </span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">4.5</span>))</span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a>The key advantage of a blocked design is that any differences between blocks — such as a moisture gradient running across the field — are **accounted for in the analysis** rather than absorbed into the error. This makes it much easier to detect true treatment effects. However, the blocked design cannot deal with trends across the experimental area. For example, there are still 3 sheep grazing treatments on the left hand side. Thus, we introduce; The Latin Square Design (LSD).</span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a>**In a Randomised Complete Block Design, what is a block?**</span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("A large plot that receives only one treatment", answer = "A group of experimental units that are as similar as possible, within which each treatment appears exactly once", "A completely randomised set of plots", "A plot that is left untreated as a control"))`</span></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a>**Why is RCBD an improvement over CRD?**</span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("It requires fewer plots", answer = "It ensures every treatment appears in every part of the field, so environmental gradients are spread evenly across treatments", "It eliminates all sources of variation", "It allows more treatments to be tested simultaneously"))`</span></span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a>**What is the key limitation of the Randomised Complete Block Design?**</span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("It cannot be used with more than four treatments", "It requires too many replicates", answer = "It cannot account for trends that run across the experimental area in more than one direction", "It does not allow randomisation within blocks"))`</span></span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Latin Square Design (LSD)</span></span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a>The Latin Square Design (LSD) is a more complex design that can account for trends in two directions. Imagine that as well as a moisture gradient running left to right across the field, there is also a temperature gradient running top to bottom. A blocked design can control for one of these — but not both at the same time.</span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a>The **Latin Square Design** solves this by controlling for variation in **two directions simultaneously** — across rows *and* across columns. Every treatment appears exactly once in each row and exactly once in each column</span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a>**The trade-off:** moving to a Latin Square means reducing the number of plots from 20 to 16 in our example. You also need the number of treatments to equal the number </span>
+<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a>of rows and columns, which limits flexibility.</span>
+<span id="cb12-242"><a href="#cb12-242" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: R code and Latin Square field layout")`</span></span>
+<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r lsd, fig.cap="Figure 4. Latin Square Design. Each treatment appears exactly once in each row and each column.", fig.width=6, fig.height=5}</span></span>
+<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a>lsd_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a>  <span class="at">col       =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb12-250"><a href="#cb12-250" aria-hidden="true" tabindex="-1"></a>  <span class="at">row       =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb12-251"><a href="#cb12-251" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">"Control"</span>,      <span class="st">"Autumn Cut"</span>,   <span class="st">"Spring Burn"</span>,  <span class="st">"Sheep Grazing"</span>,</span>
+<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Autumn Cut"</span>,   <span class="st">"Control"</span>,      <span class="st">"Sheep Grazing"</span>,<span class="st">"Spring Burn"</span>,</span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Spring Burn"</span>,  <span class="st">"Sheep Grazing"</span>,<span class="st">"Control"</span>,      <span class="st">"Autumn Cut"</span>,</span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Sheep Grazing"</span>,<span class="st">"Spring Burn"</span>,  <span class="st">"Autumn Cut"</span>,   <span class="st">"Control"</span>)</span>
+<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lsd_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> treatment), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb12-260"><a href="#cb12-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Latin Square Field Layout"</span>, <span class="at">fill =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb12-261"><a href="#cb12-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb12-262"><a href="#cb12-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-263"><a href="#cb12-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-271"><a href="#cb12-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a>**In a Latin Square Design, how many times does each treatment appear in each row and column?**</span>
+<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-274"><a href="#cb12-274" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Never", "Twice", answer = "Exactly once", "As many times as there are treatments"))`</span></span>
+<span id="cb12-275"><a href="#cb12-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a>**If you have 4 treatments and want to use a Latin Square Design, how many plots do you need?**</span>
+<span id="cb12-277"><a href="#cb12-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-278"><a href="#cb12-278" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("20", "12", answer = "16", "8"))`</span></span>
+<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a>**What is the key advantage of a Latin Square Design over RCBD?**</span>
+<span id="cb12-281"><a href="#cb12-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-282"><a href="#cb12-282" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("It requires fewer plots", "It allows more replicates per treatment", answer = "It controls for variation in two directions simultaneously — across both rows and columns", "It eliminates the need for randomisation"))`</span></span>
+<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a><span class="fu">### Split Plot Design</span></span>
+<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a>Sometimes practical constraints make full randomisation impossible. For example, imagine that our plots are **3m × 3m**, but the equipment needed to apply a treatment covers a minimum area of **12m × 3m**. We cannot apply a different treatment to each small plot individually — the equipment is simply too large.</span>
+<span id="cb12-287"><a href="#cb12-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-288"><a href="#cb12-288" aria-hidden="true" tabindex="-1"></a>Instead, we apply one factor across the larger **12m × 3m** area (the **whole plot**), and then subdivide it into four smaller **3m × 3m** plots (the **split plots**) within which a second factor is randomised.</span>
+<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a>In plain terms:</span>
+<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *One factor is applied to large areas because it has to be — the other is randomised within those large areas at a finer scale.*</span></span>
+<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: example of a split plot layout")`</span></span>
+<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{r split-plot, fig.cap="Figure 4. Split plot design. Grey and white represent the whole-plot factor; numbers represent the split-plot factor, which is completely randomised within each whole plot.", fig.width=7, fig.height=5}</span></span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a>split_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a>  <span class="at">col        =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a>  <span class="at">row        =</span> <span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a>  <span class="at">whole_plot =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">8</span>),</span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub_plot   =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(split_plan, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> whole_plot)) <span class="sc">+</span></span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> sub_plot), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"A"</span> <span class="ot">=</span> <span class="st">"grey60"</span>, <span class="st">"B"</span> <span class="ot">=</span> <span class="st">"grey90"</span>)) <span class="sc">+</span></span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Split Plot Layout"</span>, <span class="at">fill =</span> <span class="st">"Whole-plot factor"</span>) <span class="sc">+</span></span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text  =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a>**Why might a researcher use a split plot design?**</span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Because they want to test only one treatment", "Because the plots are too small to measure", answer = "Because practical constraints — such as equipment size — prevent full randomisation across all plots", "Because they want to repeat measurements over time"))`</span></span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a>**In a split plot design, which factor is applied to the larger whole plots?**</span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("The factor that is easiest to measure", answer = "The factor that cannot be randomised at a fine scale due to practical constraints", "The factor with the most levels", "The factor that is least important to the study"))`</span></span>
+<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a><span class="fu">### Repeated Measures Design</span></span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a>A **repeated measures design** is used when measurements are taken from the **same experimental unit more than once** — for example, measuring the growth of an </span>
+<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a>animal at several points throughout its life.</span>
+<span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a>In plain terms:</span>
+<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Rather than measuring different animals at each time point, you follow the same animals over time.*</span></span>
+<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a>This matters because observations taken from the same individual are not independent of each other — an animal that is large at week 1 is likely to still be large at </span>
+<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a>week 4. The analysis must account for both the **treatment effect** and the **sequence of measurements over time**.</span>
+<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a>**Why does this matter?** Ignoring the repeated nature of the data and treating each time point as independent would inflate your sample size artificially and lead to </span>
+<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a>unreliable results.</span>
+<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a>**Why must a repeated measures design be analysed differently from a standard design?**</span>
+<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Because there are too many data points", answer = "Because observations from the same individual are not independent — the analysis must account for both the treatment effect and the temporal sequence of measurements", "Because the treatments change over time", "Because replication is not possible in repeated measures"))`</span></span>
+<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-352"><a href="#cb12-352" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb12-353"><a href="#cb12-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a>**Summary of experimental designs:**</span>
+<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Design <span class="pp">|</span> Controls for <span class="pp">|</span> Use when <span class="pp">|</span></span>
+<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> CRD <span class="pp">|</span> Nothing <span class="pp">|</span> Plots are uniform <span class="pp">|</span></span>
+<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> RCBD <span class="pp">|</span> Variation in one direction <span class="pp">|</span> One known gradient <span class="pp">|</span></span>
+<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> LSD <span class="pp">|</span> Variation in two directions <span class="pp">|</span> Two known gradients <span class="pp">|</span></span>
+<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Split plot <span class="pp">|</span> Practical constraints on randomisation <span class="pp">|</span> Equipment or logistics limit full randomisation <span class="pp">|</span></span>
+<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Repeated measures <span class="pp">|</span> Non-independence of repeated observations <span class="pp">|</span> Same unit measured multiple times <span class="pp">|</span></span>
+<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-365"><a href="#cb12-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-366"><a href="#cb12-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a>**What type of design is used when measurements are taken from the same experimental unit more than once?**</span>
+<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Latin Square Design", "Split plot design", "Completely Randomised Design", answer = "Repeated measures design"))`</span></span>
+<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a>**Which design would be most appropriate if you know there is a moisture gradient running across your field from left to right?**</span>
+<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Completely Randomised Design", answer = "Randomised Complete Block Design", "Repeated measures design", "Split plot design"))`</span></span>
+<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a>**Which design would be most appropriate if you know there are gradients running both left to right AND top to bottom across your field?**</span>
+<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Completely Randomised Design", "Randomised Complete Block Design", answer = "Latin Square Design", "Repeated measures design"))`</span></span>
+<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-379"><a href="#cb12-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-380"><a href="#cb12-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analysis of Variance (ANOVA)</span></span>
+<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a><span class="fu">### What is ANOVA?</span></span>
+<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a>So far we have used t-tests to compare the means of **two groups**. But what if we want to compare **more than two groups** at once? In our grassland experiment, we have four treatments — Control, Autumn Cut, Spring Burn, and Sheep Grazing. When we have more than two groups to compare, we use **ANOVA** (Analysis of Variance).</span>
+<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-387"><a href="#cb12-387" aria-hidden="true" tabindex="-1"></a>ANOVA asks one overarching question:</span>
+<span id="cb12-388"><a href="#cb12-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Is there enough evidence to suggest that at least one treatment produces a different mean response from the others?"*</span></span>
+<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Null Hypothesis</span></span>
+<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a>Like all statistical tests, ANOVA starts with a **null hypothesis** — a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis states that:</span>
+<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *All treatment means are equal.*</span></span>
+<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a>If the probability of this being true is less than 1 in 20 (p &lt; 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others.</span>
+<span id="cb12-398"><a href="#cb12-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-399"><a href="#cb12-399" aria-hidden="true" tabindex="-1"></a><span class="fu">### How Does ANOVA Work?</span></span>
+<span id="cb12-400"><a href="#cb12-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-401"><a href="#cb12-401" aria-hidden="true" tabindex="-1"></a>ANOVA works by comparing two types of variation in the data:</span>
+<span id="cb12-402"><a href="#cb12-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-403"><a href="#cb12-403" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb12-404"><a href="#cb12-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-405"><a href="#cb12-405" aria-hidden="true" tabindex="-1"></a>**1. Within-group variance — the background noise**</span>
+<span id="cb12-406"><a href="#cb12-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-407"><a href="#cb12-407" aria-hidden="true" tabindex="-1"></a>Imagine you have 5 Control plots. You would expect them all to have a similar number of plant species, because they all received the same treatment. But in reality they will not be identical — one plot might have 8 species, another 10, another 7. This is the natural variation that exists even though the treatment was the same.</span>
+<span id="cb12-408"><a href="#cb12-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-409"><a href="#cb12-409" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Within-group variance measures how different plots are from each other within the same treatment group — the natural background noise that exists regardless of treatment.*</span></span>
+<span id="cb12-410"><a href="#cb12-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-411"><a href="#cb12-411" aria-hidden="true" tabindex="-1"></a>To calculate this, we look at how far each plot's value is from its **group mean**, square those differences (so that negative and positive differences do not cancel each other out), and add them all up. This is called the **within-group sum of squares**.</span>
+<span id="cb12-412"><a href="#cb12-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-413"><a href="#cb12-413" aria-hidden="true" tabindex="-1"></a>In plain terms:</span>
+<span id="cb12-414"><a href="#cb12-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-415"><a href="#cb12-415" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *For each plot, ask: "how far is this plot from the average for its treatment group?" Square that distance, then add all those squared distances together.*</span></span>
+<span id="cb12-416"><a href="#cb12-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-417"><a href="#cb12-417" aria-hidden="true" tabindex="-1"></a>A large within-group sum of squares means plots within the same treatment group are very different from each other — a lot of background noise. A small within-group sum of squares means plots within the same treatment group are very similar to each other — very little background noise.</span>
+<span id="cb12-418"><a href="#cb12-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-419"><a href="#cb12-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-420"><a href="#cb12-420" aria-hidden="true" tabindex="-1"></a>**2. Between-group variance — the treatment signal**</span>
+<span id="cb12-421"><a href="#cb12-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-422"><a href="#cb12-422" aria-hidden="true" tabindex="-1"></a>Now imagine comparing the **average** species richness across the four treatment groups. If the treatments have no effect, these averages should all be similar. If treatments do have an effect, the averages will differ more than you would expect from background noise alone.</span>
+<span id="cb12-423"><a href="#cb12-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-424"><a href="#cb12-424" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Between-group variance measures how different the treatment group means are from each other — the signal we are hoping to detect.*</span></span>
+<span id="cb12-425"><a href="#cb12-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-426"><a href="#cb12-426" aria-hidden="true" tabindex="-1"></a>In plain terms:</span>
+<span id="cb12-427"><a href="#cb12-427" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If Sheep Grazing plots have on average 12 species and Control plots have on average 8 species, that difference contributes to the between-group variance.*</span></span>
+<span id="cb12-428"><a href="#cb12-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-429"><a href="#cb12-429" aria-hidden="true" tabindex="-1"></a><span class="fu">### The F-ratio</span></span>
+<span id="cb12-430"><a href="#cb12-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-431"><a href="#cb12-431" aria-hidden="true" tabindex="-1"></a>ANOVA combines these two estimates into a single value called the **F-ratio**:</span>
+<span id="cb12-432"><a href="#cb12-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-433"><a href="#cb12-433" aria-hidden="true" tabindex="-1"></a>$$F = \frac{\text{Between-group variance}}{\text{Within-group variance}}$$</span>
+<span id="cb12-434"><a href="#cb12-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-435"><a href="#cb12-435" aria-hidden="true" tabindex="-1"></a>Think of it as a **signal-to-noise ratio**. Here is what the F-ratio tells us:</span>
+<span id="cb12-436"><a href="#cb12-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-437"><a href="#cb12-437" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the between-group variance and within-group variance are **similar in size**, it will be difficult to detect significant differences between treatments — the treatment signal is being drowned out by background noise. In this case, F will be close to **1**.</span>
+<span id="cb12-438"><a href="#cb12-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the within-group variance is **small relative to** the between-group variance, the treatment signal stands out clearly above the noise, and significant differences are more likely to be detected. In this case, F will be **much greater than 1**.</span>
+<span id="cb12-439"><a href="#cb12-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-440"><a href="#cb12-440" aria-hidden="true" tabindex="-1"></a>In plain terms:</span>
+<span id="cb12-441"><a href="#cb12-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-442"><a href="#cb12-442" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *The larger the F-ratio, the more convincing the evidence that at least one treatment is producing a genuinely different result.*</span></span>
+<span id="cb12-443"><a href="#cb12-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-444"><a href="#cb12-444" aria-hidden="true" tabindex="-1"></a>For a given value of F, and for a given number of treatments and replicates, we can calculate the probability that the null hypothesis is true. As before, our threshold is 1 in 20 — if p &lt; 0.05, we reject the null hypothesis and conclude that at least one treatment mean is significantly different from the others.</span>
+<span id="cb12-445"><a href="#cb12-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-446"><a href="#cb12-446" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb12-447"><a href="#cb12-447" aria-hidden="true" tabindex="-1"></a>**Important:** a significant ANOVA result tells you that *at least one* treatment mean is different — but it does not tell you *which* treatment differs from which. For that, you need a **post-hoc test**, which we will cover shortly.</span>
+<span id="cb12-448"><a href="#cb12-448" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-449"><a href="#cb12-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-450"><a href="#cb12-450" aria-hidden="true" tabindex="-1"></a><span class="fu">### Running a One-Way ANOVA in R</span></span>
+<span id="cb12-451"><a href="#cb12-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-452"><a href="#cb12-452" aria-hidden="true" tabindex="-1"></a>A one-way ANOVA tests the effect of **one factor** (in our case, treatment) on a response variable (species richness). In R, we use the <span class="in">`aov()`</span> function:</span>
+<span id="cb12-453"><a href="#cb12-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-454"><a href="#cb12-454" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: R code for one-way ANOVA")`</span></span>
+<span id="cb12-455"><a href="#cb12-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-456"><a href="#cb12-456" aria-hidden="true" tabindex="-1"></a><span class="in">```{r anova-example}</span></span>
+<span id="cb12-457"><a href="#cb12-457" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate some species richness data for illustration</span></span>
+<span id="cb12-458"><a href="#cb12-458" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb12-459"><a href="#cb12-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-460"><a href="#cb12-460" aria-hidden="true" tabindex="-1"></a>species_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-461"><a href="#cb12-461" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Autumn Cut"</span>, <span class="st">"Spring Burn"</span>, <span class="st">"Sheep Grazing"</span>), </span>
+<span id="cb12-462"><a href="#cb12-462" aria-hidden="true" tabindex="-1"></a>                  <span class="at">each =</span> <span class="dv">5</span>),</span>
+<span id="cb12-463"><a href="#cb12-463" aria-hidden="true" tabindex="-1"></a>  <span class="at">richness  =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">8</span>,  <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb12-464"><a href="#cb12-464" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">12</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb12-465"><a href="#cb12-465" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
+<span id="cb12-466"><a href="#cb12-466" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">14</span>, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb12-467"><a href="#cb12-467" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-468"><a href="#cb12-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-469"><a href="#cb12-469" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the ANOVA</span></span>
+<span id="cb12-470"><a href="#cb12-470" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(richness <span class="sc">~</span> treatment, <span class="at">data =</span> species_data)</span>
+<span id="cb12-471"><a href="#cb12-471" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span>
+<span id="cb12-472"><a href="#cb12-472" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-473"><a href="#cb12-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-474"><a href="#cb12-474" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb12-475"><a href="#cb12-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-476"><a href="#cb12-476" aria-hidden="true" tabindex="-1"></a>The <span class="in">`summary()`</span> output shows:</span>
+<span id="cb12-477"><a href="#cb12-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-478"><a href="#cb12-478" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Df** — degrees of freedom</span>
+<span id="cb12-479"><a href="#cb12-479" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Sum Sq** — the sum of squares (a measure of total variation)</span>
+<span id="cb12-480"><a href="#cb12-480" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Mean Sq** — the mean square (sum of squares divided by degrees of freedom)</span>
+<span id="cb12-481"><a href="#cb12-481" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**F value** — the F-ratio</span>
+<span id="cb12-482"><a href="#cb12-482" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pr(&gt;F)** — the p-value</span>
+<span id="cb12-483"><a href="#cb12-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-484"><a href="#cb12-484" aria-hidden="true" tabindex="-1"></a>If the p-value is less than 0.05, at least one treatment mean is significantly </span>
+<span id="cb12-485"><a href="#cb12-485" aria-hidden="true" tabindex="-1"></a>different from the others.</span>
+<span id="cb12-486"><a href="#cb12-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-487"><a href="#cb12-487" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-488"><a href="#cb12-488" aria-hidden="true" tabindex="-1"></a>**Reminder:** ANOVA is a parametric test, so the same assumptions apply as for the </span>
+<span id="cb12-489"><a href="#cb12-489" aria-hidden="true" tabindex="-1"></a>t-test — the data within each group should be approximately normally distributed, and </span>
+<span id="cb12-490"><a href="#cb12-490" aria-hidden="true" tabindex="-1"></a>the variances should be approximately equal across groups. Check these with the </span>
+<span id="cb12-491"><a href="#cb12-491" aria-hidden="true" tabindex="-1"></a>Shapiro-Wilk test and Levene's test before running ANOVA.</span>
+<span id="cb12-492"><a href="#cb12-492" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
