@@ -1,25 +1,21 @@
-﻿plot,treatment,soil_type,richness
-1,Control,clay,9
-2,Control,clay,8
-3,Control,clay,9
-4,Control,sandy,11
-5,Control,sandy,9
-6,Control,sandy,9
-7,Autumn Cut,clay,16
-8,Autumn Cut,clay,15
-9,Autumn Cut,clay,13
-10,Autumn Cut,sandy,11
-11,Autumn Cut,sandy,9
-12,Autumn Cut,sandy,9
-13,Spring Burn,clay,9
-14,Spring Burn,clay,7
-15,Spring Burn,clay,7
-16,Spring Burn,sandy,7
-17,Spring Burn,sandy,7
-18,Spring Burn,sandy,8
-19,Sheep Grazing,clay,9
-20,Sheep Grazing,clay,8
-21,Sheep Grazing,clay,12
-22,Sheep Grazing,sandy,16
-23,Sheep Grazing,sandy,16
-24,Sheep Grazing,sandy,14
+plot,block,treatment,richness
+1,1,Control,9
+2,1,Autumn Cut,12
+3,1,Spring Burn,9
+4,1,Sheep Grazing,13
+5,2,Control,8
+6,2,Autumn Cut,14
+7,2,Spring Burn,9
+8,2,Sheep Grazing,12
+9,3,Control,9
+10,3,Autumn Cut,13
+11,3,Spring Burn,10
+12,3,Sheep Grazing,14
+13,4,Control,10
+14,4,Autumn Cut,11
+15,4,Spring Burn,7
+16,4,Sheep Grazing,13
+17,5,Control,8
+18,5,Autumn Cut,13
+19,5,Spring Burn,7
+20,5,Sheep Grazing,12
