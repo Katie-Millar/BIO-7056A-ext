@@ -1,0 +1,492 @@
+---
+title: "Workshop 4 - Introduction to Design and Analysis of Experiments"
+date: today
+format:
+  html:
+    theme: yeti
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+    number-sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo    = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(webexercises)
+```
+
+## The route through today's workshop 
+
+
+## Randomisation and Replication 
+
+**Randomisation** is the process of randomly assigning treatments to experimental units. It eliminates systematic bias and ensures results are representative of the population.
+
+**Replication** is the use of multiple experimental units per treatment. It increases the reliability and precision of estimates, and allows you to separate true treatment effects from random variation.
+
+---
+
+## Understanding Experimental Design; the case study of vegatation.
+
+![](images/ch4.1.jpg){width=100% fig-align="center"}
+
+Today we will test our understanding of expeirmental design by looking at a case study of the effect of **vegetation management treatment** on **plant species richness** in a lowland grassland.
+
+Researchers have 20 grassland plots and want to test the effect of four different treatment on plant species richness. The treatments are:
+
+The four treatments are:
+
+- **T1**: Unmanaged control  
+- **T2**: Autumn cutting  
+- **T3**: Spring burning  
+- **T4**: Sheep grazing  
+
+They can only test one treatment per plot, and they want to have **5 replicates** of each treatment, so they need to know how they can decide which treatment goes in which plot. This will need to be done randomly. 
+
+**What is the purpose of randomisation in an experiment?**
+
+`r mcq(c("To ensure all plots are the same size", answer = "To eliminate systematic bias and ensure results are representative of the population", "To reduce the number of plots needed", "To make the experiment easier to manage"))`
+
+**What is replication in an experimental design?**
+
+`r mcq(c("Repeating the entire experiment from scratch", answer = "Using multiple experimental units per treatment to increase reliability and precision", "Applying the same treatment to every plot", "Taking measurements from the same plot twice"))`
+
+                                
+Using this case study, let's go through the terms we learnt in the main workbook to establish how we could assign which treatment to which plot. 
+
+### Completely Randomised Design (CRD)
+In a completely randomised design (CRD), treatments are assigned to experimental units **purely at random**, with no restrictions or grouping. It is the simplest valid experimental design.
+
+
+The treatment list is completely **shuffled at random** and assigned to plots. I will show you how this can be done in R code. 
+
+In R, the `sample()` function randomly shuffles the treatment list, and `set.seed()` ensures the result is reproducible.
+
+
+
+`r hide("Click to show: R code for plot randomisation")`                                                 
+
+
+```{r randomise}
+set.seed(99)
+
+treatments <- rep(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing"), each = 5)
+
+field_plan <- data.frame(
+  plot      = 1:20,
+  treatment = sample(treatments),
+  col       = rep(1:5, times = 4),
+  row       = rep(4:1, each = 5))
+
+field_plan
+```
+
+`r unhide()`                                 
+                                                                       
+We can visualise this this using `ggplot` to see the arrangement of the plots in the field:
+`r hide("Click to show: R code and field layout")`
+```{r field-plot, fig.cap="Figure 1. Randomised field layout. Each cell represents a 10m x 10m plot.", fig.width=7, fig.height=5}
+ggplot(field_plan, aes(x = col, y = row, fill = treatment)) +
+  geom_tile(colour = "white", linewidth = 1.2) +
+  geom_text(aes(label = plot), size = 4, fontface = "bold", colour = "white") +
+  labs(title = "Completely Randomised Design", fill = "Treatment") +
+  theme_minimal(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text  = element_blank()
+  )
+```
+
+`r unhide()`              
+    
+As you can see if you visualise it from afar, the treatments are mostly **scattered randomly** across the field. However, there are *some* of the same treatments right next to eachother and this could be considered a problem. 
+          
+Because treatments are assigned **purely at random**, there is no guarantee they will be spread evenly across the field. By chance, all five replicates of one treatment could end up on the same side. This would be a problem if those plots differed systematically in soil moisture, nutrient levels, or light availability, as any observed differences between treatments might simply reflect these **environmental gradients** rather than the treatments themselves.
+
+In our randomly assigned field layout above, we can see that the treatments are fairly evenly spread, but we were quite lucky in that example. Although what is below is done manually, it could be that random assignement may result in a field layout like below: 
+
+`r hide("Click to show: example of a poor CRD outcome")`
+
+```{r bad-crd, fig.cap="Figure 2. A poor CRD outcome — all Control plots have ended up on the left-hand side of the field by chance.", fig.width=7, fig.height=5}
+bad_plan <- data.frame(
+  plot      = 1:20,
+  treatment = c(rep("Control", 5),
+                rep("Autumn Cut", 5),
+                rep("Spring Burn", 5),
+                rep("Sheep Grazing", 5)),
+  col       = rep(1:5, times = 4),
+  row       = rep(4:1, each = 5)
+)
+
+bad_plan 
+
+ggplot(bad_plan, aes(x = col, y = row, fill = treatment)) +
+  geom_tile(colour = "white", linewidth = 1.2) +
+  geom_text(aes(label = plot), size = 4, fontface = "bold", colour = "white") +
+  labs(title = "A poor CRD outcome", fill = "Treatment") +
+  theme_minimal(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text  = element_blank()
+  )
+```
+
+`r unhide()`
+
+As written above, with a Completely Randomised Design, there is a risk that all replicates of one treatment could end up in the same part of the field (you can see an example of this above), in our case study, this would confound treatment effects with environmental gradients. This is the main weakness of a CRD.
+
+**In a Completely Randomised Design (CRD), how are treatments assigned?**
+
+`r mcq(c("Treatments are assigned in alphabetical order", "Treatments are assigned based on plot location", answer = "Treatments are assigned to experimental units purely at random", "Treatments are assigned within blocks"))`
+
+**What is the main weakness of a Completely Randomised Design?**
+
+`r longmcq(c(answer = "By chance, all replicates of one treatment could end up in the same part of the field, confounding treatment effects with environmental gradients.", "It requires too many plots to be practical.", "It cannot be used with more than two treatments.", "It does not allow for replication."))`
+
+### Blocked Design
+
+In a **blocked design**, the experimental area is divided into **blocks** that are as homogeneous as possible. Within each block, treatments are randomly assigned to the plots. This approach helps to control for variability due to environmental gradients or other factors that might affect the response variable.
+
+In plain terms: think of the field as being divided into **5 strips** (the repeats), each containing **4 plots** (the treatments). Within each strip, every treatment appears exactly once — but the order is randomised. So instead of scattering all 20 plots randomly across the whole field, we say:
+
+> *"In strip 1, one plot gets Control, one gets Autumn Cut, one gets Spring Burn, and one gets Sheep Grazing — but we randomly decide which plot gets which."*
+
+Then we do the same for strips 2, 3, 4 and 5.
+
+This guarantees that **every treatment appears in every part of the field**. If there is a moisture gradient running across the field, each treatment will experience a range of conditions — rather than one treatment accidentally getting all the wet plots.
+
+`r hide("Click to show: example of a blocked design outcome")`
+```{r rcbd, fig.cap="Figure 3. Randomised Complete Block Design. Each row is a block (strip) containing one replicate of each treatment, randomised within the block.", fig.width=7, fig.height=5}
+
+set.seed(99)
+
+blockeddesign_plan <- data.frame(
+  plot      = 1:20,
+  block     = rep(1:5, each = 4),
+  treatment = c(sample(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing")),
+                sample(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing")),
+                sample(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing")),
+                sample(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing")),
+                sample(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing"))),
+  col       = rep(1:4, times = 5),
+  row       = rep(5:1, each = 4)
+)
+
+ggplot(blockeddesign_plan, aes(x = col, y = row, fill = treatment)) +
+  geom_tile(colour = "white", linewidth = 1.2) +
+  geom_text(aes(label = paste0("Plot ", plot)), 
+            size = 3, fontface = "bold", colour = "white") +
+  # Add block labels on the left hand side
+  annotate("text", 
+           x = 0.3, 
+           y = 5:1, 
+           label = paste("Block", 1:5), 
+           hjust = 1, 
+           size = 3.5, 
+           fontface = "bold") +
+  # Add thick lines between blocks
+  geom_hline(yintercept = c(1.5, 2.5, 3.5, 4.5), 
+             linewidth = 1.5, colour = "black") +
+  labs(title = "Blocked Design", 
+       fill = "Treatment") +
+  theme_minimal(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text  = element_blank()
+  ) +
+  coord_cartesian(xlim = c(0.5, 4.5))
+```
+
+`r unhide()`
+
+The key advantage of a blocked design is that any differences between blocks — such as a moisture gradient running across the field — are **accounted for in the analysis** rather than absorbed into the error. This makes it much easier to detect true treatment effects. However, the blocked design cannot deal with trends across the experimental area. For example, there are still 3 sheep grazing treatments on the left hand side. Thus, we introduce; The Latin Square Design (LSD).
+
+**In a Randomised Complete Block Design, what is a block?**
+
+`r longmcq(c("A large plot that receives only one treatment", answer = "A group of experimental units that are as similar as possible, within which each treatment appears exactly once", "A completely randomised set of plots", "A plot that is left untreated as a control"))`
+
+**Why is RCBD an improvement over CRD?**
+
+`r longmcq(c("It requires fewer plots", answer = "It ensures every treatment appears in every part of the field, so environmental gradients are spread evenly across treatments", "It eliminates all sources of variation", "It allows more treatments to be tested simultaneously"))`
+
+**What is the key limitation of the Randomised Complete Block Design?**
+
+`r longmcq(c("It cannot be used with more than four treatments", "It requires too many replicates", answer = "It cannot account for trends that run across the experimental area in more than one direction", "It does not allow randomisation within blocks"))`
+
+
+### The Latin Square Design (LSD)
+The Latin Square Design (LSD) is a more complex design that can account for trends in two directions. Imagine that as well as a moisture gradient running left to right across the field, there is also a temperature gradient running top to bottom. A blocked design can control for one of these — but not both at the same time.
+
+The **Latin Square Design** solves this by controlling for variation in **two directions simultaneously** — across rows *and* across columns. Every treatment appears exactly once in each row and exactly once in each column
+
+::: {.callout-note}
+**The trade-off:** moving to a Latin Square means reducing the number of plots from 20 to 16 in our example. You also need the number of treatments to equal the number 
+of rows and columns, which limits flexibility.
+:::
+
+`r hide("Click to show: R code and Latin Square field layout")`
+
+```{r lsd, fig.cap="Figure 4. Latin Square Design. Each treatment appears exactly once in each row and each column.", fig.width=6, fig.height=5}
+
+lsd_plan <- data.frame(
+  col       = rep(1:4, times = 4),
+  row       = rep(4:1, each = 4),
+  treatment = c("Control",      "Autumn Cut",   "Spring Burn",  "Sheep Grazing",
+                "Autumn Cut",   "Control",      "Sheep Grazing","Spring Burn",
+                "Spring Burn",  "Sheep Grazing","Control",      "Autumn Cut",
+                "Sheep Grazing","Spring Burn",  "Autumn Cut",   "Control")
+)
+
+ggplot(lsd_plan, aes(x = col, y = row, fill = treatment)) +
+  geom_tile(colour = "white", linewidth = 1.2) +
+  geom_text(aes(label = treatment), size = 3, fontface = "bold", colour = "white") +
+  labs(title = "Latin Square Field Layout", fill = "Treatment") +
+  theme_minimal(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text  = element_blank()
+  )
+```
+
+`r unhide()`
+
+
+**In a Latin Square Design, how many times does each treatment appear in each row and column?**
+
+`r mcq(c("Never", "Twice", answer = "Exactly once", "As many times as there are treatments"))`
+
+**If you have 4 treatments and want to use a Latin Square Design, how many plots do you need?**
+
+`r mcq(c("20", "12", answer = "16", "8"))`
+
+**What is the key advantage of a Latin Square Design over RCBD?**
+
+`r longmcq(c("It requires fewer plots", "It allows more replicates per treatment", answer = "It controls for variation in two directions simultaneously — across both rows and columns", "It eliminates the need for randomisation"))`
+
+### Split Plot Design
+
+Sometimes practical constraints make full randomisation impossible. For example, imagine that our plots are **3m × 3m**, but the equipment needed to apply a treatment covers a minimum area of **12m × 3m**. We cannot apply a different treatment to each small plot individually — the equipment is simply too large.
+
+Instead, we apply one factor across the larger **12m × 3m** area (the **whole plot**), and then subdivide it into four smaller **3m × 3m** plots (the **split plots**) within which a second factor is randomised.
+
+In plain terms:
+
+> *One factor is applied to large areas because it has to be — the other is randomised within those large areas at a finer scale.*
+
+`r hide("Click to show: example of a split plot layout")`
+
+```{r split-plot, fig.cap="Figure 4. Split plot design. Grey and white represent the whole-plot factor; numbers represent the split-plot factor, which is completely randomised within each whole plot.", fig.width=7, fig.height=5}
+
+split_plan <- data.frame(
+  col        = rep(1:4, times = 4),
+  row        = rep(4:1, each = 4),
+  whole_plot = rep(c("A", "B"), each = 8),
+  sub_plot   = c(sample(1:4), sample(1:4),
+                 sample(1:4), sample(1:4))
+)
+
+ggplot(split_plan, aes(x = col, y = row, fill = whole_plot)) +
+  geom_tile(colour = "white", linewidth = 1.2) +
+  geom_text(aes(label = sub_plot), size = 4, fontface = "bold", colour = "white") +
+  scale_fill_manual(values = c("A" = "grey60", "B" = "grey90")) +
+  labs(title = "Split Plot Layout", fill = "Whole-plot factor") +
+  theme_minimal(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text  = element_blank()
+  )
+```
+
+`r unhide()`
+
+**Why might a researcher use a split plot design?**
+
+`r longmcq(c("Because they want to test only one treatment", "Because the plots are too small to measure", answer = "Because practical constraints — such as equipment size — prevent full randomisation across all plots", "Because they want to repeat measurements over time"))`
+
+**In a split plot design, which factor is applied to the larger whole plots?**
+
+`r longmcq(c("The factor that is easiest to measure", answer = "The factor that cannot be randomised at a fine scale due to practical constraints", "The factor with the most levels", "The factor that is least important to the study"))`
+
+
+### Repeated Measures Design
+
+A **repeated measures design** is used when measurements are taken from the **same experimental unit more than once** — for example, measuring the growth of an 
+animal at several points throughout its life.
+
+In plain terms:
+
+> *Rather than measuring different animals at each time point, you follow the same animals over time.*
+
+This matters because observations taken from the same individual are not independent of each other — an animal that is large at week 1 is likely to still be large at 
+week 4. The analysis must account for both the **treatment effect** and the **sequence of measurements over time**.
+
+::: {.callout-note}
+**Why does this matter?** Ignoring the repeated nature of the data and treating each time point as independent would inflate your sample size artificially and lead to 
+unreliable results.
+:::
+
+**Why must a repeated measures design be analysed differently from a standard design?**
+
+`r longmcq(c("Because there are too many data points", answer = "Because observations from the same individual are not independent — the analysis must account for both the treatment effect and the temporal sequence of measurements", "Because the treatments change over time", "Because replication is not possible in repeated measures"))`
+
+
+---
+
+::: {.callout-tip}
+**Summary of experimental designs:**
+
+| Design | Controls for | Use when |
+|---|---|---|
+| CRD | Nothing | Plots are uniform |
+| RCBD | Variation in one direction | One known gradient |
+| LSD | Variation in two directions | Two known gradients |
+| Split plot | Practical constraints on randomisation | Equipment or logistics limit full randomisation |
+| Repeated measures | Non-independence of repeated observations | Same unit measured multiple times |
+:::
+
+
+**What type of design is used when measurements are taken from the same experimental unit more than once?**
+
+`r mcq(c("Latin Square Design", "Split plot design", "Completely Randomised Design", answer = "Repeated measures design"))`
+
+**Which design would be most appropriate if you know there is a moisture gradient running across your field from left to right?**
+
+`r mcq(c("Completely Randomised Design", answer = "Randomised Complete Block Design", "Repeated measures design", "Split plot design"))`
+
+**Which design would be most appropriate if you know there are gradients running both left to right AND top to bottom across your field?**
+
+`r mcq(c("Completely Randomised Design", "Randomised Complete Block Design", answer = "Latin Square Design", "Repeated measures design"))`
+
+
+
+## Analysis of Variance (ANOVA)
+
+### What is ANOVA?
+
+So far we have used t-tests to compare the means of **two groups**. But what if we want to compare **more than two groups** at once? In our grassland experiment, we have four treatments: Control, Autumn Cut, Spring Burn, and Sheep Grazing. When we have more than two groups to compare, we use **ANOVA** (Analysis of Variance).
+
+ANOVA asks one overarching question:
+
+> *"Is there enough evidence to suggest that at least one treatment produces a different mean response from the others?"*
+
+### The Null Hypothesis
+
+Like all statistical tests, ANOVA starts with a **null hypothesis**: a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis states that:
+
+> *All treatment means are equal.*
+
+If the probability of this being true is less than 1 in 20 (p < 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others. 
+
+A good one to rememeber: 
+> *If P is significant, the null hypothesis is rejected.*
+
+
+### How Does ANOVA Work?
+
+ANOVA works by comparing two types of variation in the data:
+
+
+**1. Within-group variance: the background noise**
+
+Imagine you have 5 Control plots. You would expect them all to have a similar number of plant species, because they all received the same treatment. But in reality they will not be identical — one plot might have 8 species, another 10, another 7. This is the natural variation that exists even though the treatment was the same.
+
+> *Within-group variance measures how different plots are from each other within the same treatment group — the natural background noise that exists regardless of treatment.*
+
+To calculate this, we look at how far each plot's value is from its **group mean**, square those differences (so that negative and positive differences do not cancel each other out), and add them all up. This is called the **within-group sum of squares (SSW)**.
+
+A large within-group sum of squares means plots within the same treatment group are very different from each other — a lot of background noise. A small within-group sum of squares means plots within the same treatment group are very similar to each other — very little background noise.
+
+
+**2. Between-group variance: the treatment signal**
+
+Now imagine comparing the **average** species richness across the four treatment groups. If the treatments have no effect, these averages should all be similar. If treatments do have an effect, the averages will differ more than you would expect from background noise alone.
+
+> *Between-group variance measures how different the treatment group means are from each other — the signal we are hoping to detect.*
+
+In plain terms:
+> *If Sheep Grazing plots have on average 12 species and Control plots have on average 8 species, that difference contributes to the between-group variance.*
+
+### The F-ratio
+
+ANOVA combines these two estimates into a single value called the **F-ratio**:
+
+$$F = \frac{\text{Between-group variance}}{\text{Within-group variance}}$$
+
+Think of it as a **signal-to-noise ratio**. Here is what the F-ratio tells us:
+
+- If the between-group variance and within-group variance are **similar in size**, it will be difficult to detect significant differences between treatments — the treatment signal is being drowned out by background noise. In this case, F will be close to **1**.
+- If the within-group variance is **small relative to** the between-group variance, the treatment signal stands out clearly above the noise, and significant differences are more likely to be detected. In this case, F will be **much greater than 1**.
+
+In plain terms:
+
+> *The larger the F-ratio, the more convincing the evidence that at least one treatment is producing a genuinely different result.*
+
+For a given value of F, and for a given number of treatments and replicates, we can calculate the probability that the null hypothesis is true. As before, our threshold is 1 in 20 — if p < 0.05, we reject the null hypothesis and conclude that at least one treatment mean is significantly different from the others.
+
+::: {.callout-note}
+**Important:** a significant ANOVA result tells you that *at least one* treatment mean is different — but it does not tell you *which* treatment differs from which. For that, you need a **post-hoc test**, which we will cover shortly.
+:::
+
+### Running a One-Way ANOVA in R
+
+A one-way ANOVA tests the effect of **one factor** (in our case, treatment) on a response variable (species richness). In R, we use the `aov()` function:
+
+`r hide("Click to show: R code for one-way ANOVA")`
+
+```{r anova-example}
+# Simulate some species richness data for illustration
+set.seed(42)
+
+species_data <- data.frame(
+  treatment = rep(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing"), 
+                  each = 5),
+  richness  = c(rnorm(5, mean = 8,  sd = 2),
+                rnorm(5, mean = 12, sd = 2),
+                rnorm(5, mean = 10, sd = 2),
+                rnorm(5, mean = 14, sd = 2))
+)
+
+# Run the ANOVA
+anova_result <- aov(richness ~ treatment, data = species_data)
+summary(anova_result)
+```
+
+`r unhide()`
+
+The `summary()` output shows:
+
+- **Df** — degrees of freedom
+- **Sum Sq** — the sum of squares (a measure of total variation)
+- **Mean Sq** — the mean square (sum of squares divided by degrees of freedom)
+- **F value** — the F-ratio
+- **Pr(>F)** — the p-value
+
+If the p-value is less than 0.05, at least one treatment mean is significantly 
+different from the others.
+
+::: {.callout-tip}
+**Reminder:** ANOVA is a parametric test, so the same assumptions apply as for the 
+t-test — the data within each group should be approximately normally distributed, and 
+the variances should be approximately equal across groups. Check these with the 
+Shapiro-Wilk test and Levene's test before running ANOVA.
+:::
+

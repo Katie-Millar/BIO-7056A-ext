@@ -7,6 +7,7 @@ book:
     - index.qmd
     - 02-ext.qmd
     - 03-ext.qmd
+    - 04-ANOVA.qmd
     - appendix.qmd
 
 format:
