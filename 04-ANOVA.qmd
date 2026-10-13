@@ -530,25 +530,7 @@ In plain terms:
 > *Rather than measuring different plots at each time point, you follow the same 
 plots over time.*
 
-::: {.callout-note}
-**A simple analogy:** think of a doctor measuring a patient's weight at every 
-appointment. Rather than weighing a different patient each time, they follow the 
-same patient — so the measurements are not independent of each other.
-:::
 
-This matters because observations taken from the same plot over time are **not 
-independent** — a plot that has high species richness in year 1 is likely to still 
-have high species richness in year 2. If we ignored this and treated each time point 
-as a separate independent measurement, we would:
-
-- **Artificially inflate** our sample size
-- **Underestimate** the true variability in the data
-- Produce **unreliable results**
-
-The analysis of a repeated measures design therefore accounts for two things:
-
-1. The **treatment effect** — does species richness differ between treatments?
-2. The **temporal sequence** — how does species richness change over time?
 
 ::: {.callout-tip}
 **When to use a repeated measures design:**
@@ -577,11 +559,11 @@ measuring the same animal, plant, or plot at multiple time points.
 
 | Design | Controls for | Use when |
 |---|---|---|
-| CRD | Nothing | Plots are uniform |
-| RCBD | Variation in one direction | One known gradient |
-| LSD | Variation in two directions | Two known gradients |
-| Split plot | Practical constraints on randomisation | Equipment or logistics limit full randomisation |
-| Repeated measures | Non-independence of repeated observations | Same unit measured multiple times |
+| Completley Randomised Design | Nothing | Plots are uniform |
+| Blocked Design | Variation in one direction | One known gradient |
+| Latin Square Design | Variation in two directions | Two known gradients |
+| Split Plot Design | Practical constraints on randomisation | Equipment or logistics limit full randomisation |
+| Repeated Measures Design | Non-independence of repeated observations | Same unit measured multiple times |
 :::
 
 
@@ -608,8 +590,12 @@ more than two groups to compare, we use **ANOVA** (Analysis of Variance).
 
 ANOVA asks one overarching question:
 
-> *"Is there enough evidence to suggest that at least one treatment produces a 
-different mean response from the others?"*
+> *"Is there enough evidence to suggest that at least one treatment produces a different mean response from the others?"*
+
+**Why can we not just run multiple t-tests to compare all four treatments?**
+
+`r longmcq(c("Because t-tests can only be used with two groups and ANOVA is always more accurate.", "Because t-tests do not produce p-values.", answer = "Running multiple t-tests increases the chance of a false positive result, the more tests you run, the more likely you are to find a significant result by chance alone.", "Because ANOVA is simpler to run than multiple t-tests."))`
+
 
 ### The Null Hypothesis
 
@@ -625,6 +611,16 @@ the others.
 
 > *If p is significant, the null hypothesis is rejected.*
 
+
+**In our grassland experiment, we are testing whether vegetation treatment affects species richness. What is the null hypothesis?**
+
+`r longmcq(c("At least one treatment produces a different mean species richness.", "Species richness is normally distributed within each treatment group.", "The variances of all four treatment groups are equal.", answer = "All four treatment means are equal, there is no difference in species richness between Control, Autumn Cut, Spring Burn and Sheep Grazing."))`
+
+**If p = 0.032 in an ANOVA, what do we conclude?**
+
+`r longmcq(c(answer = "We reject the null hypothesis: at least one treatment mean is significantly different from the others.", "We accept the null hypothesis: all treatment means are equal.", "We conclude that all treatments are significantly different from each other.", "We conclude that the data are not normally distributed."))`
+
+
 ### How Does ANOVA Work?
 
 ANOVA works by comparing two types of variation in the data:
@@ -633,17 +629,30 @@ ANOVA works by comparing two types of variation in the data:
 
 Imagine you have 5 Control plots. You would expect them all to have a similar number 
 of plant species, because they all received the same treatment. But in reality they 
-will not be identical — one plot might have 8 species, another 10, another 7. This 
+will not be identical, one plot might have 8 species, another 10, another 7. This 
 is the natural variation that exists even though the treatment was the same.
 
 > *Within-group variance measures how different plots are from each other within the 
-same treatment group — the natural background noise that exists regardless of 
+same treatment group, the natural background noise that exists regardless of 
 treatment.*
 
 To calculate this, we look at how far each plot's value is from its **group mean**, 
 square those differences (so that negative and positive differences do not cancel 
 each other out), and add them all up. This is called the **within-group sum of 
 squares (SSW)**.
+
+::: {.callout-note}
+**Important:** a significant ANOVA result tells you that *at least one* treatment mean is different, but not *which* ones differ. For that, you need a **post-hoc test.**
+:::
+
+**Which of the following would contribute to within-group variance?**
+
+`r longmcq(c(answer = "Two Control plots having different species richness values, even though they received the same treatment.", "The mean species richness of Control plots being higher than the mean of Sheep Grazing plots.", "The F-ratio being greater than 1.", "The Shapiro-Wilk test returning p > 0.05."))`
+
+**If the within-group sum of squares is very large, what does this suggest?**
+
+`r longmcq(c("The treatments are having a strong effect on species richness.", answer = "There is a lot of natural background variation within treatment groups, plots receiving the same treatment are very different from each other.", "The F-ratio will be large and the result will be significant.", "The data are not normally distributed."))`
+
 
 **2. Between-group variance: the treatment signal**
 
@@ -652,8 +661,16 @@ groups. If the treatments have no effect, these averages should all be similar. 
 treatments do have an effect, the averages will differ more than you would expect 
 from background noise alone.
 
-> *Between-group variance measures how different the treatment group means are from 
-each other — the signal we are hoping to detect.*
+> *Between-group variance measures how different the treatment group means are from each other: the signal we are hoping to detect.*
+
+**Which of the following would contribute to between-group variance?**
+
+`r longmcq(c("Two Control plots having slightly different species richness values.", "The standard deviation within the Autumn Cut group being large.", "The Shapiro-Wilk test returning p < 0.05 for one group.", answer = "The mean species richness of Sheep Grazing plots (12.8) being much higher than the mean of Control plots (8.8)."))`
+
+**If the between-group variance is similar in size to the within-group variance, what does this suggest?**
+
+`r longmcq(c("The treatments are definitely having a significant effect.", answer = "The treatments are probably not having a meaningful effect — the differences between group means are no larger than the background noise within groups.", "The data are normally distributed.", "The F-ratio will be much greater than 1."))`
+
 
 ### The F-ratio
 
@@ -661,19 +678,25 @@ ANOVA combines these two estimates into a single value called the **F-ratio**:
 
 $$F = \frac{\text{Between-group variance}}{\text{Within-group variance}}$$
 
-- If the two variances are **similar in size**, F will be close to **1** — the 
-treatment signal is being drowned out by background noise
-- If the between-group variance is **much larger** than the within-group variance, 
-F will be **greater than 1** — the treatment signal stands out clearly
+- If the two variances are **similar in size**, F will be close to **1**, meaning the treatment signal is being drowned out by background noise
+- If the between-group variance is **much larger** than the within-group variance, F will be **greater than 1** — the treatment signal stands out clearly
 
-> *The larger the F-ratio, the more convincing the evidence that at least one 
-treatment is producing a genuinely different result.*
+> *The larger the F-ratio, the more convincing the evidence that at least one treatment is producing a genuinely different result.*
 
-::: {.callout-note}
-**Important:** a significant ANOVA result tells you that *at least one* treatment 
-mean is different — but not *which* ones differ. For that, you need a 
-**post-hoc test**, which we will cover shortly.
-:::
+
+**If the F-ratio is close to 1, what does this tell us?**
+
+`r longmcq(c("The result is definitely significant.", "The null hypothesis is definitely true.", answer = "The between-group variance and within-group variance are similar in size, there is little evidence of a treatment effect.", "The data are not normally distributed."))`
+
+**If the F-ratio is 15.3, what does this suggest?**
+
+`r longmcq(c(answer = "The between-group variance is much larger than the within-group variance, there is strong evidence that at least one treatment is producing a different result.", "The p-value is definitely less than 0.05.", "All four treatment means are significantly different from each other.", "The within-group variance is larger than the between-group variance."))`
+
+**A student says: 'A significant ANOVA result proves that Sheep Grazing produces higher species richness than all other treatments.' Is this correct?**
+
+`r longmcq(c("Yes, a significant ANOVA result tells us exactly which treatments differ.", answer = "No, a significant ANOVA result only tells us that at least one treatment mean is different. We need a post-hoc test to find out which specific treatments differ from each other.", "Yes, the treatment with the highest mean is always significantly different from all others.", "No, a significant ANOVA result means none of the treatments differ."))`
+
+
 
 ---
 

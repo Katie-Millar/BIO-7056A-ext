@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -68,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix.html" rel="next">
+<link href="./04-ANOVA.html" rel="next">
 <link href="./02-ext.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -76,10 +79,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dda8771d043933e00db2387e2c02d373.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -167,8 +170,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./04-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -313,24 +322,24 @@ Tests whether the difference between two means is <strong>larger than sampling e
 <p><strong>3. The true population mean turned out to be 13.1, but the sample mean was 14.2. This difference is best described as:</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">A calculation mistake</option><option value="answer">Sampling error</option><option value="">A statistically significant effect</option><option value="">The standard deviation</option></select></p>
 <p><strong>4. A colleague argues: <em>“Since our sample mean (14.2) differs from the true population mean (13.1), our sampling method must have been biased.”</em> Which response best evaluates this claim?</strong></p>
-<div id="radio_WPPEWBNNPA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WPPEWBNNPA" value=""> <span>Correct - any difference between sample and population mean indicates bias in how trees were selected.</span></label><label><input type="radio" autocomplete="off" name="radio_WPPEWBNNPA" value="answer"> <span>Incorrect - a difference between a sample statistic and the true parameter is expected even with random, unbiased sampling, because of sampling error; only a systematic pattern (e.g.&nbsp;always missing certain trees) would indicate bias.</span></label><label><input type="radio" autocomplete="off" name="radio_WPPEWBNNPA" value=""> <span>Incorrect - the difference is too small to matter, so no explanation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_WPPEWBNNPA" value=""> <span>Correct, but only because the sample size (40) was too small to ever be unbiased.</span></label>
+<div id="radio_UFRGPSBAVS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UFRGPSBAVS" value=""> <span>Correct - any difference between sample and population mean indicates bias in how trees were selected.</span></label><label><input type="radio" autocomplete="off" name="radio_UFRGPSBAVS" value="answer"> <span>Incorrect - a difference between a sample statistic and the true parameter is expected even with random, unbiased sampling, because of sampling error; only a systematic pattern (e.g.&nbsp;always missing certain trees) would indicate bias.</span></label><label><input type="radio" autocomplete="off" name="radio_UFRGPSBAVS" value=""> <span>Incorrect - the difference is too small to matter, so no explanation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_UFRGPSBAVS" value=""> <span>Correct, but only because the sample size (40) was too small to ever be unbiased.</span></label>
 </div>
 <p><strong>5. “The team calculates a 95% confidence interval of 12.0–16.4 flies/tree. Which of the following is the correct interpretation?”</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">95% probability any single tree has 12.0-16.4 flies</option><option value="">95% of sampled trees had 12.0-16.4 flies</option><option value="answer">We are 95% confident this range contains the true population mean</option><option value="">The population mean is definitely in this range</option></select></p>
 <p><strong>6. “Comparing mean fly counts between edge trees and interior trees calls for which statistical test?”</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">One-sample t-test</option><option value="answer">Two-sample t-test</option><option value="">A confidence interval alone</option><option value="">Calculating variance only</option></select></p>
 <p><strong>7. A student claims p = 0.04 for the edge-vs-interior test “proves edge trees definitely have more flies, and the effect must be biologically important.” Is there any flaw with this statement?</strong></p>
-<div id="radio_LYPNTDSQKY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LYPNTDSQKY" value=""> <span>No flaw - p &lt; 0.05 definitely proves both statistical and biological significance.</span></label><label><input type="radio" autocomplete="off" name="radio_LYPNTDSQKY" value="answer"> <span>Yes - statistical significance (p &lt; 0.05) means the difference is unlikely to be due to sampling error alone, but it does not prove anything with certainty, nor does it tell us whether the effect is biologically meaningful.</span></label><label><input type="radio" autocomplete="off" name="radio_LYPNTDSQKY" value=""> <span>Yes - p = 0.03 actually indicates no significant difference.</span></label><label><input type="radio" autocomplete="off" name="radio_LYPNTDSQKY" value=""> <span>Yes - only because the sample sizes for edge and interior trees were unequal.</span></label>
+<div id="radio_WAZDCLJSJL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WAZDCLJSJL" value=""> <span>No flaw - p &lt; 0.05 definitely proves both statistical and biological significance.</span></label><label><input type="radio" autocomplete="off" name="radio_WAZDCLJSJL" value="answer"> <span>Yes - statistical significance (p &lt; 0.05) means the difference is unlikely to be due to sampling error alone, but it does not prove anything with certainty, nor does it tell us whether the effect is biologically meaningful.</span></label><label><input type="radio" autocomplete="off" name="radio_WAZDCLJSJL" value=""> <span>Yes - p = 0.03 actually indicates no significant difference.</span></label><label><input type="radio" autocomplete="off" name="radio_WAZDCLJSJL" value=""> <span>Yes - only because the sample sizes for edge and interior trees were unequal.</span></label>
 </div>
 </section>
 <section id="parametric-and-non-parametric-tests" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="parametric-and-non-parametric-tests"><span class="header-section-number">3.5</span> Parametric and Non-Parametric Tests</h2>
 <p><img src="images/ch3-3.png" class="img-fluid quarto-figure quarto-figure-center" style="width:100.0%"> We learnt in the main workbook about parametric and non-parametric tests, and how to choose between them.</p>
 <p><strong>What is a parametric test and what is a non-parametric test?</strong></p>
-<div id="radio_VWJUMJTUPG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VWJUMJTUPG" value=""> <span>A parametric test makes no assumption about the distribution of the data; a non-parametric test assumes the data follow a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_VWJUMJTUPG" value=""> <span>Both parametric and non-parametric tests assume the data follow a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_VWJUMJTUPG" value=""> <span>Neither parametric nor non-parametric tests make any assumptions about the distribution of the data.</span></label><label><input type="radio" autocomplete="off" name="radio_VWJUMJTUPG" value="answer"> <span>A parametric test assumes the data follow a normal distribution; a non-parametric test makes no assumption about the distribution of the data.</span></label>
+<div id="radio_HOIXCCPJWD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HOIXCCPJWD" value=""> <span>A parametric test makes no assumption about the distribution of the data; a non-parametric test assumes the data follow a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_HOIXCCPJWD" value=""> <span>Both parametric and non-parametric tests assume the data follow a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_HOIXCCPJWD" value=""> <span>Neither parametric nor non-parametric tests make any assumptions about the distribution of the data.</span></label><label><input type="radio" autocomplete="off" name="radio_HOIXCCPJWD" value="answer"> <span>A parametric test assumes the data follow a normal distribution; a non-parametric test makes no assumption about the distribution of the data.</span></label>
 </div>
 <p>To summarise, <strong>parametric tests</strong> (like the t-test) assume that the underlying data are normally distributed. We have previously checked the visualisation of the data using <strong>histograms</strong> these show the skew of the data. If the data are skewed, that assumption may be violated, which can make the test’s results unreliable. However, this does not automatically mean the test result is wrong — it depends on how much the skew is actually affecting the outcome, and we learnt that we can check in two ways:</p>
 <p><strong>(1) Remove the influential point(s):</strong> Re-run the test excluding the datapoint(s) responsible for the skew, and compare the results. If the conclusion changes, the skew is likely having a meaningful effect on your result.<br>
@@ -413,8 +422,8 @@ Click to show examples of checking out the data
 </div>
 <p>Looking at this histogram, the data do not follow a neat bell-shaped curve. Instead, there appear to be <strong>two clusters</strong> — a group of trees with relatively low fly counts (around 1–5 flies), and a larger group with higher fly counts (around 13–17 flies), with a noticeable dip in between. This raises two questions: are the data normally distributed, and why do two groups appear to exist? We can begin to explore this by splitting the data by <strong>tree type</strong> (edge vs interior) and <strong>sex</strong> (female vs male).</p>
 <p><strong>Based on this histogram, what would you say about the distribution of fly counts?</strong></p>
-<div id="radio_SEAHLRCDED" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SEAHLRCDED" value="answer"> <span>The data appear bimodal and may not be normally distributed, suggesting further checks are needed before choosing a statistical test.</span></label><label><input type="radio" autocomplete="off" name="radio_SEAHLRCDED" value=""> <span>The data are clearly normally distributed and a parametric test can be used straight away.</span></label><label><input type="radio" autocomplete="off" name="radio_SEAHLRCDED" value=""> <span>The data are strongly right-skewed, so a non-parametric test must be used.</span></label><label><input type="radio" autocomplete="off" name="radio_SEAHLRCDED" value=""> <span>The histogram tells us nothing useful about the distribution.</span></label>
+<div id="radio_TNGZOLMGZP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TNGZOLMGZP" value="answer"> <span>The data appear bimodal and may not be normally distributed, suggesting further checks are needed before choosing a statistical test.</span></label><label><input type="radio" autocomplete="off" name="radio_TNGZOLMGZP" value=""> <span>The data are clearly normally distributed and a parametric test can be used straight away.</span></label><label><input type="radio" autocomplete="off" name="radio_TNGZOLMGZP" value=""> <span>The data are strongly right-skewed, so a non-parametric test must be used.</span></label><label><input type="radio" autocomplete="off" name="radio_TNGZOLMGZP" value=""> <span>The histogram tells us nothing useful about the distribution.</span></label>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>medfly_orchard_histogram_tree_type <span class="ot">&lt;-</span> medfly_orchard <span class="sc">%&gt;%</span></span>
@@ -455,8 +464,8 @@ Click to show examples of checking out the data
 </div>
 <p>Female trees show a clearer peak around 15–17 flies, while male trees are more spread out with no obvious pattern — though this may partly reflect the smaller male sample size (n = 15) rather than a true biological difference. Neither group shows a perfectly normal distribution, which is why we will now move on to more formal checks.</p>
 <p><strong>Why might the male histogram look more irregular than the female histogram?</strong></p>
-<div id="radio_BINLJIAMAI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BINLJIAMAI" value="answer"> <span>The male group has a smaller sample size (n = 15), so each bar represents fewer trees and the distribution looks less smooth.</span></label><label><input type="radio" autocomplete="off" name="radio_BINLJIAMAI" value=""> <span>Male flies are naturally more variable than female flies.</span></label><label><input type="radio" autocomplete="off" name="radio_BINLJIAMAI" value=""> <span>The binwidth is too large for the male group.</span></label><label><input type="radio" autocomplete="off" name="radio_BINLJIAMAI" value=""> <span>The male data contain errors and should be removed.</span></label>
+<div id="radio_FJYHQHWASS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FJYHQHWASS" value="answer"> <span>The male group has a smaller sample size (n = 15), so each bar represents fewer trees and the distribution looks less smooth.</span></label><label><input type="radio" autocomplete="off" name="radio_FJYHQHWASS" value=""> <span>Male flies are naturally more variable than female flies.</span></label><label><input type="radio" autocomplete="off" name="radio_FJYHQHWASS" value=""> <span>The binwidth is too large for the male group.</span></label><label><input type="radio" autocomplete="off" name="radio_FJYHQHWASS" value=""> <span>The male data contain errors and should be removed.</span></label>
 </div>
 <p>Having generated histograms for each group, we can see that the data may not be normally distributed. However, histograms alone are not sufficient to confirm normality, particularly with small sample sizes.</p>
 <p>A more reliable visual tool is a <strong>Q-Q plot (quantile-quantile plot)</strong>. This sounds more complicated than it is — all it does is plot your actual data values against what you would expect to see if the data were perfectly normal. If your data are normally distributed, the points will fall roughly along a straight diagonal line. If the points curve away from the line, this suggests the data are not normally distributed.</p>
@@ -497,8 +506,8 @@ Click to show examples of checking out the data
 </div>
 </div>
 <p><strong>Overall, what do the Q-Q plots suggest about the distribution of fly counts across all four groups?</strong></p>
-<div id="radio_WTCPXMMSXF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WTCPXMMSXF" value="answer"> <span>None of the groups show dramatic departures from normality, but visual inspection alone is not sufficient to confirm this; a formal test is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_WTCPXMMSXF" value=""> <span>All four groups are clearly normally distributed and no further checks are needed.</span></label><label><input type="radio" autocomplete="off" name="radio_WTCPXMMSXF" value=""> <span>All four groups show strong departures from normality and a non-parametric test should be used immediately.</span></label><label><input type="radio" autocomplete="off" name="radio_WTCPXMMSXF" value=""> <span>Q-Q plots cannot be used to assess normality.</span></label>
+<div id="radio_UMOQGAUEEZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UMOQGAUEEZ" value="answer"> <span>None of the groups show dramatic departures from normality, but visual inspection alone is not sufficient to confirm this; a formal test is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_UMOQGAUEEZ" value=""> <span>All four groups are clearly normally distributed and no further checks are needed.</span></label><label><input type="radio" autocomplete="off" name="radio_UMOQGAUEEZ" value=""> <span>All four groups show strong departures from normality and a non-parametric test should be used immediately.</span></label><label><input type="radio" autocomplete="off" name="radio_UMOQGAUEEZ" value=""> <span>Q-Q plots cannot be used to assess normality.</span></label>
 </div>
 <p>Neither group shows a perfectly straight line, but none show dramatic departures from normality either. However, visual inspection alone is not enough — we should confirm this with a formal test. We will now use the <strong>Shapiro-Wilk test</strong> to formally assess whether each group is normally distributed, which will help us decide whether a parametric t-test is appropriate.</p>
 <p>The <strong>Shapiro-Wilk test</strong> formally tests whether a dataset is normally distributed. It produces a <strong>W statistic</strong> and a <strong>p-value</strong>:</p>
@@ -618,8 +627,8 @@ Note
 </div>
 </div>
 <p><strong>Based on the t-test results, which statement is correct?</strong></p>
-<div id="radio_KTNCVKUSJP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KTNCVKUSJP" value="answer"> <span>Tree type is significantly associated with fly count (p = 0.014), but there is no significant association with sex (p = 0.240).</span></label><label><input type="radio" autocomplete="off" name="radio_KTNCVKUSJP" value=""> <span>Both tree type and sex are significantly associated with fly count.</span></label><label><input type="radio" autocomplete="off" name="radio_KTNCVKUSJP" value=""> <span>Neither tree type nor sex are significantly associated with fly count.</span></label><label><input type="radio" autocomplete="off" name="radio_KTNCVKUSJP" value=""> <span>Sex is significantly associated with fly count but tree type is not.</span></label>
+<div id="radio_HUYYUNEPRK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HUYYUNEPRK" value="answer"> <span>Tree type is significantly associated with fly count (p = 0.014), but there is no significant association with sex (p = 0.240).</span></label><label><input type="radio" autocomplete="off" name="radio_HUYYUNEPRK" value=""> <span>Both tree type and sex are significantly associated with fly count.</span></label><label><input type="radio" autocomplete="off" name="radio_HUYYUNEPRK" value=""> <span>Neither tree type nor sex are significantly associated with fly count.</span></label><label><input type="radio" autocomplete="off" name="radio_HUYYUNEPRK" value=""> <span>Sex is significantly associated with fly count but tree type is not.</span></label>
 </div>
 </section>
 </section>
@@ -1013,16 +1022,16 @@ window.onload = function() {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -1379,8 +1388,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix.html" class="pagination-link" aria-label="Appendix - Knowing your R &amp; Statistics">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-ANOVA.html" class="pagination-link" aria-label="Workshop 4 - Introduction to Design and Analysis of Experiments">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
