@@ -382,7 +382,7 @@ unreliable results.
 
 ### What is ANOVA?
 
-So far we have used t-tests to compare the means of **two groups**. But what if we want to compare **more than two groups** at once? In our grassland experiment, we have four treatments — Control, Autumn Cut, Spring Burn, and Sheep Grazing. When we have more than two groups to compare, we use **ANOVA** (Analysis of Variance).
+So far we have used t-tests to compare the means of **two groups**. But what if we want to compare **more than two groups** at once? In our grassland experiment, we have four treatments: Control, Autumn Cut, Spring Burn, and Sheep Grazing. When we have more than two groups to compare, we use **ANOVA** (Analysis of Variance).
 
 ANOVA asks one overarching question:
 
@@ -390,34 +390,33 @@ ANOVA asks one overarching question:
 
 ### The Null Hypothesis
 
-Like all statistical tests, ANOVA starts with a **null hypothesis** — a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis states that:
+Like all statistical tests, ANOVA starts with a **null hypothesis**: a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis states that:
 
 > *All treatment means are equal.*
 
-If the probability of this being true is less than 1 in 20 (p < 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others.
+If the probability of this being true is less than 1 in 20 (p < 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others. 
+
+A good one to rememeber: 
+> *If P is significant, the null hypothesis is rejected.*
+
 
 ### How Does ANOVA Work?
 
 ANOVA works by comparing two types of variation in the data:
 
----
 
-**1. Within-group variance — the background noise**
+**1. Within-group variance: the background noise**
 
 Imagine you have 5 Control plots. You would expect them all to have a similar number of plant species, because they all received the same treatment. But in reality they will not be identical — one plot might have 8 species, another 10, another 7. This is the natural variation that exists even though the treatment was the same.
 
 > *Within-group variance measures how different plots are from each other within the same treatment group — the natural background noise that exists regardless of treatment.*
 
-To calculate this, we look at how far each plot's value is from its **group mean**, square those differences (so that negative and positive differences do not cancel each other out), and add them all up. This is called the **within-group sum of squares**.
-
-In plain terms:
-
-> *For each plot, ask: "how far is this plot from the average for its treatment group?" Square that distance, then add all those squared distances together.*
+To calculate this, we look at how far each plot's value is from its **group mean**, square those differences (so that negative and positive differences do not cancel each other out), and add them all up. This is called the **within-group sum of squares (SSW)**.
 
 A large within-group sum of squares means plots within the same treatment group are very different from each other — a lot of background noise. A small within-group sum of squares means plots within the same treatment group are very similar to each other — very little background noise.
 
 
-**2. Between-group variance — the treatment signal**
+**2. Between-group variance: the treatment signal**
 
 Now imagine comparing the **average** species richness across the four treatment groups. If the treatments have no effect, these averages should all be similar. If treatments do have an effect, the averages will differ more than you would expect from background noise alone.
 

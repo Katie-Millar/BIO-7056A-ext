@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-12">
+<meta name="dcterms.date" content="2026-10-13">
 
-<title>Workshop 4 - Introduction to Design and Analysis of Experiments</title>
+<title>4&nbsp; Workshop 4 - Introduction to Design and Analysis of Experiments – Statistics for Biologists - Extension Coursebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -62,17 +65,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="04-ANOVA_files/libs/clipboard/clipboard.min.js"></script>
-<script src="04-ANOVA_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="04-ANOVA_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="04-ANOVA_files/libs/quarto-html/popper.min.js"></script>
-<script src="04-ANOVA_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="04-ANOVA_files/libs/quarto-html/anchor.min.js"></script>
-<link href="04-ANOVA_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="04-ANOVA_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="04-ANOVA_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="04-ANOVA_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="04-ANOVA_files/libs/bootstrap/bootstrap-19216fa8bb71272e13fc45993650fab3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./appendix.html" rel="next">
+<link href="./03-ext.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -122,40 +160,107 @@ window.Quarto = {
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-ANOVA.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics for Biologists - Extension Coursebook</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducing this Workbook</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Workshop 2 - Exploratory Data Analysis - Extension</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-ext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ANOVA.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#the-route-through-todays-workshop" id="toc-the-route-through-todays-workshop" class="nav-link active" data-scroll-target="#the-route-through-todays-workshop"><span class="header-section-number">1</span> The route through today’s workshop</a></li>
-  <li><a href="#randomisation-and-replication" id="toc-randomisation-and-replication" class="nav-link" data-scroll-target="#randomisation-and-replication"><span class="header-section-number">2</span> Randomisation and Replication</a></li>
-  <li><a href="#understanding-experimental-design-the-case-study-of-vegatation." id="toc-understanding-experimental-design-the-case-study-of-vegatation." class="nav-link" data-scroll-target="#understanding-experimental-design-the-case-study-of-vegatation."><span class="header-section-number">3</span> Understanding Experimental Design; the case study of vegatation.</a>
+  <li><a href="#the-route-through-todays-workshop" id="toc-the-route-through-todays-workshop" class="nav-link active" data-scroll-target="#the-route-through-todays-workshop"><span class="header-section-number">4.1</span> The route through today’s workshop</a></li>
+  <li><a href="#randomisation-and-replication" id="toc-randomisation-and-replication" class="nav-link" data-scroll-target="#randomisation-and-replication"><span class="header-section-number">4.2</span> Randomisation and Replication</a></li>
+  <li><a href="#understanding-experimental-design-the-case-study-of-vegatation." id="toc-understanding-experimental-design-the-case-study-of-vegatation." class="nav-link" data-scroll-target="#understanding-experimental-design-the-case-study-of-vegatation."><span class="header-section-number">4.3</span> Understanding Experimental Design; the case study of vegatation.</a>
   <ul class="collapse">
-  <li><a href="#completely-randomised-design-crd" id="toc-completely-randomised-design-crd" class="nav-link" data-scroll-target="#completely-randomised-design-crd"><span class="header-section-number">3.1</span> Completely Randomised Design (CRD)</a></li>
-  <li><a href="#blocked-design" id="toc-blocked-design" class="nav-link" data-scroll-target="#blocked-design"><span class="header-section-number">3.2</span> Blocked Design</a></li>
-  <li><a href="#the-latin-square-design-lsd" id="toc-the-latin-square-design-lsd" class="nav-link" data-scroll-target="#the-latin-square-design-lsd"><span class="header-section-number">3.3</span> The Latin Square Design (LSD)</a></li>
-  <li><a href="#split-plot-design" id="toc-split-plot-design" class="nav-link" data-scroll-target="#split-plot-design"><span class="header-section-number">3.4</span> Split Plot Design</a></li>
-  <li><a href="#repeated-measures-design" id="toc-repeated-measures-design" class="nav-link" data-scroll-target="#repeated-measures-design"><span class="header-section-number">3.5</span> Repeated Measures Design</a></li>
+  <li><a href="#completely-randomised-design-crd" id="toc-completely-randomised-design-crd" class="nav-link" data-scroll-target="#completely-randomised-design-crd"><span class="header-section-number">4.3.1</span> Completely Randomised Design (CRD)</a></li>
+  <li><a href="#blocked-design" id="toc-blocked-design" class="nav-link" data-scroll-target="#blocked-design"><span class="header-section-number">4.3.2</span> Blocked Design</a></li>
+  <li><a href="#the-latin-square-design-lsd" id="toc-the-latin-square-design-lsd" class="nav-link" data-scroll-target="#the-latin-square-design-lsd"><span class="header-section-number">4.3.3</span> The Latin Square Design (LSD)</a></li>
+  <li><a href="#split-plot-design" id="toc-split-plot-design" class="nav-link" data-scroll-target="#split-plot-design"><span class="header-section-number">4.3.4</span> Split Plot Design</a></li>
+  <li><a href="#repeated-measures-design" id="toc-repeated-measures-design" class="nav-link" data-scroll-target="#repeated-measures-design"><span class="header-section-number">4.3.5</span> Repeated Measures Design</a></li>
   </ul></li>
-  <li><a href="#analysis-of-variance-anova" id="toc-analysis-of-variance-anova" class="nav-link" data-scroll-target="#analysis-of-variance-anova"><span class="header-section-number">4</span> Analysis of Variance (ANOVA)</a>
+  <li><a href="#analysis-of-variance-anova" id="toc-analysis-of-variance-anova" class="nav-link" data-scroll-target="#analysis-of-variance-anova"><span class="header-section-number">4.4</span> Analysis of Variance (ANOVA)</a>
   <ul class="collapse">
-  <li><a href="#what-is-anova" id="toc-what-is-anova" class="nav-link" data-scroll-target="#what-is-anova"><span class="header-section-number">4.1</span> What is ANOVA?</a></li>
-  <li><a href="#the-null-hypothesis" id="toc-the-null-hypothesis" class="nav-link" data-scroll-target="#the-null-hypothesis"><span class="header-section-number">4.2</span> The Null Hypothesis</a></li>
-  <li><a href="#how-does-anova-work" id="toc-how-does-anova-work" class="nav-link" data-scroll-target="#how-does-anova-work"><span class="header-section-number">4.3</span> How Does ANOVA Work?</a></li>
-  <li><a href="#the-f-ratio" id="toc-the-f-ratio" class="nav-link" data-scroll-target="#the-f-ratio"><span class="header-section-number">4.4</span> The F-ratio</a></li>
-  <li><a href="#running-a-one-way-anova-in-r" id="toc-running-a-one-way-anova-in-r" class="nav-link" data-scroll-target="#running-a-one-way-anova-in-r"><span class="header-section-number">4.5</span> Running a One-Way ANOVA in R</a></li>
+  <li><a href="#what-is-anova" id="toc-what-is-anova" class="nav-link" data-scroll-target="#what-is-anova"><span class="header-section-number">4.4.1</span> What is ANOVA?</a></li>
+  <li><a href="#the-null-hypothesis" id="toc-the-null-hypothesis" class="nav-link" data-scroll-target="#the-null-hypothesis"><span class="header-section-number">4.4.2</span> The Null Hypothesis</a></li>
+  <li><a href="#how-does-anova-work" id="toc-how-does-anova-work" class="nav-link" data-scroll-target="#how-does-anova-work"><span class="header-section-number">4.4.3</span> How Does ANOVA Work?</a></li>
+  <li><a href="#the-f-ratio" id="toc-the-f-ratio" class="nav-link" data-scroll-target="#the-f-ratio"><span class="header-section-number">4.4.4</span> The F-ratio</a></li>
+  <li><a href="#running-a-one-way-anova-in-r" id="toc-running-a-one-way-anova-in-r" class="nav-link" data-scroll-target="#running-a-one-way-anova-in-r"><span class="header-section-number">4.4.5</span> Running a One-Way ANOVA in R</a></li>
   </ul></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Workshop 4 - Introduction to Design and Analysis of Experiments</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -166,7 +271,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 12, 2026</p>
+      <p class="date">October 13, 2026</p>
     </div>
   </div>
   
@@ -178,17 +283,17 @@ window.Quarto = {
 </header>
 
 
-<section id="the-route-through-todays-workshop" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="the-route-through-todays-workshop"><span class="header-section-number">1</span> The route through today’s workshop</h2>
+<section id="the-route-through-todays-workshop" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="the-route-through-todays-workshop"><span class="header-section-number">4.1</span> The route through today’s workshop</h2>
 </section>
-<section id="randomisation-and-replication" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="randomisation-and-replication"><span class="header-section-number">2</span> Randomisation and Replication</h2>
+<section id="randomisation-and-replication" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="randomisation-and-replication"><span class="header-section-number">4.2</span> Randomisation and Replication</h2>
 <p><strong>Randomisation</strong> is the process of randomly assigning treatments to experimental units. It eliminates systematic bias and ensures results are representative of the population.</p>
 <p><strong>Replication</strong> is the use of multiple experimental units per treatment. It increases the reliability and precision of estimates, and allows you to separate true treatment effects from random variation.</p>
 <hr>
 </section>
-<section id="understanding-experimental-design-the-case-study-of-vegatation." class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="understanding-experimental-design-the-case-study-of-vegatation."><span class="header-section-number">3</span> Understanding Experimental Design; the case study of vegatation.</h2>
+<section id="understanding-experimental-design-the-case-study-of-vegatation." class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="understanding-experimental-design-the-case-study-of-vegatation."><span class="header-section-number">4.3</span> Understanding Experimental Design; the case study of vegatation.</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/ch4.1.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -212,8 +317,8 @@ window.Quarto = {
 <p><strong>What is replication in an experimental design?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">Repeating the entire experiment from scratch</option><option value="answer">Using multiple experimental units per treatment to increase reliability and precision</option><option value="">Applying the same treatment to every plot</option><option value="">Taking measurements from the same plot twice</option></select></p>
 <p>Using this case study, let’s go through the terms we learnt in the main workbook to establish how we could assign which treatment to which plot.</p>
-<section id="completely-randomised-design-crd" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="completely-randomised-design-crd"><span class="header-section-number">3.1</span> Completely Randomised Design (CRD)</h3>
+<section id="completely-randomised-design-crd" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="completely-randomised-design-crd"><span class="header-section-number">4.3.1</span> Completely Randomised Design (CRD)</h3>
 <p>In a completely randomised design (CRD), treatments are assigned to experimental units <strong>purely at random</strong>, with no restrictions or grouping. It is the simplest valid experimental design.</p>
 <p>The treatment list is completely <strong>shuffled at random</strong> and assigned to plots. I will show you how this can be done in R code.</p>
 <p>In R, the <code>sample()</code> function randomly shuffles the treatment list, and <code>set.seed()</code> ensures the result is reproducible.</p>
@@ -354,8 +459,8 @@ Click to show: example of a poor CRD outcome
 <label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value="answer"> <span>By chance, all replicates of one treatment could end up in the same part of the field, confounding treatment effects with environmental gradients.</span></label><label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value=""> <span>It requires too many plots to be practical.</span></label><label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value=""> <span>It cannot be used with more than two treatments.</span></label><label><input type="radio" autocomplete="off" name="radio_AGRGFEHWZV" value=""> <span>It does not allow for replication.</span></label>
 </div>
 </section>
-<section id="blocked-design" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="blocked-design"><span class="header-section-number">3.2</span> Blocked Design</h3>
+<section id="blocked-design" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="blocked-design"><span class="header-section-number">4.3.2</span> Blocked Design</h3>
 <p>In a <strong>blocked design</strong>, the experimental area is divided into <strong>blocks</strong> that are as homogeneous as possible. Within each block, treatments are randomly assigned to the plots. This approach helps to control for variability due to environmental gradients or other factors that might affect the response variable.</p>
 <p>In plain terms: think of the field as being divided into <strong>5 strips</strong> (the repeats), each containing <strong>4 plots</strong> (the treatments). Within each strip, every treatment appears exactly once — but the order is randomised. So instead of scattering all 20 plots randomly across the whole field, we say:</p>
 <blockquote class="blockquote">
@@ -430,8 +535,8 @@ Click to show: example of a blocked design outcome
 <label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value=""> <span>It cannot be used with more than four treatments</span></label><label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value=""> <span>It requires too many replicates</span></label><label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value="answer"> <span>It cannot account for trends that run across the experimental area in more than one direction</span></label><label><input type="radio" autocomplete="off" name="radio_ANVFGOTUOG" value=""> <span>It does not allow randomisation within blocks</span></label>
 </div>
 </section>
-<section id="the-latin-square-design-lsd" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="the-latin-square-design-lsd"><span class="header-section-number">3.3</span> The Latin Square Design (LSD)</h3>
+<section id="the-latin-square-design-lsd" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="the-latin-square-design-lsd"><span class="header-section-number">4.3.3</span> The Latin Square Design (LSD)</h3>
 <p>The Latin Square Design (LSD) is a more complex design that can account for trends in two directions. Imagine that as well as a moisture gradient running left to right across the field, there is also a temperature gradient running top to bottom. A blocked design can control for one of these — but not both at the same time.</p>
 <p>The <strong>Latin Square Design</strong> solves this by controlling for variation in <strong>two directions simultaneously</strong> — across rows <em>and</em> across columns. Every treatment appears exactly once in each row and exactly once in each column</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -490,8 +595,8 @@ Click to show: R code and Latin Square field layout
 <label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value=""> <span>It requires fewer plots</span></label><label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value=""> <span>It allows more replicates per treatment</span></label><label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value="answer"> <span>It controls for variation in two directions simultaneously — across both rows and columns</span></label><label><input type="radio" autocomplete="off" name="radio_QVMLYICHWT" value=""> <span>It eliminates the need for randomisation</span></label>
 </div>
 </section>
-<section id="split-plot-design" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="split-plot-design"><span class="header-section-number">3.4</span> Split Plot Design</h3>
+<section id="split-plot-design" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="split-plot-design"><span class="header-section-number">4.3.4</span> Split Plot Design</h3>
 <p>Sometimes practical constraints make full randomisation impossible. For example, imagine that our plots are <strong>3m × 3m</strong>, but the equipment needed to apply a treatment covers a minimum area of <strong>12m × 3m</strong>. We cannot apply a different treatment to each small plot individually — the equipment is simply too large.</p>
 <p>Instead, we apply one factor across the larger <strong>12m × 3m</strong> area (the <strong>whole plot</strong>), and then subdivide it into four smaller <strong>3m × 3m</strong> plots (the <strong>split plots</strong>) within which a second factor is randomised.</p>
 <p>In plain terms:</p>
@@ -541,8 +646,8 @@ Click to show: example of a split plot layout
 <label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value=""> <span>The factor that is easiest to measure</span></label><label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value="answer"> <span>The factor that cannot be randomised at a fine scale due to practical constraints</span></label><label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value=""> <span>The factor with the most levels</span></label><label><input type="radio" autocomplete="off" name="radio_ODQHCGYSSX" value=""> <span>The factor that is least important to the study</span></label>
 </div>
 </section>
-<section id="repeated-measures-design" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="repeated-measures-design"><span class="header-section-number">3.5</span> Repeated Measures Design</h3>
+<section id="repeated-measures-design" class="level3" data-number="4.3.5">
+<h3 data-number="4.3.5" class="anchored" data-anchor-id="repeated-measures-design"><span class="header-section-number">4.3.5</span> Repeated Measures Design</h3>
 <p>A <strong>repeated measures design</strong> is used when measurements are taken from the <strong>same experimental unit more than once</strong> — for example, measuring the growth of an animal at several points throughout its life.</p>
 <p>In plain terms:</p>
 <blockquote class="blockquote">
@@ -629,26 +734,26 @@ Tip
 <p><select class="webex-select"><option value="blank"></option><option value="">Completely Randomised Design</option><option value="">Randomised Complete Block Design</option><option value="answer">Latin Square Design</option><option value="">Repeated measures design</option></select></p>
 </section>
 </section>
-<section id="analysis-of-variance-anova" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="analysis-of-variance-anova"><span class="header-section-number">4</span> Analysis of Variance (ANOVA)</h2>
-<section id="what-is-anova" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="what-is-anova"><span class="header-section-number">4.1</span> What is ANOVA?</h3>
+<section id="analysis-of-variance-anova" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="analysis-of-variance-anova"><span class="header-section-number">4.4</span> Analysis of Variance (ANOVA)</h2>
+<section id="what-is-anova" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="what-is-anova"><span class="header-section-number">4.4.1</span> What is ANOVA?</h3>
 <p>So far we have used t-tests to compare the means of <strong>two groups</strong>. But what if we want to compare <strong>more than two groups</strong> at once? In our grassland experiment, we have four treatments — Control, Autumn Cut, Spring Burn, and Sheep Grazing. When we have more than two groups to compare, we use <strong>ANOVA</strong> (Analysis of Variance).</p>
 <p>ANOVA asks one overarching question:</p>
 <blockquote class="blockquote">
 <p><em>“Is there enough evidence to suggest that at least one treatment produces a different mean response from the others?”</em></p>
 </blockquote>
 </section>
-<section id="the-null-hypothesis" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="the-null-hypothesis"><span class="header-section-number">4.2</span> The Null Hypothesis</h3>
+<section id="the-null-hypothesis" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="the-null-hypothesis"><span class="header-section-number">4.4.2</span> The Null Hypothesis</h3>
 <p>Like all statistical tests, ANOVA starts with a <strong>null hypothesis</strong> — a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis states that:</p>
 <blockquote class="blockquote">
 <p><em>All treatment means are equal.</em></p>
 </blockquote>
 <p>If the probability of this being true is less than 1 in 20 (p &lt; 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others.</p>
 </section>
-<section id="how-does-anova-work" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="how-does-anova-work"><span class="header-section-number">4.3</span> How Does ANOVA Work?</h3>
+<section id="how-does-anova-work" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="how-does-anova-work"><span class="header-section-number">4.4.3</span> How Does ANOVA Work?</h3>
 <p>ANOVA works by comparing two types of variation in the data:</p>
 <hr>
 <p><strong>1. Within-group variance — the background noise</strong></p>
@@ -669,8 +774,8 @@ Tip
 </blockquote>
 <p>In plain terms: &gt; <em>If Sheep Grazing plots have on average 12 species and Control plots have on average 8 species, that difference contributes to the between-group variance.</em></p>
 </section>
-<section id="the-f-ratio" class="level3" data-number="4.4">
-<h3 data-number="4.4" class="anchored" data-anchor-id="the-f-ratio"><span class="header-section-number">4.4</span> The F-ratio</h3>
+<section id="the-f-ratio" class="level3" data-number="4.4.4">
+<h3 data-number="4.4.4" class="anchored" data-anchor-id="the-f-ratio"><span class="header-section-number">4.4.4</span> The F-ratio</h3>
 <p>ANOVA combines these two estimates into a single value called the <strong>F-ratio</strong>:</p>
 <p><span class="math display">F = \frac{\text{Between-group variance}}{\text{Within-group variance}}</span></p>
 <p>Think of it as a <strong>signal-to-noise ratio</strong>. Here is what the F-ratio tells us:</p>
@@ -697,8 +802,8 @@ Note
 </div>
 </div>
 </section>
-<section id="running-a-one-way-anova-in-r" class="level3" data-number="4.5">
-<h3 data-number="4.5" class="anchored" data-anchor-id="running-a-one-way-anova-in-r"><span class="header-section-number">4.5</span> Running a One-Way ANOVA in R</h3>
+<section id="running-a-one-way-anova-in-r" class="level3" data-number="4.4.5">
+<h3 data-number="4.4.5" class="anchored" data-anchor-id="running-a-one-way-anova-in-r"><span class="header-section-number">4.4.5</span> Running a One-Way ANOVA in R</h3>
 <p>A one-way ANOVA tests the effect of <strong>one factor</strong> (in our case, treatment) on a response variable (species richness). In R, we use the <code>aov()</code> function:</p>
 <div class="webex-solution">
 <button>
@@ -751,13 +856,14 @@ Tip
 <p><strong>Reminder:</strong> ANOVA is a parametric test, so the same assumptions apply as for the t-test — the data within each group should be approximately normally distributed, and the variances should be approximately equal across groups. Check these with the Shapiro-Wilk test and Levene’s test before running ANOVA.</p>
 </div>
 </div>
+
+
 <!-- -->
 
 </section>
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -1137,16 +1243,16 @@ window.onload = function() {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -1495,7 +1601,19 @@ window.onload = function() {
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-ext.html" class="pagination-link" aria-label="Workshop 3 - Sampling Distributions and Testing for Differences - Extension">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./appendix.html" class="pagination-link" aria-label="Appendix - Knowing your R &amp; Statistics">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 4 - Introduction to Design and Analysis of Experiments"</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
