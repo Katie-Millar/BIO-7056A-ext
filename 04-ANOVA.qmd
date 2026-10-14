@@ -456,6 +456,48 @@ split_plan <- data.frame(
     sample(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing")),
     sample(c("Control", "Autumn Cut", "Spring Burn", "Sheep Grazing")))
 )
+
+
+treatment_colours <- c(
+  "Control"       = "#F8766D",
+  "Autumn Cut"    = "#7CAE00",
+  "Spring Burn"   = "#00BFC4",
+  "Sheep Grazing" = "#C77CFF"
+)
+
+ggplot(split_plan, aes(x = col, y = row, fill = treatment)) +
+  geom_tile(colour = "white", linewidth = 1.2) +
+  geom_text(aes(label = treatment),
+            size = 3, fontface = "bold", colour = "white") +
+  # Thick line separating managed from unmanaged
+  geom_hline(yintercept = 2.5, linewidth = 2.5, colour = "black") +
+  # Whole plot labels on the right
+  annotate("text",
+           x = 4.7, y = c(1.5, 3.5),
+           label = c("Previously\nUnmanaged", "Previously\nManaged"),
+           hjust = 0, size = 3.5, fontface = "bold") +
+  # Bracket showing whole plot area
+  annotate("segment",
+           x = 4.6, xend = 4.6,
+           y = 2.6, yend = 4.4,
+           linewidth = 1, colour = "black") +
+  annotate("segment",
+           x = 4.6, xend = 4.6,
+           y = 0.6, yend = 2.4,
+           linewidth = 1, colour = "black") +
+  scale_fill_manual(values = treatment_colours) +
+  labs(title = "Split Plot Layout",
+       subtitle = "Whole-plot factor: past management history\nSplit-plot factor: vegetation management treatment",
+       fill = "Vegetation treatment") +
+  coord_cartesian(xlim = c(0.5, 6)) +
+  theme_minimal(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text  = element_blank()
+  )
+
+
 ```
 
 `r unhide()`
