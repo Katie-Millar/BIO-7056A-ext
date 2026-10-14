@@ -41,19 +41,19 @@ grassland_species <- read_csv("data/grassland_species.csv")
 In the main workbook, you should have been introduced to experimental design and ANOVA. In this workshop, we will go through the following:
 
 1. Recapping our terms 
-2. Understanding experimental design through a case study of vegetation management
-  2.1 Completley Randomised Design (CRD)
-  2.2 Randomised Complete Block Design (RCBD)
-  2.3 Latin Square Design (LSD)
-  2.4 Split Plot Design
-3. Introducing ANOVA 
-  3.1 One-way ANOVA using vegetation case study
-  3.2 Two-way ANOVA using vegetation case study
+2. Understanding experimental design through a case study of vegetation management.           
+    2.1 Completley Randomised Design (CRD).           
+    2.2 Randomised Complete Block Design (RCBD).           
+    2.3 Latin Square Design (LSD).           
+    2.4 Split Plot Design.           
+3. Introducing ANOVA               
+    3.1 One-way ANOVA using vegetation case study            
+    3.2 Two-way ANOVA using vegetation case study                   
 
 
 
 ### Package reading alert! 
-Today we will need: `tidyverse`, `janitor`, `DescTools`, `car`. This is a new work page, so please make sure you have installed these packages and loaded them into the script.
+Today we will need: `tidyverse`, `janitor`, `car`. This is a new work page, so please make sure you have installed these packages and loaded them into the script.
 
 
 
@@ -208,13 +208,13 @@ ggplot(bad_plan, aes(x = col, y = row, fill = treatment)) +
 
 As written above, with a Completely Randomised Design, there is a risk that all replicates of one treatment could end up in the same part of the field (you can see an example of this with the visualisation above), in our case study, this would confound treatment effects with environmental gradients. This is the main weakness of a CRD.
 
-**In a Completely Randomised Design, how are treatments assigned?**
+**In a Completely Randomised Design, how are treatments assigned in our case study?**
 
 `r mcq(c("Treatments are assigned in alphabetical order", "Treatments are assigned based on plot location", answer = "Treatments are assigned to experimental units purely at random", "Treatments are assigned within blocks"))`
 
-**What is the main weakness of a Completely Randomised Design?**
+**What is the main weakness of a Completely Randomised Design in our case study?**
 
-`r longmcq(c(answer = "By chance, all replicates of one treatment could end up in the same part of the field, confounding treatment effects with environmental gradients.", "It requires too many plots to be practical.", "It cannot be used with more than two treatments.", "It does not allow for replication."))`
+`r longmcq(c(answer = "By chance, all replicates of one treatment could end up in the same part of the field.", "It requires too many plots to be practical.", "It cannot be used with more than two treatments.", "It does not allow for replication."))`
 
 ### Blocked Design (BD)
 
@@ -222,11 +222,11 @@ In a **blocked design**, the experimental area is divided into **blocks** that a
 
 In plain terms: think of the field as being divided into **5 strips** (the repeats), each containing **4 plots** (the treatments). Within each strip, every treatment appears exactly once — but the order is randomised. So instead of scattering all 20 plots randomly across the whole field, we say:
 
-> *"In strip 1, one plot gets Control, one gets Autumn Cut, one gets Spring Burn, and one gets Sheep Grazing — but we randomly decide which plot gets which."*
+> *"In strip 1, one plot gets Control, one gets Autumn Cut, one gets Spring Burn, and one gets Sheep Grazing, but we randomly decide which plot gets which."*
 
 Then we do the same for strips 2, 3, 4 and 5.
 
-This guarantees that **every treatment appears in every part of the field**. If there is a moisture gradient running across the field, each treatment will experience a range of conditions — rather than one treatment accidentally getting all the wet plots.
+This guarantees that **every treatment appears in every part of the field**. If there is a moisture gradient running across the field, each treatment will experience a range of conditions, rather than one treatment accidentally getting all the wet plots.
 
 `r hide("Click to show: example of a blocked design outcome")`
 ```{r, ig.cap="Figure 3. Randomised Complete Block Design. Each row is a block (strip) containing one replicate of each treatment, randomised within the block.", fig.width=7, fig.height=5}
@@ -324,26 +324,38 @@ The key advantage of a blocked design is that any differences between the select
 
 **In a Blocked Design, what is a block?**
 
-`r longmcq(c("A large plot that receives only one treatment", answer = "A group of experimental units that are as similar as possible, within which each treatment appears exactly once", "A completely randomised set of plots", "A plot that is left untreated as a control"))`
+`r longmcq(c("A large plot that receives only one treatment, ensuring a large area is covered for accuracy", answer = "A group of experimental units that are as similar as possible, within which each treatment appears exactly once", "A completely randomised set of plots, this allows for there to be no bias", "A plot that is left untreated as a control for comparison"))`
 
-**Why is Blocked Design an improvement over Completely Randomised Design?**
+**Why is a Blocked Design an improvement over a Completely Randomised Design?**
 
-`r longmcq(c("It requires fewer plots", answer = "It ensures every treatment appears in every part of the field, so environmental gradients are spread evenly across treatments", "It eliminates all sources of variation", "It allows more treatments to be tested simultaneously"))`
+`r longmcq(c("It requires fewer plots because each treatment only needs to appear once across the whole field, reducing the total number of experimental units needed.",answer = "It ensures every treatment appears in every part of the field, so environmental gradients such as soil moisture or light availability are spread evenly across treatments rather than confounded with them.","It eliminates all sources of variation by making every plot identical, so any differences between plots can be attributed entirely to the treatment effect.","It allows more treatments to be tested simultaneously by subdividing each block into as many plots as needed, regardless of how many treatments are being compared."))`
 
-**What is the key limitation of the Block Design?**
 
-`r longmcq(c("It cannot be used with more than four treatments", "It requires too many replicates", answer = "It cannot account for trends that run across the experimental area in more than one direction", "It does not allow randomisation within blocks"))`
+```{r, echo = FALSE}
+limitation_choices <- c(
+  "It cannot be used with more than four treatments, as each block must contain exactly one replicate of each treatment and larger numbers make the blocks too large to be homogeneous.",
+  "It requires too many replicates relative to other designs, as each treatment must appear in every block, making it impractical when resources or plot numbers are limited.",
+  "It cannot account for trends that run across the experimental area in more than one direction — for example, a gradient running diagonally across the field would not be controlled for by blocks arranged in one direction only.",
+  "It does not allow randomisation within blocks, meaning treatments are always assigned in the same order across blocks, which can introduce systematic bias into the results."
+)
+```
+
+**What is the key limitation of a Blocked Design?**
+
+`r longmcq(c(limitation_choices[1], limitation_choices[2], answer = limitation_choices[3], limitation_choices[4]))`
 
 
 ### The Latin Square Design (LSD)
-The Latin Square Design (LSD) is a more complex design that can account for trends in two directions. Imagine that as well as a moisture gradient running left to right across the field, there is also a temperature gradient running top to bottom. A blocked design can control for one of these — but not both at the same time.
+The Latin Square Design (LSD) is a more complex design that can account for trends in two directions. Imagine that as well as a moisture gradient running left to right across the field, there is also a temperature gradient running top to bottom. A blocked design can control for one of these, but not both at the same time.
 
-The **Latin Square Design** solves this by controlling for variation in **two directions simultaneously** — across rows *and* across columns. Every treatment appears exactly once in each row and exactly once in each column
+The **Latin Square Design** solves this by controlling for variation in **two directions simultaneously**, across rows *and* across columns. Every treatment appears exactly once in each row and exactly once in each column
 
 ::: {.callout-note}
-**The trade-off:** moving to a Latin Square means reducing the number of plots from 20 to 16 in our example. You also need the number of treatments to equal the number 
+**The trade-off:** moving to a Latin Square means reducing the number of plots from 20 to 16 in our example. You need the number of treatments to equal the number 
 of rows and columns, which limits flexibility.
 :::
+
+A Latin Square design can be randomly generated in R before you do your experiment, as below: 
 
 <br>
 
