@@ -2,20 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Appendix - Knowing your R &amp; Statistics – Statistics for Biologists - Extension Coursebook</title>
+<title>5&nbsp; Appendix - Knowing your R &amp; Statistics – Statistics for Biologists - Extension Coursebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -68,17 +71,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03-ext.html" rel="prev">
+<link href="./04-ANOVA.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dda8771d043933e00db2387e2c02d373.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -121,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -166,8 +169,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./04-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -180,14 +189,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#loading-and-installing-packages" id="toc-loading-and-installing-packages" class="nav-link active" data-scroll-target="#loading-and-installing-packages"><span class="header-section-number">4.1</span> Loading and installing packages</a></li>
-  <li><a href="#the-pipe-and" id="toc-the-pipe-and" class="nav-link" data-scroll-target="#the-pipe-and"><span class="header-section-number">4.2</span> The pipe: <code>|&gt;</code> and <code>%&gt;%</code></a></li>
-  <li><a href="#using-tidyverse" id="toc-using-tidyverse" class="nav-link" data-scroll-target="#using-tidyverse"><span class="header-section-number">4.3</span> Using <code>tidyverse()</code></a></li>
-  <li><a href="#other-fun-tools" id="toc-other-fun-tools" class="nav-link" data-scroll-target="#other-fun-tools"><span class="header-section-number">4.4</span> Other fun tools</a></li>
-  <li><a href="#definitions-used-in-this-coursebook" id="toc-definitions-used-in-this-coursebook" class="nav-link" data-scroll-target="#definitions-used-in-this-coursebook"><span class="header-section-number">4.5</span> Definitions used in this coursebook</a>
+  <li><a href="#loading-and-installing-packages" id="toc-loading-and-installing-packages" class="nav-link active" data-scroll-target="#loading-and-installing-packages"><span class="header-section-number">5.1</span> Loading and installing packages</a></li>
+  <li><a href="#the-pipe-and" id="toc-the-pipe-and" class="nav-link" data-scroll-target="#the-pipe-and"><span class="header-section-number">5.2</span> The pipe: <code>|&gt;</code> and <code>%&gt;%</code></a></li>
+  <li><a href="#using-tidyverse" id="toc-using-tidyverse" class="nav-link" data-scroll-target="#using-tidyverse"><span class="header-section-number">5.3</span> Using <code>tidyverse()</code></a></li>
+  <li><a href="#other-fun-tools" id="toc-other-fun-tools" class="nav-link" data-scroll-target="#other-fun-tools"><span class="header-section-number">5.4</span> Other fun tools</a></li>
+  <li><a href="#definitions-used-in-this-coursebook" id="toc-definitions-used-in-this-coursebook" class="nav-link" data-scroll-target="#definitions-used-in-this-coursebook"><span class="header-section-number">5.5</span> Definitions used in this coursebook</a>
   <ul class="collapse">
-  <li><a href="#workshop-2" id="toc-workshop-2" class="nav-link" data-scroll-target="#workshop-2"><span class="header-section-number">4.5.1</span> Workshop 2</a></li>
-  <li><a href="#workshop-3" id="toc-workshop-3" class="nav-link" data-scroll-target="#workshop-3"><span class="header-section-number">4.5.2</span> Workshop 3</a></li>
+  <li><a href="#workshop-2" id="toc-workshop-2" class="nav-link" data-scroll-target="#workshop-2"><span class="header-section-number">5.5.1</span> Workshop 2</a></li>
+  <li><a href="#workshop-3" id="toc-workshop-3" class="nav-link" data-scroll-target="#workshop-3"><span class="header-section-number">5.5.2</span> Workshop 3</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -197,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -214,29 +223,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="loading-and-installing-packages" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="loading-and-installing-packages"><span class="header-section-number">4.1</span> Loading and installing packages</h2>
+<section id="loading-and-installing-packages" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="loading-and-installing-packages"><span class="header-section-number">5.1</span> Loading and installing packages</h2>
 <p>Let’s get the difference on loading and installing packages down. A general rule of good practice is to load only the packages you need for each project within the appropriate scripts and to do this at the top, you can install them in a way that doesn’t clutter your global environment.</p>
 </section>
-<section id="the-pipe-and" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="the-pipe-and"><span class="header-section-number">4.2</span> The pipe: <code>|&gt;</code> and <code>%&gt;%</code></h2>
+<section id="the-pipe-and" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="the-pipe-and"><span class="header-section-number">5.2</span> The pipe: <code>|&gt;</code> and <code>%&gt;%</code></h2>
 <p>As you work through these examples, you’ll notice code written with a pipe: <code>%&gt;%</code>. As you may know already, or as you research around at other resources, the pipe can also sometime be written as <code>|&gt;</code>.</p>
 <p><code>%&gt;%</code> comes from the magrittr package (loaded with tidyverse). It’s been around since ~2014. <code>|&gt;</code> is the native pipe, built into base R itself since R 4.1.0 (2021). No package needed.</p>
 <p>These are functionally near-identical, and for the purposes of this workbook and the main workbook, we’ll be using <code>%&gt;%</code> throughout.</p>
 </section>
-<section id="using-tidyverse" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="using-tidyverse"><span class="header-section-number">4.3</span> Using <code>tidyverse()</code></h2>
+<section id="using-tidyverse" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="using-tidyverse"><span class="header-section-number">5.3</span> Using <code>tidyverse()</code></h2>
 <p>You will most certainly come across the tidyverse package a lot in your R. This is a collection of packages that are designed to work together, and make data analysis easier. The tidyverse includes packages like ggplot2, dplyr, tidyr, readr, purrr, and more. So as long as you have tidyverse installed, you can use all of these packages without having to install them individually.</p>
 </section>
-<section id="other-fun-tools" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="other-fun-tools"><span class="header-section-number">4.4</span> Other fun tools</h2>
+<section id="other-fun-tools" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="other-fun-tools"><span class="header-section-number">5.4</span> Other fun tools</h2>
 </section>
-<section id="definitions-used-in-this-coursebook" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="definitions-used-in-this-coursebook"><span class="header-section-number">4.5</span> Definitions used in this coursebook</h2>
-<section id="workshop-2" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="workshop-2"><span class="header-section-number">4.5.1</span> Workshop 2</h3>
-<section id="data-types" class="level4" data-number="4.5.1.1">
-<h4 data-number="4.5.1.1" class="anchored" data-anchor-id="data-types"><span class="header-section-number">4.5.1.1</span> Data Types</h4>
+<section id="definitions-used-in-this-coursebook" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="definitions-used-in-this-coursebook"><span class="header-section-number">5.5</span> Definitions used in this coursebook</h2>
+<section id="workshop-2" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="workshop-2"><span class="header-section-number">5.5.1</span> Workshop 2</h3>
+<section id="data-types" class="level4" data-number="5.5.1.1">
+<h4 data-number="5.5.1.1" class="anchored" data-anchor-id="data-types"><span class="header-section-number">5.5.1.1</span> Data Types</h4>
 <p><strong>Quantitative/Numerical data</strong><br>
 Data that can be measured and expressed numerically.</p>
 <p><strong>Discrete data</strong><br>
@@ -250,8 +259,8 @@ Categorical data with no inherent order (e.g.&nbsp;eye colour, type of fruit).</
 <p><strong>Ordinal data</strong><br>
 Categorical data with a meaningful order (e.g.&nbsp;education level, satisfaction rating).</p>
 </section>
-<section id="summary-statistics" class="level4" data-number="4.5.1.2">
-<h4 data-number="4.5.1.2" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">4.5.1.2</span> Summary statistics</h4>
+<section id="summary-statistics" class="level4" data-number="5.5.1.2">
+<h4 data-number="5.5.1.2" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">5.5.1.2</span> Summary statistics</h4>
 <p><strong>Mean</strong><br>
 The total of all values divided by the number of values.</p>
 <p><strong>Median</strong><br>
@@ -268,10 +277,10 @@ A measure of how much values differ from the mean, calculated as the average of 
 A measure of asymmetry in the distribution of data. A positive skew indicates a longer tail on the right; a negative skew indicates a longer tail on the left.</p>
 </section>
 </section>
-<section id="workshop-3" class="level3" data-number="4.5.2">
-<h3 data-number="4.5.2" class="anchored" data-anchor-id="workshop-3"><span class="header-section-number">4.5.2</span> Workshop 3</h3>
-<section id="sampling-and-inference" class="level4" data-number="4.5.2.1">
-<h4 data-number="4.5.2.1" class="anchored" data-anchor-id="sampling-and-inference"><span class="header-section-number">4.5.2.1</span> Sampling and inference</h4>
+<section id="workshop-3" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="workshop-3"><span class="header-section-number">5.5.2</span> Workshop 3</h3>
+<section id="sampling-and-inference" class="level4" data-number="5.5.2.1">
+<h4 data-number="5.5.2.1" class="anchored" data-anchor-id="sampling-and-inference"><span class="header-section-number">5.5.2.1</span> Sampling and inference</h4>
 <p><strong>Sampling</strong><br>
 Selecting a subset (sample) of individuals or observations from a larger population to estimate characteristics of the whole population, without measuring everything.</p>
 <p><strong>Sampling error</strong><br>
@@ -283,8 +292,8 @@ An estimate of how much a sample mean is likely to vary from the true population
 <p><strong>Confidence intervals</strong><br>
 A range of values, calculated from sample data, likely to contain the true population parameter at a given confidence level (e.g.&nbsp;95%).</p>
 </section>
-<section id="testing-for-differences" class="level4" data-number="4.5.2.2">
-<h4 data-number="4.5.2.2" class="anchored" data-anchor-id="testing-for-differences"><span class="header-section-number">4.5.2.2</span> Testing for differences</h4>
+<section id="testing-for-differences" class="level4" data-number="5.5.2.2">
+<h4 data-number="5.5.2.2" class="anchored" data-anchor-id="testing-for-differences"><span class="header-section-number">5.5.2.2</span> Testing for differences</h4>
 <p><strong>T-tests</strong><br>
 Test whether the difference between two means is larger than sampling error alone would explain.</p>
 <ul>
@@ -691,16 +700,16 @@ window.onload = function() {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -1052,8 +1061,8 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./03-ext.html" class="pagination-link" aria-label="Workshop 3 - Sampling Distributions and Testing for Differences - Extension">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span>
+      <a href="./04-ANOVA.html" class="pagination-link" aria-label="Workshop 4 - Introduction to Design and Analysis of Experiments">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
