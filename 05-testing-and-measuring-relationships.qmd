@@ -1,0 +1,77 @@
+---
+title: "Workshop 5 - Testing and Measuring Relationships Extension"
+date: today
+format:
+  html:
+    theme: yeti
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+    number-sections: true
+---
+
+## Today's Workshop 
+
+## Understanding Our Terms and Definitions 
+
+
+### Correlation Analysis 
+A statistical method used to measure the strength and direction of a relationship between two or more variables.
+
+### Regression Analysis 
+A statistical method used to estimate the relationship between a dependent outcome variable and one or more independent predictor variables. 
+
+#### Positive Association
+- As one variable increases, the other variable also increases.
+
+#### Negative Association
+- As one variable increases, the other variable decreases.
+
+
+## Regression Analysis
+
+The most common type of regression analysis is **linear regression**, which assumes a **linear relationship** between an independent variable and a dependent variable, and fits a straight line to the data.
+
+In our grassland experiment, we might ask: *"Is there a relationship between soil moisture and species richness?"* Linear regression would allow us to:
+
+### The Three Steps of Linear Regression
+
+**Step 1: Test whether a relationship exists**
+
+Find the line that best describes the relationship between the independent and dependent variables, and assess whether the **slope is significantly different from zero**. A slope of zero would mean the independent variable has no effect on the dependent variable.
+
+> *If the slope is significantly different from zero (p < 0.05), we have evidence that the two variables are related.*
+
+**Step 2: Assess the strength of the relationship**
+
+Determine how well the data points fit the regression line. This is measured using **R²** (R-squared) — the proportion of variation in the dependent variable that is explained by the independent variable.
+
+> *An R² of 1 means the line fits the data perfectly. An R² of 0 means the independent variable explains none of the variation in the dependent variable.*
+
+**Step 3: Describe the relationship**
+
+Determine the **coefficients** of the regression equation — the **slope** and the **intercept** — which together describe the line:
+
+$$y = a + bx$$
+
+Where:
+
+- $y$ is the dependent variable (e.g. species richness)
+- $x$ is the independent variable (e.g. soil moisture)
+- $a$ is the **intercept** — the value of $y$ when $x$ is zero
+- $b$ is the **slope** — how much $y$ changes for each one-unit increase in $x$
+
+::: {.callout-note}
+**Important assumptions of linear regression:**
+
+- The relationship between the two variables is **linear**
+- The residuals (the differences between observed and predicted values) are 
+**normally distributed**
+- The variance of the residuals is **constant** across all values of $x$ 
+(homoscedasticity)
+:::
