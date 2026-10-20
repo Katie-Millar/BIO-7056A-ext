@@ -8,6 +8,7 @@ book:
     - 02-ext.qmd
     - 03-ext.qmd
     - 04-ANOVA.qmd
+    - 05-testing-and-measuring-relationships.qmd
     - appendix.qmd
 
 format:

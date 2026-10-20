@@ -298,3 +298,130 @@ called **homoscedasticity**
 
 We will check these assumptions in the next section.
 :::
+
+
+## Case Study: Otter - 
+
+We should have already read in our data.
+We can start by checking out the variable types in our data 
+
+**Can you remember how to check the data type of each variable in R?**
+
+`r mcq(c(
+"<code>colnames()</code>",
+"<code>summary()</code>",
+"<code>head()</code>",
+answer = "<code>str()</code>"
+))`
+
+`r hide("Show answer here, no clicking until question is answered!")`
+
+`str()` shows the **structure** of the dataset — including the data type of each variable. For example:
+
+```{r}
+str(otter_data)
+```
+
+This shows: 
+
+| Data type shown | What it means | Variable type |
+|---|---|---|
+| `chr` | Character:text values | Nominal categorical |
+| `Factor` | Factor: categorical with levels | Nominal or ordinal categorical |
+| `int` | Integer: whole numbers | Discrete quantitative |
+| `num` | Numeric: decimal numbers | Continuous quantitative |
+
+So for our otter dataset:
+
+- `site` and `sex` show as `chr` — **nominal categorical**
+- `spraints` shows as `int` — **discrete quantitative** (you cannot have half a spraint)
+- `fish_index`, `length_cm`, `mass_kg` show as `num` — **continuous quantitative**
+
+`r unhide()`
+
+
+### What should we do analysis on? 
+
+In our otter dataset, if you ran the code above you should see that we have many variables: `site`, `season`, `sex`, `age_class` `length_cm`, `mass_kg`, `spraints` and `fish_index`. We cannot and should not analyse all possible combinations. Instead, we start with a clear research question. 
+
+Here are some examples using our otter data:
+
+| Research question | Dependent variable (y) | Independent variable (x) | Analysis |
+|---|---|---|---|
+| Do male otters have longer body length than females? | `length_cm` | `sex` | t-test |
+| Does spraint count differ between sites? | `spraints` | `site` | One-way ANOVA |
+| Does spraint count differ between sites and seasons? | `spraints` | `site` + `season` | Two-way ANOVA |
+| Does fish availability predict spraint count? | `spraints` | `fish_index` | Linear regression |
+
+::: {.callout-note}
+**A good research question has three things:**
+
+1. A clearly defined **dependent variable**: what you are measuring as an outcome
+2. A clearly defined **independent variable**: what you think drives that outcome
+3. A **biological justification**: why would you expect these two variables to be related?
+:::
+
+**Before you visualise or analyse anything, you should be able to complete this sentence:**
+
+> *"I want to know whether x affects x, because ... ."*
+
+For example:
+
+> *"I want to know whether **site** and **season** affects **spraint count**, because otters may ...."*
+
+Once you have your research question, you only need to visualise the variables involved, not the entire dataset.
+
+**You want to know whether site and season affects sprain count. Which variables do you need to visualise?**
+
+`r mcq(c(
+"All variables in the dataset",
+answer = "site, season and sprain_count only",
+"spraints and fish_index",
+"site and season"
+))`
+
+**Which of the following is a well-formed research question?**
+
+`r longmcq(c(
+answer = "Does spraint count differ between sites and seasons, and is there an interaction between the two — for example, do otters mark their territory more in winter on some rivers than others?",
+"Is there anything interesting in the otter dataset?",
+"What do all the variables in the otter dataset look like when plotted?",
+"Can we find a significant result somewhere in the otter dataset?"
+))`
+
+
+
+
+`r hide("Click to show explanation")`
+
+A well-formed research question should:
+
+- Name a specific **dependent variable** (spraint count)
+- Name specific **independent variables** (site and season)
+- Include a **biological justification** — why might these variables be related?
+- Be **testable** — it leads directly to a specific statistical analysis 
+(in this case, a two-way ANOVA)
+
+The other options are poorly formed because they are too vague, do not name 
+specific variables, and do not have a clear biological motivation. Fishing for 
+significant results across all variables — sometimes called **p-hacking** — is 
+considered poor scientific practice.
+
+`r unhide()`
+
+Now that we have decided on what we are doing, let's get analysing... 
+
+### The Analysis 
+
+#### Step 1. Visualise! 
+
+Let's first visualise our data to get a good idea of what's going on. 
+
+```{r}
+
+
+
+
+
+
+```
