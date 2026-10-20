@@ -1,0 +1,2385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-20">
+
+<title>Workshop 5 - Testing and Measuring Relationships Extension</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="05-testing-and-measuring-relationships_files/libs/clipboard/clipboard.min.js"></script>
+<script src="05-testing-and-measuring-relationships_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="05-testing-and-measuring-relationships_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="05-testing-and-measuring-relationships_files/libs/quarto-html/popper.min.js"></script>
+<script src="05-testing-and-measuring-relationships_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="05-testing-and-measuring-relationships_files/libs/quarto-html/anchor.min.js"></script>
+<link href="05-testing-and-measuring-relationships_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="05-testing-and-measuring-relationships_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="05-testing-and-measuring-relationships_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="05-testing-and-measuring-relationships_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="05-testing-and-measuring-relationships_files/libs/bootstrap/bootstrap-19216fa8bb71272e13fc45993650fab3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#the-route-to-todays-workshop" id="toc-the-route-to-todays-workshop" class="nav-link active" data-scroll-target="#the-route-to-todays-workshop"><span class="header-section-number">1</span> The Route to Today’s Workshop</a></li>
+  <li><a href="#understanding-our-terms-and-definitions" id="toc-understanding-our-terms-and-definitions" class="nav-link" data-scroll-target="#understanding-our-terms-and-definitions"><span class="header-section-number">2</span> Understanding Our Terms and Definitions</a></li>
+  <li><a href="#regression-analysis" id="toc-regression-analysis" class="nav-link" data-scroll-target="#regression-analysis"><span class="header-section-number">3</span> Regression Analysis</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="header-section-number">4</span> Linear Regression</a>
+  <ul class="collapse">
+  <li><a href="#what-is-linear-regression" id="toc-what-is-linear-regression" class="nav-link" data-scroll-target="#what-is-linear-regression"><span class="header-section-number">4.1</span> What is Linear Regression?</a></li>
+  <li><a href="#the-three-steps-of-linear-regression" id="toc-the-three-steps-of-linear-regression" class="nav-link" data-scroll-target="#the-three-steps-of-linear-regression"><span class="header-section-number">4.2</span> The Three Steps of Linear Regression</a></li>
+  </ul></li>
+  <li><a href="#case-study-otter--" id="toc-case-study-otter--" class="nav-link" data-scroll-target="#case-study-otter--"><span class="header-section-number">5</span> Case Study: Otter -</a>
+  <ul class="collapse">
+  <li><a href="#what-should-we-do-analysis-on" id="toc-what-should-we-do-analysis-on" class="nav-link" data-scroll-target="#what-should-we-do-analysis-on"><span class="header-section-number">5.1</span> What should we do analysis on?</a></li>
+  <li><a href="#the-analysis" id="toc-the-analysis" class="nav-link" data-scroll-target="#the-analysis"><span class="header-section-number">5.2</span> The Analysis</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Workshop 5 - Testing and Measuring Relationships Extension</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 20, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-route-to-todays-workshop" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-route-to-todays-workshop"><span class="header-section-number">1</span> The Route to Today’s Workshop</h2>
+</section>
+<section id="understanding-our-terms-and-definitions" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="understanding-our-terms-and-definitions"><span class="header-section-number">2</span> Understanding Our Terms and Definitions</h2>
+<p><strong>Correlation Analysis</strong><br>
+A statistical method used to measure the strength and direction of a relationship between two or more variables.</p>
+<p><strong>Regression Analysis</strong><br>
+A statistical method used to estimate the relationship between a dependent outcome variable and one or more independent predictor variables.</p>
+<p><strong>Positive Association</strong><br>
+As one variable increases, the other variable also increases.</p>
+<p><strong>Negative Association</strong><br>
+As one variable increases, the other variable decreases.</p>
+</section>
+<section id="regression-analysis" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="regression-analysis"><span class="header-section-number">3</span> Regression Analysis</h2>
+<p>The most common type of regression analysis is <strong>linear regression</strong>, which assumes a <strong>linear relationship</strong> between an independent variable and a dependent variable, and fits a straight line to the data.</p>
+<p>In our grassland experiment, we might ask: <em>“Is there a relationship between soil moisture and species richness?”</em> Linear regression would allow us to:</p>
+</section>
+<section id="linear-regression" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">4</span> Linear Regression</h2>
+<section id="what-is-linear-regression" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="what-is-linear-regression"><span class="header-section-number">4.1</span> What is Linear Regression?</h3>
+<p>So far we have compared <strong>means between groups</strong> using t-tests and ANOVA. But what if we want to understand the <strong>relationship between two continuous variables</strong>?</p>
+<div class="webex-solution">
+<button>
+Can you remember what a continuous variable is?
+</button>
+<p>A <strong>continuous variable</strong> is a variable that can take any value within a range, it is measured rather than counted. Examples from our otter dataset include:</p>
+<ul>
+<li>Body length (e.g.&nbsp;115.3 cm)</li>
+<li>Body mass (e.g.&nbsp;9.52 kg)</li>
+<li>Fish availability index (e.g.&nbsp;6.7)</li>
+<li>Spraint count (e.g.&nbsp;12)</li>
+</ul>
+<p>This is different from a <strong>categorical variable</strong> (such as site or sex), which takes a fixed number of distinct values. In linear regression, the <strong>dependent variable (y) must be continuous</strong>. The independent variable (x) is typically continuous too, though categorical variables can also be used in more advanced models.</p>
+</div>
+<p>In our otter survey, we might ask:</p>
+<blockquote class="blockquote">
+<p><em>“Does fish availability predict how many spraints an otter leaves?”</em></p>
+</blockquote>
+<p>This is a question about a <strong>relationship</strong> between two variables, as fish availability increases, do spraints increase too? Linear regression allows us to answer this.</p>
+<hr>
+</section>
+<section id="the-three-steps-of-linear-regression" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="the-three-steps-of-linear-regression"><span class="header-section-number">4.2</span> The Three Steps of Linear Regression</h3>
+<p><strong>Step 1: Test whether a relationship exists</strong></p>
+<p>We plot the data and fit a straight line, then test whether the <strong>slope is significantly different from zero</strong>.</p>
+<blockquote class="blockquote">
+<p><em>If fish availability has no effect on spraints, the line would be completely flat (slope = 0), as fish availability increases, spraints do not change.</em></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>If fish availability does affect spraints, the line would slope upwards (positive relationship) or downwards (negative relationship).</em></p>
+</blockquote>
+<p>The two plots below illustrate this using our otter data:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-testing-and-measuring-relationships_files/figure-html/slope-illustration-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Figure 1. Left: fish availability shows a clear positive relationship with spraint count. Right: body length shows almost no relationship with spraint count.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click to show explanation of the plots
+</button>
+<ul>
+<li><p><strong>Fish availability (left)</strong>: the line slopes clearly <strong>upward</strong>, suggesting that as fish availability increases, spraint count increases too. The points follow the line closely, suggesting a <strong>strong positive relationship</strong>.</p></li>
+<li><p><strong>Body length (right)</strong>: the line is almost <strong>completely flat</strong>, and the points are scattered widely with no clear pattern. This suggests <strong>no meaningful relationship</strong> between body length and spraint count.</p></li>
+</ul>
+</div>
+<p><strong>Looking at the fish availability plot, what does the slope of the line suggest?</strong></p>
+<div id="radio_TNNRZBJZVO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TNNRZBJZVO" value="answer"> <span>As fish availability increases, spraint count increases, there is a positive relationship between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_TNNRZBJZVO" value=""> <span>As fish availability increases, spraint count decreases, there is a negative relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_TNNRZBJZVO" value=""> <span>The line is flat, suggesting fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_TNNRZBJZVO" value=""> <span>The relationship between fish availability and spraint count is curved, not linear.</span></label>
+</div>
+<p><strong>Looking at the body length plot, what does the slope of the line suggest?</strong></p>
+<div id="radio_TQOICWUYRK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TQOICWUYRK" value=""> <span>As body length increases, spraint count increases, larger otters mark their territory more.</span></label><label><input type="radio" autocomplete="off" name="radio_TQOICWUYRK" value=""> <span>As body length increases, spraint count decreases, larger otters mark their territory less.</span></label><label><input type="radio" autocomplete="off" name="radio_TQOICWUYRK" value="answer"> <span>The line is almost flat, suggesting body length has little or no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_TQOICWUYRK" value=""> <span>Body length perfectly predicts spraint count.</span></label>
+</div>
+<p><strong>Comparing the two plots, which variable appears to be a better predictor of spraint count?</strong></p>
+<div id="radio_HFUDRHVZIP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HFUDRHVZIP" value="answer"> <span>Fish availability, the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_HFUDRHVZIP" value=""> <span>Body length: the flat line means there is no noise in the data, making it a more reliable predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_HFUDRHVZIP" value=""> <span>Both variables predict spraint count equally well.</span></label><label><input type="radio" autocomplete="off" name="radio_HFUDRHVZIP" value=""> <span>Neither variable predicts spraint count, both lines are flat.</span></label>
+</div>
+<p><strong>If the slope of the fish availability line was negative instead of positive, what would this mean biologically?</strong></p>
+<div id="radio_PHKOAQZCHM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PHKOAQZCHM" value="answer"> <span>As fish availability increases, otters leave fewer spraints.</span></label><label><input type="radio" autocomplete="off" name="radio_PHKOAQZCHM" value=""> <span>Fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_PHKOAQZCHM" value=""> <span>Otters always leave more spraints when fish are scarce.</span></label><label><input type="radio" autocomplete="off" name="radio_PHKOAQZCHM" value=""> <span>The regression assumptions have been violated.</span></label>
+</div>
+<p>We test the slope formally using a <strong>t-test</strong>, which produces a p-value:</p>
+<ul>
+<li>If <strong>p &lt; 0.05</strong>: the slope is significantly different from zero; we have evidence of a relationship</li>
+<li>If <strong>p &gt; 0.05</strong>: we do not have enough evidence to conclude a relationship exists</li>
+</ul>
+<p>In R, we fit the linear model using <code>lm()</code> and then use <code>summary()</code> to view the results:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit linear models for both variables</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lm_fish   <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index, <span class="at">data =</span> otter_data)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lm_length <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> length_cm,  <span class="at">data =</span> otter_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = spraints ~ fish_index, data = otter_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.5767 -1.2375 -0.2637  1.3212  3.8737 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.2483     1.0938   0.227    0.821    
+fish_index    1.8130     0.1596  11.358 2.25e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.815 on 58 degrees of freedom
+Multiple R-squared:  0.6898,    Adjusted R-squared:  0.6845 
+F-statistic:   129 on 1 and 58 DF,  p-value: 2.249e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = spraints ~ length_cm, data = otter_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.2072 -2.7089  0.0695  2.0684  6.9829 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 16.85006    3.53021   4.773 1.27e-05 ***
+length_cm   -0.04225    0.03316  -1.274    0.208    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.215 on 58 degrees of freedom
+Multiple R-squared:  0.02723,   Adjusted R-squared:  0.01046 
+F-statistic: 1.623 on 1 and 58 DF,  p-value: 0.2077</code></pre>
+</div>
+</div>
+<p>The <code>Coefficients</code> table in the output shows:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Estimate</code></td>
+<td>The value of the slope or intercept</td>
+</tr>
+<tr class="even">
+<td><code>Std. Error</code></td>
+<td>The uncertainty around that estimate</td>
+</tr>
+<tr class="odd">
+<td><code>t value</code></td>
+<td>How many standard errors the slope is from zero</td>
+</tr>
+<tr class="even">
+<td><code>Pr(&gt;|t|)</code></td>
+<td>The p-value: is the slope significantly different from zero?</td>
+</tr>
+</tbody>
+</table>
+<p>For <strong>fish index</strong>, the slope is significantly different from zero (p &lt; 0.001), confirming a positive relationship with spraint count. For <strong>body length</strong>, the slope is not significantly different from zero (p = 0.207), confirming no meaningful relationship.</p>
+<p><strong>Where would you find the p-value for the slope in the <code>summary()</code> output?</strong></p>
+<div id="radio_DSUSNJXYHC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DSUSNJXYHC" value="answer"> <span>In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_DSUSNJXYHC" value=""> <span>In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_DSUSNJXYHC" value=""> <span>In the R-squared value at the bottom of the output.</span></label><label><input type="radio" autocomplete="off" name="radio_DSUSNJXYHC" value=""> <span>In the F-statistic at the bottom of the output.</span></label>
+</div>
+<p><strong>If the t value for the slope is 8.45, what does this suggest?</strong></p>
+<div id="radio_POEAQHUKHO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_POEAQHUKHO" value="answer"> <span>The slope is 8.45 standard errors away from zero: strong evidence that the slope is significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_POEAQHUKHO" value=""> <span>The p-value is 8.45, so the result is not significant.</span></label><label><input type="radio" autocomplete="off" name="radio_POEAQHUKHO" value=""> <span>The slope itself is 8.45: fish availability increases spraints by 8.45 per unit.</span></label><label><input type="radio" autocomplete="off" name="radio_POEAQHUKHO" value=""> <span>The R-squared value is 8.45, meaning the model explains 8.45% of the variation.</span></label>
+</div>
+<hr>
+<p><strong>Step 2: Assess the strength of the relationship</strong></p>
+<p>Even if a relationship exists, it might be weak, the data points might be scattered widely around the line. We measure how well the line fits the data using <strong>R²</strong>(R-squared:</p>
+<blockquote class="blockquote">
+<p><em>R² is the proportion of variation in spraints that is explained by fish availability, or length.</em></p>
+</blockquote>
+<ul>
+<li><strong>R² = 1</strong>: the line fits the data perfectly; fish availability or length explains all variation in spraints</li>
+<li><strong>R² = 0.6</strong>: fish availability or length explains 60% of the variation in spraints; other factors explain the remaining 40%</li>
+<li><strong>R² = 0</strong>: the line explains nothing; fish availability or length has no predictive power</li>
+</ul>
+<p>R² can be found in the <code>summary()</code> output under <code>Multiple R-squared</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract R-squared values</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)<span class="sc">$</span>r.squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6898364</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)<span class="sc">$</span>r.squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02722733</code></pre>
+</div>
+</div>
+<p><strong>If R² = 0.69 for the relationship between fish index and spraints, and R² = 0.027 for the relationship between body length and spraints, what does this mean?</strong></p>
+<div id="radio_QBPEILXVFQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QBPEILXVFQ" value="answer"> <span>Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_QBPEILXVFQ" value=""> <span>Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.</span></label><label><input type="radio" autocomplete="off" name="radio_QBPEILXVFQ" value=""> <span>Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_QBPEILXVFQ" value=""> <span>An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated.</span></label>
+</div>
+<hr>
+<p><strong>Step 3: Describe the relationship</strong></p>
+<p>Finally, we describe the relationship using the <strong>regression equation</strong>:</p>
+<p><span class="math display">y = a + bx</span></p>
+<p>For our otter data:</p>
+<p><span class="math display">\text{spraints} = a + b \times \text{fish index}</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">y</span> = spraints: the <strong>dependent variable</strong> (what we are trying to predict)</li>
+<li><span class="math inline">x</span> = fish index: the <strong>independent variable</strong> (what we think drives spraints)</li>
+<li><span class="math inline">a</span> = the <strong>intercept</strong>: the predicted number of spraints when fish index = 0</li>
+<li><span class="math inline">b</span> = the <strong>slope</strong>: how much spraints change for each one-unit increase in fish index</li>
+</ul>
+<p>We can extract the slope and intercept directly from the model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract slope and intercept</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_fish)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)  fish_index 
+  0.2482678   1.8130078 </code></pre>
+</div>
+</div>
+<p><strong>What does a slope of zero mean in a linear regression?</strong></p>
+<div id="radio_UOQZOZIFAG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UOQZOZIFAG" value=""> <span>The regression line passes through the origin.</span></label><label><input type="radio" autocomplete="off" name="radio_UOQZOZIFAG" value="answer"> <span>The independent variable has no effect on the dependent variable: as x increases, y does not change.</span></label><label><input type="radio" autocomplete="off" name="radio_UOQZOZIFAG" value=""> <span>The R-squared value is equal to 1, meaning the line fits the data perfectly.</span></label><label><input type="radio" autocomplete="off" name="radio_UOQZOZIFAG" value=""> <span>The intercept is equal to zero, meaning the line starts at the origin.</span></label>
+</div>
+<p><strong>What does the intercept tell us in our otter regression?</strong></p>
+<div id="radio_XTIVCJXIWE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XTIVCJXIWE" value=""> <span>The rate at which spraints increase as fish availability increases.</span></label><label><input type="radio" autocomplete="off" name="radio_XTIVCJXIWE" value=""> <span>The proportion of variation in spraints explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_XTIVCJXIWE" value="answer"> <span>The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.</span></label><label><input type="radio" autocomplete="off" name="radio_XTIVCJXIWE" value=""> <span>The p-value for the test of whether the slope is significantly different from zero.</span></label>
+</div>
+<p><strong>In our otter model above, what is the dependent variable?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">Fish index</option><option value="">Body length</option><option value="answer">Spraints</option><option value="">Site</option><option value="">Season</option></select></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Important assumptions of linear regression:</strong></p>
+<ul>
+<li>The relationship between the two variables is <strong>linear</strong>: a straight line is a reasonable description of the data</li>
+<li>The <strong>residuals</strong> (differences between observed and predicted values) are normally distributed</li>
+<li>The variance of the residuals is <strong>constant</strong> across all values of x: this is called <strong>homoscedasticity</strong></li>
+</ul>
+<p>We will check these assumptions in the next section.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="case-study-otter--" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="case-study-otter--"><span class="header-section-number">5</span> Case Study: Otter -</h2>
+<p>We should have already read in our data. We can start by checking out the variable types in our data</p>
+<p><strong>Can you remember how to check the data type of each variable in R?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">colnames()</option><option value="">summary()</option><option value="">head()</option><option value="answer">str()</option></select></p>
+<div class="webex-solution">
+<button>
+Show answer here, no clicking until question is answered!
+</button>
+<p><code>str()</code> shows the <strong>structure</strong> of the dataset — including the data type of each variable. For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(otter_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [60 × 9] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ otter_id  : chr [1:60] "OT001" "OT002" "OT003" "OT004" ...
+ $ site      : chr [1:60] "River Bure" "River Bure" "River Bure" "River Bure" ...
+ $ season    : chr [1:60] "summer" "summer" "summer" "summer" ...
+ $ sex       : chr [1:60] "male" "male" "male" "female" ...
+ $ age_class : chr [1:60] "sub_adult" "sub_adult" "juvenile" "juvenile" ...
+ $ length_cm : num [1:60] 120.2 127.6 116.9 88.6 110.6 ...
+ $ mass_kg   : num [1:60] 11.33 10.42 7.2 5.23 9.63 ...
+ $ spraints  : num [1:60] 13 14 11 15 13 15 12 13 12 16 ...
+ $ fish_index: num [1:60] 6.3 6.1 5.1 7.7 5.6 6 6.7 6.4 6.8 7.3 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   otter_id = col_character(),
+  ..   site = col_character(),
+  ..   season = col_character(),
+  ..   sex = col_character(),
+  ..   age_class = col_character(),
+  ..   length_cm = col_double(),
+  ..   mass_kg = col_double(),
+  ..   spraints = col_double(),
+  ..   fish_index = col_double()
+  .. )
+ - attr(*, "problems")=&lt;pointer: 0xadf0dc2d0&gt; </code></pre>
+</div>
+</div>
+<p>This shows:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data type shown</th>
+<th>What it means</th>
+<th>Variable type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chr</code></td>
+<td>Character:text values</td>
+<td>Nominal categorical</td>
+</tr>
+<tr class="even">
+<td><code>Factor</code></td>
+<td>Factor: categorical with levels</td>
+<td>Nominal or ordinal categorical</td>
+</tr>
+<tr class="odd">
+<td><code>int</code></td>
+<td>Integer: whole numbers</td>
+<td>Discrete quantitative</td>
+</tr>
+<tr class="even">
+<td><code>num</code></td>
+<td>Numeric: decimal numbers</td>
+<td>Continuous quantitative</td>
+</tr>
+</tbody>
+</table>
+<p>So for our otter dataset:</p>
+<ul>
+<li><code>site</code> and <code>sex</code> show as <code>chr</code> — <strong>nominal categorical</strong></li>
+<li><code>spraints</code> shows as <code>int</code> — <strong>discrete quantitative</strong> (you cannot have half a spraint)</li>
+<li><code>fish_index</code>, <code>length_cm</code>, <code>mass_kg</code> show as <code>num</code> — <strong>continuous quantitative</strong></li>
+</ul>
+</div>
+<section id="what-should-we-do-analysis-on" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="what-should-we-do-analysis-on"><span class="header-section-number">5.1</span> What should we do analysis on?</h3>
+<p>In our otter dataset, if you ran the code above you should see that we have many variables: <code>site</code>, <code>season</code>, <code>sex</code>, <code>age_class</code> <code>length_cm</code>, <code>mass_kg</code>, <code>spraints</code> and <code>fish_index</code>. We cannot and should not analyse all possible combinations. Instead, we start with a clear research question.</p>
+<p>Here are some examples using our otter data:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Research question</th>
+<th>Dependent variable (y)</th>
+<th>Independent variable (x)</th>
+<th>Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Do male otters have longer body length than females?</td>
+<td><code>length_cm</code></td>
+<td><code>sex</code></td>
+<td>t-test</td>
+</tr>
+<tr class="even">
+<td>Does spraint count differ between sites?</td>
+<td><code>spraints</code></td>
+<td><code>site</code></td>
+<td>One-way ANOVA</td>
+</tr>
+<tr class="odd">
+<td>Does spraint count differ between sites and seasons?</td>
+<td><code>spraints</code></td>
+<td><code>site</code> + <code>season</code></td>
+<td>Two-way ANOVA</td>
+</tr>
+<tr class="even">
+<td>Does fish availability predict spraint count?</td>
+<td><code>spraints</code></td>
+<td><code>fish_index</code></td>
+<td>Linear regression</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A good research question has three things:</strong></p>
+<ol type="1">
+<li>A clearly defined <strong>dependent variable</strong>: what you are measuring as an outcome</li>
+<li>A clearly defined <strong>independent variable</strong>: what you think drives that outcome</li>
+<li>A <strong>biological justification</strong>: why would you expect these two variables to be related?</li>
+</ol>
+</div>
+</div>
+<p><strong>Before you visualise or analyse anything, you should be able to complete this sentence:</strong></p>
+<blockquote class="blockquote">
+<p><em>“I want to know whether x affects x, because … .”</em></p>
+</blockquote>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p><em>“I want to know whether <strong>site</strong> and <strong>season</strong> affects <strong>spraints</strong>, because otters may ….”</em></p>
+</blockquote>
+<p>Once you have your research question, you only need to visualise the variables involved, not the entire dataset.</p>
+<p><strong>You want to know whether site and season affects sprain count. Which variables do you need to visualise?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">All variables in the dataset</option><option value="answer">site, season and spraints only</option><option value="">spraints and fish_index</option><option value="">site and season</option></select></p>
+<p><strong>Which of the following is a well-formed research question?</strong></p>
+<div id="radio_WQDYJPQQMW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WQDYJPQQMW" value="answer"> <span>Does spraint count differ between sites and seasons, and is there an interaction between the two — for example, do otters mark their territory more in winter on some rivers than others?</span></label><label><input type="radio" autocomplete="off" name="radio_WQDYJPQQMW" value=""> <span>Is there anything interesting in the otter dataset?</span></label><label><input type="radio" autocomplete="off" name="radio_WQDYJPQQMW" value=""> <span>What do all the variables in the otter dataset look like when plotted?</span></label><label><input type="radio" autocomplete="off" name="radio_WQDYJPQQMW" value=""> <span>Can we find a significant result somewhere in the otter dataset?</span></label>
+</div>
+<div class="webex-solution">
+<button>
+Click to show explanation
+</button>
+<p>A well-formed research question should:</p>
+<ul>
+<li>Name a specific <strong>dependent variable</strong> (spraint count)</li>
+<li>Name specific <strong>independent variables</strong> (site and season)</li>
+<li>Include a <strong>biological justification</strong> — why might these variables be related?</li>
+<li>Be <strong>testable</strong> — it leads directly to a specific statistical analysis (in this case, a two-way ANOVA)</li>
+</ul>
+<p>The other options are poorly formed because they are too vague, do not name specific variables, and do not have a clear biological motivation. Fishing for significant results across all variables — sometimes called <strong>p-hacking</strong> — is considered poor scientific practice.</p>
+</div>
+<p>Now that we have decided on what we are doing, let’s get analysing…</p>
+</section>
+<section id="the-analysis" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="the-analysis"><span class="header-section-number">5.2</span> The Analysis</h3>
+<section id="step-1.-visualise" class="level4" data-number="5.2.1">
+<h4 data-number="5.2.1" class="anchored" data-anchor-id="step-1.-visualise"><span class="header-section-number">5.2.1</span> Step 1. Visualise!</h4>
+<p>Let’s first visualise our data to get a good idea of what’s going on.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Use: sprain, site and season to visualise the data.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> site, <span class="at">y =</span> spraints, <span class="at">fill =</span> season)) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Site"</span>, <span class="at">y =</span> <span class="st">"Spraint count"</span>, <span class="at">fill =</span> <span class="st">"Season"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-testing-and-measuring-relationships_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What is this initial visualisation telling us about the data?</strong></p>
+<div id="radio_IGNJDGAYYO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IGNJDGAYYO" value="answer"> <span>Spraint count appears to differ between sites and seasons, with River Wensum showing the highest counts particularly in winter, suggesting a possible interaction between site and season.</span></label><label><input type="radio" autocomplete="off" name="radio_IGNJDGAYYO" value=""> <span>Spraint count is the same across all sites and seasons, there is no pattern in the data.</span></label><label><input type="radio" autocomplete="off" name="radio_IGNJDGAYYO" value=""> <span>Season has no effect on spraint count, the boxes look the same in summer and winter.</span></label><label><input type="radio" autocomplete="off" name="radio_IGNJDGAYYO" value=""> <span>Site has no effect on spraint count, all three rivers show identical distributions.</span></label>
+</div>
+<div class="webex-solution">
+<button>
+Click to show explanation
+</button>
+<p>Looking at the boxplot:</p>
+<ul>
+<li><strong>River Wensum</strong> shows notably higher spraint counts in <strong>winter</strong> compared to summer — this is a potential interaction effect</li>
+<li><strong>River Bure</strong> appears higher in <strong>summer</strong> than winter</li>
+<li><strong>River Yare</strong> shows little difference between seasons</li>
+</ul>
+<p>This pattern — where the effect of season <strong>depends on which site you are looking at</strong> — is the visual signature of an <strong>interaction</strong>. This is exactly what a two-way ANOVA will allow us to test formally.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember — this is just a visual impression. We need to check our assumptions and run the formal test before drawing any conclusions.</p>
+</div>
+</div>
+</div>
+<p>In Chapter 3, we first learnt about the <strong>Shapiro-Wilk test</strong> for checking whether the data within each group are approximately <strong>normally distributed</strong>, and <strong>Levene’s test</strong> for checking whether the <strong>variances across groups are approximately equal</strong>. Let’s apply these to our otter data before running the two-way ANOVA.</p>
+<p>Complete the code below to run the Shapiro-Wilk test, followed by Levene’s test, grouped by site and season. Replace each <code>___</code> with the correct answer:</p>
+<p>The function to test normality is: <input class="webex-solveme nospaces" size="12" data-answer="[&quot;shapiro.test&quot;]"></p>
+<p>The function to test for equality of variances is: <input class="webex-solveme nospaces" size="10" data-answer="[&quot;leveneTest&quot;]"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Hints:</strong></p>
+<ul>
+<li>R is <strong>case sensitive</strong> — <code>leveneTest</code> is not the same as <code>levenetest</code> or <code>LeveneTest</code></li>
+<li>For the grouping variables, think about what we want to check normality <strong>within</strong> — we want to check each combination of site and season separately</li>
+</ul>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, season) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">___</span>(spraints)<span class="sc">$</span>statistic,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">___</span>(spraints)<span class="sc">$</span><span class="er">$</span>p.value</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">___</span>(spraints <span class="sc">~</span> site <span class="sc">*</span> season,, <span class="at">data =</span> otter_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="webex-solution">
+<button>
+Click to show the solution
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro-Wilk test for normality within each site x season combination</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, season) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">shapiro.test</span>(spraints)<span class="sc">$</span>statistic,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">shapiro.test</span>(spraints)<span class="sc">$</span>p.value,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  site         season shapiro_w shapiro_p
+  &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+1 River Bure   summer     0.953     0.709
+2 River Bure   winter     0.948     0.646
+3 River Wensum summer     0.916     0.328
+4 River Wensum winter     0.896     0.198
+5 River Yare   summer     0.904     0.245
+6 River Yare   winter     0.878     0.124</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's test for equal variances across site x season combinations</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(spraints <span class="sc">~</span> site <span class="sc">*</span> season, <span class="at">data =</span> otter_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  5  0.5202 0.7599
+      54               </code></pre>
+</div>
+</div>
+</div>
+<p><strong>What does a p-value &gt; 0.05 in the Shapiro-Wilk test suggest?</strong></p>
+<div id="radio_CWROOIJNNV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CWROOIJNNV" value="answer"> <span>The data are approximately normally distributed, we do not reject the null hypothesis of normality.</span></label><label><input type="radio" autocomplete="off" name="radio_CWROOIJNNV" value=""> <span>The data are not normally distributed, we reject the null hypothesis of normality.</span></label><label><input type="radio" autocomplete="off" name="radio_CWROOIJNNV" value=""> <span>The data are homoscedastic, we do not reject the null hypothesis of equal variances.</span></label><label><input type="radio" autocomplete="off" name="radio_CWROOIJNNV" value=""> <span>The data are heteroscedastic, we reject the null hypothesis of equal variances.</span></label>
+</div>
+<p><strong>What does a p-value &gt; 0.05 in the Levene’s test suggest?</strong></p>
+<div id="radio_AROSRQHDLS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AROSRQHDLS" value=""> <span>The variances across groups are not equal, we reject the null hypothesis of equal variances.</span></label><label><input type="radio" autocomplete="off" name="radio_AROSRQHDLS" value=""> <span>The data are normally distributed, we do not reject the null hypothesis of normality.</span></label><label><input type="radio" autocomplete="off" name="radio_AROSRQHDLS" value="answer"> <span>The variances across groups are approximately equal, we do not reject the null hypothesis of equal variances.</span></label><label><input type="radio" autocomplete="off" name="radio_AROSRQHDLS" value=""> <span>The data are not normally distributed, we reject the null hypothesis of normality.</span></label>
+</div>
+<p>We have confirmed that the assumptions of normality and equal variances are met, let’s use a histogram to just have a quick visual check of the data distribution.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> spraints, <span class="at">fill =</span> season)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> site) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Spraint count"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-testing-and-measuring-relationships_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There’s a lot going on but we can see that the data are <strong>approximately normally distributed</strong> within each site and season combination, with no obvious outliers, more importantly, we know from the Shapiro-Wilk test that the data are not significantly different from a normal distribution.</p>
+<p>So, let’s run our test to see if there is a significant effect of site, season and the interaction between the two on spraint count.</p>
+<p><strong>What test should we use to test whether site and season affect spraint count?</strong></p>
+<p><select class="webex-select"><option value="blank"></option><option value="">One-way ANOVA</option><option value="">Linear regression</option><option value="answer">Two-way ANOVA</option><option value="">Chi-squared test</option></select></p>
+<div class="webex-solution">
+<button>
+Click to show explanation
+</button>
+<p>Two-way ANOVA is the appropriate test when we have two independent variables (site and season) and want to examine their effect on a continuous dependent variable (spraint count).</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>spraint_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(spraints <span class="sc">~</span> site <span class="sc">*</span> season, <span class="at">data =</span> otter_data)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(spraint_aov)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+site         2  437.7  218.87  122.73  &lt; 2e-16 ***
+season       1   14.0   14.02    7.86  0.00701 ** 
+site:season  2   68.1   34.07   19.10 5.32e-07 ***
+Residuals   54   96.3    1.78                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="understanding-and-writing-up-interactions" class="level4" data-number="5.2.2">
+<h4 data-number="5.2.2" class="anchored" data-anchor-id="understanding-and-writing-up-interactions"><span class="header-section-number">5.2.2</span> Understanding and Writing Up Interactions</h4>
+<p>Before we interpret our ANOVA output, it is important to understand what an <strong>interaction</strong> actually means, and how to write one up correctly.</p>
+</section>
+<section id="what-is-an-interaction" class="level4" data-number="5.2.3">
+<h4 data-number="5.2.3" class="anchored" data-anchor-id="what-is-an-interaction"><span class="header-section-number">5.2.3</span> What is an Interaction?</h4>
+<p>An interaction occurs when the effect of one variable <strong>depends on</strong> the level of another variable. In our otter example:</p>
+<blockquote class="blockquote">
+<p><em>“Does the effect of season on spraint count depend on which river we are looking at?”</em></p>
+</blockquote>
+<p>If yes — there is an interaction. If no — there is no interaction and the effect of season is the same across all three rivers.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A simple way to spot an interaction:</strong></p>
+<ul>
+<li><strong>No interaction</strong> — the difference between summer and winter spraints is roughly the same at all three sites</li>
+<li><strong>Interaction present</strong> — the difference between summer and winter spraints is bigger at some sites than others, or even reverses direction</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="visualising-the-interaction" class="level4" data-number="5.2.4">
+<h4 data-number="5.2.4" class="anchored" data-anchor-id="visualising-the-interaction"><span class="header-section-number">5.2.4</span> Visualising the Interaction</h4>
+<p>An <strong>interaction plot</strong> is the clearest way to see whether an interaction exists:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, season) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_spraints =</span> <span class="fu">mean</span>(spraints), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> site, <span class="at">y =</span> mean_spraints,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> season, <span class="at">group =</span> season)) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Site"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean spraint count"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Season"</span>) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-testing-and-measuring-relationships_files/figure-html/interaction-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figure 5. Interaction plot showing mean spraint count by site and season. Non-parallel or crossing lines indicate an interaction.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click to show explanation of the interaction plot
+</button>
+<ul>
+<li>If the lines are <strong>parallel</strong> — the effect of season is the same at all sites, suggesting <strong>no interaction</strong></li>
+<li>If the lines are <strong>non-parallel or crossing</strong> — the effect of season differs between sites, suggesting an <strong>interaction is present</strong></li>
+</ul>
+<p>In our otter data, the lines cross between sites — River Wensum shows much higher spraints in winter, while River Bure shows higher spraints in summer. This crossing pattern is the visual signature of an interaction.</p>
+</div>
+<p><strong>What would parallel lines in an interaction plot tell us?</strong></p>
+<div id="radio_HZTQHZOEGT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HZTQHZOEGT" value="answer"> <span>The effect of season on spraint count is the same across all three sites — there is no interaction between site and season.</span></label><label><input type="radio" autocomplete="off" name="radio_HZTQHZOEGT" value=""> <span>There is a strong interaction between site and season.</span></label><label><input type="radio" autocomplete="off" name="radio_HZTQHZOEGT" value=""> <span>The main effect of site is not significant.</span></label><label><input type="radio" autocomplete="off" name="radio_HZTQHZOEGT" value=""> <span>The ANOVA assumptions have been violated.</span></label>
+</div>
+<p><strong>If the lines cross in an interaction plot, what does this suggest?</strong></p>
+<div id="radio_ABKBRKLCDI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ABKBRKLCDI" value=""> <span>There is no interaction — the effect of season is the same at all sites.</span></label><label><input type="radio" autocomplete="off" name="radio_ABKBRKLCDI" value="answer"> <span>There is an interaction — the effect of season on spraint count reverses or changes substantially depending on which site you are looking at.</span></label><label><input type="radio" autocomplete="off" name="radio_ABKBRKLCDI" value=""> <span>The main effects of site and season are both non-significant.</span></label><label><input type="radio" autocomplete="off" name="radio_ABKBRKLCDI" value=""> <span>The data are not normally distributed.</span></label>
+</div>
+<hr>
+</section>
+<section id="how-to-write-up-an-interaction" class="level4" data-number="5.2.5">
+<h4 data-number="5.2.5" class="anchored" data-anchor-id="how-to-write-up-an-interaction"><span class="header-section-number">5.2.5</span> How to Write Up an Interaction</h4>
+<p>When writing up a significant interaction, you need to:</p>
+<ol type="1">
+<li><strong>State the statistical result</strong> — F value, degrees of freedom, p-value</li>
+<li><strong>Describe the direction</strong> — which combination was highest/lowest</li>
+<li><strong>Interpret the biology</strong> — what does this mean in the real world</li>
+</ol>
+<p>Here is an example write-up template:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Write-up template:</strong></p>
+<p><em>“There was a significant interaction between [factor 1] and [factor 2] on [dependent variable] (F(df1, df2) = X.XX, p = X.XXX). [Factor 1] had a [stronger/weaker/opposite] effect on [dependent variable] in [level of factor 2] compared to [other level of factor 2]. Specifically, [describe the pattern — which combination was highest, which was lowest, where did the effect reverse].”</em></p>
+</div>
+</div>
+<p>For example, using our otter data:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Example write-up:</strong></p>
+<p><em>“There was a significant interaction between site and season on spraint count (F(2, 54) = XX.XX, p &lt; 0.001). Spraint counts were highest at River Wensum in winter, while River Bure showed higher counts in summer. This suggests that the seasonal pattern of territory marking behaviour differs between rivers, possibly reflecting differences in seasonal fish availability across sites.”</em></p>
+</div>
+</div>
+<p><strong>Now try writing your own — fill in the blanks:</strong></p>
+<p>There was a <input class="webex-solveme nospaces" size="15" data-answer="[&quot;significant&quot;,&quot;non-significant&quot;]"> interaction between <input class="webex-solveme nospaces" size="4" data-answer="[&quot;site&quot;]"> and <input class="webex-solveme nospaces" size="6" data-answer="[&quot;season&quot;]"> on spraint count. The effect of season on spraint count <input class="webex-solveme nospaces" size="8" data-answer="[&quot;differed&quot;,&quot;varied&quot;]"> between sites, with River <input class="webex-solveme nospaces" size="6" data-answer="[&quot;Wensum&quot;]"> showing the highest counts in <input class="webex-solveme nospaces" size="6" data-answer="[&quot;winter&quot;]">.</p>
+<div class="webex-solution">
+<button>
+Click to show example full write-up
+</button>
+<p><em>“There was a significant interaction between site and season on spraint count. Spraint counts were highest at River Wensum in winter and at River Bure in summer, suggesting that the seasonal pattern of territory marking differs between rivers. This may reflect differences in the seasonal availability of fish prey across the three sites.”</em></p>
+</div>
+<p><strong>Which of the following is the best write-up of a significant interaction?</strong></p>
+<div id="radio_FRRBQGNEFO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FRRBQGNEFO" value="answer"> <span>There was a significant interaction between site and season on spraint count (F(2, 54) = 8.32, p &lt; 0.001). Spraint counts were highest at River Wensum in winter and lowest at River Yare in summer, suggesting that the effect of season on territory marking behaviour differs between rivers.</span></label><label><input type="radio" autocomplete="off" name="radio_FRRBQGNEFO" value=""> <span>The interaction was significant (p &lt; 0.05), showing that site and season both affect spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_FRRBQGNEFO" value=""> <span>Site and season both had significant main effects, so there must be an interaction between them.</span></label><label><input type="radio" autocomplete="off" name="radio_FRRBQGNEFO" value=""> <span>The p-value for the interaction term was less than 0.05, proving that River Wensum always has more spraints than the other sites.</span></label>
+</div>
+<p><strong>A student writes: ‘There was a significant main effect of season, so otters always mark their territory more in winter.’ What is wrong with this statement?</strong></p>
+<div id="radio_PDMCWPUIMG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PDMCWPUIMG" value=""> <span>Nothing — a significant main effect of season means otters always mark more in winter.</span></label><label><input type="radio" autocomplete="off" name="radio_PDMCWPUIMG" value="answer"> <span>If there is a significant interaction, the main effect of season can be misleading — the effect of season depends on the site, so we cannot generalise across all sites without considering the interaction.</span></label><label><input type="radio" autocomplete="off" name="radio_PDMCWPUIMG" value=""> <span>The student should have reported the F value and degrees of freedom.</span></label><label><input type="radio" autocomplete="off" name="radio_PDMCWPUIMG" value=""> <span>The statement is correct but should also mention the p-value.</span></label>
+</div>
+<p><strong>What does the p-value for the interaction term tell us?</strong></p>
+<div id="radio_JKGUZZIJSW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JKGUZZIJSW" value="answer"> <span>There is a significant interaction between site and season, meaning the effect of season on spraint count depends on the site.</span></label><label><input type="radio" autocomplete="off" name="radio_JKGUZZIJSW" value=""> <span>There is no significant interaction between site and season, meaning the effect of season on spraint count is the same across all sites.</span></label><label><input type="radio" autocomplete="off" name="radio_JKGUZZIJSW" value=""> <span>The main effect of site is significant, meaning spraint count differs between sites regardless of season.</span></label><label><input type="radio" autocomplete="off" name="radio_JKGUZZIJSW" value=""> <span>The main effect of season is significant, meaning spraint count differs between seasons regardless of site.</span></label>
+</div>
+<!-- -->
+
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+var update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+
+  for (var i = 0; i < t.length; i++) {
+    var p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML =
+      correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+};
+
+
+/* webex-solution button toggling function */
+var b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains("open")) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+};
+
+
+/* check answers */
+var check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains("unchecked")) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+};
+
+
+/* function for checking solveme answers */
+var solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "");
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+
+  /* match numeric answers within a specified tolerance */
+  if (Number(this.dataset.tol) > 0) {
+
+    var tol = Number(this.dataset.tol);
+
+    var matches = real_answers.map(function(x) {
+      return Math.abs(x - my_answer) < tol;
+    });
+
+    if (matches.reduce(function(a, b) {
+      return a + b;
+    }, 0) > 0) {
+
+      cl.add("webex-correct");
+
+    } else {
+
+      cl.remove("webex-correct");
+    }
+  }
+
+
+  /* regex checking */
+  if (cl.contains("regex")) {
+
+    var answer_regex = RegExp(real_answers.join("|"));
+
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+};
+
+
+/* function for checking select answers */
+var select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList;
+
+  /* remove previous styles */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+
+  /* add appropriate style */
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+};
+
+
+/* function for checking radiogroups answers */
+var radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector(
+    "input[name=" + this.id + "]:checked"
+  );
+
+  /* make sure something is selected */
+  if (!checked_button) {
+    return;
+  }
+
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of previous styles */
+  for (var i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add appropriate style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+};
+
+
+/* initialise WebEx when page loads */
+window.onload = function() {
+  console.log("webex onload");
+
+
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+
+    if (
+      buttons[i].parentElement &&
+      buttons[i].parentElement.classList.contains("webex-solution")
+    ) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+
+  /* set up WebEx check sections */
+  var check_sections =
+    document.getElementsByClassName("webex-check");
+
+  console.log("check:", check_sections.length);
+
+  for (var i = 0; i < check_sections.length; i++) {
+
+    check_sections[i].classList.add("unchecked");
+
+    var btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+
+    check_sections[i].appendChild(btn);
+
+    var spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+
+    check_sections[i].appendChild(spn);
+  }
+
+
+  /* set up webex-solveme inputs */
+  var solveme =
+    document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete", "off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+
+    solveme[i].value = "";
+
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+
+    solveme[i].dataset.answer = real_answer;
+
+
+    /* attach checking functions */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+
+    /* add WebEx icon */
+    solveme[i].insertAdjacentHTML(
+      "afterend",
+      " <span class='webex-icon'></span>"
+    );
+  }
+
+
+  /* set up radiogroups */
+  var radiogroups =
+    document.getElementsByClassName("webex-radiogroup");
+
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+
+  /* set up selects */
+  var selects =
+    document.getElementsByClassName("webex-select");
+
+  for (var i = 0; i < selects.length; i++) {
+
+    selects[i].onchange = select_func;
+
+    selects[i].insertAdjacentHTML(
+      "afterend",
+      " <span class='webex-icon'></span>"
+    );
+  }
+
+
+  /* update total score */
+  update_total_correct();
+};
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 5 - Testing and Measuring Relationships Extension"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: yeti</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-title: "Contents"</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">    css: [style.css, include/webex.css]</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: include/webex.js</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: katex</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webexercises)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>otter_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/otter_data.csv"</span>)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Route to Today's Workshop </span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Understanding Our Terms and Definitions </span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>**Correlation Analysis**                          </span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>A statistical method used to measure the strength and direction of a relationship between two or more variables.</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>**Regression Analysis**                   </span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>A statistical method used to estimate the relationship between a dependent outcome variable and one or more independent predictor variables. </span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>**Positive Association**                         </span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>As one variable increases, the other variable also increases.</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>**Negative Association**           </span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>As one variable increases, the other variable decreases.</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regression Analysis</span></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>The most common type of regression analysis is **linear regression**, which assumes a **linear relationship** between an independent variable and a dependent variable, and fits a straight line to the data.</span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>In our grassland experiment, we might ask: *"Is there a relationship between soil moisture and species richness?"* Linear regression would allow us to:</span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Linear Regression</span></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a><span class="fu">### What is Linear Regression?</span></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>So far we have compared **means between groups** using t-tests and ANOVA. But what if we want to understand the **relationship between two continuous variables**?</span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Can you remember what a continuous variable is?")`</span></span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>A **continuous variable** is a variable that can take any value within a range, it is measured rather than counted. Examples from our otter dataset include:</span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Body length (e.g. 115.3 cm)</span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Body mass (e.g. 9.52 kg)</span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fish availability index (e.g. 6.7)</span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Spraint count (e.g. 12)</span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a>This is different from a **categorical variable** (such as site or sex), which takes a fixed number of distinct values. In linear regression, the **dependent variable (y) must be continuous**. The independent variable (x) is typically continuous too, though categorical variables can also be used in more advanced models.</span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a>In our otter survey, we might ask:</span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Does fish availability predict how many spraints an otter leaves?"*</span></span>
+<span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a>This is a question about a **relationship** between two variables, as fish availability increases, do spraints increase too? Linear regression allows us to answer this.</span>
+<span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Three Steps of Linear Regression</span></span>
+<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a>**Step 1: Test whether a relationship exists**</span>
+<span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a>We plot the data and fit a straight line, then test whether the **slope is significantly different from zero**.</span>
+<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If fish availability has no effect on spraints, the line would be completely flat (slope = 0), as fish availability increases, spraints do not change.*</span></span>
+<span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a>                                                     </span>
+<span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If fish availability does affect spraints, the line would slope upwards (positive relationship) or downwards (negative relationship).*</span></span>
+<span id="cb24-91"><a href="#cb24-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a>The two plots below illustrate this using our otter data:</span>
+<span id="cb24-93"><a href="#cb24-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r slope-illustration, message=FALSE, echo=FALSE, fig.cap="Figure 1. Left: fish availability shows a clear positive relationship with spraint count. Right: body length shows almost no relationship with spraint count.", fig.width=10, fig.height=4}</span></span>
+<span id="cb24-95"><a href="#cb24-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-96"><a href="#cb24-96" aria-hidden="true" tabindex="-1"></a>plot_slope <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> fish_index, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fish availability index"</span>,</span>
+<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
+<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a>plot_flat <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> length_cm, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
+<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#00BFC4"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb24-106"><a href="#cb24-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body length (cm)"</span>,</span>
+<span id="cb24-107"><a href="#cb24-107" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
+<span id="cb24-108"><a href="#cb24-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb24-109"><a href="#cb24-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-110"><a href="#cb24-110" aria-hidden="true" tabindex="-1"></a>plot_slope <span class="sc">+</span> plot_flat</span>
+<span id="cb24-111"><a href="#cb24-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-112"><a href="#cb24-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-113"><a href="#cb24-113" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation of the plots")`</span></span>
+<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-115"><a href="#cb24-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Fish availability (left)**: the line slopes clearly **upward**, suggesting that as fish availability increases, spraint count increases too. The points follow the line closely, suggesting a **strong positive relationship**.</span>
+<span id="cb24-116"><a href="#cb24-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-117"><a href="#cb24-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Body length (right)**: the line is almost **completely flat**, and the points are scattered widely with no clear pattern. This suggests **no meaningful relationship** between body length and spraint count.</span>
+<span id="cb24-118"><a href="#cb24-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-119"><a href="#cb24-119" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-120"><a href="#cb24-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-121"><a href="#cb24-121" aria-hidden="true" tabindex="-1"></a>**Looking at the fish availability plot, what does the slope of the line suggest?**</span>
+<span id="cb24-122"><a href="#cb24-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-123"><a href="#cb24-123" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a>answer = "As fish availability increases, spraint count increases, there is a positive relationship between the two variables.",</span>
+<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a>"As fish availability increases, spraint count decreases, there is a negative relationship.",</span>
+<span id="cb24-126"><a href="#cb24-126" aria-hidden="true" tabindex="-1"></a>"The line is flat, suggesting fish availability has no effect on spraint count.",</span>
+<span id="cb24-127"><a href="#cb24-127" aria-hidden="true" tabindex="-1"></a>"The relationship between fish availability and spraint count is curved, not linear."</span>
+<span id="cb24-128"><a href="#cb24-128" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-129"><a href="#cb24-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-130"><a href="#cb24-130" aria-hidden="true" tabindex="-1"></a>**Looking at the body length plot, what does the slope of the line suggest?**</span>
+<span id="cb24-131"><a href="#cb24-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-132"><a href="#cb24-132" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a>"As body length increases, spraint count increases, larger otters mark their territory more.",</span>
+<span id="cb24-134"><a href="#cb24-134" aria-hidden="true" tabindex="-1"></a>"As body length increases, spraint count decreases, larger otters mark their territory less.",</span>
+<span id="cb24-135"><a href="#cb24-135" aria-hidden="true" tabindex="-1"></a>answer = "The line is almost flat, suggesting body length has little or no effect on spraint count.",</span>
+<span id="cb24-136"><a href="#cb24-136" aria-hidden="true" tabindex="-1"></a>"Body length perfectly predicts spraint count."</span>
+<span id="cb24-137"><a href="#cb24-137" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-138"><a href="#cb24-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-139"><a href="#cb24-139" aria-hidden="true" tabindex="-1"></a>**Comparing the two plots, which variable appears to be a better predictor of spraint count?**</span>
+<span id="cb24-140"><a href="#cb24-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-141"><a href="#cb24-141" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-142"><a href="#cb24-142" aria-hidden="true" tabindex="-1"></a>answer = "Fish availability, the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.",</span>
+<span id="cb24-143"><a href="#cb24-143" aria-hidden="true" tabindex="-1"></a>"Body length: the flat line means there is no noise in the data, making it a more reliable predictor.",</span>
+<span id="cb24-144"><a href="#cb24-144" aria-hidden="true" tabindex="-1"></a>"Both variables predict spraint count equally well.",</span>
+<span id="cb24-145"><a href="#cb24-145" aria-hidden="true" tabindex="-1"></a>"Neither variable predicts spraint count, both lines are flat."</span>
+<span id="cb24-146"><a href="#cb24-146" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-147"><a href="#cb24-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-148"><a href="#cb24-148" aria-hidden="true" tabindex="-1"></a>**If the slope of the fish availability line was negative instead of positive, what would this mean biologically?**</span>
+<span id="cb24-149"><a href="#cb24-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-150"><a href="#cb24-150" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-151"><a href="#cb24-151" aria-hidden="true" tabindex="-1"></a>answer = "As fish availability increases, otters leave fewer spraints.",</span>
+<span id="cb24-152"><a href="#cb24-152" aria-hidden="true" tabindex="-1"></a>"Fish availability has no effect on spraint count.",</span>
+<span id="cb24-153"><a href="#cb24-153" aria-hidden="true" tabindex="-1"></a>"Otters always leave more spraints when fish are scarce.",</span>
+<span id="cb24-154"><a href="#cb24-154" aria-hidden="true" tabindex="-1"></a>"The regression assumptions have been violated."</span>
+<span id="cb24-155"><a href="#cb24-155" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-156"><a href="#cb24-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-157"><a href="#cb24-157" aria-hidden="true" tabindex="-1"></a>We test the slope formally using a **t-test**, which produces a p-value:</span>
+<span id="cb24-158"><a href="#cb24-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-159"><a href="#cb24-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If **p &lt; 0.05**: the slope is significantly different from zero; we have </span>
+<span id="cb24-160"><a href="#cb24-160" aria-hidden="true" tabindex="-1"></a>evidence of a relationship</span>
+<span id="cb24-161"><a href="#cb24-161" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If **p &gt; 0.05**: we do not have enough evidence to conclude a relationship exists</span>
+<span id="cb24-162"><a href="#cb24-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-163"><a href="#cb24-163" aria-hidden="true" tabindex="-1"></a>In R, we fit the linear model using <span class="in">`lm()`</span> and then use <span class="in">`summary()`</span> to view the results:</span>
+<span id="cb24-164"><a href="#cb24-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-167"><a href="#cb24-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-168"><a href="#cb24-168" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit linear models for both variables</span></span>
+<span id="cb24-169"><a href="#cb24-169" aria-hidden="true" tabindex="-1"></a>lm_fish   <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index, <span class="at">data =</span> otter_data)</span>
+<span id="cb24-170"><a href="#cb24-170" aria-hidden="true" tabindex="-1"></a>lm_length <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> length_cm,  <span class="at">data =</span> otter_data)</span>
+<span id="cb24-171"><a href="#cb24-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-175"><a href="#cb24-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-176"><a href="#cb24-176" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)</span>
+<span id="cb24-177"><a href="#cb24-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-178"><a href="#cb24-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-181"><a href="#cb24-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-182"><a href="#cb24-182" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)</span>
+<span id="cb24-183"><a href="#cb24-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-184"><a href="#cb24-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-185"><a href="#cb24-185" aria-hidden="true" tabindex="-1"></a>The <span class="in">`Coefficients`</span> table in the output shows:</span>
+<span id="cb24-186"><a href="#cb24-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-187"><a href="#cb24-187" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> What it means <span class="pp">|</span></span>
+<span id="cb24-188"><a href="#cb24-188" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb24-189"><a href="#cb24-189" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Estimate`</span> <span class="pp">|</span> The value of the slope or intercept <span class="pp">|</span></span>
+<span id="cb24-190"><a href="#cb24-190" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Std. Error`</span> <span class="pp">|</span> The uncertainty around that estimate <span class="pp">|</span></span>
+<span id="cb24-191"><a href="#cb24-191" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`t value`</span> <span class="pp">|</span> How many standard errors the slope is from zero <span class="pp">|</span></span>
+<span id="cb24-192"><a href="#cb24-192" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Pr(&gt;|t|)`</span> <span class="pp">|</span> The p-value: is the slope significantly different from zero? <span class="pp">|</span></span>
+<span id="cb24-193"><a href="#cb24-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-194"><a href="#cb24-194" aria-hidden="true" tabindex="-1"></a>For **fish index**, the slope is significantly different from zero (p &lt; 0.001), confirming a positive relationship with spraint count. For **body length**, the slope is not significantly different from zero (p = 0.207), confirming no meaningful relationship.</span>
+<span id="cb24-195"><a href="#cb24-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-196"><a href="#cb24-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-197"><a href="#cb24-197" aria-hidden="true" tabindex="-1"></a>**Where would you find the p-value for the slope in the `summary()` output?**</span>
+<span id="cb24-198"><a href="#cb24-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-199"><a href="#cb24-199" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-200"><a href="#cb24-200" aria-hidden="true" tabindex="-1"></a>answer = "In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).",</span>
+<span id="cb24-201"><a href="#cb24-201" aria-hidden="true" tabindex="-1"></a>"In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).",</span>
+<span id="cb24-202"><a href="#cb24-202" aria-hidden="true" tabindex="-1"></a>"In the R-squared value at the bottom of the output.",</span>
+<span id="cb24-203"><a href="#cb24-203" aria-hidden="true" tabindex="-1"></a>"In the F-statistic at the bottom of the output."</span>
+<span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-205"><a href="#cb24-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a>**If the t value for the slope is 8.45, what does this suggest?**</span>
+<span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-209"><a href="#cb24-209" aria-hidden="true" tabindex="-1"></a>answer = "The slope is 8.45 standard errors away from zero: strong evidence that the slope is significantly different from zero.",</span>
+<span id="cb24-210"><a href="#cb24-210" aria-hidden="true" tabindex="-1"></a>"The p-value is 8.45, so the result is not significant.",</span>
+<span id="cb24-211"><a href="#cb24-211" aria-hidden="true" tabindex="-1"></a>"The slope itself is 8.45: fish availability increases spraints by 8.45 per unit.",</span>
+<span id="cb24-212"><a href="#cb24-212" aria-hidden="true" tabindex="-1"></a>"The R-squared value is 8.45, meaning the model explains 8.45% of the variation."</span>
+<span id="cb24-213"><a href="#cb24-213" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-214"><a href="#cb24-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-215"><a href="#cb24-215" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-216"><a href="#cb24-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-217"><a href="#cb24-217" aria-hidden="true" tabindex="-1"></a>**Step 2: Assess the strength of the relationship**</span>
+<span id="cb24-218"><a href="#cb24-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a>Even if a relationship exists, it might be weak, the data points might be scattered widely around the line. We measure how well the line fits the data using **R²**(R-squared:</span>
+<span id="cb24-220"><a href="#cb24-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-221"><a href="#cb24-221" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *R² is the proportion of variation in spraints that is explained by fish availability, or length.*</span></span>
+<span id="cb24-222"><a href="#cb24-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-223"><a href="#cb24-223" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 1**: the line fits the data perfectly; fish availability or length explains all </span>
+<span id="cb24-224"><a href="#cb24-224" aria-hidden="true" tabindex="-1"></a>variation in spraints</span>
+<span id="cb24-225"><a href="#cb24-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 0.6**: fish availability or length explains 60% of the variation in spraints; </span>
+<span id="cb24-226"><a href="#cb24-226" aria-hidden="true" tabindex="-1"></a>other factors explain the remaining 40%</span>
+<span id="cb24-227"><a href="#cb24-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 0**: the line explains nothing; fish availability or length has no predictive power</span>
+<span id="cb24-228"><a href="#cb24-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-229"><a href="#cb24-229" aria-hidden="true" tabindex="-1"></a>R² can be found in the <span class="in">`summary()`</span> output under <span class="in">`Multiple R-squared`</span>:</span>
+<span id="cb24-230"><a href="#cb24-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-231"><a href="#cb24-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r r-squared}</span></span>
+<span id="cb24-232"><a href="#cb24-232" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract R-squared values</span></span>
+<span id="cb24-233"><a href="#cb24-233" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)<span class="sc">$</span>r.squared</span>
+<span id="cb24-234"><a href="#cb24-234" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)<span class="sc">$</span>r.squared</span>
+<span id="cb24-235"><a href="#cb24-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-236"><a href="#cb24-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-237"><a href="#cb24-237" aria-hidden="true" tabindex="-1"></a>**If R² = 0.69 for the relationship between fish index and spraints, and R² = 0.027 for the relationship between body length and spraints, what does this mean?**</span>
+<span id="cb24-238"><a href="#cb24-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-239"><a href="#cb24-239" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-240"><a href="#cb24-240" aria-hidden="true" tabindex="-1"></a>answer = "Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.",</span>
+<span id="cb24-241"><a href="#cb24-241" aria-hidden="true" tabindex="-1"></a>"Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.",</span>
+<span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a>"Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.",</span>
+<span id="cb24-243"><a href="#cb24-243" aria-hidden="true" tabindex="-1"></a>"An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated."</span>
+<span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-246"><a href="#cb24-246" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-248"><a href="#cb24-248" aria-hidden="true" tabindex="-1"></a>**Step 3: Describe the relationship**</span>
+<span id="cb24-249"><a href="#cb24-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-250"><a href="#cb24-250" aria-hidden="true" tabindex="-1"></a>Finally, we describe the relationship using the **regression equation**:</span>
+<span id="cb24-251"><a href="#cb24-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-252"><a href="#cb24-252" aria-hidden="true" tabindex="-1"></a>$$y = a + bx$$</span>
+<span id="cb24-253"><a href="#cb24-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-254"><a href="#cb24-254" aria-hidden="true" tabindex="-1"></a>For our otter data:</span>
+<span id="cb24-255"><a href="#cb24-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-256"><a href="#cb24-256" aria-hidden="true" tabindex="-1"></a>$$\text{spraints} = a + b \times \text{fish index}$$</span>
+<span id="cb24-257"><a href="#cb24-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-258"><a href="#cb24-258" aria-hidden="true" tabindex="-1"></a>Where:</span>
+<span id="cb24-259"><a href="#cb24-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$y$ = spraints: the **dependent variable** (what we are trying to predict)</span>
+<span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$x$ = fish index: the **independent variable** (what we think drives spraints)</span>
+<span id="cb24-262"><a href="#cb24-262" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$a$ = the **intercept**: the predicted number of spraints when fish index = 0</span>
+<span id="cb24-263"><a href="#cb24-263" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$b$ = the **slope**: how much spraints change for each one-unit increase in </span>
+<span id="cb24-264"><a href="#cb24-264" aria-hidden="true" tabindex="-1"></a>fish index</span>
+<span id="cb24-265"><a href="#cb24-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a>We can extract the slope and intercept directly from the model:</span>
+<span id="cb24-267"><a href="#cb24-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-268"><a href="#cb24-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r coefficients}</span></span>
+<span id="cb24-269"><a href="#cb24-269" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract slope and intercept</span></span>
+<span id="cb24-270"><a href="#cb24-270" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_fish)</span>
+<span id="cb24-271"><a href="#cb24-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-272"><a href="#cb24-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-273"><a href="#cb24-273" aria-hidden="true" tabindex="-1"></a>**What does a slope of zero mean in a linear regression?**</span>
+<span id="cb24-274"><a href="#cb24-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-275"><a href="#cb24-275" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-276"><a href="#cb24-276" aria-hidden="true" tabindex="-1"></a>"The regression line passes through the origin.",</span>
+<span id="cb24-277"><a href="#cb24-277" aria-hidden="true" tabindex="-1"></a>answer = "The independent variable has no effect on the dependent variable: as x increases, y does not change.",</span>
+<span id="cb24-278"><a href="#cb24-278" aria-hidden="true" tabindex="-1"></a>"The R-squared value is equal to 1, meaning the line fits the data perfectly.",</span>
+<span id="cb24-279"><a href="#cb24-279" aria-hidden="true" tabindex="-1"></a>"The intercept is equal to zero, meaning the line starts at the origin."</span>
+<span id="cb24-280"><a href="#cb24-280" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-281"><a href="#cb24-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-282"><a href="#cb24-282" aria-hidden="true" tabindex="-1"></a>**What does the intercept tell us in our otter regression?**</span>
+<span id="cb24-283"><a href="#cb24-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-284"><a href="#cb24-284" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-285"><a href="#cb24-285" aria-hidden="true" tabindex="-1"></a>"The rate at which spraints increase as fish availability increases.",</span>
+<span id="cb24-286"><a href="#cb24-286" aria-hidden="true" tabindex="-1"></a>"The proportion of variation in spraints explained by fish availability.",</span>
+<span id="cb24-287"><a href="#cb24-287" aria-hidden="true" tabindex="-1"></a>answer = "The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.",</span>
+<span id="cb24-288"><a href="#cb24-288" aria-hidden="true" tabindex="-1"></a>"The p-value for the test of whether the slope is significantly different from zero."</span>
+<span id="cb24-289"><a href="#cb24-289" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-290"><a href="#cb24-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-291"><a href="#cb24-291" aria-hidden="true" tabindex="-1"></a>**In our otter model above, what is the dependent variable?**</span>
+<span id="cb24-292"><a href="#cb24-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-293"><a href="#cb24-293" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Fish index", "Body length", answer = "Spraints", "Site", "Season"))`</span></span>
+<span id="cb24-294"><a href="#cb24-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-295"><a href="#cb24-295" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb24-296"><a href="#cb24-296" aria-hidden="true" tabindex="-1"></a>**Important assumptions of linear regression:**</span>
+<span id="cb24-297"><a href="#cb24-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-298"><a href="#cb24-298" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The relationship between the two variables is **linear**: a straight line is </span>
+<span id="cb24-299"><a href="#cb24-299" aria-hidden="true" tabindex="-1"></a>a reasonable description of the data</span>
+<span id="cb24-300"><a href="#cb24-300" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **residuals** (differences between observed and predicted values) are </span>
+<span id="cb24-301"><a href="#cb24-301" aria-hidden="true" tabindex="-1"></a>normally distributed</span>
+<span id="cb24-302"><a href="#cb24-302" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The variance of the residuals is **constant** across all values of x: this is </span>
+<span id="cb24-303"><a href="#cb24-303" aria-hidden="true" tabindex="-1"></a>called **homoscedasticity**</span>
+<span id="cb24-304"><a href="#cb24-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-305"><a href="#cb24-305" aria-hidden="true" tabindex="-1"></a>We will check these assumptions in the next section.</span>
+<span id="cb24-306"><a href="#cb24-306" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-307"><a href="#cb24-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-308"><a href="#cb24-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-309"><a href="#cb24-309" aria-hidden="true" tabindex="-1"></a><span class="fu">## Case Study: Otter - </span></span>
+<span id="cb24-310"><a href="#cb24-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-311"><a href="#cb24-311" aria-hidden="true" tabindex="-1"></a>We should have already read in our data.</span>
+<span id="cb24-312"><a href="#cb24-312" aria-hidden="true" tabindex="-1"></a>We can start by checking out the variable types in our data </span>
+<span id="cb24-313"><a href="#cb24-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-314"><a href="#cb24-314" aria-hidden="true" tabindex="-1"></a>**Can you remember how to check the data type of each variable in R?**</span>
+<span id="cb24-315"><a href="#cb24-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-316"><a href="#cb24-316" aria-hidden="true" tabindex="-1"></a>`r mcq(c(</span>
+<span id="cb24-317"><a href="#cb24-317" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>colnames()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
+<span id="cb24-318"><a href="#cb24-318" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>summary()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
+<span id="cb24-319"><a href="#cb24-319" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>head()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
+<span id="cb24-320"><a href="#cb24-320" aria-hidden="true" tabindex="-1"></a>answer = "<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>str()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>"</span>
+<span id="cb24-321"><a href="#cb24-321" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-322"><a href="#cb24-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-323"><a href="#cb24-323" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Show answer here, no clicking until question is answered!")`</span></span>
+<span id="cb24-324"><a href="#cb24-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-325"><a href="#cb24-325" aria-hidden="true" tabindex="-1"></a><span class="in">`str()`</span> shows the **structure** of the dataset — including the data type of each variable. For example:</span>
+<span id="cb24-326"><a href="#cb24-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-329"><a href="#cb24-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-330"><a href="#cb24-330" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(otter_data)</span>
+<span id="cb24-331"><a href="#cb24-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-332"><a href="#cb24-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-333"><a href="#cb24-333" aria-hidden="true" tabindex="-1"></a>This shows: </span>
+<span id="cb24-334"><a href="#cb24-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-335"><a href="#cb24-335" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Data type shown <span class="pp">|</span> What it means <span class="pp">|</span> Variable type <span class="pp">|</span></span>
+<span id="cb24-336"><a href="#cb24-336" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb24-337"><a href="#cb24-337" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`chr`</span> <span class="pp">|</span> Character:text values <span class="pp">|</span> Nominal categorical <span class="pp">|</span></span>
+<span id="cb24-338"><a href="#cb24-338" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Factor`</span> <span class="pp">|</span> Factor: categorical with levels <span class="pp">|</span> Nominal or ordinal categorical <span class="pp">|</span></span>
+<span id="cb24-339"><a href="#cb24-339" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`int`</span> <span class="pp">|</span> Integer: whole numbers <span class="pp">|</span> Discrete quantitative <span class="pp">|</span></span>
+<span id="cb24-340"><a href="#cb24-340" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`num`</span> <span class="pp">|</span> Numeric: decimal numbers <span class="pp">|</span> Continuous quantitative <span class="pp">|</span></span>
+<span id="cb24-341"><a href="#cb24-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-342"><a href="#cb24-342" aria-hidden="true" tabindex="-1"></a>So for our otter dataset:</span>
+<span id="cb24-343"><a href="#cb24-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-344"><a href="#cb24-344" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`site`</span> and <span class="in">`sex`</span> show as <span class="in">`chr`</span> — **nominal categorical**</span>
+<span id="cb24-345"><a href="#cb24-345" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`spraints`</span> shows as <span class="in">`int`</span> — **discrete quantitative** (you cannot have half a spraint)</span>
+<span id="cb24-346"><a href="#cb24-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`fish_index`</span>, <span class="in">`length_cm`</span>, <span class="in">`mass_kg`</span> show as <span class="in">`num`</span> — **continuous quantitative**</span>
+<span id="cb24-347"><a href="#cb24-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-348"><a href="#cb24-348" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-349"><a href="#cb24-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-350"><a href="#cb24-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-351"><a href="#cb24-351" aria-hidden="true" tabindex="-1"></a><span class="fu">### What should we do analysis on? </span></span>
+<span id="cb24-352"><a href="#cb24-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-353"><a href="#cb24-353" aria-hidden="true" tabindex="-1"></a>In our otter dataset, if you ran the code above you should see that we have many variables: <span class="in">`site`</span>, <span class="in">`season`</span>, <span class="in">`sex`</span>, <span class="in">`age_class`</span> <span class="in">`length_cm`</span>, <span class="in">`mass_kg`</span>, <span class="in">`spraints`</span> and <span class="in">`fish_index`</span>. We cannot and should not analyse all possible combinations. Instead, we start with a clear research question. </span>
+<span id="cb24-354"><a href="#cb24-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-355"><a href="#cb24-355" aria-hidden="true" tabindex="-1"></a>Here are some examples using our otter data:</span>
+<span id="cb24-356"><a href="#cb24-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-357"><a href="#cb24-357" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Research question <span class="pp">|</span> Dependent variable (y) <span class="pp">|</span> Independent variable (x) <span class="pp">|</span> Analysis <span class="pp">|</span></span>
+<span id="cb24-358"><a href="#cb24-358" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb24-359"><a href="#cb24-359" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Do male otters have longer body length than females? <span class="pp">|</span> <span class="in">`length_cm`</span> <span class="pp">|</span> <span class="in">`sex`</span> <span class="pp">|</span> t-test <span class="pp">|</span></span>
+<span id="cb24-360"><a href="#cb24-360" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does spraint count differ between sites? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`site`</span> <span class="pp">|</span> One-way ANOVA <span class="pp">|</span></span>
+<span id="cb24-361"><a href="#cb24-361" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does spraint count differ between sites and seasons? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`site`</span> + <span class="in">`season`</span> <span class="pp">|</span> Two-way ANOVA <span class="pp">|</span></span>
+<span id="cb24-362"><a href="#cb24-362" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does fish availability predict spraint count? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> Linear regression <span class="pp">|</span></span>
+<span id="cb24-363"><a href="#cb24-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-364"><a href="#cb24-364" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb24-365"><a href="#cb24-365" aria-hidden="true" tabindex="-1"></a>**A good research question has three things:**</span>
+<span id="cb24-366"><a href="#cb24-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-367"><a href="#cb24-367" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>A clearly defined **dependent variable**: what you are measuring as an outcome</span>
+<span id="cb24-368"><a href="#cb24-368" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>A clearly defined **independent variable**: what you think drives that outcome</span>
+<span id="cb24-369"><a href="#cb24-369" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>A **biological justification**: why would you expect these two variables to be related?</span>
+<span id="cb24-370"><a href="#cb24-370" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-371"><a href="#cb24-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-372"><a href="#cb24-372" aria-hidden="true" tabindex="-1"></a>**Before you visualise or analyse anything, you should be able to complete this sentence:**</span>
+<span id="cb24-373"><a href="#cb24-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-374"><a href="#cb24-374" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"I want to know whether x affects x, because ... ."*</span></span>
+<span id="cb24-375"><a href="#cb24-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-376"><a href="#cb24-376" aria-hidden="true" tabindex="-1"></a>For example:</span>
+<span id="cb24-377"><a href="#cb24-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-378"><a href="#cb24-378" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"I want to know whether **site** and **season** affects **spraints**, because otters may ...."*</span></span>
+<span id="cb24-379"><a href="#cb24-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-380"><a href="#cb24-380" aria-hidden="true" tabindex="-1"></a>Once you have your research question, you only need to visualise the variables involved, not the entire dataset.</span>
+<span id="cb24-381"><a href="#cb24-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-382"><a href="#cb24-382" aria-hidden="true" tabindex="-1"></a>**You want to know whether site and season affects sprain count. Which variables do you need to visualise?**</span>
+<span id="cb24-383"><a href="#cb24-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-384"><a href="#cb24-384" aria-hidden="true" tabindex="-1"></a>`r mcq(c(</span>
+<span id="cb24-385"><a href="#cb24-385" aria-hidden="true" tabindex="-1"></a>"All variables in the dataset",</span>
+<span id="cb24-386"><a href="#cb24-386" aria-hidden="true" tabindex="-1"></a>answer = "site, season and spraints only",</span>
+<span id="cb24-387"><a href="#cb24-387" aria-hidden="true" tabindex="-1"></a>"spraints and fish_index",</span>
+<span id="cb24-388"><a href="#cb24-388" aria-hidden="true" tabindex="-1"></a>"site and season"</span>
+<span id="cb24-389"><a href="#cb24-389" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-390"><a href="#cb24-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-391"><a href="#cb24-391" aria-hidden="true" tabindex="-1"></a>**Which of the following is a well-formed research question?**</span>
+<span id="cb24-392"><a href="#cb24-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-393"><a href="#cb24-393" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-394"><a href="#cb24-394" aria-hidden="true" tabindex="-1"></a>answer = "Does spraint count differ between sites and seasons, and is there an interaction between the two — for example, do otters mark their territory more in winter on some rivers than others?",</span>
+<span id="cb24-395"><a href="#cb24-395" aria-hidden="true" tabindex="-1"></a>"Is there anything interesting in the otter dataset?",</span>
+<span id="cb24-396"><a href="#cb24-396" aria-hidden="true" tabindex="-1"></a>"What do all the variables in the otter dataset look like when plotted?",</span>
+<span id="cb24-397"><a href="#cb24-397" aria-hidden="true" tabindex="-1"></a>"Can we find a significant result somewhere in the otter dataset?"</span>
+<span id="cb24-398"><a href="#cb24-398" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-399"><a href="#cb24-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-400"><a href="#cb24-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-401"><a href="#cb24-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-402"><a href="#cb24-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-403"><a href="#cb24-403" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
+<span id="cb24-404"><a href="#cb24-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-405"><a href="#cb24-405" aria-hidden="true" tabindex="-1"></a>A well-formed research question should:</span>
+<span id="cb24-406"><a href="#cb24-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-407"><a href="#cb24-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Name a specific **dependent variable** (spraint count)</span>
+<span id="cb24-408"><a href="#cb24-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Name specific **independent variables** (site and season)</span>
+<span id="cb24-409"><a href="#cb24-409" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Include a **biological justification** — why might these variables be related?</span>
+<span id="cb24-410"><a href="#cb24-410" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Be **testable** — it leads directly to a specific statistical analysis </span>
+<span id="cb24-411"><a href="#cb24-411" aria-hidden="true" tabindex="-1"></a>(in this case, a two-way ANOVA)</span>
+<span id="cb24-412"><a href="#cb24-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-413"><a href="#cb24-413" aria-hidden="true" tabindex="-1"></a>The other options are poorly formed because they are too vague, do not name </span>
+<span id="cb24-414"><a href="#cb24-414" aria-hidden="true" tabindex="-1"></a>specific variables, and do not have a clear biological motivation. Fishing for </span>
+<span id="cb24-415"><a href="#cb24-415" aria-hidden="true" tabindex="-1"></a>significant results across all variables — sometimes called **p-hacking** — is </span>
+<span id="cb24-416"><a href="#cb24-416" aria-hidden="true" tabindex="-1"></a>considered poor scientific practice.</span>
+<span id="cb24-417"><a href="#cb24-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-418"><a href="#cb24-418" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-419"><a href="#cb24-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-420"><a href="#cb24-420" aria-hidden="true" tabindex="-1"></a>Now that we have decided on what we are doing, let's get analysing... </span>
+<span id="cb24-421"><a href="#cb24-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-422"><a href="#cb24-422" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Analysis </span></span>
+<span id="cb24-423"><a href="#cb24-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-424"><a href="#cb24-424" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 1. Visualise! </span></span>
+<span id="cb24-425"><a href="#cb24-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-426"><a href="#cb24-426" aria-hidden="true" tabindex="-1"></a>Let's first visualise our data to get a good idea of what's going on. </span>
+<span id="cb24-427"><a href="#cb24-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-430"><a href="#cb24-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-431"><a href="#cb24-431" aria-hidden="true" tabindex="-1"></a><span class="do">## Use: sprain, site and season to visualise the data.</span></span>
+<span id="cb24-432"><a href="#cb24-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-433"><a href="#cb24-433" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> site, <span class="at">y =</span> spraints, <span class="at">fill =</span> season)) <span class="sc">+</span></span>
+<span id="cb24-434"><a href="#cb24-434" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb24-435"><a href="#cb24-435" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Site"</span>, <span class="at">y =</span> <span class="st">"Spraint count"</span>, <span class="at">fill =</span> <span class="st">"Season"</span>) <span class="sc">+</span></span>
+<span id="cb24-436"><a href="#cb24-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb24-437"><a href="#cb24-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-438"><a href="#cb24-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-439"><a href="#cb24-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-440"><a href="#cb24-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-441"><a href="#cb24-441" aria-hidden="true" tabindex="-1"></a>**What is this initial visualisation telling us about the data?**</span>
+<span id="cb24-442"><a href="#cb24-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-443"><a href="#cb24-443" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-444"><a href="#cb24-444" aria-hidden="true" tabindex="-1"></a>answer = "Spraint count appears to differ between sites and seasons, with River Wensum showing the highest counts particularly in winter, suggesting a possible interaction between site and season.",</span>
+<span id="cb24-445"><a href="#cb24-445" aria-hidden="true" tabindex="-1"></a>"Spraint count is the same across all sites and seasons, there is no pattern in the data.",</span>
+<span id="cb24-446"><a href="#cb24-446" aria-hidden="true" tabindex="-1"></a>"Season has no effect on spraint count, the boxes look the same in summer and winter.",</span>
+<span id="cb24-447"><a href="#cb24-447" aria-hidden="true" tabindex="-1"></a>"Site has no effect on spraint count, all three rivers show identical distributions."</span>
+<span id="cb24-448"><a href="#cb24-448" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-449"><a href="#cb24-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-450"><a href="#cb24-450" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
+<span id="cb24-451"><a href="#cb24-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-452"><a href="#cb24-452" aria-hidden="true" tabindex="-1"></a>Looking at the boxplot:</span>
+<span id="cb24-453"><a href="#cb24-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-454"><a href="#cb24-454" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**River Wensum** shows notably higher spraint counts in **winter** compared </span>
+<span id="cb24-455"><a href="#cb24-455" aria-hidden="true" tabindex="-1"></a>to summer — this is a potential interaction effect</span>
+<span id="cb24-456"><a href="#cb24-456" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**River Bure** appears higher in **summer** than winter</span>
+<span id="cb24-457"><a href="#cb24-457" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**River Yare** shows little difference between seasons</span>
+<span id="cb24-458"><a href="#cb24-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-459"><a href="#cb24-459" aria-hidden="true" tabindex="-1"></a>This pattern — where the effect of season **depends on which site you are looking </span>
+<span id="cb24-460"><a href="#cb24-460" aria-hidden="true" tabindex="-1"></a>at** — is the visual signature of an **interaction**. This is exactly what a </span>
+<span id="cb24-461"><a href="#cb24-461" aria-hidden="true" tabindex="-1"></a>two-way ANOVA will allow us to test formally.</span>
+<span id="cb24-462"><a href="#cb24-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-463"><a href="#cb24-463" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb24-464"><a href="#cb24-464" aria-hidden="true" tabindex="-1"></a>Remember — this is just a visual impression. We need to check our assumptions </span>
+<span id="cb24-465"><a href="#cb24-465" aria-hidden="true" tabindex="-1"></a>and run the formal test before drawing any conclusions.</span>
+<span id="cb24-466"><a href="#cb24-466" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-467"><a href="#cb24-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-468"><a href="#cb24-468" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-469"><a href="#cb24-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-470"><a href="#cb24-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-471"><a href="#cb24-471" aria-hidden="true" tabindex="-1"></a>In Chapter 3, we first learnt about the **Shapiro-Wilk test** for checking whether the data within each group are approximately **normally distributed**, and **Levene's test** for checking whether the **variances across groups are approximately equal**. Let's apply these to our otter data before running the two-way ANOVA.</span>
+<span id="cb24-472"><a href="#cb24-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-473"><a href="#cb24-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-474"><a href="#cb24-474" aria-hidden="true" tabindex="-1"></a>Complete the code below to run the Shapiro-Wilk test, followed by Levene's test, </span>
+<span id="cb24-475"><a href="#cb24-475" aria-hidden="true" tabindex="-1"></a>grouped by site and season. Replace each <span class="in">`___`</span> with the correct answer:</span>
+<span id="cb24-476"><a href="#cb24-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-477"><a href="#cb24-477" aria-hidden="true" tabindex="-1"></a>The function to test normality is: <span class="in">`r fitb("shapiro.test")`</span></span>
+<span id="cb24-478"><a href="#cb24-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-479"><a href="#cb24-479" aria-hidden="true" tabindex="-1"></a>The function to test for equality of variances is: <span class="in">`r fitb("leveneTest")`</span></span>
+<span id="cb24-480"><a href="#cb24-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-481"><a href="#cb24-481" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb24-482"><a href="#cb24-482" aria-hidden="true" tabindex="-1"></a>**Hints:**</span>
+<span id="cb24-483"><a href="#cb24-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-484"><a href="#cb24-484" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R is **case sensitive** — <span class="in">`leveneTest`</span> is not the same as <span class="in">`levenetest`</span> or <span class="in">`LeveneTest`</span></span>
+<span id="cb24-485"><a href="#cb24-485" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For the grouping variables, think about what we want to check normality **within** — we want to check each combination of site and season separately</span>
+<span id="cb24-486"><a href="#cb24-486" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-487"><a href="#cb24-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-488"><a href="#cb24-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-489"><a href="#cb24-489" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb24-490"><a href="#cb24-490" aria-hidden="true" tabindex="-1"></a>otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb24-491"><a href="#cb24-491" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, season) <span class="sc">%&gt;%</span></span>
+<span id="cb24-492"><a href="#cb24-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb24-493"><a href="#cb24-493" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">___</span>(spraints)<span class="sc">$</span>statistic,</span>
+<span id="cb24-494"><a href="#cb24-494" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">___</span>(spraints)<span class="sc">$</span><span class="er">$</span>p.value</span>
+<span id="cb24-495"><a href="#cb24-495" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-496"><a href="#cb24-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-497"><a href="#cb24-497" aria-hidden="true" tabindex="-1"></a><span class="fu">___</span>(spraints <span class="sc">~</span> site <span class="sc">*</span> season,, <span class="at">data =</span> otter_data)</span>
+<span id="cb24-498"><a href="#cb24-498" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-499"><a href="#cb24-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-500"><a href="#cb24-500" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the solution")`</span></span>
+<span id="cb24-501"><a href="#cb24-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-504"><a href="#cb24-504" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-505"><a href="#cb24-505" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro-Wilk test for normality within each site x season combination</span></span>
+<span id="cb24-506"><a href="#cb24-506" aria-hidden="true" tabindex="-1"></a>otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb24-507"><a href="#cb24-507" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, season) <span class="sc">%&gt;%</span></span>
+<span id="cb24-508"><a href="#cb24-508" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb24-509"><a href="#cb24-509" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">shapiro.test</span>(spraints)<span class="sc">$</span>statistic,</span>
+<span id="cb24-510"><a href="#cb24-510" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">shapiro.test</span>(spraints)<span class="sc">$</span>p.value,</span>
+<span id="cb24-511"><a href="#cb24-511" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb24-512"><a href="#cb24-512" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-513"><a href="#cb24-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-514"><a href="#cb24-514" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's test for equal variances across site x season combinations</span></span>
+<span id="cb24-515"><a href="#cb24-515" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(spraints <span class="sc">~</span> site <span class="sc">*</span> season, <span class="at">data =</span> otter_data)</span>
+<span id="cb24-516"><a href="#cb24-516" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-517"><a href="#cb24-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-518"><a href="#cb24-518" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-519"><a href="#cb24-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-520"><a href="#cb24-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-521"><a href="#cb24-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-522"><a href="#cb24-522" aria-hidden="true" tabindex="-1"></a>**What does a p-value &gt; 0.05 in the Shapiro-Wilk test suggest?**</span>
+<span id="cb24-523"><a href="#cb24-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-524"><a href="#cb24-524" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-525"><a href="#cb24-525" aria-hidden="true" tabindex="-1"></a>answer = "The data are approximately normally distributed, we do not reject the null hypothesis of normality.",</span>
+<span id="cb24-526"><a href="#cb24-526" aria-hidden="true" tabindex="-1"></a>"The data are not normally distributed, we reject the null hypothesis of normality.",</span>
+<span id="cb24-527"><a href="#cb24-527" aria-hidden="true" tabindex="-1"></a>"The data are homoscedastic, we do not reject the null hypothesis of equal variances.",</span>
+<span id="cb24-528"><a href="#cb24-528" aria-hidden="true" tabindex="-1"></a>"The data are heteroscedastic, we reject the null hypothesis of equal variances."</span>
+<span id="cb24-529"><a href="#cb24-529" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-530"><a href="#cb24-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-531"><a href="#cb24-531" aria-hidden="true" tabindex="-1"></a>**What does a p-value &gt; 0.05 in the Levene's test suggest?**</span>
+<span id="cb24-532"><a href="#cb24-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-533"><a href="#cb24-533" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-534"><a href="#cb24-534" aria-hidden="true" tabindex="-1"></a>"The variances across groups are not equal, we reject the null hypothesis of equal variances.",</span>
+<span id="cb24-535"><a href="#cb24-535" aria-hidden="true" tabindex="-1"></a>"The data are normally distributed, we do not reject the null hypothesis of normality.",</span>
+<span id="cb24-536"><a href="#cb24-536" aria-hidden="true" tabindex="-1"></a>answer = "The variances across groups are approximately equal, we do not reject the null hypothesis of equal variances.",</span>
+<span id="cb24-537"><a href="#cb24-537" aria-hidden="true" tabindex="-1"></a>"The data are not normally distributed, we reject the null hypothesis of normality."</span>
+<span id="cb24-538"><a href="#cb24-538" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-539"><a href="#cb24-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-540"><a href="#cb24-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-541"><a href="#cb24-541" aria-hidden="true" tabindex="-1"></a>We have confirmed that the assumptions of normality and equal variances are met, let's use a histogram to just have a quick visual check of the data distribution.</span>
+<span id="cb24-542"><a href="#cb24-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-545"><a href="#cb24-545" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-546"><a href="#cb24-546" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> spraints, <span class="at">fill =</span> season)) <span class="sc">+</span></span>
+<span id="cb24-547"><a href="#cb24-547" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb24-548"><a href="#cb24-548" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> site) <span class="sc">+</span></span>
+<span id="cb24-549"><a href="#cb24-549" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Spraint count"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb24-550"><a href="#cb24-550" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb24-551"><a href="#cb24-551" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb24-552"><a href="#cb24-552" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-553"><a href="#cb24-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-554"><a href="#cb24-554" aria-hidden="true" tabindex="-1"></a>There's a lot going on but we can see that the data are **approximately normally distributed** within each site and season combination, with no obvious outliers, more importantly, we know from the Shapiro-Wilk test that the data are not significantly different from a normal distribution.</span>
+<span id="cb24-555"><a href="#cb24-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-556"><a href="#cb24-556" aria-hidden="true" tabindex="-1"></a>So, let's run our test to see if there is a significant effect of site, season and the interaction between the two on spraint count.</span>
+<span id="cb24-557"><a href="#cb24-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-558"><a href="#cb24-558" aria-hidden="true" tabindex="-1"></a>**What test should we use to test whether site and season affect spraint count?**</span>
+<span id="cb24-559"><a href="#cb24-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-560"><a href="#cb24-560" aria-hidden="true" tabindex="-1"></a>`r mcq(c(</span>
+<span id="cb24-561"><a href="#cb24-561" aria-hidden="true" tabindex="-1"></a>"One-way ANOVA",</span>
+<span id="cb24-562"><a href="#cb24-562" aria-hidden="true" tabindex="-1"></a>"Linear regression",</span>
+<span id="cb24-563"><a href="#cb24-563" aria-hidden="true" tabindex="-1"></a>answer = "Two-way ANOVA",</span>
+<span id="cb24-564"><a href="#cb24-564" aria-hidden="true" tabindex="-1"></a>"Chi-squared test"</span>
+<span id="cb24-565"><a href="#cb24-565" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-566"><a href="#cb24-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-567"><a href="#cb24-567" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
+<span id="cb24-568"><a href="#cb24-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-569"><a href="#cb24-569" aria-hidden="true" tabindex="-1"></a>Two-way ANOVA is the appropriate test when we have two independent variables (site and season) and want to examine their effect on a continuous dependent variable (spraint count).</span>
+<span id="cb24-570"><a href="#cb24-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-571"><a href="#cb24-571" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-572"><a href="#cb24-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-573"><a href="#cb24-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-576"><a href="#cb24-576" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-577"><a href="#cb24-577" aria-hidden="true" tabindex="-1"></a>spraint_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(spraints <span class="sc">~</span> site <span class="sc">*</span> season, <span class="at">data =</span> otter_data)</span>
+<span id="cb24-578"><a href="#cb24-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-579"><a href="#cb24-579" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(spraint_aov)</span>
+<span id="cb24-580"><a href="#cb24-580" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-581"><a href="#cb24-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-582"><a href="#cb24-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-583"><a href="#cb24-583" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Understanding and Writing Up Interactions</span></span>
+<span id="cb24-584"><a href="#cb24-584" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-585"><a href="#cb24-585" aria-hidden="true" tabindex="-1"></a>Before we interpret our ANOVA output, it is important to understand what an **interaction** actually means, and how to write one up correctly.</span>
+<span id="cb24-586"><a href="#cb24-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-587"><a href="#cb24-587" aria-hidden="true" tabindex="-1"></a><span class="fu">#### What is an Interaction?</span></span>
+<span id="cb24-588"><a href="#cb24-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-589"><a href="#cb24-589" aria-hidden="true" tabindex="-1"></a>An interaction occurs when the effect of one variable **depends on** the level of another variable. In our otter example:</span>
+<span id="cb24-590"><a href="#cb24-590" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-591"><a href="#cb24-591" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Does the effect of season on spraint count depend on which river we are </span></span>
+<span id="cb24-592"><a href="#cb24-592" aria-hidden="true" tabindex="-1"></a><span class="at">looking at?"*</span></span>
+<span id="cb24-593"><a href="#cb24-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-594"><a href="#cb24-594" aria-hidden="true" tabindex="-1"></a>If yes — there is an interaction. If no — there is no interaction and the </span>
+<span id="cb24-595"><a href="#cb24-595" aria-hidden="true" tabindex="-1"></a>effect of season is the same across all three rivers.</span>
+<span id="cb24-596"><a href="#cb24-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-597"><a href="#cb24-597" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb24-598"><a href="#cb24-598" aria-hidden="true" tabindex="-1"></a>**A simple way to spot an interaction:**</span>
+<span id="cb24-599"><a href="#cb24-599" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-600"><a href="#cb24-600" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**No interaction** — the difference between summer and winter spraints is </span>
+<span id="cb24-601"><a href="#cb24-601" aria-hidden="true" tabindex="-1"></a>roughly the same at all three sites</span>
+<span id="cb24-602"><a href="#cb24-602" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Interaction present** — the difference between summer and winter spraints </span>
+<span id="cb24-603"><a href="#cb24-603" aria-hidden="true" tabindex="-1"></a>is bigger at some sites than others, or even reverses direction</span>
+<span id="cb24-604"><a href="#cb24-604" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-605"><a href="#cb24-605" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-606"><a href="#cb24-606" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Visualising the Interaction</span></span>
+<span id="cb24-607"><a href="#cb24-607" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-608"><a href="#cb24-608" aria-hidden="true" tabindex="-1"></a>An **interaction plot** is the clearest way to see whether an interaction exists:</span>
+<span id="cb24-609"><a href="#cb24-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-610"><a href="#cb24-610" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interaction-plot, fig.cap="Figure 5. Interaction plot showing mean spraint count by site and season. Non-parallel or crossing lines indicate an interaction."}</span></span>
+<span id="cb24-611"><a href="#cb24-611" aria-hidden="true" tabindex="-1"></a>otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb24-612"><a href="#cb24-612" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, season) <span class="sc">%&gt;%</span></span>
+<span id="cb24-613"><a href="#cb24-613" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_spraints =</span> <span class="fu">mean</span>(spraints), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-614"><a href="#cb24-614" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> site, <span class="at">y =</span> mean_spraints,</span>
+<span id="cb24-615"><a href="#cb24-615" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> season, <span class="at">group =</span> season)) <span class="sc">+</span></span>
+<span id="cb24-616"><a href="#cb24-616" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb24-617"><a href="#cb24-617" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb24-618"><a href="#cb24-618" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Site"</span>,</span>
+<span id="cb24-619"><a href="#cb24-619" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean spraint count"</span>,</span>
+<span id="cb24-620"><a href="#cb24-620" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Season"</span>) <span class="sc">+</span></span>
+<span id="cb24-621"><a href="#cb24-621" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb24-622"><a href="#cb24-622" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb24-623"><a href="#cb24-623" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-624"><a href="#cb24-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-625"><a href="#cb24-625" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation of the interaction plot")`</span></span>
+<span id="cb24-626"><a href="#cb24-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-627"><a href="#cb24-627" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the lines are **parallel** — the effect of season is the same at all </span>
+<span id="cb24-628"><a href="#cb24-628" aria-hidden="true" tabindex="-1"></a>sites, suggesting **no interaction**</span>
+<span id="cb24-629"><a href="#cb24-629" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the lines are **non-parallel or crossing** — the effect of season differs </span>
+<span id="cb24-630"><a href="#cb24-630" aria-hidden="true" tabindex="-1"></a>between sites, suggesting an **interaction is present**</span>
+<span id="cb24-631"><a href="#cb24-631" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-632"><a href="#cb24-632" aria-hidden="true" tabindex="-1"></a>In our otter data, the lines cross between sites — River Wensum shows much </span>
+<span id="cb24-633"><a href="#cb24-633" aria-hidden="true" tabindex="-1"></a>higher spraints in winter, while River Bure shows higher spraints in summer. </span>
+<span id="cb24-634"><a href="#cb24-634" aria-hidden="true" tabindex="-1"></a>This crossing pattern is the visual signature of an interaction.</span>
+<span id="cb24-635"><a href="#cb24-635" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-636"><a href="#cb24-636" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-637"><a href="#cb24-637" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-638"><a href="#cb24-638" aria-hidden="true" tabindex="-1"></a>**What would parallel lines in an interaction plot tell us?**</span>
+<span id="cb24-639"><a href="#cb24-639" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-640"><a href="#cb24-640" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-641"><a href="#cb24-641" aria-hidden="true" tabindex="-1"></a>answer = "The effect of season on spraint count is the same across all three sites — there is no interaction between site and season.",</span>
+<span id="cb24-642"><a href="#cb24-642" aria-hidden="true" tabindex="-1"></a>"There is a strong interaction between site and season.",</span>
+<span id="cb24-643"><a href="#cb24-643" aria-hidden="true" tabindex="-1"></a>"The main effect of site is not significant.",</span>
+<span id="cb24-644"><a href="#cb24-644" aria-hidden="true" tabindex="-1"></a>"The ANOVA assumptions have been violated."</span>
+<span id="cb24-645"><a href="#cb24-645" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-646"><a href="#cb24-646" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-647"><a href="#cb24-647" aria-hidden="true" tabindex="-1"></a>**If the lines cross in an interaction plot, what does this suggest?**</span>
+<span id="cb24-648"><a href="#cb24-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-649"><a href="#cb24-649" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-650"><a href="#cb24-650" aria-hidden="true" tabindex="-1"></a>"There is no interaction — the effect of season is the same at all sites.",</span>
+<span id="cb24-651"><a href="#cb24-651" aria-hidden="true" tabindex="-1"></a>answer = "There is an interaction — the effect of season on spraint count reverses or changes substantially depending on which site you are looking at.",</span>
+<span id="cb24-652"><a href="#cb24-652" aria-hidden="true" tabindex="-1"></a>"The main effects of site and season are both non-significant.",</span>
+<span id="cb24-653"><a href="#cb24-653" aria-hidden="true" tabindex="-1"></a>"The data are not normally distributed."</span>
+<span id="cb24-654"><a href="#cb24-654" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-655"><a href="#cb24-655" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-656"><a href="#cb24-656" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-657"><a href="#cb24-657" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-658"><a href="#cb24-658" aria-hidden="true" tabindex="-1"></a><span class="fu">#### How to Write Up an Interaction</span></span>
+<span id="cb24-659"><a href="#cb24-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-660"><a href="#cb24-660" aria-hidden="true" tabindex="-1"></a>When writing up a significant interaction, you need to:</span>
+<span id="cb24-661"><a href="#cb24-661" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-662"><a href="#cb24-662" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**State the statistical result** — F value, degrees of freedom, p-value</span>
+<span id="cb24-663"><a href="#cb24-663" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Describe the direction** — which combination was highest/lowest</span>
+<span id="cb24-664"><a href="#cb24-664" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Interpret the biology** — what does this mean in the real world</span>
+<span id="cb24-665"><a href="#cb24-665" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-666"><a href="#cb24-666" aria-hidden="true" tabindex="-1"></a>Here is an example write-up template:</span>
+<span id="cb24-667"><a href="#cb24-667" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-668"><a href="#cb24-668" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb24-669"><a href="#cb24-669" aria-hidden="true" tabindex="-1"></a>**Write-up template:**</span>
+<span id="cb24-670"><a href="#cb24-670" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-671"><a href="#cb24-671" aria-hidden="true" tabindex="-1"></a>*"There was a significant interaction between <span class="co">[</span><span class="ot">factor 1</span><span class="co">]</span> and <span class="co">[</span><span class="ot">factor 2</span><span class="co">]</span> on </span>
+<span id="cb24-672"><a href="#cb24-672" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">dependent variable</span><span class="co">]</span> (F(df1, df2) = X.XX, p = X.XXX). <span class="co">[</span><span class="ot">Factor 1</span><span class="co">]</span> had a </span>
+<span id="cb24-673"><a href="#cb24-673" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">stronger/weaker/opposite</span><span class="co">]</span> effect on <span class="co">[</span><span class="ot">dependent variable</span><span class="co">]</span> in <span class="co">[</span><span class="ot">level of factor 2</span><span class="co">]</span> </span>
+<span id="cb24-674"><a href="#cb24-674" aria-hidden="true" tabindex="-1"></a>compared to <span class="co">[</span><span class="ot">other level of factor 2</span><span class="co">]</span>. Specifically, [describe the pattern — </span>
+<span id="cb24-675"><a href="#cb24-675" aria-hidden="true" tabindex="-1"></a>which combination was highest, which was lowest, where did the effect reverse]."*</span>
+<span id="cb24-676"><a href="#cb24-676" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-677"><a href="#cb24-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-678"><a href="#cb24-678" aria-hidden="true" tabindex="-1"></a>For example, using our otter data:</span>
+<span id="cb24-679"><a href="#cb24-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-680"><a href="#cb24-680" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb24-681"><a href="#cb24-681" aria-hidden="true" tabindex="-1"></a>**Example write-up:**</span>
+<span id="cb24-682"><a href="#cb24-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-683"><a href="#cb24-683" aria-hidden="true" tabindex="-1"></a>*"There was a significant interaction between site and season on spraint count </span>
+<span id="cb24-684"><a href="#cb24-684" aria-hidden="true" tabindex="-1"></a>(F(2, 54) = XX.XX, p &lt; 0.001). Spraint counts were highest at River Wensum in </span>
+<span id="cb24-685"><a href="#cb24-685" aria-hidden="true" tabindex="-1"></a>winter, while River Bure showed higher counts in summer. This suggests that </span>
+<span id="cb24-686"><a href="#cb24-686" aria-hidden="true" tabindex="-1"></a>the seasonal pattern of territory marking behaviour differs between rivers, </span>
+<span id="cb24-687"><a href="#cb24-687" aria-hidden="true" tabindex="-1"></a>possibly reflecting differences in seasonal fish availability across sites."*</span>
+<span id="cb24-688"><a href="#cb24-688" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-689"><a href="#cb24-689" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-690"><a href="#cb24-690" aria-hidden="true" tabindex="-1"></a>**Now try writing your own — fill in the blanks:**</span>
+<span id="cb24-691"><a href="#cb24-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-692"><a href="#cb24-692" aria-hidden="true" tabindex="-1"></a>There was a <span class="in">`r fitb(c("significant", "non-significant"))`</span> </span>
+<span id="cb24-693"><a href="#cb24-693" aria-hidden="true" tabindex="-1"></a>interaction between <span class="in">`r fitb("site")`</span> and </span>
+<span id="cb24-694"><a href="#cb24-694" aria-hidden="true" tabindex="-1"></a><span class="in">`r fitb("season")`</span> on spraint count. The effect of season on </span>
+<span id="cb24-695"><a href="#cb24-695" aria-hidden="true" tabindex="-1"></a>spraint count <span class="in">`r fitb(c("differed", "varied"))`</span> between sites, </span>
+<span id="cb24-696"><a href="#cb24-696" aria-hidden="true" tabindex="-1"></a>with River <span class="in">`r fitb("Wensum")`</span> showing the highest counts in </span>
+<span id="cb24-697"><a href="#cb24-697" aria-hidden="true" tabindex="-1"></a><span class="in">`r fitb("winter")`</span>.</span>
+<span id="cb24-698"><a href="#cb24-698" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-699"><a href="#cb24-699" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show example full write-up")`</span></span>
+<span id="cb24-700"><a href="#cb24-700" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-701"><a href="#cb24-701" aria-hidden="true" tabindex="-1"></a>*"There was a significant interaction between site and season on spraint count. </span>
+<span id="cb24-702"><a href="#cb24-702" aria-hidden="true" tabindex="-1"></a>Spraint counts were highest at River Wensum in winter and at River Bure in </span>
+<span id="cb24-703"><a href="#cb24-703" aria-hidden="true" tabindex="-1"></a>summer, suggesting that the seasonal pattern of territory marking differs </span>
+<span id="cb24-704"><a href="#cb24-704" aria-hidden="true" tabindex="-1"></a>between rivers. This may reflect differences in the seasonal availability of </span>
+<span id="cb24-705"><a href="#cb24-705" aria-hidden="true" tabindex="-1"></a>fish prey across the three sites."*</span>
+<span id="cb24-706"><a href="#cb24-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-707"><a href="#cb24-707" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb24-708"><a href="#cb24-708" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-709"><a href="#cb24-709" aria-hidden="true" tabindex="-1"></a>**Which of the following is the best write-up of a significant interaction?**</span>
+<span id="cb24-710"><a href="#cb24-710" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-711"><a href="#cb24-711" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-712"><a href="#cb24-712" aria-hidden="true" tabindex="-1"></a>answer = "There was a significant interaction between site and season on spraint count (F(2, 54) = 8.32, p &lt; 0.001). Spraint counts were highest at River Wensum in winter and lowest at River Yare in summer, suggesting that the effect of season on territory marking behaviour differs between rivers.",</span>
+<span id="cb24-713"><a href="#cb24-713" aria-hidden="true" tabindex="-1"></a>"The interaction was significant (p &lt; 0.05), showing that site and season both affect spraint count.",</span>
+<span id="cb24-714"><a href="#cb24-714" aria-hidden="true" tabindex="-1"></a>"Site and season both had significant main effects, so there must be an interaction between them.",</span>
+<span id="cb24-715"><a href="#cb24-715" aria-hidden="true" tabindex="-1"></a>"The p-value for the interaction term was less than 0.05, proving that River Wensum always has more spraints than the other sites."</span>
+<span id="cb24-716"><a href="#cb24-716" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-717"><a href="#cb24-717" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-718"><a href="#cb24-718" aria-hidden="true" tabindex="-1"></a>**A student writes: 'There was a significant main effect of season, so otters </span>
+<span id="cb24-719"><a href="#cb24-719" aria-hidden="true" tabindex="-1"></a>always mark their territory more in winter.' What is wrong with this statement?**</span>
+<span id="cb24-720"><a href="#cb24-720" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-721"><a href="#cb24-721" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-722"><a href="#cb24-722" aria-hidden="true" tabindex="-1"></a>"Nothing — a significant main effect of season means otters always mark more in winter.",</span>
+<span id="cb24-723"><a href="#cb24-723" aria-hidden="true" tabindex="-1"></a>answer = "If there is a significant interaction, the main effect of season can be misleading — the effect of season depends on the site, so we cannot generalise across all sites without considering the interaction.",</span>
+<span id="cb24-724"><a href="#cb24-724" aria-hidden="true" tabindex="-1"></a>"The student should have reported the F value and degrees of freedom.",</span>
+<span id="cb24-725"><a href="#cb24-725" aria-hidden="true" tabindex="-1"></a>"The statement is correct but should also mention the p-value."</span>
+<span id="cb24-726"><a href="#cb24-726" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb24-727"><a href="#cb24-727" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-728"><a href="#cb24-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-729"><a href="#cb24-729" aria-hidden="true" tabindex="-1"></a>**What does the p-value for the interaction term tell us?**</span>
+<span id="cb24-730"><a href="#cb24-730" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-731"><a href="#cb24-731" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb24-732"><a href="#cb24-732" aria-hidden="true" tabindex="-1"></a>answer = "There is a significant interaction between site and season, meaning the effect of season on spraint count depends on the site.",</span>
+<span id="cb24-733"><a href="#cb24-733" aria-hidden="true" tabindex="-1"></a>"There is no significant interaction between site and season, meaning the effect of season on spraint count is the same across all sites.",</span>
+<span id="cb24-734"><a href="#cb24-734" aria-hidden="true" tabindex="-1"></a>"The main effect of site is significant, meaning spraint count differs between sites regardless of season.",</span>
+<span id="cb24-735"><a href="#cb24-735" aria-hidden="true" tabindex="-1"></a>"The main effect of season is significant, meaning spraint count differs between seasons regardless of site."</span>
+<span id="cb24-736"><a href="#cb24-736" aria-hidden="true" tabindex="-1"></a>))`</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

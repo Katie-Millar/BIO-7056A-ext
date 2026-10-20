@@ -367,7 +367,7 @@ Here are some examples using our otter data:
 
 For example:
 
-> *"I want to know whether **site** and **season** affects **spraint count**, because otters may ...."*
+> *"I want to know whether **site** and **season** affects **spraints**, because otters may ...."*
 
 Once you have your research question, you only need to visualise the variables involved, not the entire dataset.
 
@@ -375,7 +375,7 @@ Once you have your research question, you only need to visualise the variables i
 
 `r mcq(c(
 "All variables in the dataset",
-answer = "site, season and sprain_count only",
+answer = "site, season and spraints only",
 "spraints and fish_index",
 "site and season"
 ))`
@@ -419,9 +419,305 @@ Let's first visualise our data to get a good idea of what's going on.
 
 ```{r}
 
+## Use: sprain, site and season to visualise the data.
 
-
-
+ggplot(otter_data, aes(x = site, y = spraints, fill = season)) +
+  geom_boxplot() +
+  labs(x = "Site", y = "Spraint count", fill = "Season") +
+  theme_minimal(base_size = 13)
 
 
 ```
+
+**What is this initial visualisation telling us about the data?**
+
+`r longmcq(c(
+answer = "Spraint count appears to differ between sites and seasons, with River Wensum showing the highest counts particularly in winter, suggesting a possible interaction between site and season.",
+"Spraint count is the same across all sites and seasons, there is no pattern in the data.",
+"Season has no effect on spraint count, the boxes look the same in summer and winter.",
+"Site has no effect on spraint count, all three rivers show identical distributions."
+))`
+
+`r hide("Click to show explanation")`
+
+Looking at the boxplot:
+
+- **River Wensum** shows notably higher spraint counts in **winter** compared 
+to summer — this is a potential interaction effect
+- **River Bure** appears higher in **summer** than winter
+- **River Yare** shows little difference between seasons
+
+This pattern — where the effect of season **depends on which site you are looking 
+at** — is the visual signature of an **interaction**. This is exactly what a 
+two-way ANOVA will allow us to test formally.
+
+::: {.callout-note}
+Remember — this is just a visual impression. We need to check our assumptions 
+and run the formal test before drawing any conclusions.
+:::
+
+`r unhide()`
+
+
+In Chapter 3, we first learnt about the **Shapiro-Wilk test** for checking whether the data within each group are approximately **normally distributed**, and **Levene's test** for checking whether the **variances across groups are approximately equal**. Let's apply these to our otter data before running the two-way ANOVA.
+
+
+Complete the code below to run the Shapiro-Wilk test, followed by Levene's test, 
+grouped by site and season. Replace each `___` with the correct answer:
+
+The function to test normality is: `r fitb("shapiro.test")`
+
+The function to test for equality of variances is: `r fitb("leveneTest")`
+
+::: {.callout-tip}
+**Hints:**
+
+- R is **case sensitive** — `leveneTest` is not the same as `levenetest` or `LeveneTest`
+- For the grouping variables, think about what we want to check normality **within** — we want to check each combination of site and season separately
+:::
+
+
+```r
+otter_data %>%
+  group_by(site, season) %>%
+  summarise(
+    shapiro_w = ___(spraints)$statistic,
+    shapiro_p = ___(spraints)$$p.value
+  )
+
+___(spraints ~ site * season,, data = otter_data)
+```
+
+`r hide("Click to show the solution")`
+
+```{r}
+# Shapiro-Wilk test for normality within each site x season combination
+otter_data %>%
+  group_by(site, season) %>%
+  summarise(
+    shapiro_w = shapiro.test(spraints)$statistic,
+    shapiro_p = shapiro.test(spraints)$p.value,
+    .groups = "drop"
+  )
+
+# Levene's test for equal variances across site x season combinations
+leveneTest(spraints ~ site * season, data = otter_data)
+```
+
+`r unhide()`
+
+
+
+**What does a p-value > 0.05 in the Shapiro-Wilk test suggest?**
+
+`r longmcq(c(
+answer = "The data are approximately normally distributed, we do not reject the null hypothesis of normality.",
+"The data are not normally distributed, we reject the null hypothesis of normality.",
+"The data are homoscedastic, we do not reject the null hypothesis of equal variances.",
+"The data are heteroscedastic, we reject the null hypothesis of equal variances."
+))`
+
+**What does a p-value > 0.05 in the Levene's test suggest?**
+
+`r longmcq(c(
+"The variances across groups are not equal, we reject the null hypothesis of equal variances.",
+"The data are normally distributed, we do not reject the null hypothesis of normality.",
+answer = "The variances across groups are approximately equal, we do not reject the null hypothesis of equal variances.",
+"The data are not normally distributed, we reject the null hypothesis of normality."
+))`
+
+
+We have confirmed that the assumptions of normality and equal variances are met, let's use a histogram to just have a quick visual check of the data distribution.
+
+```{r}
+
+ggplot(otter_data, aes(x = spraints, fill = season)) +
+  geom_histogram(binwidth = 1, colour = "black") +
+  facet_wrap(~ site) +
+  labs(x = "Spraint count", y = "Frequency") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+There's a lot going on but we can see that the data are **approximately normally distributed** within each site and season combination, with no obvious outliers, more importantly, we know from the Shapiro-Wilk test that the data are not significantly different from a normal distribution.
+
+So, let's run our test to see if there is a significant effect of site, season and the interaction between the two on spraint count.
+
+**What test should we use to test whether site and season affect spraint count?**
+
+`r mcq(c(
+"One-way ANOVA",
+"Linear regression",
+answer = "Two-way ANOVA",
+"Chi-squared test"
+))`
+
+`r hide("Click to show explanation")`
+
+Two-way ANOVA is the appropriate test when we have two independent variables (site and season) and want to examine their effect on a continuous dependent variable (spraint count).
+
+`r unhide()`
+
+
+```{r}
+
+spraint_aov <- aov(spraints ~ site * season, data = otter_data)
+
+summary(spraint_aov)
+```
+
+
+#### Understanding and Writing Up Interactions
+
+Before we interpret our ANOVA output, it is important to understand what an **interaction** actually means, and how to write one up correctly.
+
+#### What is an Interaction?
+
+An interaction occurs when the effect of one variable **depends on** the level of another variable. In our otter example:
+
+> *"Does the effect of season on spraint count depend on which river we are 
+looking at?"*
+
+If yes — there is an interaction. If no — there is no interaction and the 
+effect of season is the same across all three rivers.
+
+::: {.callout-note}
+**A simple way to spot an interaction:**
+
+- **No interaction** — the difference between summer and winter spraints is 
+roughly the same at all three sites
+- **Interaction present** — the difference between summer and winter spraints 
+is bigger at some sites than others, or even reverses direction
+:::
+
+#### Visualising the Interaction
+
+An **interaction plot** is the clearest way to see whether an interaction exists:
+
+```{r interaction-plot, fig.cap="Figure 5. Interaction plot showing mean spraint count by site and season. Non-parallel or crossing lines indicate an interaction."}
+otter_data %>%
+  group_by(site, season) %>%
+  summarise(mean_spraints = mean(spraints), .groups = "drop") %>%
+  ggplot(aes(x = site, y = mean_spraints,
+             colour = season, group = season)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  labs(x = "Site",
+       y = "Mean spraint count",
+       colour = "Season") +
+  theme_minimal(base_size = 13) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+`r hide("Click to show explanation of the interaction plot")`
+
+- If the lines are **parallel** — the effect of season is the same at all 
+sites, suggesting **no interaction**
+- If the lines are **non-parallel or crossing** — the effect of season differs 
+between sites, suggesting an **interaction is present**
+
+In our otter data, the lines cross between sites — River Wensum shows much 
+higher spraints in winter, while River Bure shows higher spraints in summer. 
+This crossing pattern is the visual signature of an interaction.
+
+`r unhide()`
+
+**What would parallel lines in an interaction plot tell us?**
+
+`r longmcq(c(
+answer = "The effect of season on spraint count is the same across all three sites — there is no interaction between site and season.",
+"There is a strong interaction between site and season.",
+"The main effect of site is not significant.",
+"The ANOVA assumptions have been violated."
+))`
+
+**If the lines cross in an interaction plot, what does this suggest?**
+
+`r longmcq(c(
+"There is no interaction — the effect of season is the same at all sites.",
+answer = "There is an interaction — the effect of season on spraint count reverses or changes substantially depending on which site you are looking at.",
+"The main effects of site and season are both non-significant.",
+"The data are not normally distributed."
+))`
+
+---
+
+#### How to Write Up an Interaction
+
+When writing up a significant interaction, you need to:
+
+1. **State the statistical result** — F value, degrees of freedom, p-value
+2. **Describe the direction** — which combination was highest/lowest
+3. **Interpret the biology** — what does this mean in the real world
+
+Here is an example write-up template:
+
+::: {.callout-tip}
+**Write-up template:**
+
+*"There was a significant interaction between [factor 1] and [factor 2] on 
+[dependent variable] (F(df1, df2) = X.XX, p = X.XXX). [Factor 1] had a 
+[stronger/weaker/opposite] effect on [dependent variable] in [level of factor 2] 
+compared to [other level of factor 2]. Specifically, [describe the pattern — 
+which combination was highest, which was lowest, where did the effect reverse]."*
+:::
+
+For example, using our otter data:
+
+::: {.callout-note}
+**Example write-up:**
+
+*"There was a significant interaction between site and season on spraint count 
+(F(2, 54) = XX.XX, p < 0.001). Spraint counts were highest at River Wensum in 
+winter, while River Bure showed higher counts in summer. This suggests that 
+the seasonal pattern of territory marking behaviour differs between rivers, 
+possibly reflecting differences in seasonal fish availability across sites."*
+:::
+
+**Now try writing your own — fill in the blanks:**
+
+There was a `r fitb(c("significant", "non-significant"))` 
+interaction between `r fitb("site")` and 
+`r fitb("season")` on spraint count. The effect of season on 
+spraint count `r fitb(c("differed", "varied"))` between sites, 
+with River `r fitb("Wensum")` showing the highest counts in 
+`r fitb("winter")`.
+
+`r hide("Click to show example full write-up")`
+
+*"There was a significant interaction between site and season on spraint count. 
+Spraint counts were highest at River Wensum in winter and at River Bure in 
+summer, suggesting that the seasonal pattern of territory marking differs 
+between rivers. This may reflect differences in the seasonal availability of 
+fish prey across the three sites."*
+
+`r unhide()`
+
+**Which of the following is the best write-up of a significant interaction?**
+
+`r longmcq(c(
+answer = "There was a significant interaction between site and season on spraint count (F(2, 54) = 8.32, p < 0.001). Spraint counts were highest at River Wensum in winter and lowest at River Yare in summer, suggesting that the effect of season on territory marking behaviour differs between rivers.",
+"The interaction was significant (p < 0.05), showing that site and season both affect spraint count.",
+"Site and season both had significant main effects, so there must be an interaction between them.",
+"The p-value for the interaction term was less than 0.05, proving that River Wensum always has more spraints than the other sites."
+))`
+
+**A student writes: 'There was a significant main effect of season, so otters 
+always mark their territory more in winter.' What is wrong with this statement?**
+
+`r longmcq(c(
+"Nothing — a significant main effect of season means otters always mark more in winter.",
+answer = "If there is a significant interaction, the main effect of season can be misleading — the effect of season depends on the site, so we cannot generalise across all sites without considering the interaction.",
+"The student should have reported the F value and degrees of freedom.",
+"The statement is correct but should also mention the p-value."
+))`
+
+
+**What does the p-value for the interaction term tell us?**
+
+`r longmcq(c(
+answer = "There is a significant interaction between site and season, meaning the effect of season on spraint count depends on the site.",
+"There is no significant interaction between site and season, meaning the effect of season on spraint count is the same across all sites.",
+"The main effect of site is significant, meaning spraint count differs between sites regardless of season.",
+"The main effect of season is significant, meaning spraint count differs between seasons regardless of site."
+))`
