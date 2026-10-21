@@ -300,7 +300,7 @@ window.Quarto = {
 <p><img src="images/otters.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
-<p>Today we will be working with the otters across some Norfolk rivers! Please read in the data, <code>otter_data.csv</code>, from the data folder.</p>
+<p>Today we will be working with the otters across some Norfolk rivers! Please read in the data, <code>otter_data.csv</code>, from the data folder. Please also add the following packages: <code>tidyverse</code>, <code>janitor</code>, <code>car</code> and <code>patchwork</code>.</p>
 <section id="what-is-linear-regression" class="level3" data-number="5.2.1">
 <h3 data-number="5.2.1" class="anchored" data-anchor-id="what-is-linear-regression"><span class="header-section-number">5.2.1</span> What is Linear Regression?</h3>
 <p>So far we have compared <strong>means between groups</strong> using t-tests and ANOVA. But what if we want to understand the <strong>relationship between two continuous variables</strong>?</p>
@@ -370,20 +370,20 @@ Click to show explanation of the plots
 </ul>
 </div>
 <p><strong>Looking at the fish availability plot, what does the slope of the line suggest?</strong></p>
-<div id="radio_HWKYBZGRCS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HWKYBZGRCS" value="answer"> <span>As fish availability increases, spraint count increases, there is a positive relationship between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_HWKYBZGRCS" value=""> <span>As fish availability increases, spraint count decreases, there is a negative relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_HWKYBZGRCS" value=""> <span>The line is flat, suggesting fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_HWKYBZGRCS" value=""> <span>The relationship between fish availability and spraint count is curved, not linear.</span></label>
+<div id="radio_NOQAHHCPZG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NOQAHHCPZG" value="answer"> <span>As fish availability increases, spraint count increases, there is a positive relationship between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQAHHCPZG" value=""> <span>As fish availability increases, spraint count decreases, there is a negative relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQAHHCPZG" value=""> <span>The line is flat, suggesting fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQAHHCPZG" value=""> <span>The relationship between fish availability and spraint count is curved, not linear.</span></label>
 </div>
 <p><strong>Looking at the body length plot, what does the slope of the line suggest?</strong></p>
-<div id="radio_YBRPJNZTVD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YBRPJNZTVD" value=""> <span>As body length increases, spraint count increases, larger otters mark their territory more.</span></label><label><input type="radio" autocomplete="off" name="radio_YBRPJNZTVD" value=""> <span>As body length increases, spraint count decreases, larger otters mark their territory less.</span></label><label><input type="radio" autocomplete="off" name="radio_YBRPJNZTVD" value="answer"> <span>The line is almost flat, suggesting body length has little or no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_YBRPJNZTVD" value=""> <span>Body length perfectly predicts spraint count.</span></label>
+<div id="radio_LXVXUZZKNA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LXVXUZZKNA" value=""> <span>As body length increases, spraint count increases, larger otters mark their territory more.</span></label><label><input type="radio" autocomplete="off" name="radio_LXVXUZZKNA" value=""> <span>As body length increases, spraint count decreases, larger otters mark their territory less.</span></label><label><input type="radio" autocomplete="off" name="radio_LXVXUZZKNA" value="answer"> <span>The line is almost flat, suggesting body length has little or no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_LXVXUZZKNA" value=""> <span>Body length perfectly predicts spraint count.</span></label>
 </div>
 <p><strong>Comparing the two plots, which variable appears to be a better predictor of spraint count?</strong></p>
-<div id="radio_LLBYEMYSZO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LLBYEMYSZO" value="answer"> <span>Fish availability, the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_LLBYEMYSZO" value=""> <span>Body length, the flat line means there is no noise in the data, making it a more reliable predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_LLBYEMYSZO" value=""> <span>Both variables predict spraint count equally well.</span></label><label><input type="radio" autocomplete="off" name="radio_LLBYEMYSZO" value=""> <span>Neither variable predicts spraint count, both lines are flat.</span></label>
+<div id="radio_EPMQQYZFYN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EPMQQYZFYN" value="answer"> <span>Fish availability, the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_EPMQQYZFYN" value=""> <span>Body length, the flat line means there is no noise in the data, making it a more reliable predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_EPMQQYZFYN" value=""> <span>Both variables predict spraint count equally well.</span></label><label><input type="radio" autocomplete="off" name="radio_EPMQQYZFYN" value=""> <span>Neither variable predicts spraint count, both lines are flat.</span></label>
 </div>
 <p><strong>If the slope of the fish availability line was negative instead of positive, what would this mean biologically?</strong></p>
-<div id="radio_SRGCWKQSFU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SRGCWKQSFU" value="answer"> <span>As fish availability increases, otters leave fewer spraints, perhaps because they do not need to defend territory as strongly when food is plentiful.</span></label><label><input type="radio" autocomplete="off" name="radio_SRGCWKQSFU" value=""> <span>Fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_SRGCWKQSFU" value=""> <span>Otters always leave more spraints when fish are scarce.</span></label><label><input type="radio" autocomplete="off" name="radio_SRGCWKQSFU" value=""> <span>The regression assumptions have been violated.</span></label>
+<div id="radio_RJMWCMYXER" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RJMWCMYXER" value="answer"> <span>As fish availability increases, otters leave fewer spraints, perhaps because they do not need to defend territory as strongly when food is plentiful.</span></label><label><input type="radio" autocomplete="off" name="radio_RJMWCMYXER" value=""> <span>Fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_RJMWCMYXER" value=""> <span>Otters always leave more spraints when fish are scarce.</span></label><label><input type="radio" autocomplete="off" name="radio_RJMWCMYXER" value=""> <span>The regression assumptions have been violated.</span></label>
 </div>
 <p>We test the slope formally using a <strong>t-test</strong>, which produces a p-value:</p>
 <ul>
@@ -474,8 +474,8 @@ F-statistic: 1.623 on 1 and 58 DF,  p-value: 0.2077</code></pre>
 </table>
 <p>For <strong>fish index</strong>, the slope is significantly different from zero (p &lt; 0.001), confirming a positive relationship with spraint count. For <strong>body length</strong>, the slope is not significantly different from zero (p = 0.208), confirming no meaningful relationship.</p>
 <p><strong>Where would you find the p-value for the slope in the <code>summary()</code> output?</strong></p>
-<div id="radio_IEVKYXRLJU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IEVKYXRLJU" value="answer"> <span>In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_IEVKYXRLJU" value=""> <span>In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_IEVKYXRLJU" value=""> <span>In the R-squared value at the bottom of the output.</span></label><label><input type="radio" autocomplete="off" name="radio_IEVKYXRLJU" value=""> <span>In the F-statistic at the bottom of the output.</span></label>
+<div id="radio_LAXBDQDIWP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LAXBDQDIWP" value="answer"> <span>In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_LAXBDQDIWP" value=""> <span>In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_LAXBDQDIWP" value=""> <span>In the R-squared value at the bottom of the output.</span></label><label><input type="radio" autocomplete="off" name="radio_LAXBDQDIWP" value=""> <span>In the F-statistic at the bottom of the output.</span></label>
 </div>
 <hr>
 <p><strong>Step 2: Assess the strength of the relationship</strong></p>
@@ -500,8 +500,8 @@ F-statistic: 1.623 on 1 and 58 DF,  p-value: 0.2077</code></pre>
 </div>
 </div>
 <p><strong>If R² = 0.69 for the relationship between fish index and spraints, and R² = 0.027 for the relationship between body length and spraints, what does this mean?</strong></p>
-<div id="radio_WMZVCWIXUJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WMZVCWIXUJ" value="answer"> <span>Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_WMZVCWIXUJ" value=""> <span>Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.</span></label><label><input type="radio" autocomplete="off" name="radio_WMZVCWIXUJ" value=""> <span>Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_WMZVCWIXUJ" value=""> <span>An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated.</span></label>
+<div id="radio_MQLMGLFZOC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MQLMGLFZOC" value="answer"> <span>Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_MQLMGLFZOC" value=""> <span>Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.</span></label><label><input type="radio" autocomplete="off" name="radio_MQLMGLFZOC" value=""> <span>Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_MQLMGLFZOC" value=""> <span>An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated.</span></label>
 </div>
 <hr>
 <p><strong>Step 3: Describe the relationship</strong></p>
@@ -530,12 +530,12 @@ F-statistic: 1.623 on 1 and 58 DF,  p-value: 0.2077</code></pre>
 </div>
 </div>
 <p><strong>What does a slope of zero mean in a linear regression?</strong></p>
-<div id="radio_WXFUHTBXGB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WXFUHTBXGB" value=""> <span>The regression line passes through the origin.</span></label><label><input type="radio" autocomplete="off" name="radio_WXFUHTBXGB" value="answer"> <span>The independent variable has no effect on the dependent variable, as x increases, y does not change.</span></label><label><input type="radio" autocomplete="off" name="radio_WXFUHTBXGB" value=""> <span>The R-squared value is equal to 1, meaning the line fits the data perfectly.</span></label><label><input type="radio" autocomplete="off" name="radio_WXFUHTBXGB" value=""> <span>The intercept is equal to zero, meaning the line starts at the origin.</span></label>
+<div id="radio_YJCQRPTZEQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YJCQRPTZEQ" value=""> <span>The regression line passes through the origin.</span></label><label><input type="radio" autocomplete="off" name="radio_YJCQRPTZEQ" value="answer"> <span>The independent variable has no effect on the dependent variable, as x increases, y does not change.</span></label><label><input type="radio" autocomplete="off" name="radio_YJCQRPTZEQ" value=""> <span>The R-squared value is equal to 1, meaning the line fits the data perfectly.</span></label><label><input type="radio" autocomplete="off" name="radio_YJCQRPTZEQ" value=""> <span>The intercept is equal to zero, meaning the line starts at the origin.</span></label>
 </div>
 <p><strong>What does the intercept tell us in our otter regression?</strong></p>
-<div id="radio_NAMISRNLZV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NAMISRNLZV" value=""> <span>The rate at which spraints increase as fish availability increases.</span></label><label><input type="radio" autocomplete="off" name="radio_NAMISRNLZV" value=""> <span>The proportion of variation in spraints explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_NAMISRNLZV" value="answer"> <span>The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.</span></label><label><input type="radio" autocomplete="off" name="radio_NAMISRNLZV" value=""> <span>The p-value for the test of whether the slope is significantly different from zero.</span></label>
+<div id="radio_EFTYXTWDNF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EFTYXTWDNF" value=""> <span>The rate at which spraints increase as fish availability increases.</span></label><label><input type="radio" autocomplete="off" name="radio_EFTYXTWDNF" value=""> <span>The proportion of variation in spraints explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_EFTYXTWDNF" value="answer"> <span>The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.</span></label><label><input type="radio" autocomplete="off" name="radio_EFTYXTWDNF" value=""> <span>The p-value for the test of whether the slope is significantly different from zero.</span></label>
 </div>
 <p><strong>In our otter model, what is the dependent variable?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">Fish index</option><option value="">Body length</option><option value="answer">Spraints</option><option value="">Site</option><option value="">Season</option></select></p>
@@ -718,8 +718,8 @@ Note
 <p><strong>You want to know whether fish availability predicts spraint count. Which variables do you need to visualise?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">All variables in the dataset</option><option value="">site, season and spraints only</option><option value="answer">fish_index and spraints only</option><option value="">site and fish_index</option></select></p>
 <p><strong>Which of the following is a well formed research question?</strong></p>
-<div id="radio_SVQDBBURIL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SVQDBBURIL" value="answer"> <span>Does fish availability predict spraint count in otters, because otters may mark their territory more actively in areas where fish are more abundant?</span></label><label><input type="radio" autocomplete="off" name="radio_SVQDBBURIL" value=""> <span>Is there anything interesting in the otter dataset?</span></label><label><input type="radio" autocomplete="off" name="radio_SVQDBBURIL" value=""> <span>What do all the variables in the otter dataset look like when plotted?</span></label><label><input type="radio" autocomplete="off" name="radio_SVQDBBURIL" value=""> <span>Can we find a significant result somewhere in the otter dataset?</span></label>
+<div id="radio_PRXBHSWFRF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PRXBHSWFRF" value="answer"> <span>Does fish availability predict spraint count in otters, because otters may mark their territory more actively in areas where fish are more abundant?</span></label><label><input type="radio" autocomplete="off" name="radio_PRXBHSWFRF" value=""> <span>Is there anything interesting in the otter dataset?</span></label><label><input type="radio" autocomplete="off" name="radio_PRXBHSWFRF" value=""> <span>What do all the variables in the otter dataset look like when plotted?</span></label><label><input type="radio" autocomplete="off" name="radio_PRXBHSWFRF" value=""> <span>Can we find a significant result somewhere in the otter dataset?</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -765,12 +765,12 @@ Click to show explanation
 </div>
 </div>
 <p><strong>What does the scatterplot suggest about the relationship between fish availability and spraint count?</strong></p>
-<div id="radio_TNAONZYLPP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TNAONZYLPP" value="answer"> <span>There appears to be a positive linear relationship, as fish availability increases, spraint count tends to increase too.</span></label><label><input type="radio" autocomplete="off" name="radio_TNAONZYLPP" value=""> <span>There appears to be no relationship, the points are scattered randomly with no pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_TNAONZYLPP" value=""> <span>There appears to be a negative relationship, as fish availability increases, spraint count decreases.</span></label><label><input type="radio" autocomplete="off" name="radio_TNAONZYLPP" value=""> <span>The relationship is clearly curved, a straight line is not appropriate.</span></label>
+<div id="radio_EGZPVJMLBX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EGZPVJMLBX" value="answer"> <span>There appears to be a positive linear relationship, as fish availability increases, spraint count tends to increase too.</span></label><label><input type="radio" autocomplete="off" name="radio_EGZPVJMLBX" value=""> <span>There appears to be no relationship, the points are scattered randomly with no pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_EGZPVJMLBX" value=""> <span>There appears to be a negative relationship, as fish availability increases, spraint count decreases.</span></label><label><input type="radio" autocomplete="off" name="radio_EGZPVJMLBX" value=""> <span>The relationship is clearly curved, a straight line is not appropriate.</span></label>
 </div>
 <p><strong>Is a straight line a reasonable description of this relationship?</strong></p>
-<div id="radio_AIBNLYEGXM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AIBNLYEGXM" value="answer"> <span>Yes, the points follow a roughly linear pattern, suggesting that linear regression is an appropriate model.</span></label><label><input type="radio" autocomplete="off" name="radio_AIBNLYEGXM" value=""> <span>No, the points follow a clear curve, so non-linear regression is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_AIBNLYEGXM" value=""> <span>It is impossible to tell from a scatterplot alone.</span></label><label><input type="radio" autocomplete="off" name="radio_AIBNLYEGXM" value=""> <span>No, there are too many outliers for any model to be appropriate.</span></label>
+<div id="radio_CVCCWYBJCV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CVCCWYBJCV" value="answer"> <span>Yes, the points follow a roughly linear pattern, suggesting that linear regression is an appropriate model.</span></label><label><input type="radio" autocomplete="off" name="radio_CVCCWYBJCV" value=""> <span>No, the points follow a clear curve, so non-linear regression is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_CVCCWYBJCV" value=""> <span>It is impossible to tell from a scatterplot alone.</span></label><label><input type="radio" autocomplete="off" name="radio_CVCCWYBJCV" value=""> <span>No, there are too many outliers for any model to be appropriate.</span></label>
 </div>
 <hr>
 </section>
@@ -869,12 +869,12 @@ F-statistic:   129 on 1 and 58 DF,  p-value: 2.249e-16</code></pre>
 </div>
 </div>
 <p><strong>What would a random scatter in the residuals plot tell us?</strong></p>
-<div id="radio_MINYXSEFRZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MINYXSEFRZ" value="answer"> <span>The model assumptions are met, the residuals are evenly distributed around zero with no systematic pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_MINYXSEFRZ" value=""> <span>The model is a poor fit for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_MINYXSEFRZ" value=""> <span>The relationship between fish availability and spraint count is non-linear.</span></label><label><input type="radio" autocomplete="off" name="radio_MINYXSEFRZ" value=""> <span>The variance of the residuals increases with the fitted values.</span></label>
+<div id="radio_VFUTMWJYVH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VFUTMWJYVH" value="answer"> <span>The model assumptions are met, the residuals are evenly distributed around zero with no systematic pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_VFUTMWJYVH" value=""> <span>The model is a poor fit for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_VFUTMWJYVH" value=""> <span>The relationship between fish availability and spraint count is non-linear.</span></label><label><input type="radio" autocomplete="off" name="radio_VFUTMWJYVH" value=""> <span>The variance of the residuals increases with the fitted values.</span></label>
 </div>
 <p><strong>What would a U-shape in the residuals plot suggest?</strong></p>
-<div id="radio_YFIPJZHMDC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YFIPJZHMDC" value="answer"> <span>The relationship is non-linear, a straight line may not be an appropriate model for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_YFIPJZHMDC" value=""> <span>The assumptions are met and we can proceed with the analysis.</span></label><label><input type="radio" autocomplete="off" name="radio_YFIPJZHMDC" value=""> <span>The variance of the residuals is constant across all fitted values.</span></label><label><input type="radio" autocomplete="off" name="radio_YFIPJZHMDC" value=""> <span>The slope is not significantly different from zero.</span></label>
+<div id="radio_ZLJMMPYHZU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZLJMMPYHZU" value="answer"> <span>The relationship is non-linear, a straight line may not be an appropriate model for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_ZLJMMPYHZU" value=""> <span>The assumptions are met and we can proceed with the analysis.</span></label><label><input type="radio" autocomplete="off" name="radio_ZLJMMPYHZU" value=""> <span>The variance of the residuals is constant across all fitted values.</span></label><label><input type="radio" autocomplete="off" name="radio_ZLJMMPYHZU" value=""> <span>The slope is not significantly different from zero.</span></label>
 </div>
 <hr>
 </section>
@@ -913,12 +913,12 @@ F-statistic:   129 on 1 and 58 DF,  p-value: 2.249e-16</code></pre>
 </div>
 <p><strong>The F-statistic</strong> tests the null hypothesis that fish availability has no effect on spraint count. A large F-statistic and small p-value tell us the model explains a significant amount of variation in the data.</p>
 <p><strong>What does the slope (fish_index Estimate) tell us?</strong></p>
-<div id="radio_JNOKCFXNXT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JNOKCFXNXT" value=""> <span>The predicted spraint count when fish availability is at its maximum.</span></label><label><input type="radio" autocomplete="off" name="radio_JNOKCFXNXT" value="answer"> <span>How much spraint count increases for each one-unit increase in fish availability index.</span></label><label><input type="radio" autocomplete="off" name="radio_JNOKCFXNXT" value=""> <span>The proportion of variation in spraint count explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_JNOKCFXNXT" value=""> <span>The p-value for the overall model significance.</span></label>
+<div id="radio_CYXLEFDYZY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CYXLEFDYZY" value=""> <span>The predicted spraint count when fish availability is at its maximum.</span></label><label><input type="radio" autocomplete="off" name="radio_CYXLEFDYZY" value="answer"> <span>How much spraint count increases for each one-unit increase in fish availability index.</span></label><label><input type="radio" autocomplete="off" name="radio_CYXLEFDYZY" value=""> <span>The proportion of variation in spraint count explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_CYXLEFDYZY" value=""> <span>The p-value for the overall model significance.</span></label>
 </div>
 <p><strong>What does the R² value tell us?</strong></p>
-<div id="radio_TFABYSRSCF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TFABYSRSCF" value=""> <span>Whether the slope is significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_TFABYSRSCF" value=""> <span>The average distance of the data points from the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_TFABYSRSCF" value="answer"> <span>The proportion of variation in spraint count that is explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_TFABYSRSCF" value=""> <span>The p-value for the F-statistic.</span></label>
+<div id="radio_ZJRTOFIWJL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZJRTOFIWJL" value=""> <span>Whether the slope is significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_ZJRTOFIWJL" value=""> <span>The average distance of the data points from the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_ZJRTOFIWJL" value="answer"> <span>The proportion of variation in spraint count that is explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_ZJRTOFIWJL" value=""> <span>The p-value for the F-statistic.</span></label>
 </div>
 <hr>
 </section>
@@ -970,12 +970,12 @@ Note
 </div>
 </div>
 <p><strong>Why is the prediction interval always wider than the confidence interval?</strong></p>
-<div id="radio_DBCNDEOGJG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DBCNDEOGJG" value=""> <span>Because the prediction interval uses a different significance threshold.</span></label><label><input type="radio" autocomplete="off" name="radio_DBCNDEOGJG" value="answer"> <span>Because the prediction interval accounts for both the uncertainty in the mean and the natural variation between individual otters, individual observations are always more variable than means.</span></label><label><input type="radio" autocomplete="off" name="radio_DBCNDEOGJG" value=""> <span>Because the confidence interval is calculated incorrectly.</span></label><label><input type="radio" autocomplete="off" name="radio_DBCNDEOGJG" value=""> <span>Because the prediction interval does not use the regression equation.</span></label>
+<div id="radio_YSKBSFIIHN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YSKBSFIIHN" value=""> <span>Because the prediction interval uses a different significance threshold.</span></label><label><input type="radio" autocomplete="off" name="radio_YSKBSFIIHN" value="answer"> <span>Because the prediction interval accounts for both the uncertainty in the mean and the natural variation between individual otters, individual observations are always more variable than means.</span></label><label><input type="radio" autocomplete="off" name="radio_YSKBSFIIHN" value=""> <span>Because the confidence interval is calculated incorrectly.</span></label><label><input type="radio" autocomplete="off" name="radio_YSKBSFIIHN" value=""> <span>Because the prediction interval does not use the regression equation.</span></label>
 </div>
 <p><strong>Is it valid to predict the spraint count for a fish index of 15?</strong></p>
-<div id="radio_PWLQZWTXVE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PWLQZWTXVE" value=""> <span>Yes, the regression equation can be used to predict any value of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_PWLQZWTXVE" value="answer"> <span>No, a fish index of 15 is outside the range of the observed data. Extrapolating beyond the data range is unreliable as we do not know whether the linear relationship holds outside the observed values.</span></label><label><input type="radio" autocomplete="off" name="radio_PWLQZWTXVE" value=""> <span>Yes, as long as the R-squared value is high enough.</span></label><label><input type="radio" autocomplete="off" name="radio_PWLQZWTXVE" value=""> <span>No, because the confidence interval would be too wide to be useful.</span></label>
+<div id="radio_ESNMGZCGNP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ESNMGZCGNP" value=""> <span>Yes, the regression equation can be used to predict any value of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_ESNMGZCGNP" value="answer"> <span>No, a fish index of 15 is outside the range of the observed data. Extrapolating beyond the data range is unreliable as we do not know whether the linear relationship holds outside the observed values.</span></label><label><input type="radio" autocomplete="off" name="radio_ESNMGZCGNP" value=""> <span>Yes, as long as the R-squared value is high enough.</span></label><label><input type="radio" autocomplete="off" name="radio_ESNMGZCGNP" value=""> <span>No, because the confidence interval would be too wide to be useful.</span></label>
 </div>
 
 
@@ -1778,530 +1778,531 @@ window.onload = function() {
 <span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/otters.jpg)</span>{width=100% fig-align="center"}</span>
 <span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>Today we will be working with the otters across some Norfolk rivers! Please read in the data, <span class="in">`otter_data.csv`</span>, from the data folder. </span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>Today we will be working with the otters across some Norfolk rivers! Please read in the data, <span class="in">`otter_data.csv`</span>, from the data folder. Please also add the following packages: <span class="in">`tidyverse`</span>, <span class="in">`janitor`</span>, <span class="in">`car`</span> and <span class="in">`patchwork`</span>. </span>
 <span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### What is Linear Regression?</span></span>
-<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>So far we have compared **means between groups** using t-tests and ANOVA. But what if we want to understand the **relationship between two continuous variables**?</span>
-<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Can you remember what a continuous variable is?")`</span></span>
-<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>A **continuous variable** is a variable that can take any value within a range, it is measured rather than counted. Examples from our otter dataset include:</span>
-<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Body length (e.g. 115.3 cm)</span>
-<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Body mass (e.g. 9.52 kg)</span>
-<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fish availability index (e.g. 6.7)</span>
-<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Spraint count (e.g. 12)</span>
-<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a>This is different from a **categorical variable** (such as site or sex), which takes a fixed number of distinct values. In linear regression, the **dependent variable (y) must be continuous**. The independent variable (x) is typically continuous too, though categorical variables can also be used in more advanced models.</span>
-<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a>In our otter survey, we might ask:</span>
-<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Does fish availability predict how many spraints an otter leaves?"*</span></span>
-<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a>This is a question about a **relationship** between two variables, as fish availability increases, do spraints increase too? Linear regression may allows us  to answer this.</span>
-<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Three Steps of Linear Regression</span></span>
-<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a>**Step 1: Test whether a relationship exists**</span>
-<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a>We plot the data and fit a straight line, then test whether the **slope is significantly different from zero**.</span>
-<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If fish availability has no effect on spraints, the line would be completely flat (slope = 0), as fish availability increases, spraints do not change.*</span></span>
-<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If fish availability does affect spraints, the line would slope upwards (positive relationship) or downwards (negative relationship).*</span></span>
-<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a>The two plots below illustrate this using our otter data:</span>
-<span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, fig.cap="Figure 1. Left: fish availability shows a clear positive relationship with spraint count. Right: body length shows almost no relationship with spraint count.", fig.width=10, fig.height=4}</span></span>
-<span id="cb32-83"><a href="#cb32-83" aria-hidden="true" tabindex="-1"></a>plot_slope <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> fish_index, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
-<span id="cb32-84"><a href="#cb32-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb32-85"><a href="#cb32-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb32-86"><a href="#cb32-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fish availability index"</span>,</span>
-<span id="cb32-87"><a href="#cb32-87" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
-<span id="cb32-88"><a href="#cb32-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
-<span id="cb32-89"><a href="#cb32-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-90"><a href="#cb32-90" aria-hidden="true" tabindex="-1"></a>plot_flat <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> length_cm, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
-<span id="cb32-91"><a href="#cb32-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#00BFC4"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb32-92"><a href="#cb32-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb32-93"><a href="#cb32-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body length (cm)"</span>,</span>
-<span id="cb32-94"><a href="#cb32-94" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
-<span id="cb32-95"><a href="#cb32-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
-<span id="cb32-96"><a href="#cb32-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-97"><a href="#cb32-97" aria-hidden="true" tabindex="-1"></a>plot_slope <span class="sc">+</span> plot_flat</span>
-<span id="cb32-98"><a href="#cb32-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-99"><a href="#cb32-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-100"><a href="#cb32-100" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation of the plots")`</span></span>
-<span id="cb32-101"><a href="#cb32-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-102"><a href="#cb32-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Fish availability (left)**: the line slopes clearly **upward**, suggesting that as fish availability increases, spraint count increases too. The points follow the line closely, suggesting a **strong positive relationship**.</span>
-<span id="cb32-103"><a href="#cb32-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-104"><a href="#cb32-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Body length (right)**: the line is almost **completely flat**, and the points are scattered widely with no clear pattern. This suggests **no meaningful relationship** between body length and spraint count.</span>
-<span id="cb32-105"><a href="#cb32-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-106"><a href="#cb32-106" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb32-107"><a href="#cb32-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-108"><a href="#cb32-108" aria-hidden="true" tabindex="-1"></a>**Looking at the fish availability plot, what does the slope of the line suggest?**</span>
-<span id="cb32-109"><a href="#cb32-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-110"><a href="#cb32-110" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-111"><a href="#cb32-111" aria-hidden="true" tabindex="-1"></a>answer = "As fish availability increases, spraint count increases, there is a positive relationship between the two variables.",</span>
-<span id="cb32-112"><a href="#cb32-112" aria-hidden="true" tabindex="-1"></a>"As fish availability increases, spraint count decreases, there is a negative relationship.",</span>
-<span id="cb32-113"><a href="#cb32-113" aria-hidden="true" tabindex="-1"></a>"The line is flat, suggesting fish availability has no effect on spraint count.",</span>
-<span id="cb32-114"><a href="#cb32-114" aria-hidden="true" tabindex="-1"></a>"The relationship between fish availability and spraint count is curved, not linear."</span>
-<span id="cb32-115"><a href="#cb32-115" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-116"><a href="#cb32-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-117"><a href="#cb32-117" aria-hidden="true" tabindex="-1"></a>**Looking at the body length plot, what does the slope of the line suggest?**</span>
-<span id="cb32-118"><a href="#cb32-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-119"><a href="#cb32-119" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-120"><a href="#cb32-120" aria-hidden="true" tabindex="-1"></a>"As body length increases, spraint count increases, larger otters mark their territory more.",</span>
-<span id="cb32-121"><a href="#cb32-121" aria-hidden="true" tabindex="-1"></a>"As body length increases, spraint count decreases, larger otters mark their territory less.",</span>
-<span id="cb32-122"><a href="#cb32-122" aria-hidden="true" tabindex="-1"></a>answer = "The line is almost flat, suggesting body length has little or no effect on spraint count.",</span>
-<span id="cb32-123"><a href="#cb32-123" aria-hidden="true" tabindex="-1"></a>"Body length perfectly predicts spraint count."</span>
-<span id="cb32-124"><a href="#cb32-124" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-125"><a href="#cb32-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-126"><a href="#cb32-126" aria-hidden="true" tabindex="-1"></a>**Comparing the two plots, which variable appears to be a better predictor of spraint count?**</span>
-<span id="cb32-127"><a href="#cb32-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-128"><a href="#cb32-128" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-129"><a href="#cb32-129" aria-hidden="true" tabindex="-1"></a>answer = "Fish availability,  the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.",</span>
-<span id="cb32-130"><a href="#cb32-130" aria-hidden="true" tabindex="-1"></a>"Body length, the flat line means there is no noise in the data, making it a more reliable predictor.",</span>
-<span id="cb32-131"><a href="#cb32-131" aria-hidden="true" tabindex="-1"></a>"Both variables predict spraint count equally well.",</span>
-<span id="cb32-132"><a href="#cb32-132" aria-hidden="true" tabindex="-1"></a>"Neither variable predicts spraint count, both lines are flat."</span>
-<span id="cb32-133"><a href="#cb32-133" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-134"><a href="#cb32-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-135"><a href="#cb32-135" aria-hidden="true" tabindex="-1"></a>**If the slope of the fish availability line was negative instead of positive, what would this mean biologically?**</span>
-<span id="cb32-136"><a href="#cb32-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-137"><a href="#cb32-137" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-138"><a href="#cb32-138" aria-hidden="true" tabindex="-1"></a>answer = "As fish availability increases, otters leave fewer spraints, perhaps because they do not need to defend territory as strongly when food is plentiful.",</span>
-<span id="cb32-139"><a href="#cb32-139" aria-hidden="true" tabindex="-1"></a>"Fish availability has no effect on spraint count.",</span>
-<span id="cb32-140"><a href="#cb32-140" aria-hidden="true" tabindex="-1"></a>"Otters always leave more spraints when fish are scarce.",</span>
-<span id="cb32-141"><a href="#cb32-141" aria-hidden="true" tabindex="-1"></a>"The regression assumptions have been violated."</span>
-<span id="cb32-142"><a href="#cb32-142" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-143"><a href="#cb32-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-144"><a href="#cb32-144" aria-hidden="true" tabindex="-1"></a>We test the slope formally using a **t-test**, which produces a p-value:</span>
-<span id="cb32-145"><a href="#cb32-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-146"><a href="#cb32-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If **p &lt; 0.05**: the slope is significantly different from zero; we have evidence of a relationship</span>
-<span id="cb32-147"><a href="#cb32-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If **p &gt; 0.05**: we do not have enough evidence to conclude a relationship exists</span>
-<span id="cb32-148"><a href="#cb32-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-149"><a href="#cb32-149" aria-hidden="true" tabindex="-1"></a>In R, we fit the linear model using <span class="in">`lm()`</span> and then use <span class="in">`summary()`</span> to view the results:</span>
-<span id="cb32-150"><a href="#cb32-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-153"><a href="#cb32-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-154"><a href="#cb32-154" aria-hidden="true" tabindex="-1"></a>lm_fish   <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index, <span class="at">data =</span> otter_data)</span>
-<span id="cb32-155"><a href="#cb32-155" aria-hidden="true" tabindex="-1"></a>lm_length <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> length_cm,  <span class="at">data =</span> otter_data)</span>
-<span id="cb32-156"><a href="#cb32-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-157"><a href="#cb32-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-160"><a href="#cb32-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-161"><a href="#cb32-161" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)</span>
-<span id="cb32-162"><a href="#cb32-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-163"><a href="#cb32-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-166"><a href="#cb32-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-167"><a href="#cb32-167" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)</span>
-<span id="cb32-168"><a href="#cb32-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-169"><a href="#cb32-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-170"><a href="#cb32-170" aria-hidden="true" tabindex="-1"></a>The <span class="in">`Coefficients`</span> table in the output shows:</span>
-<span id="cb32-171"><a href="#cb32-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-172"><a href="#cb32-172" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> What it means <span class="pp">|</span></span>
-<span id="cb32-173"><a href="#cb32-173" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
-<span id="cb32-174"><a href="#cb32-174" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Estimate`</span> <span class="pp">|</span> The value of the slope or intercept <span class="pp">|</span></span>
-<span id="cb32-175"><a href="#cb32-175" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Std. Error`</span> <span class="pp">|</span> The uncertainty around that estimate <span class="pp">|</span></span>
-<span id="cb32-176"><a href="#cb32-176" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`t value`</span> <span class="pp">|</span> How many standard errors the slope is from zero <span class="pp">|</span></span>
-<span id="cb32-177"><a href="#cb32-177" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Pr(&gt;|t|)`</span> <span class="pp">|</span> The p-value: is the slope significantly different from zero? <span class="pp">|</span></span>
-<span id="cb32-178"><a href="#cb32-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-179"><a href="#cb32-179" aria-hidden="true" tabindex="-1"></a>For **fish index**, the slope is significantly different from zero (p &lt; 0.001), confirming a positive relationship with spraint count. For **body length**, the slope is not significantly different from zero (p = 0.208), confirming no meaningful relationship.</span>
-<span id="cb32-180"><a href="#cb32-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-181"><a href="#cb32-181" aria-hidden="true" tabindex="-1"></a>**Where would you find the p-value for the slope in the `summary()` output?**</span>
-<span id="cb32-182"><a href="#cb32-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-183"><a href="#cb32-183" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-184"><a href="#cb32-184" aria-hidden="true" tabindex="-1"></a>answer = "In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).",</span>
-<span id="cb32-185"><a href="#cb32-185" aria-hidden="true" tabindex="-1"></a>"In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).",</span>
-<span id="cb32-186"><a href="#cb32-186" aria-hidden="true" tabindex="-1"></a>"In the R-squared value at the bottom of the output.",</span>
-<span id="cb32-187"><a href="#cb32-187" aria-hidden="true" tabindex="-1"></a>"In the F-statistic at the bottom of the output."</span>
-<span id="cb32-188"><a href="#cb32-188" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-189"><a href="#cb32-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-190"><a href="#cb32-190" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-191"><a href="#cb32-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-192"><a href="#cb32-192" aria-hidden="true" tabindex="-1"></a>**Step 2: Assess the strength of the relationship**</span>
-<span id="cb32-193"><a href="#cb32-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-194"><a href="#cb32-194" aria-hidden="true" tabindex="-1"></a>Even if a relationship exists, it might be weak, the data points might be scattered widely around the line. We measure how well the line fits the data using **R²** (R-squared):</span>
-<span id="cb32-195"><a href="#cb32-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-196"><a href="#cb32-196" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *R² is the proportion of variation in spraints that is explained by fish availability.*</span></span>
-<span id="cb32-197"><a href="#cb32-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-198"><a href="#cb32-198" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 1**: the line fits the data perfectly</span>
-<span id="cb32-199"><a href="#cb32-199" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 0.6**: fish availability explains 60% of the variation in spraints; </span>
-<span id="cb32-200"><a href="#cb32-200" aria-hidden="true" tabindex="-1"></a>other factors explain the remaining 40%</span>
-<span id="cb32-201"><a href="#cb32-201" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 0**: the line explains nothing; fish availability has no predictive power</span>
-<span id="cb32-202"><a href="#cb32-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-203"><a href="#cb32-203" aria-hidden="true" tabindex="-1"></a>R² can be found in the <span class="in">`summary()`</span> output under <span class="in">`Multiple R-squared`</span>:</span>
-<span id="cb32-204"><a href="#cb32-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-205"><a href="#cb32-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r r-squared}</span></span>
-<span id="cb32-206"><a href="#cb32-206" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)<span class="sc">$</span>r.squared</span>
-<span id="cb32-207"><a href="#cb32-207" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)<span class="sc">$</span>r.squared</span>
-<span id="cb32-208"><a href="#cb32-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-209"><a href="#cb32-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-210"><a href="#cb32-210" aria-hidden="true" tabindex="-1"></a>**If R² = 0.69 for the relationship between fish index and spraints, and R² = 0.027 for the relationship between body length and spraints, what does this mean?**</span>
-<span id="cb32-211"><a href="#cb32-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-212"><a href="#cb32-212" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-213"><a href="#cb32-213" aria-hidden="true" tabindex="-1"></a>answer = "Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.",</span>
-<span id="cb32-214"><a href="#cb32-214" aria-hidden="true" tabindex="-1"></a>"Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.",</span>
-<span id="cb32-215"><a href="#cb32-215" aria-hidden="true" tabindex="-1"></a>"Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.",</span>
-<span id="cb32-216"><a href="#cb32-216" aria-hidden="true" tabindex="-1"></a>"An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated."</span>
-<span id="cb32-217"><a href="#cb32-217" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-218"><a href="#cb32-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-219"><a href="#cb32-219" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-220"><a href="#cb32-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-221"><a href="#cb32-221" aria-hidden="true" tabindex="-1"></a>**Step 3: Describe the relationship**</span>
-<span id="cb32-222"><a href="#cb32-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-223"><a href="#cb32-223" aria-hidden="true" tabindex="-1"></a>Finally, we describe the relationship using the **regression equation**:</span>
-<span id="cb32-224"><a href="#cb32-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-225"><a href="#cb32-225" aria-hidden="true" tabindex="-1"></a>$$y = a + bx$$</span>
-<span id="cb32-226"><a href="#cb32-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-227"><a href="#cb32-227" aria-hidden="true" tabindex="-1"></a>For our otter data:</span>
-<span id="cb32-228"><a href="#cb32-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-229"><a href="#cb32-229" aria-hidden="true" tabindex="-1"></a>$$\text{spraints} = a + b \times \text{fish index}$$</span>
-<span id="cb32-230"><a href="#cb32-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-231"><a href="#cb32-231" aria-hidden="true" tabindex="-1"></a>Where:</span>
-<span id="cb32-232"><a href="#cb32-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-233"><a href="#cb32-233" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$y$ = spraints: the **dependent variable** (what we are trying to predict)</span>
-<span id="cb32-234"><a href="#cb32-234" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$x$ = fish index: the **independent variable** (what we think drives spraints)</span>
-<span id="cb32-235"><a href="#cb32-235" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$a$ = the **intercept**: the predicted number of spraints when fish index = 0</span>
-<span id="cb32-236"><a href="#cb32-236" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$b$ = the **slope**: how much spraints change for each one-unit increase in </span>
-<span id="cb32-237"><a href="#cb32-237" aria-hidden="true" tabindex="-1"></a>fish index</span>
-<span id="cb32-238"><a href="#cb32-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-239"><a href="#cb32-239" aria-hidden="true" tabindex="-1"></a>We can extract the slope and intercept directly from the model:</span>
-<span id="cb32-240"><a href="#cb32-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-241"><a href="#cb32-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r coefficients}</span></span>
-<span id="cb32-242"><a href="#cb32-242" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_fish)</span>
-<span id="cb32-243"><a href="#cb32-243" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_length)</span>
-<span id="cb32-244"><a href="#cb32-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-245"><a href="#cb32-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-246"><a href="#cb32-246" aria-hidden="true" tabindex="-1"></a>**What does a slope of zero mean in a linear regression?**</span>
-<span id="cb32-247"><a href="#cb32-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-248"><a href="#cb32-248" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-249"><a href="#cb32-249" aria-hidden="true" tabindex="-1"></a>"The regression line passes through the origin.",</span>
-<span id="cb32-250"><a href="#cb32-250" aria-hidden="true" tabindex="-1"></a>answer = "The independent variable has no effect on the dependent variable,  as x increases, y does not change.",</span>
-<span id="cb32-251"><a href="#cb32-251" aria-hidden="true" tabindex="-1"></a>"The R-squared value is equal to 1, meaning the line fits the data perfectly.",</span>
-<span id="cb32-252"><a href="#cb32-252" aria-hidden="true" tabindex="-1"></a>"The intercept is equal to zero, meaning the line starts at the origin."</span>
-<span id="cb32-253"><a href="#cb32-253" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-254"><a href="#cb32-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-255"><a href="#cb32-255" aria-hidden="true" tabindex="-1"></a>**What does the intercept tell us in our otter regression?**</span>
-<span id="cb32-256"><a href="#cb32-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-257"><a href="#cb32-257" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-258"><a href="#cb32-258" aria-hidden="true" tabindex="-1"></a>"The rate at which spraints increase as fish availability increases.",</span>
-<span id="cb32-259"><a href="#cb32-259" aria-hidden="true" tabindex="-1"></a>"The proportion of variation in spraints explained by fish availability.",</span>
-<span id="cb32-260"><a href="#cb32-260" aria-hidden="true" tabindex="-1"></a>answer = "The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.",</span>
-<span id="cb32-261"><a href="#cb32-261" aria-hidden="true" tabindex="-1"></a>"The p-value for the test of whether the slope is significantly different from zero."</span>
-<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-263"><a href="#cb32-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-264"><a href="#cb32-264" aria-hidden="true" tabindex="-1"></a>**In our otter model, what is the dependent variable?**</span>
-<span id="cb32-265"><a href="#cb32-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-266"><a href="#cb32-266" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Fish index", "Body length", answer = "Spraints", "Site", "Season"))`</span></span>
-<span id="cb32-267"><a href="#cb32-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-268"><a href="#cb32-268" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb32-269"><a href="#cb32-269" aria-hidden="true" tabindex="-1"></a>**Important assumptions of linear regression:**</span>
-<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-271"><a href="#cb32-271" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The relationship between the two variables is **linear**: a straight line is a reasonable description of the data</span>
-<span id="cb32-272"><a href="#cb32-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **residuals** (differences between observed and predicted values) are normally distributed</span>
-<span id="cb32-273"><a href="#cb32-273" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The variance of the residuals is **constant** across all values of x: this is called **homoscedasticity**</span>
-<span id="cb32-274"><a href="#cb32-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-275"><a href="#cb32-275" aria-hidden="true" tabindex="-1"></a>We will check these assumptions in the next section.</span>
-<span id="cb32-276"><a href="#cb32-276" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb32-277"><a href="#cb32-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-278"><a href="#cb32-278" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-279"><a href="#cb32-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-280"><a href="#cb32-280" aria-hidden="true" tabindex="-1"></a><span class="fu">## Case Study: Otters in Norfolk Rivers </span></span>
-<span id="cb32-281"><a href="#cb32-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-282"><a href="#cb32-282" aria-hidden="true" tabindex="-1"></a>We should have already read in our data. We can start by checking the variable types:</span>
-<span id="cb32-283"><a href="#cb32-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-284"><a href="#cb32-284" aria-hidden="true" tabindex="-1"></a>**Can you remember how to check the data type of each variable in R?**</span>
-<span id="cb32-285"><a href="#cb32-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-286"><a href="#cb32-286" aria-hidden="true" tabindex="-1"></a>`r mcq(c(</span>
-<span id="cb32-287"><a href="#cb32-287" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>colnames()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
-<span id="cb32-288"><a href="#cb32-288" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>summary()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
-<span id="cb32-289"><a href="#cb32-289" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>head()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
-<span id="cb32-290"><a href="#cb32-290" aria-hidden="true" tabindex="-1"></a>answer = "<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>str()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>"</span>
-<span id="cb32-291"><a href="#cb32-291" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-292"><a href="#cb32-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-293"><a href="#cb32-293" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Show answer, only after attempting the question!")`</span></span>
-<span id="cb32-294"><a href="#cb32-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-295"><a href="#cb32-295" aria-hidden="true" tabindex="-1"></a><span class="in">`str()`</span> shows the **structure** of the dataset, including the data type of each variable:</span>
-<span id="cb32-296"><a href="#cb32-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-297"><a href="#cb32-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r str-data}</span></span>
-<span id="cb32-298"><a href="#cb32-298" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(otter_data)</span>
-<span id="cb32-299"><a href="#cb32-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-300"><a href="#cb32-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-301"><a href="#cb32-301" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Data type shown <span class="pp">|</span> What it means <span class="pp">|</span> Variable type <span class="pp">|</span></span>
-<span id="cb32-302"><a href="#cb32-302" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
-<span id="cb32-303"><a href="#cb32-303" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`chr`</span> <span class="pp">|</span> Character: text values <span class="pp">|</span> Nominal categorical <span class="pp">|</span></span>
-<span id="cb32-304"><a href="#cb32-304" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Factor`</span> <span class="pp">|</span> Factor: categorical with levels <span class="pp">|</span> Nominal or ordinal categorical <span class="pp">|</span></span>
-<span id="cb32-305"><a href="#cb32-305" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`int`</span> <span class="pp">|</span> Integer: whole numbers <span class="pp">|</span> Discrete quantitative <span class="pp">|</span></span>
-<span id="cb32-306"><a href="#cb32-306" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`num`</span> <span class="pp">|</span> Numeric: decimal numbers <span class="pp">|</span> Continuous quantitative <span class="pp">|</span></span>
-<span id="cb32-307"><a href="#cb32-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-308"><a href="#cb32-308" aria-hidden="true" tabindex="-1"></a>So for our otter dataset:</span>
-<span id="cb32-309"><a href="#cb32-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-310"><a href="#cb32-310" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`site`</span> and <span class="in">`sex`</span> show as <span class="in">`chr`</span>: **nominal categorical**</span>
-<span id="cb32-311"><a href="#cb32-311" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`spraints`</span> shows as <span class="in">`int`</span>: **discrete quantitative**</span>
-<span id="cb32-312"><a href="#cb32-312" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`fish_index`</span>, <span class="in">`length_cm`</span>, <span class="in">`mass_kg`</span> show as <span class="in">`num`</span>: **continuous quantitative**</span>
-<span id="cb32-313"><a href="#cb32-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-314"><a href="#cb32-314" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb32-315"><a href="#cb32-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-316"><a href="#cb32-316" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-317"><a href="#cb32-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-318"><a href="#cb32-318" aria-hidden="true" tabindex="-1"></a><span class="fu">### What Should We Analyse?</span></span>
-<span id="cb32-319"><a href="#cb32-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-320"><a href="#cb32-320" aria-hidden="true" tabindex="-1"></a>In our otter dataset we have many variables: <span class="in">`site`</span>, <span class="in">`season`</span>, <span class="in">`sex`</span>, <span class="in">`age_class`</span>, <span class="in">`length_cm`</span>, <span class="in">`mass_kg`</span>, <span class="in">`spraints`</span> and <span class="in">`fish_index`</span>. We cannot and should not analyse all possible combinations.Instead, we start with a lear research question.</span>
-<span id="cb32-321"><a href="#cb32-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-322"><a href="#cb32-322" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Research question <span class="pp">|</span> Dependent variable (y) <span class="pp">|</span> Independent variable (x) <span class="pp">|</span> Analysis <span class="pp">|</span></span>
-<span id="cb32-323"><a href="#cb32-323" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
-<span id="cb32-324"><a href="#cb32-324" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Do male otters have longer body length than females? <span class="pp">|</span> <span class="in">`length_cm`</span> <span class="pp">|</span> <span class="in">`sex`</span> <span class="pp">|</span> t-test <span class="pp">|</span></span>
-<span id="cb32-325"><a href="#cb32-325" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does spraint count differ between sites? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`site`</span> <span class="pp">|</span> One-way ANOVA <span class="pp">|</span></span>
-<span id="cb32-326"><a href="#cb32-326" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does spraint count differ between sites and seasons? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`site`</span> + <span class="in">`season`</span> <span class="pp">|</span> Two-way ANOVA <span class="pp">|</span></span>
-<span id="cb32-327"><a href="#cb32-327" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does fish availability predict spraint count? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> Linear regression <span class="pp">|</span></span>
-<span id="cb32-328"><a href="#cb32-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-329"><a href="#cb32-329" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb32-330"><a href="#cb32-330" aria-hidden="true" tabindex="-1"></a>**A good research question has three things:**</span>
-<span id="cb32-331"><a href="#cb32-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-332"><a href="#cb32-332" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>A clearly defined **dependent variable**: what you are measuring as an outcome</span>
-<span id="cb32-333"><a href="#cb32-333" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>A clearly defined **independent variable**: what you think drives that outcome</span>
-<span id="cb32-334"><a href="#cb32-334" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>A **biological justification**: why would you expect these two variables to </span>
-<span id="cb32-335"><a href="#cb32-335" aria-hidden="true" tabindex="-1"></a>be related?</span>
-<span id="cb32-336"><a href="#cb32-336" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb32-337"><a href="#cb32-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-338"><a href="#cb32-338" aria-hidden="true" tabindex="-1"></a>**Before you visualise or analyse anything, complete this sentence:**</span>
-<span id="cb32-339"><a href="#cb32-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-340"><a href="#cb32-340" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"I want to know whether x affects y, because ... ."*</span></span>
-<span id="cb32-341"><a href="#cb32-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-342"><a href="#cb32-342" aria-hidden="true" tabindex="-1"></a>For example:</span>
-<span id="cb32-343"><a href="#cb32-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-344"><a href="#cb32-344" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"I want to know whether **fish availability** predicts **spraint count**, because otters may mark their territory more actively in areas where food is more plentiful."*</span></span>
-<span id="cb32-345"><a href="#cb32-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-346"><a href="#cb32-346" aria-hidden="true" tabindex="-1"></a>Once you have your research question, you only need to visualise the variables involved, not the entire dataset.</span>
-<span id="cb32-347"><a href="#cb32-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-348"><a href="#cb32-348" aria-hidden="true" tabindex="-1"></a>**You want to know whether fish availability predicts spraint count. Which variables do you need to visualise?**</span>
-<span id="cb32-349"><a href="#cb32-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-350"><a href="#cb32-350" aria-hidden="true" tabindex="-1"></a>`r mcq(c(</span>
-<span id="cb32-351"><a href="#cb32-351" aria-hidden="true" tabindex="-1"></a>"All variables in the dataset",</span>
-<span id="cb32-352"><a href="#cb32-352" aria-hidden="true" tabindex="-1"></a>"site, season and spraints only",</span>
-<span id="cb32-353"><a href="#cb32-353" aria-hidden="true" tabindex="-1"></a>answer = "fish_index and spraints only",</span>
-<span id="cb32-354"><a href="#cb32-354" aria-hidden="true" tabindex="-1"></a>"site and fish_index"</span>
-<span id="cb32-355"><a href="#cb32-355" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-356"><a href="#cb32-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-357"><a href="#cb32-357" aria-hidden="true" tabindex="-1"></a>**Which of the following is a well formed research question?**</span>
-<span id="cb32-358"><a href="#cb32-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-359"><a href="#cb32-359" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-360"><a href="#cb32-360" aria-hidden="true" tabindex="-1"></a>answer = "Does fish availability predict spraint count in otters, because otters may mark their territory more actively in areas where fish are more abundant?",</span>
-<span id="cb32-361"><a href="#cb32-361" aria-hidden="true" tabindex="-1"></a>"Is there anything interesting in the otter dataset?",</span>
-<span id="cb32-362"><a href="#cb32-362" aria-hidden="true" tabindex="-1"></a>"What do all the variables in the otter dataset look like when plotted?",</span>
-<span id="cb32-363"><a href="#cb32-363" aria-hidden="true" tabindex="-1"></a>"Can we find a significant result somewhere in the otter dataset?"</span>
-<span id="cb32-364"><a href="#cb32-364" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-365"><a href="#cb32-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-366"><a href="#cb32-366" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
-<span id="cb32-367"><a href="#cb32-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-368"><a href="#cb32-368" aria-hidden="true" tabindex="-1"></a>A well-formed research question should:</span>
-<span id="cb32-369"><a href="#cb32-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-370"><a href="#cb32-370" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Name a specific **dependent variable** (spraint count)</span>
-<span id="cb32-371"><a href="#cb32-371" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Name a specific **independent variable** (fish availability)</span>
-<span id="cb32-372"><a href="#cb32-372" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Include a **biological justification**</span>
-<span id="cb32-373"><a href="#cb32-373" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Be **testable**, it leads directly to a specific statistical analysis (in this case, a linear regression)</span>
-<span id="cb32-374"><a href="#cb32-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-375"><a href="#cb32-375" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb32-376"><a href="#cb32-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-377"><a href="#cb32-377" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-378"><a href="#cb32-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-379"><a href="#cb32-379" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Analysis</span></span>
-<span id="cb32-380"><a href="#cb32-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-381"><a href="#cb32-381" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 1: Visualise</span></span>
-<span id="cb32-382"><a href="#cb32-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-383"><a href="#cb32-383" aria-hidden="true" tabindex="-1"></a>Before fitting any model, always visualise the relationship using a </span>
-<span id="cb32-384"><a href="#cb32-384" aria-hidden="true" tabindex="-1"></a>**scatterplot**. This helps us:</span>
-<span id="cb32-385"><a href="#cb32-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-386"><a href="#cb32-386" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See whether a linear relationship is a reasonable assumption</span>
-<span id="cb32-387"><a href="#cb32-387" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Spot any obvious outliers</span>
-<span id="cb32-388"><a href="#cb32-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Get a sense of the strength and direction of the relationship</span>
-<span id="cb32-389"><a href="#cb32-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-390"><a href="#cb32-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.cap="Figure 2. Scatterplot of fish availability index against spraint count with a fitted regression line."}</span></span>
-<span id="cb32-391"><a href="#cb32-391" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> fish_index, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
-<span id="cb32-392"><a href="#cb32-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb32-393"><a href="#cb32-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb32-394"><a href="#cb32-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fish availability index"</span>,</span>
-<span id="cb32-395"><a href="#cb32-395" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
-<span id="cb32-396"><a href="#cb32-396" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
-<span id="cb32-397"><a href="#cb32-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-398"><a href="#cb32-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-399"><a href="#cb32-399" aria-hidden="true" tabindex="-1"></a>**What does the scatterplot suggest about the relationship between fish availability and spraint count?**</span>
-<span id="cb32-400"><a href="#cb32-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-401"><a href="#cb32-401" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-402"><a href="#cb32-402" aria-hidden="true" tabindex="-1"></a>answer = "There appears to be a positive linear relationship, as fish availability increases, spraint count tends to increase too.",</span>
-<span id="cb32-403"><a href="#cb32-403" aria-hidden="true" tabindex="-1"></a>"There appears to be no relationship, the points are scattered randomly with no pattern.",</span>
-<span id="cb32-404"><a href="#cb32-404" aria-hidden="true" tabindex="-1"></a>"There appears to be a negative relationship, as fish availability increases, spraint count decreases.",</span>
-<span id="cb32-405"><a href="#cb32-405" aria-hidden="true" tabindex="-1"></a>"The relationship is clearly curved, a straight line is not appropriate."</span>
-<span id="cb32-406"><a href="#cb32-406" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-407"><a href="#cb32-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-408"><a href="#cb32-408" aria-hidden="true" tabindex="-1"></a>**Is a straight line a reasonable description of this relationship?**</span>
-<span id="cb32-409"><a href="#cb32-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-410"><a href="#cb32-410" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-411"><a href="#cb32-411" aria-hidden="true" tabindex="-1"></a>answer = "Yes, the points follow a roughly linear pattern, suggesting that linear regression is an appropriate model.",</span>
-<span id="cb32-412"><a href="#cb32-412" aria-hidden="true" tabindex="-1"></a>"No, the points follow a clear curve, so non-linear regression is needed.",</span>
-<span id="cb32-413"><a href="#cb32-413" aria-hidden="true" tabindex="-1"></a>"It is impossible to tell from a scatterplot alone.",</span>
-<span id="cb32-414"><a href="#cb32-414" aria-hidden="true" tabindex="-1"></a>"No, there are too many outliers for any model to be appropriate."</span>
-<span id="cb32-415"><a href="#cb32-415" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-416"><a href="#cb32-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-417"><a href="#cb32-417" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-418"><a href="#cb32-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-419"><a href="#cb32-419" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 2: Fit the Linear Model</span></span>
-<span id="cb32-420"><a href="#cb32-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-421"><a href="#cb32-421" aria-hidden="true" tabindex="-1"></a>Now we can fit the linear model using <span class="in">`lm()`</span>. Complete the code below:</span>
-<span id="cb32-422"><a href="#cb32-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-423"><a href="#cb32-423" aria-hidden="true" tabindex="-1"></a>The dependent variable is: <span class="in">`r fitb("spraints")`</span></span>
-<span id="cb32-424"><a href="#cb32-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-425"><a href="#cb32-425" aria-hidden="true" tabindex="-1"></a>The independent variable is: <span class="in">`r fitb("fish_index")`</span></span>
-<span id="cb32-426"><a href="#cb32-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-427"><a href="#cb32-427" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb32-428"><a href="#cb32-428" aria-hidden="true" tabindex="-1"></a>lm_otter <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> ___, <span class="at">data =</span> otter_data)</span>
-<span id="cb32-429"><a href="#cb32-429" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(___)</span>
-<span id="cb32-430"><a href="#cb32-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-431"><a href="#cb32-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-432"><a href="#cb32-432" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the solution")`</span></span>
-<span id="cb32-433"><a href="#cb32-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-434"><a href="#cb32-434" aria-hidden="true" tabindex="-1"></a><span class="in">```{r lm-fit}</span></span>
-<span id="cb32-435"><a href="#cb32-435" aria-hidden="true" tabindex="-1"></a>lm_otter <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index, <span class="at">data =</span> otter_data)</span>
-<span id="cb32-436"><a href="#cb32-436" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_otter)</span>
-<span id="cb32-437"><a href="#cb32-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-438"><a href="#cb32-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-439"><a href="#cb32-439" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb32-440"><a href="#cb32-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-441"><a href="#cb32-441" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-442"><a href="#cb32-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-443"><a href="#cb32-443" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 3: Check the Residuals</span></span>
-<span id="cb32-444"><a href="#cb32-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-445"><a href="#cb32-445" aria-hidden="true" tabindex="-1"></a>Before interpreting the output, we must check the **residuals**, the </span>
-<span id="cb32-446"><a href="#cb32-446" aria-hidden="true" tabindex="-1"></a>differences between the observed values and the values predicted by the model.</span>
-<span id="cb32-447"><a href="#cb32-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-448"><a href="#cb32-448" aria-hidden="true" tabindex="-1"></a>If the assumptions are met, the residuals should show a **random scatter** </span>
-<span id="cb32-449"><a href="#cb32-449" aria-hidden="true" tabindex="-1"></a>around zero with no systematic pattern:</span>
-<span id="cb32-450"><a href="#cb32-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-451"><a href="#cb32-451" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Pattern <span class="pp">|</span> What it suggests <span class="pp">|</span></span>
-<span id="cb32-452"><a href="#cb32-452" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
-<span id="cb32-453"><a href="#cb32-453" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Random scatter <span class="pp">|</span> Assumptions are met ✓ <span class="pp">|</span></span>
-<span id="cb32-454"><a href="#cb32-454" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Positive or negative trend <span class="pp">|</span> Heteroscedasticity, variance is not constant <span class="pp">|</span></span>
-<span id="cb32-455"><a href="#cb32-455" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Wedge shape <span class="pp">|</span> Greater spread at one end of the fitted values <span class="pp">|</span></span>
-<span id="cb32-456"><a href="#cb32-456" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> U-shape <span class="pp">|</span> Non-linear relationship, a straight line is not appropriate <span class="pp">|</span></span>
-<span id="cb32-457"><a href="#cb32-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-458"><a href="#cb32-458" aria-hidden="true" tabindex="-1"></a><span class="in">```{r residuals-plot, fig.cap="Figure 3. Residuals plotted against fitted values. A random scatter around zero suggests the model assumptions are met."}</span></span>
-<span id="cb32-459"><a href="#cb32-459" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lm_otter, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb32-460"><a href="#cb32-460" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb32-461"><a href="#cb32-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb32-462"><a href="#cb32-462" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted values"</span>,</span>
-<span id="cb32-463"><a href="#cb32-463" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residuals"</span>) <span class="sc">+</span></span>
-<span id="cb32-464"><a href="#cb32-464" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
-<span id="cb32-465"><a href="#cb32-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-466"><a href="#cb32-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-467"><a href="#cb32-467" aria-hidden="true" tabindex="-1"></a>**What would a random scatter in the residuals plot tell us?**</span>
-<span id="cb32-468"><a href="#cb32-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-469"><a href="#cb32-469" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-470"><a href="#cb32-470" aria-hidden="true" tabindex="-1"></a>answer = "The model assumptions are met, the residuals are evenly distributed around zero with no systematic pattern.",</span>
-<span id="cb32-471"><a href="#cb32-471" aria-hidden="true" tabindex="-1"></a>"The model is a poor fit for the data.",</span>
-<span id="cb32-472"><a href="#cb32-472" aria-hidden="true" tabindex="-1"></a>"The relationship between fish availability and spraint count is non-linear.",</span>
-<span id="cb32-473"><a href="#cb32-473" aria-hidden="true" tabindex="-1"></a>"The variance of the residuals increases with the fitted values."</span>
-<span id="cb32-474"><a href="#cb32-474" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-475"><a href="#cb32-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-476"><a href="#cb32-476" aria-hidden="true" tabindex="-1"></a>**What would a U-shape in the residuals plot suggest?**</span>
-<span id="cb32-477"><a href="#cb32-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-478"><a href="#cb32-478" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-479"><a href="#cb32-479" aria-hidden="true" tabindex="-1"></a>answer = "The relationship is non-linear, a straight line may not be an appropriate model for the data.",</span>
-<span id="cb32-480"><a href="#cb32-480" aria-hidden="true" tabindex="-1"></a>"The assumptions are met and we can proceed with the analysis.",</span>
-<span id="cb32-481"><a href="#cb32-481" aria-hidden="true" tabindex="-1"></a>"The variance of the residuals is constant across all fitted values.",</span>
-<span id="cb32-482"><a href="#cb32-482" aria-hidden="true" tabindex="-1"></a>"The slope is not significantly different from zero."</span>
-<span id="cb32-483"><a href="#cb32-483" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-484"><a href="#cb32-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-485"><a href="#cb32-485" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-486"><a href="#cb32-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-487"><a href="#cb32-487" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 4: Interpret the Output</span></span>
-<span id="cb32-488"><a href="#cb32-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-489"><a href="#cb32-489" aria-hidden="true" tabindex="-1"></a>The <span class="in">`summary()`</span> output breaks down as follows:</span>
-<span id="cb32-490"><a href="#cb32-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-491"><a href="#cb32-491" aria-hidden="true" tabindex="-1"></a>**The Coefficients table:**</span>
-<span id="cb32-492"><a href="#cb32-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-493"><a href="#cb32-493" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Row <span class="pp">|</span> What it tells us <span class="pp">|</span></span>
-<span id="cb32-494"><a href="#cb32-494" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
-<span id="cb32-495"><a href="#cb32-495" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`(Intercept)`</span> <span class="pp">|</span> The predicted spraint count when fish index = 0 <span class="pp">|</span></span>
-<span id="cb32-496"><a href="#cb32-496" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> How much spraint count changes for each one-unit increase in fish index <span class="pp">|</span></span>
-<span id="cb32-497"><a href="#cb32-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-498"><a href="#cb32-498" aria-hidden="true" tabindex="-1"></a>**R²**: the proportion of variation in spraint count explained by fish </span>
-<span id="cb32-499"><a href="#cb32-499" aria-hidden="true" tabindex="-1"></a>availability:</span>
-<span id="cb32-500"><a href="#cb32-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-501"><a href="#cb32-501" aria-hidden="true" tabindex="-1"></a><span class="in">```{r r-squared-otter}</span></span>
-<span id="cb32-502"><a href="#cb32-502" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_otter)<span class="sc">$</span>r.squared</span>
-<span id="cb32-503"><a href="#cb32-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-504"><a href="#cb32-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-505"><a href="#cb32-505" aria-hidden="true" tabindex="-1"></a>**The F-statistic** tests the null hypothesis that fish availability has no effect on spraint count. A large F-statistic and small p-value tell us the model explains a significant amount of variation in the data.</span>
-<span id="cb32-506"><a href="#cb32-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-507"><a href="#cb32-507" aria-hidden="true" tabindex="-1"></a>**What does the slope (fish_index Estimate) tell us?**</span>
-<span id="cb32-508"><a href="#cb32-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-509"><a href="#cb32-509" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-510"><a href="#cb32-510" aria-hidden="true" tabindex="-1"></a>"The predicted spraint count when fish availability is at its maximum.",</span>
-<span id="cb32-511"><a href="#cb32-511" aria-hidden="true" tabindex="-1"></a>answer = "How much spraint count increases for each one-unit increase in fish availability index.",</span>
-<span id="cb32-512"><a href="#cb32-512" aria-hidden="true" tabindex="-1"></a>"The proportion of variation in spraint count explained by fish availability.",</span>
-<span id="cb32-513"><a href="#cb32-513" aria-hidden="true" tabindex="-1"></a>"The p-value for the overall model significance."</span>
-<span id="cb32-514"><a href="#cb32-514" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-515"><a href="#cb32-515" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-516"><a href="#cb32-516" aria-hidden="true" tabindex="-1"></a>**What does the R² value tell us?**</span>
-<span id="cb32-517"><a href="#cb32-517" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-518"><a href="#cb32-518" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-519"><a href="#cb32-519" aria-hidden="true" tabindex="-1"></a>"Whether the slope is significantly different from zero.",</span>
-<span id="cb32-520"><a href="#cb32-520" aria-hidden="true" tabindex="-1"></a>"The average distance of the data points from the regression line.",</span>
-<span id="cb32-521"><a href="#cb32-521" aria-hidden="true" tabindex="-1"></a>answer = "The proportion of variation in spraint count that is explained by fish availability.",</span>
-<span id="cb32-522"><a href="#cb32-522" aria-hidden="true" tabindex="-1"></a>"The p-value for the F-statistic."</span>
-<span id="cb32-523"><a href="#cb32-523" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-524"><a href="#cb32-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-525"><a href="#cb32-525" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb32-526"><a href="#cb32-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-527"><a href="#cb32-527" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 5: Confidence Intervals and Predictions</span></span>
-<span id="cb32-528"><a href="#cb32-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-529"><a href="#cb32-529" aria-hidden="true" tabindex="-1"></a>We can calculate **95% confidence intervals** for the slope and intercept:</span>
-<span id="cb32-530"><a href="#cb32-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-531"><a href="#cb32-531" aria-hidden="true" tabindex="-1"></a><span class="in">```{r confint-otter}</span></span>
-<span id="cb32-532"><a href="#cb32-532" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm_otter)</span>
-<span id="cb32-533"><a href="#cb32-533" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-534"><a href="#cb32-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-535"><a href="#cb32-535" aria-hidden="true" tabindex="-1"></a>We can also use the model to **make predictions**:</span>
-<span id="cb32-536"><a href="#cb32-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-537"><a href="#cb32-537" aria-hidden="true" tabindex="-1"></a><span class="in">```{r predict-ci}</span></span>
-<span id="cb32-538"><a href="#cb32-538" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence interval: range for the mean spraint count at fish index = 7</span></span>
-<span id="cb32-539"><a href="#cb32-539" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_otter,</span>
-<span id="cb32-540"><a href="#cb32-540" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">fish_index =</span> <span class="dv">7</span>),</span>
-<span id="cb32-541"><a href="#cb32-541" aria-hidden="true" tabindex="-1"></a>        <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
-<span id="cb32-542"><a href="#cb32-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-543"><a href="#cb32-543" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction interval: range for an individual observation</span></span>
-<span id="cb32-544"><a href="#cb32-544" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_otter,</span>
-<span id="cb32-545"><a href="#cb32-545" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">fish_index =</span> <span class="dv">7</span>),</span>
-<span id="cb32-546"><a href="#cb32-546" aria-hidden="true" tabindex="-1"></a>        <span class="at">interval =</span> <span class="st">"prediction"</span>)</span>
-<span id="cb32-547"><a href="#cb32-547" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-548"><a href="#cb32-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-549"><a href="#cb32-549" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb32-550"><a href="#cb32-550" aria-hidden="true" tabindex="-1"></a>**Confidence interval vs prediction interval:**</span>
-<span id="cb32-551"><a href="#cb32-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-552"><a href="#cb32-552" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **confidence interval** gives the range within which the **mean** spraint count is likely to lie for otters at a given fish index, this is narrower</span>
-<span id="cb32-553"><a href="#cb32-553" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **prediction interval** gives the range within which an **individual** otter's spraint count is likely to lie, this is always wider because individual observations vary around the mean</span>
-<span id="cb32-554"><a href="#cb32-554" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb32-555"><a href="#cb32-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-556"><a href="#cb32-556" aria-hidden="true" tabindex="-1"></a>**Why is the prediction interval always wider than the confidence interval?**</span>
-<span id="cb32-557"><a href="#cb32-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-558"><a href="#cb32-558" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-559"><a href="#cb32-559" aria-hidden="true" tabindex="-1"></a>"Because the prediction interval uses a different significance threshold.",</span>
-<span id="cb32-560"><a href="#cb32-560" aria-hidden="true" tabindex="-1"></a>answer = "Because the prediction interval accounts for both the uncertainty in the mean and the natural variation between individual otters, individual observations are always more variable than means.",</span>
-<span id="cb32-561"><a href="#cb32-561" aria-hidden="true" tabindex="-1"></a>"Because the confidence interval is calculated incorrectly.",</span>
-<span id="cb32-562"><a href="#cb32-562" aria-hidden="true" tabindex="-1"></a>"Because the prediction interval does not use the regression equation."</span>
-<span id="cb32-563"><a href="#cb32-563" aria-hidden="true" tabindex="-1"></a>))`</span>
-<span id="cb32-564"><a href="#cb32-564" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-565"><a href="#cb32-565" aria-hidden="true" tabindex="-1"></a>**Is it valid to predict the spraint count for a fish index of 15?**</span>
-<span id="cb32-566"><a href="#cb32-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-567"><a href="#cb32-567" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
-<span id="cb32-568"><a href="#cb32-568" aria-hidden="true" tabindex="-1"></a>"Yes, the regression equation can be used to predict any value of spraint count.",</span>
-<span id="cb32-569"><a href="#cb32-569" aria-hidden="true" tabindex="-1"></a>answer = "No, a fish index of 15 is outside the range of the observed data. Extrapolating beyond the data range is unreliable as we do not know whether the linear relationship holds outside the observed values.",</span>
-<span id="cb32-570"><a href="#cb32-570" aria-hidden="true" tabindex="-1"></a>"Yes, as long as the R-squared value is high enough.",</span>
-<span id="cb32-571"><a href="#cb32-571" aria-hidden="true" tabindex="-1"></a>"No, because the confidence interval would be too wide to be useful."</span>
-<span id="cb32-572"><a href="#cb32-572" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### What is Linear Regression?</span></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>So far we have compared **means between groups** using t-tests and ANOVA. But what if we want to understand the **relationship between two continuous variables**?</span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Can you remember what a continuous variable is?")`</span></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>A **continuous variable** is a variable that can take any value within a range, it is measured rather than counted. Examples from our otter dataset include:</span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Body length (e.g. 115.3 cm)</span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Body mass (e.g. 9.52 kg)</span>
+<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fish availability index (e.g. 6.7)</span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Spraint count (e.g. 12)</span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>This is different from a **categorical variable** (such as site or sex), which takes a fixed number of distinct values. In linear regression, the **dependent variable (y) must be continuous**. The independent variable (x) is typically continuous too, though categorical variables can also be used in more advanced models.</span>
+<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a>In our otter survey, we might ask:</span>
+<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Does fish availability predict how many spraints an otter leaves?"*</span></span>
+<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a>This is a question about a **relationship** between two variables, as fish availability increases, do spraints increase too? Linear regression may allows us  to answer this.</span>
+<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Three Steps of Linear Regression</span></span>
+<span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a>**Step 1: Test whether a relationship exists**</span>
+<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a>We plot the data and fit a straight line, then test whether the **slope is significantly different from zero**.</span>
+<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If fish availability has no effect on spraints, the line would be completely flat (slope = 0), as fish availability increases, spraints do not change.*</span></span>
+<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If fish availability does affect spraints, the line would slope upwards (positive relationship) or downwards (negative relationship).*</span></span>
+<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a>The two plots below illustrate this using our otter data:</span>
+<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-83"><a href="#cb32-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, fig.cap="Figure 1. Left: fish availability shows a clear positive relationship with spraint count. Right: body length shows almost no relationship with spraint count.", fig.width=10, fig.height=4}</span></span>
+<span id="cb32-84"><a href="#cb32-84" aria-hidden="true" tabindex="-1"></a>plot_slope <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> fish_index, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
+<span id="cb32-85"><a href="#cb32-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb32-86"><a href="#cb32-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb32-87"><a href="#cb32-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fish availability index"</span>,</span>
+<span id="cb32-88"><a href="#cb32-88" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
+<span id="cb32-89"><a href="#cb32-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb32-90"><a href="#cb32-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-91"><a href="#cb32-91" aria-hidden="true" tabindex="-1"></a>plot_flat <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> length_cm, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
+<span id="cb32-92"><a href="#cb32-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#00BFC4"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb32-93"><a href="#cb32-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb32-94"><a href="#cb32-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body length (cm)"</span>,</span>
+<span id="cb32-95"><a href="#cb32-95" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
+<span id="cb32-96"><a href="#cb32-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb32-97"><a href="#cb32-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-98"><a href="#cb32-98" aria-hidden="true" tabindex="-1"></a>plot_slope <span class="sc">+</span> plot_flat</span>
+<span id="cb32-99"><a href="#cb32-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-100"><a href="#cb32-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-101"><a href="#cb32-101" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation of the plots")`</span></span>
+<span id="cb32-102"><a href="#cb32-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-103"><a href="#cb32-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Fish availability (left)**: the line slopes clearly **upward**, suggesting that as fish availability increases, spraint count increases too. The points follow the line closely, suggesting a **strong positive relationship**.</span>
+<span id="cb32-104"><a href="#cb32-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-105"><a href="#cb32-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Body length (right)**: the line is almost **completely flat**, and the points are scattered widely with no clear pattern. This suggests **no meaningful relationship** between body length and spraint count.</span>
+<span id="cb32-106"><a href="#cb32-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-107"><a href="#cb32-107" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb32-108"><a href="#cb32-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-109"><a href="#cb32-109" aria-hidden="true" tabindex="-1"></a>**Looking at the fish availability plot, what does the slope of the line suggest?**</span>
+<span id="cb32-110"><a href="#cb32-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-111"><a href="#cb32-111" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-112"><a href="#cb32-112" aria-hidden="true" tabindex="-1"></a>answer = "As fish availability increases, spraint count increases, there is a positive relationship between the two variables.",</span>
+<span id="cb32-113"><a href="#cb32-113" aria-hidden="true" tabindex="-1"></a>"As fish availability increases, spraint count decreases, there is a negative relationship.",</span>
+<span id="cb32-114"><a href="#cb32-114" aria-hidden="true" tabindex="-1"></a>"The line is flat, suggesting fish availability has no effect on spraint count.",</span>
+<span id="cb32-115"><a href="#cb32-115" aria-hidden="true" tabindex="-1"></a>"The relationship between fish availability and spraint count is curved, not linear."</span>
+<span id="cb32-116"><a href="#cb32-116" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-117"><a href="#cb32-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-118"><a href="#cb32-118" aria-hidden="true" tabindex="-1"></a>**Looking at the body length plot, what does the slope of the line suggest?**</span>
+<span id="cb32-119"><a href="#cb32-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-120"><a href="#cb32-120" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-121"><a href="#cb32-121" aria-hidden="true" tabindex="-1"></a>"As body length increases, spraint count increases, larger otters mark their territory more.",</span>
+<span id="cb32-122"><a href="#cb32-122" aria-hidden="true" tabindex="-1"></a>"As body length increases, spraint count decreases, larger otters mark their territory less.",</span>
+<span id="cb32-123"><a href="#cb32-123" aria-hidden="true" tabindex="-1"></a>answer = "The line is almost flat, suggesting body length has little or no effect on spraint count.",</span>
+<span id="cb32-124"><a href="#cb32-124" aria-hidden="true" tabindex="-1"></a>"Body length perfectly predicts spraint count."</span>
+<span id="cb32-125"><a href="#cb32-125" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-126"><a href="#cb32-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-127"><a href="#cb32-127" aria-hidden="true" tabindex="-1"></a>**Comparing the two plots, which variable appears to be a better predictor of spraint count?**</span>
+<span id="cb32-128"><a href="#cb32-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-129"><a href="#cb32-129" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-130"><a href="#cb32-130" aria-hidden="true" tabindex="-1"></a>answer = "Fish availability,  the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.",</span>
+<span id="cb32-131"><a href="#cb32-131" aria-hidden="true" tabindex="-1"></a>"Body length, the flat line means there is no noise in the data, making it a more reliable predictor.",</span>
+<span id="cb32-132"><a href="#cb32-132" aria-hidden="true" tabindex="-1"></a>"Both variables predict spraint count equally well.",</span>
+<span id="cb32-133"><a href="#cb32-133" aria-hidden="true" tabindex="-1"></a>"Neither variable predicts spraint count, both lines are flat."</span>
+<span id="cb32-134"><a href="#cb32-134" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-135"><a href="#cb32-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-136"><a href="#cb32-136" aria-hidden="true" tabindex="-1"></a>**If the slope of the fish availability line was negative instead of positive, what would this mean biologically?**</span>
+<span id="cb32-137"><a href="#cb32-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-138"><a href="#cb32-138" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-139"><a href="#cb32-139" aria-hidden="true" tabindex="-1"></a>answer = "As fish availability increases, otters leave fewer spraints, perhaps because they do not need to defend territory as strongly when food is plentiful.",</span>
+<span id="cb32-140"><a href="#cb32-140" aria-hidden="true" tabindex="-1"></a>"Fish availability has no effect on spraint count.",</span>
+<span id="cb32-141"><a href="#cb32-141" aria-hidden="true" tabindex="-1"></a>"Otters always leave more spraints when fish are scarce.",</span>
+<span id="cb32-142"><a href="#cb32-142" aria-hidden="true" tabindex="-1"></a>"The regression assumptions have been violated."</span>
+<span id="cb32-143"><a href="#cb32-143" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-144"><a href="#cb32-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-145"><a href="#cb32-145" aria-hidden="true" tabindex="-1"></a>We test the slope formally using a **t-test**, which produces a p-value:</span>
+<span id="cb32-146"><a href="#cb32-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-147"><a href="#cb32-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If **p &lt; 0.05**: the slope is significantly different from zero; we have evidence of a relationship</span>
+<span id="cb32-148"><a href="#cb32-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If **p &gt; 0.05**: we do not have enough evidence to conclude a relationship exists</span>
+<span id="cb32-149"><a href="#cb32-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-150"><a href="#cb32-150" aria-hidden="true" tabindex="-1"></a>In R, we fit the linear model using <span class="in">`lm()`</span> and then use <span class="in">`summary()`</span> to view the results:</span>
+<span id="cb32-151"><a href="#cb32-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-154"><a href="#cb32-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-155"><a href="#cb32-155" aria-hidden="true" tabindex="-1"></a>lm_fish   <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index, <span class="at">data =</span> otter_data)</span>
+<span id="cb32-156"><a href="#cb32-156" aria-hidden="true" tabindex="-1"></a>lm_length <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> length_cm,  <span class="at">data =</span> otter_data)</span>
+<span id="cb32-157"><a href="#cb32-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-158"><a href="#cb32-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-161"><a href="#cb32-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-162"><a href="#cb32-162" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)</span>
+<span id="cb32-163"><a href="#cb32-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-164"><a href="#cb32-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-167"><a href="#cb32-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-168"><a href="#cb32-168" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)</span>
+<span id="cb32-169"><a href="#cb32-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-170"><a href="#cb32-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-171"><a href="#cb32-171" aria-hidden="true" tabindex="-1"></a>The <span class="in">`Coefficients`</span> table in the output shows:</span>
+<span id="cb32-172"><a href="#cb32-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-173"><a href="#cb32-173" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> What it means <span class="pp">|</span></span>
+<span id="cb32-174"><a href="#cb32-174" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb32-175"><a href="#cb32-175" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Estimate`</span> <span class="pp">|</span> The value of the slope or intercept <span class="pp">|</span></span>
+<span id="cb32-176"><a href="#cb32-176" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Std. Error`</span> <span class="pp">|</span> The uncertainty around that estimate <span class="pp">|</span></span>
+<span id="cb32-177"><a href="#cb32-177" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`t value`</span> <span class="pp">|</span> How many standard errors the slope is from zero <span class="pp">|</span></span>
+<span id="cb32-178"><a href="#cb32-178" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Pr(&gt;|t|)`</span> <span class="pp">|</span> The p-value: is the slope significantly different from zero? <span class="pp">|</span></span>
+<span id="cb32-179"><a href="#cb32-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-180"><a href="#cb32-180" aria-hidden="true" tabindex="-1"></a>For **fish index**, the slope is significantly different from zero (p &lt; 0.001), confirming a positive relationship with spraint count. For **body length**, the slope is not significantly different from zero (p = 0.208), confirming no meaningful relationship.</span>
+<span id="cb32-181"><a href="#cb32-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-182"><a href="#cb32-182" aria-hidden="true" tabindex="-1"></a>**Where would you find the p-value for the slope in the `summary()` output?**</span>
+<span id="cb32-183"><a href="#cb32-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-184"><a href="#cb32-184" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-185"><a href="#cb32-185" aria-hidden="true" tabindex="-1"></a>answer = "In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).",</span>
+<span id="cb32-186"><a href="#cb32-186" aria-hidden="true" tabindex="-1"></a>"In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).",</span>
+<span id="cb32-187"><a href="#cb32-187" aria-hidden="true" tabindex="-1"></a>"In the R-squared value at the bottom of the output.",</span>
+<span id="cb32-188"><a href="#cb32-188" aria-hidden="true" tabindex="-1"></a>"In the F-statistic at the bottom of the output."</span>
+<span id="cb32-189"><a href="#cb32-189" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-190"><a href="#cb32-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-191"><a href="#cb32-191" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-192"><a href="#cb32-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-193"><a href="#cb32-193" aria-hidden="true" tabindex="-1"></a>**Step 2: Assess the strength of the relationship**</span>
+<span id="cb32-194"><a href="#cb32-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-195"><a href="#cb32-195" aria-hidden="true" tabindex="-1"></a>Even if a relationship exists, it might be weak, the data points might be scattered widely around the line. We measure how well the line fits the data using **R²** (R-squared):</span>
+<span id="cb32-196"><a href="#cb32-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-197"><a href="#cb32-197" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *R² is the proportion of variation in spraints that is explained by fish availability.*</span></span>
+<span id="cb32-198"><a href="#cb32-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-199"><a href="#cb32-199" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 1**: the line fits the data perfectly</span>
+<span id="cb32-200"><a href="#cb32-200" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 0.6**: fish availability explains 60% of the variation in spraints; </span>
+<span id="cb32-201"><a href="#cb32-201" aria-hidden="true" tabindex="-1"></a>other factors explain the remaining 40%</span>
+<span id="cb32-202"><a href="#cb32-202" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R² = 0**: the line explains nothing; fish availability has no predictive power</span>
+<span id="cb32-203"><a href="#cb32-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-204"><a href="#cb32-204" aria-hidden="true" tabindex="-1"></a>R² can be found in the <span class="in">`summary()`</span> output under <span class="in">`Multiple R-squared`</span>:</span>
+<span id="cb32-205"><a href="#cb32-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-206"><a href="#cb32-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r r-squared}</span></span>
+<span id="cb32-207"><a href="#cb32-207" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_fish)<span class="sc">$</span>r.squared</span>
+<span id="cb32-208"><a href="#cb32-208" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_length)<span class="sc">$</span>r.squared</span>
+<span id="cb32-209"><a href="#cb32-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-210"><a href="#cb32-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-211"><a href="#cb32-211" aria-hidden="true" tabindex="-1"></a>**If R² = 0.69 for the relationship between fish index and spraints, and R² = 0.027 for the relationship between body length and spraints, what does this mean?**</span>
+<span id="cb32-212"><a href="#cb32-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-213"><a href="#cb32-213" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-214"><a href="#cb32-214" aria-hidden="true" tabindex="-1"></a>answer = "Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.",</span>
+<span id="cb32-215"><a href="#cb32-215" aria-hidden="true" tabindex="-1"></a>"Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.",</span>
+<span id="cb32-216"><a href="#cb32-216" aria-hidden="true" tabindex="-1"></a>"Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.",</span>
+<span id="cb32-217"><a href="#cb32-217" aria-hidden="true" tabindex="-1"></a>"An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated."</span>
+<span id="cb32-218"><a href="#cb32-218" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-219"><a href="#cb32-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-220"><a href="#cb32-220" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-221"><a href="#cb32-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-222"><a href="#cb32-222" aria-hidden="true" tabindex="-1"></a>**Step 3: Describe the relationship**</span>
+<span id="cb32-223"><a href="#cb32-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-224"><a href="#cb32-224" aria-hidden="true" tabindex="-1"></a>Finally, we describe the relationship using the **regression equation**:</span>
+<span id="cb32-225"><a href="#cb32-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-226"><a href="#cb32-226" aria-hidden="true" tabindex="-1"></a>$$y = a + bx$$</span>
+<span id="cb32-227"><a href="#cb32-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-228"><a href="#cb32-228" aria-hidden="true" tabindex="-1"></a>For our otter data:</span>
+<span id="cb32-229"><a href="#cb32-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-230"><a href="#cb32-230" aria-hidden="true" tabindex="-1"></a>$$\text{spraints} = a + b \times \text{fish index}$$</span>
+<span id="cb32-231"><a href="#cb32-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-232"><a href="#cb32-232" aria-hidden="true" tabindex="-1"></a>Where:</span>
+<span id="cb32-233"><a href="#cb32-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-234"><a href="#cb32-234" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$y$ = spraints: the **dependent variable** (what we are trying to predict)</span>
+<span id="cb32-235"><a href="#cb32-235" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$x$ = fish index: the **independent variable** (what we think drives spraints)</span>
+<span id="cb32-236"><a href="#cb32-236" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$a$ = the **intercept**: the predicted number of spraints when fish index = 0</span>
+<span id="cb32-237"><a href="#cb32-237" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$b$ = the **slope**: how much spraints change for each one-unit increase in </span>
+<span id="cb32-238"><a href="#cb32-238" aria-hidden="true" tabindex="-1"></a>fish index</span>
+<span id="cb32-239"><a href="#cb32-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-240"><a href="#cb32-240" aria-hidden="true" tabindex="-1"></a>We can extract the slope and intercept directly from the model:</span>
+<span id="cb32-241"><a href="#cb32-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-242"><a href="#cb32-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r coefficients}</span></span>
+<span id="cb32-243"><a href="#cb32-243" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_fish)</span>
+<span id="cb32-244"><a href="#cb32-244" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_length)</span>
+<span id="cb32-245"><a href="#cb32-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-246"><a href="#cb32-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-247"><a href="#cb32-247" aria-hidden="true" tabindex="-1"></a>**What does a slope of zero mean in a linear regression?**</span>
+<span id="cb32-248"><a href="#cb32-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-249"><a href="#cb32-249" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-250"><a href="#cb32-250" aria-hidden="true" tabindex="-1"></a>"The regression line passes through the origin.",</span>
+<span id="cb32-251"><a href="#cb32-251" aria-hidden="true" tabindex="-1"></a>answer = "The independent variable has no effect on the dependent variable,  as x increases, y does not change.",</span>
+<span id="cb32-252"><a href="#cb32-252" aria-hidden="true" tabindex="-1"></a>"The R-squared value is equal to 1, meaning the line fits the data perfectly.",</span>
+<span id="cb32-253"><a href="#cb32-253" aria-hidden="true" tabindex="-1"></a>"The intercept is equal to zero, meaning the line starts at the origin."</span>
+<span id="cb32-254"><a href="#cb32-254" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-255"><a href="#cb32-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-256"><a href="#cb32-256" aria-hidden="true" tabindex="-1"></a>**What does the intercept tell us in our otter regression?**</span>
+<span id="cb32-257"><a href="#cb32-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-258"><a href="#cb32-258" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-259"><a href="#cb32-259" aria-hidden="true" tabindex="-1"></a>"The rate at which spraints increase as fish availability increases.",</span>
+<span id="cb32-260"><a href="#cb32-260" aria-hidden="true" tabindex="-1"></a>"The proportion of variation in spraints explained by fish availability.",</span>
+<span id="cb32-261"><a href="#cb32-261" aria-hidden="true" tabindex="-1"></a>answer = "The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.",</span>
+<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a>"The p-value for the test of whether the slope is significantly different from zero."</span>
+<span id="cb32-263"><a href="#cb32-263" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-264"><a href="#cb32-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-265"><a href="#cb32-265" aria-hidden="true" tabindex="-1"></a>**In our otter model, what is the dependent variable?**</span>
+<span id="cb32-266"><a href="#cb32-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-267"><a href="#cb32-267" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("Fish index", "Body length", answer = "Spraints", "Site", "Season"))`</span></span>
+<span id="cb32-268"><a href="#cb32-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-269"><a href="#cb32-269" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a>**Important assumptions of linear regression:**</span>
+<span id="cb32-271"><a href="#cb32-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-272"><a href="#cb32-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The relationship between the two variables is **linear**: a straight line is a reasonable description of the data</span>
+<span id="cb32-273"><a href="#cb32-273" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **residuals** (differences between observed and predicted values) are normally distributed</span>
+<span id="cb32-274"><a href="#cb32-274" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The variance of the residuals is **constant** across all values of x: this is called **homoscedasticity**</span>
+<span id="cb32-275"><a href="#cb32-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-276"><a href="#cb32-276" aria-hidden="true" tabindex="-1"></a>We will check these assumptions in the next section.</span>
+<span id="cb32-277"><a href="#cb32-277" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb32-278"><a href="#cb32-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-279"><a href="#cb32-279" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-280"><a href="#cb32-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-281"><a href="#cb32-281" aria-hidden="true" tabindex="-1"></a><span class="fu">## Case Study: Otters in Norfolk Rivers </span></span>
+<span id="cb32-282"><a href="#cb32-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-283"><a href="#cb32-283" aria-hidden="true" tabindex="-1"></a>We should have already read in our data. We can start by checking the variable types:</span>
+<span id="cb32-284"><a href="#cb32-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-285"><a href="#cb32-285" aria-hidden="true" tabindex="-1"></a>**Can you remember how to check the data type of each variable in R?**</span>
+<span id="cb32-286"><a href="#cb32-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-287"><a href="#cb32-287" aria-hidden="true" tabindex="-1"></a>`r mcq(c(</span>
+<span id="cb32-288"><a href="#cb32-288" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>colnames()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
+<span id="cb32-289"><a href="#cb32-289" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>summary()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
+<span id="cb32-290"><a href="#cb32-290" aria-hidden="true" tabindex="-1"></a>"<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>head()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>",</span>
+<span id="cb32-291"><a href="#cb32-291" aria-hidden="true" tabindex="-1"></a>answer = "<span class="dt">&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>str()<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span>"</span>
+<span id="cb32-292"><a href="#cb32-292" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-293"><a href="#cb32-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-294"><a href="#cb32-294" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Show answer, only after attempting the question!")`</span></span>
+<span id="cb32-295"><a href="#cb32-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-296"><a href="#cb32-296" aria-hidden="true" tabindex="-1"></a><span class="in">`str()`</span> shows the **structure** of the dataset, including the data type of each variable:</span>
+<span id="cb32-297"><a href="#cb32-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-298"><a href="#cb32-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r str-data}</span></span>
+<span id="cb32-299"><a href="#cb32-299" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(otter_data)</span>
+<span id="cb32-300"><a href="#cb32-300" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-301"><a href="#cb32-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-302"><a href="#cb32-302" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Data type shown <span class="pp">|</span> What it means <span class="pp">|</span> Variable type <span class="pp">|</span></span>
+<span id="cb32-303"><a href="#cb32-303" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb32-304"><a href="#cb32-304" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`chr`</span> <span class="pp">|</span> Character: text values <span class="pp">|</span> Nominal categorical <span class="pp">|</span></span>
+<span id="cb32-305"><a href="#cb32-305" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Factor`</span> <span class="pp">|</span> Factor: categorical with levels <span class="pp">|</span> Nominal or ordinal categorical <span class="pp">|</span></span>
+<span id="cb32-306"><a href="#cb32-306" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`int`</span> <span class="pp">|</span> Integer: whole numbers <span class="pp">|</span> Discrete quantitative <span class="pp">|</span></span>
+<span id="cb32-307"><a href="#cb32-307" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`num`</span> <span class="pp">|</span> Numeric: decimal numbers <span class="pp">|</span> Continuous quantitative <span class="pp">|</span></span>
+<span id="cb32-308"><a href="#cb32-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-309"><a href="#cb32-309" aria-hidden="true" tabindex="-1"></a>So for our otter dataset:</span>
+<span id="cb32-310"><a href="#cb32-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-311"><a href="#cb32-311" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`site`</span> and <span class="in">`sex`</span> show as <span class="in">`chr`</span>: **nominal categorical**</span>
+<span id="cb32-312"><a href="#cb32-312" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`spraints`</span> shows as <span class="in">`int`</span>: **discrete quantitative**</span>
+<span id="cb32-313"><a href="#cb32-313" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`fish_index`</span>, <span class="in">`length_cm`</span>, <span class="in">`mass_kg`</span> show as <span class="in">`num`</span>: **continuous quantitative**</span>
+<span id="cb32-314"><a href="#cb32-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-315"><a href="#cb32-315" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb32-316"><a href="#cb32-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-317"><a href="#cb32-317" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-318"><a href="#cb32-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-319"><a href="#cb32-319" aria-hidden="true" tabindex="-1"></a><span class="fu">### What Should We Analyse?</span></span>
+<span id="cb32-320"><a href="#cb32-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-321"><a href="#cb32-321" aria-hidden="true" tabindex="-1"></a>In our otter dataset we have many variables: <span class="in">`site`</span>, <span class="in">`season`</span>, <span class="in">`sex`</span>, <span class="in">`age_class`</span>, <span class="in">`length_cm`</span>, <span class="in">`mass_kg`</span>, <span class="in">`spraints`</span> and <span class="in">`fish_index`</span>. We cannot and should not analyse all possible combinations.Instead, we start with a lear research question.</span>
+<span id="cb32-322"><a href="#cb32-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-323"><a href="#cb32-323" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Research question <span class="pp">|</span> Dependent variable (y) <span class="pp">|</span> Independent variable (x) <span class="pp">|</span> Analysis <span class="pp">|</span></span>
+<span id="cb32-324"><a href="#cb32-324" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb32-325"><a href="#cb32-325" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Do male otters have longer body length than females? <span class="pp">|</span> <span class="in">`length_cm`</span> <span class="pp">|</span> <span class="in">`sex`</span> <span class="pp">|</span> t-test <span class="pp">|</span></span>
+<span id="cb32-326"><a href="#cb32-326" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does spraint count differ between sites? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`site`</span> <span class="pp">|</span> One-way ANOVA <span class="pp">|</span></span>
+<span id="cb32-327"><a href="#cb32-327" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does spraint count differ between sites and seasons? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`site`</span> + <span class="in">`season`</span> <span class="pp">|</span> Two-way ANOVA <span class="pp">|</span></span>
+<span id="cb32-328"><a href="#cb32-328" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Does fish availability predict spraint count? <span class="pp">|</span> <span class="in">`spraints`</span> <span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> Linear regression <span class="pp">|</span></span>
+<span id="cb32-329"><a href="#cb32-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-330"><a href="#cb32-330" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb32-331"><a href="#cb32-331" aria-hidden="true" tabindex="-1"></a>**A good research question has three things:**</span>
+<span id="cb32-332"><a href="#cb32-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-333"><a href="#cb32-333" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>A clearly defined **dependent variable**: what you are measuring as an outcome</span>
+<span id="cb32-334"><a href="#cb32-334" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>A clearly defined **independent variable**: what you think drives that outcome</span>
+<span id="cb32-335"><a href="#cb32-335" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>A **biological justification**: why would you expect these two variables to </span>
+<span id="cb32-336"><a href="#cb32-336" aria-hidden="true" tabindex="-1"></a>be related?</span>
+<span id="cb32-337"><a href="#cb32-337" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb32-338"><a href="#cb32-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-339"><a href="#cb32-339" aria-hidden="true" tabindex="-1"></a>**Before you visualise or analyse anything, complete this sentence:**</span>
+<span id="cb32-340"><a href="#cb32-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-341"><a href="#cb32-341" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"I want to know whether x affects y, because ... ."*</span></span>
+<span id="cb32-342"><a href="#cb32-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-343"><a href="#cb32-343" aria-hidden="true" tabindex="-1"></a>For example:</span>
+<span id="cb32-344"><a href="#cb32-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-345"><a href="#cb32-345" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"I want to know whether **fish availability** predicts **spraint count**, because otters may mark their territory more actively in areas where food is more plentiful."*</span></span>
+<span id="cb32-346"><a href="#cb32-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-347"><a href="#cb32-347" aria-hidden="true" tabindex="-1"></a>Once you have your research question, you only need to visualise the variables involved, not the entire dataset.</span>
+<span id="cb32-348"><a href="#cb32-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-349"><a href="#cb32-349" aria-hidden="true" tabindex="-1"></a>**You want to know whether fish availability predicts spraint count. Which variables do you need to visualise?**</span>
+<span id="cb32-350"><a href="#cb32-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-351"><a href="#cb32-351" aria-hidden="true" tabindex="-1"></a>`r mcq(c(</span>
+<span id="cb32-352"><a href="#cb32-352" aria-hidden="true" tabindex="-1"></a>"All variables in the dataset",</span>
+<span id="cb32-353"><a href="#cb32-353" aria-hidden="true" tabindex="-1"></a>"site, season and spraints only",</span>
+<span id="cb32-354"><a href="#cb32-354" aria-hidden="true" tabindex="-1"></a>answer = "fish_index and spraints only",</span>
+<span id="cb32-355"><a href="#cb32-355" aria-hidden="true" tabindex="-1"></a>"site and fish_index"</span>
+<span id="cb32-356"><a href="#cb32-356" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-357"><a href="#cb32-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-358"><a href="#cb32-358" aria-hidden="true" tabindex="-1"></a>**Which of the following is a well formed research question?**</span>
+<span id="cb32-359"><a href="#cb32-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-360"><a href="#cb32-360" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-361"><a href="#cb32-361" aria-hidden="true" tabindex="-1"></a>answer = "Does fish availability predict spraint count in otters, because otters may mark their territory more actively in areas where fish are more abundant?",</span>
+<span id="cb32-362"><a href="#cb32-362" aria-hidden="true" tabindex="-1"></a>"Is there anything interesting in the otter dataset?",</span>
+<span id="cb32-363"><a href="#cb32-363" aria-hidden="true" tabindex="-1"></a>"What do all the variables in the otter dataset look like when plotted?",</span>
+<span id="cb32-364"><a href="#cb32-364" aria-hidden="true" tabindex="-1"></a>"Can we find a significant result somewhere in the otter dataset?"</span>
+<span id="cb32-365"><a href="#cb32-365" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-366"><a href="#cb32-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-367"><a href="#cb32-367" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
+<span id="cb32-368"><a href="#cb32-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-369"><a href="#cb32-369" aria-hidden="true" tabindex="-1"></a>A well-formed research question should:</span>
+<span id="cb32-370"><a href="#cb32-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-371"><a href="#cb32-371" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Name a specific **dependent variable** (spraint count)</span>
+<span id="cb32-372"><a href="#cb32-372" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Name a specific **independent variable** (fish availability)</span>
+<span id="cb32-373"><a href="#cb32-373" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Include a **biological justification**</span>
+<span id="cb32-374"><a href="#cb32-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Be **testable**, it leads directly to a specific statistical analysis (in this case, a linear regression)</span>
+<span id="cb32-375"><a href="#cb32-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-376"><a href="#cb32-376" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb32-377"><a href="#cb32-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-378"><a href="#cb32-378" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-379"><a href="#cb32-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-380"><a href="#cb32-380" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Analysis</span></span>
+<span id="cb32-381"><a href="#cb32-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-382"><a href="#cb32-382" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 1: Visualise</span></span>
+<span id="cb32-383"><a href="#cb32-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-384"><a href="#cb32-384" aria-hidden="true" tabindex="-1"></a>Before fitting any model, always visualise the relationship using a </span>
+<span id="cb32-385"><a href="#cb32-385" aria-hidden="true" tabindex="-1"></a>**scatterplot**. This helps us:</span>
+<span id="cb32-386"><a href="#cb32-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-387"><a href="#cb32-387" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See whether a linear relationship is a reasonable assumption</span>
+<span id="cb32-388"><a href="#cb32-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Spot any obvious outliers</span>
+<span id="cb32-389"><a href="#cb32-389" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Get a sense of the strength and direction of the relationship</span>
+<span id="cb32-390"><a href="#cb32-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-391"><a href="#cb32-391" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.cap="Figure 2. Scatterplot of fish availability index against spraint count with a fitted regression line."}</span></span>
+<span id="cb32-392"><a href="#cb32-392" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> fish_index, <span class="at">y =</span> spraints)) <span class="sc">+</span></span>
+<span id="cb32-393"><a href="#cb32-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb32-394"><a href="#cb32-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb32-395"><a href="#cb32-395" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fish availability index"</span>,</span>
+<span id="cb32-396"><a href="#cb32-396" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Spraint count"</span>) <span class="sc">+</span></span>
+<span id="cb32-397"><a href="#cb32-397" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb32-398"><a href="#cb32-398" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-399"><a href="#cb32-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-400"><a href="#cb32-400" aria-hidden="true" tabindex="-1"></a>**What does the scatterplot suggest about the relationship between fish availability and spraint count?**</span>
+<span id="cb32-401"><a href="#cb32-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-402"><a href="#cb32-402" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-403"><a href="#cb32-403" aria-hidden="true" tabindex="-1"></a>answer = "There appears to be a positive linear relationship, as fish availability increases, spraint count tends to increase too.",</span>
+<span id="cb32-404"><a href="#cb32-404" aria-hidden="true" tabindex="-1"></a>"There appears to be no relationship, the points are scattered randomly with no pattern.",</span>
+<span id="cb32-405"><a href="#cb32-405" aria-hidden="true" tabindex="-1"></a>"There appears to be a negative relationship, as fish availability increases, spraint count decreases.",</span>
+<span id="cb32-406"><a href="#cb32-406" aria-hidden="true" tabindex="-1"></a>"The relationship is clearly curved, a straight line is not appropriate."</span>
+<span id="cb32-407"><a href="#cb32-407" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-408"><a href="#cb32-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-409"><a href="#cb32-409" aria-hidden="true" tabindex="-1"></a>**Is a straight line a reasonable description of this relationship?**</span>
+<span id="cb32-410"><a href="#cb32-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-411"><a href="#cb32-411" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-412"><a href="#cb32-412" aria-hidden="true" tabindex="-1"></a>answer = "Yes, the points follow a roughly linear pattern, suggesting that linear regression is an appropriate model.",</span>
+<span id="cb32-413"><a href="#cb32-413" aria-hidden="true" tabindex="-1"></a>"No, the points follow a clear curve, so non-linear regression is needed.",</span>
+<span id="cb32-414"><a href="#cb32-414" aria-hidden="true" tabindex="-1"></a>"It is impossible to tell from a scatterplot alone.",</span>
+<span id="cb32-415"><a href="#cb32-415" aria-hidden="true" tabindex="-1"></a>"No, there are too many outliers for any model to be appropriate."</span>
+<span id="cb32-416"><a href="#cb32-416" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-417"><a href="#cb32-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-418"><a href="#cb32-418" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-419"><a href="#cb32-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-420"><a href="#cb32-420" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 2: Fit the Linear Model</span></span>
+<span id="cb32-421"><a href="#cb32-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-422"><a href="#cb32-422" aria-hidden="true" tabindex="-1"></a>Now we can fit the linear model using <span class="in">`lm()`</span>. Complete the code below:</span>
+<span id="cb32-423"><a href="#cb32-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-424"><a href="#cb32-424" aria-hidden="true" tabindex="-1"></a>The dependent variable is: <span class="in">`r fitb("spraints")`</span></span>
+<span id="cb32-425"><a href="#cb32-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-426"><a href="#cb32-426" aria-hidden="true" tabindex="-1"></a>The independent variable is: <span class="in">`r fitb("fish_index")`</span></span>
+<span id="cb32-427"><a href="#cb32-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-428"><a href="#cb32-428" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb32-429"><a href="#cb32-429" aria-hidden="true" tabindex="-1"></a>lm_otter <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> ___, <span class="at">data =</span> otter_data)</span>
+<span id="cb32-430"><a href="#cb32-430" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(___)</span>
+<span id="cb32-431"><a href="#cb32-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-432"><a href="#cb32-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-433"><a href="#cb32-433" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the solution")`</span></span>
+<span id="cb32-434"><a href="#cb32-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-435"><a href="#cb32-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r lm-fit}</span></span>
+<span id="cb32-436"><a href="#cb32-436" aria-hidden="true" tabindex="-1"></a>lm_otter <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index, <span class="at">data =</span> otter_data)</span>
+<span id="cb32-437"><a href="#cb32-437" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_otter)</span>
+<span id="cb32-438"><a href="#cb32-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-439"><a href="#cb32-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-440"><a href="#cb32-440" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb32-441"><a href="#cb32-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-442"><a href="#cb32-442" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-443"><a href="#cb32-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-444"><a href="#cb32-444" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 3: Check the Residuals</span></span>
+<span id="cb32-445"><a href="#cb32-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-446"><a href="#cb32-446" aria-hidden="true" tabindex="-1"></a>Before interpreting the output, we must check the **residuals**, the </span>
+<span id="cb32-447"><a href="#cb32-447" aria-hidden="true" tabindex="-1"></a>differences between the observed values and the values predicted by the model.</span>
+<span id="cb32-448"><a href="#cb32-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-449"><a href="#cb32-449" aria-hidden="true" tabindex="-1"></a>If the assumptions are met, the residuals should show a **random scatter** </span>
+<span id="cb32-450"><a href="#cb32-450" aria-hidden="true" tabindex="-1"></a>around zero with no systematic pattern:</span>
+<span id="cb32-451"><a href="#cb32-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-452"><a href="#cb32-452" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Pattern <span class="pp">|</span> What it suggests <span class="pp">|</span></span>
+<span id="cb32-453"><a href="#cb32-453" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb32-454"><a href="#cb32-454" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Random scatter <span class="pp">|</span> Assumptions are met ✓ <span class="pp">|</span></span>
+<span id="cb32-455"><a href="#cb32-455" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Positive or negative trend <span class="pp">|</span> Heteroscedasticity, variance is not constant <span class="pp">|</span></span>
+<span id="cb32-456"><a href="#cb32-456" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Wedge shape <span class="pp">|</span> Greater spread at one end of the fitted values <span class="pp">|</span></span>
+<span id="cb32-457"><a href="#cb32-457" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> U-shape <span class="pp">|</span> Non-linear relationship, a straight line is not appropriate <span class="pp">|</span></span>
+<span id="cb32-458"><a href="#cb32-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-459"><a href="#cb32-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{r residuals-plot, fig.cap="Figure 3. Residuals plotted against fitted values. A random scatter around zero suggests the model assumptions are met."}</span></span>
+<span id="cb32-460"><a href="#cb32-460" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lm_otter, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb32-461"><a href="#cb32-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb32-462"><a href="#cb32-462" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb32-463"><a href="#cb32-463" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted values"</span>,</span>
+<span id="cb32-464"><a href="#cb32-464" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residuals"</span>) <span class="sc">+</span></span>
+<span id="cb32-465"><a href="#cb32-465" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb32-466"><a href="#cb32-466" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-467"><a href="#cb32-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-468"><a href="#cb32-468" aria-hidden="true" tabindex="-1"></a>**What would a random scatter in the residuals plot tell us?**</span>
+<span id="cb32-469"><a href="#cb32-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-470"><a href="#cb32-470" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-471"><a href="#cb32-471" aria-hidden="true" tabindex="-1"></a>answer = "The model assumptions are met, the residuals are evenly distributed around zero with no systematic pattern.",</span>
+<span id="cb32-472"><a href="#cb32-472" aria-hidden="true" tabindex="-1"></a>"The model is a poor fit for the data.",</span>
+<span id="cb32-473"><a href="#cb32-473" aria-hidden="true" tabindex="-1"></a>"The relationship between fish availability and spraint count is non-linear.",</span>
+<span id="cb32-474"><a href="#cb32-474" aria-hidden="true" tabindex="-1"></a>"The variance of the residuals increases with the fitted values."</span>
+<span id="cb32-475"><a href="#cb32-475" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-476"><a href="#cb32-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-477"><a href="#cb32-477" aria-hidden="true" tabindex="-1"></a>**What would a U-shape in the residuals plot suggest?**</span>
+<span id="cb32-478"><a href="#cb32-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-479"><a href="#cb32-479" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-480"><a href="#cb32-480" aria-hidden="true" tabindex="-1"></a>answer = "The relationship is non-linear, a straight line may not be an appropriate model for the data.",</span>
+<span id="cb32-481"><a href="#cb32-481" aria-hidden="true" tabindex="-1"></a>"The assumptions are met and we can proceed with the analysis.",</span>
+<span id="cb32-482"><a href="#cb32-482" aria-hidden="true" tabindex="-1"></a>"The variance of the residuals is constant across all fitted values.",</span>
+<span id="cb32-483"><a href="#cb32-483" aria-hidden="true" tabindex="-1"></a>"The slope is not significantly different from zero."</span>
+<span id="cb32-484"><a href="#cb32-484" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-485"><a href="#cb32-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-486"><a href="#cb32-486" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-487"><a href="#cb32-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-488"><a href="#cb32-488" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 4: Interpret the Output</span></span>
+<span id="cb32-489"><a href="#cb32-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-490"><a href="#cb32-490" aria-hidden="true" tabindex="-1"></a>The <span class="in">`summary()`</span> output breaks down as follows:</span>
+<span id="cb32-491"><a href="#cb32-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-492"><a href="#cb32-492" aria-hidden="true" tabindex="-1"></a>**The Coefficients table:**</span>
+<span id="cb32-493"><a href="#cb32-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-494"><a href="#cb32-494" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Row <span class="pp">|</span> What it tells us <span class="pp">|</span></span>
+<span id="cb32-495"><a href="#cb32-495" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb32-496"><a href="#cb32-496" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`(Intercept)`</span> <span class="pp">|</span> The predicted spraint count when fish index = 0 <span class="pp">|</span></span>
+<span id="cb32-497"><a href="#cb32-497" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> How much spraint count changes for each one-unit increase in fish index <span class="pp">|</span></span>
+<span id="cb32-498"><a href="#cb32-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-499"><a href="#cb32-499" aria-hidden="true" tabindex="-1"></a>**R²**: the proportion of variation in spraint count explained by fish </span>
+<span id="cb32-500"><a href="#cb32-500" aria-hidden="true" tabindex="-1"></a>availability:</span>
+<span id="cb32-501"><a href="#cb32-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-502"><a href="#cb32-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{r r-squared-otter}</span></span>
+<span id="cb32-503"><a href="#cb32-503" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_otter)<span class="sc">$</span>r.squared</span>
+<span id="cb32-504"><a href="#cb32-504" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-505"><a href="#cb32-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-506"><a href="#cb32-506" aria-hidden="true" tabindex="-1"></a>**The F-statistic** tests the null hypothesis that fish availability has no effect on spraint count. A large F-statistic and small p-value tell us the model explains a significant amount of variation in the data.</span>
+<span id="cb32-507"><a href="#cb32-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-508"><a href="#cb32-508" aria-hidden="true" tabindex="-1"></a>**What does the slope (fish_index Estimate) tell us?**</span>
+<span id="cb32-509"><a href="#cb32-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-510"><a href="#cb32-510" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-511"><a href="#cb32-511" aria-hidden="true" tabindex="-1"></a>"The predicted spraint count when fish availability is at its maximum.",</span>
+<span id="cb32-512"><a href="#cb32-512" aria-hidden="true" tabindex="-1"></a>answer = "How much spraint count increases for each one-unit increase in fish availability index.",</span>
+<span id="cb32-513"><a href="#cb32-513" aria-hidden="true" tabindex="-1"></a>"The proportion of variation in spraint count explained by fish availability.",</span>
+<span id="cb32-514"><a href="#cb32-514" aria-hidden="true" tabindex="-1"></a>"The p-value for the overall model significance."</span>
+<span id="cb32-515"><a href="#cb32-515" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-516"><a href="#cb32-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-517"><a href="#cb32-517" aria-hidden="true" tabindex="-1"></a>**What does the R² value tell us?**</span>
+<span id="cb32-518"><a href="#cb32-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-519"><a href="#cb32-519" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-520"><a href="#cb32-520" aria-hidden="true" tabindex="-1"></a>"Whether the slope is significantly different from zero.",</span>
+<span id="cb32-521"><a href="#cb32-521" aria-hidden="true" tabindex="-1"></a>"The average distance of the data points from the regression line.",</span>
+<span id="cb32-522"><a href="#cb32-522" aria-hidden="true" tabindex="-1"></a>answer = "The proportion of variation in spraint count that is explained by fish availability.",</span>
+<span id="cb32-523"><a href="#cb32-523" aria-hidden="true" tabindex="-1"></a>"The p-value for the F-statistic."</span>
+<span id="cb32-524"><a href="#cb32-524" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-525"><a href="#cb32-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-526"><a href="#cb32-526" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-527"><a href="#cb32-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-528"><a href="#cb32-528" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 5: Confidence Intervals and Predictions</span></span>
+<span id="cb32-529"><a href="#cb32-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-530"><a href="#cb32-530" aria-hidden="true" tabindex="-1"></a>We can calculate **95% confidence intervals** for the slope and intercept:</span>
+<span id="cb32-531"><a href="#cb32-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-532"><a href="#cb32-532" aria-hidden="true" tabindex="-1"></a><span class="in">```{r confint-otter}</span></span>
+<span id="cb32-533"><a href="#cb32-533" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm_otter)</span>
+<span id="cb32-534"><a href="#cb32-534" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-535"><a href="#cb32-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-536"><a href="#cb32-536" aria-hidden="true" tabindex="-1"></a>We can also use the model to **make predictions**:</span>
+<span id="cb32-537"><a href="#cb32-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-538"><a href="#cb32-538" aria-hidden="true" tabindex="-1"></a><span class="in">```{r predict-ci}</span></span>
+<span id="cb32-539"><a href="#cb32-539" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence interval: range for the mean spraint count at fish index = 7</span></span>
+<span id="cb32-540"><a href="#cb32-540" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_otter,</span>
+<span id="cb32-541"><a href="#cb32-541" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">fish_index =</span> <span class="dv">7</span>),</span>
+<span id="cb32-542"><a href="#cb32-542" aria-hidden="true" tabindex="-1"></a>        <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb32-543"><a href="#cb32-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-544"><a href="#cb32-544" aria-hidden="true" tabindex="-1"></a><span class="co"># Prediction interval: range for an individual observation</span></span>
+<span id="cb32-545"><a href="#cb32-545" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_otter,</span>
+<span id="cb32-546"><a href="#cb32-546" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">fish_index =</span> <span class="dv">7</span>),</span>
+<span id="cb32-547"><a href="#cb32-547" aria-hidden="true" tabindex="-1"></a>        <span class="at">interval =</span> <span class="st">"prediction"</span>)</span>
+<span id="cb32-548"><a href="#cb32-548" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-549"><a href="#cb32-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-550"><a href="#cb32-550" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb32-551"><a href="#cb32-551" aria-hidden="true" tabindex="-1"></a>**Confidence interval vs prediction interval:**</span>
+<span id="cb32-552"><a href="#cb32-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-553"><a href="#cb32-553" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **confidence interval** gives the range within which the **mean** spraint count is likely to lie for otters at a given fish index, this is narrower</span>
+<span id="cb32-554"><a href="#cb32-554" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **prediction interval** gives the range within which an **individual** otter's spraint count is likely to lie, this is always wider because individual observations vary around the mean</span>
+<span id="cb32-555"><a href="#cb32-555" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb32-556"><a href="#cb32-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-557"><a href="#cb32-557" aria-hidden="true" tabindex="-1"></a>**Why is the prediction interval always wider than the confidence interval?**</span>
+<span id="cb32-558"><a href="#cb32-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-559"><a href="#cb32-559" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-560"><a href="#cb32-560" aria-hidden="true" tabindex="-1"></a>"Because the prediction interval uses a different significance threshold.",</span>
+<span id="cb32-561"><a href="#cb32-561" aria-hidden="true" tabindex="-1"></a>answer = "Because the prediction interval accounts for both the uncertainty in the mean and the natural variation between individual otters, individual observations are always more variable than means.",</span>
+<span id="cb32-562"><a href="#cb32-562" aria-hidden="true" tabindex="-1"></a>"Because the confidence interval is calculated incorrectly.",</span>
+<span id="cb32-563"><a href="#cb32-563" aria-hidden="true" tabindex="-1"></a>"Because the prediction interval does not use the regression equation."</span>
+<span id="cb32-564"><a href="#cb32-564" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb32-565"><a href="#cb32-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-566"><a href="#cb32-566" aria-hidden="true" tabindex="-1"></a>**Is it valid to predict the spraint count for a fish index of 15?**</span>
+<span id="cb32-567"><a href="#cb32-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-568"><a href="#cb32-568" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb32-569"><a href="#cb32-569" aria-hidden="true" tabindex="-1"></a>"Yes, the regression equation can be used to predict any value of spraint count.",</span>
+<span id="cb32-570"><a href="#cb32-570" aria-hidden="true" tabindex="-1"></a>answer = "No, a fish index of 15 is outside the range of the observed data. Extrapolating beyond the data range is unreliable as we do not know whether the linear relationship holds outside the observed values.",</span>
+<span id="cb32-571"><a href="#cb32-571" aria-hidden="true" tabindex="-1"></a>"Yes, as long as the R-squared value is high enough.",</span>
+<span id="cb32-572"><a href="#cb32-572" aria-hidden="true" tabindex="-1"></a>"No, because the confidence interval would be too wide to be useful."</span>
+<span id="cb32-573"><a href="#cb32-573" aria-hidden="true" tabindex="-1"></a>))`</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
