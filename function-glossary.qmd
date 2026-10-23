@@ -1,0 +1,326 @@
+---
+title: "R Function Glossary"
+date: today
+format:
+  html:
+    theme: yeti
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+    number-sections: true
+---
+
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(janitor)
+library(car)
+library(kableExtra)
+library(webexercises)
+library(patchwork)
+
+otter_data <- read_csv("data/otter_data.csv")
+
+
+```
+
+A LOT of functions have been learnt in this module, and it can be hard to remember them all. This glossary is intended to be a reference for the functions that have been used in this module. It is not an exhaustive list of all functions in R, but it does cover the most commonly used functions in this module.
+
+## Loading Packages
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `library()` | Base R | Loads an installed package into your session | `library(tidyverse)` |
+| `install.packages()` | Base R | Installs a package from CRAN | `install.packages("tidyverse")` |
+
+---
+
+::: {.callout-note}
+
+ In Posit Cloud, which we regularly use in this module, the packages will need to be reinstalled each time you start a new session. If you are using a downloaded application like RStudio Desktop, or Positron, you only need to install packages once. You will still need to load the packages each time you start a new session.
+
+:::
+
+
+
+## Reading in Data
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `read_csv()` | `tidyverse` | Reads a CSV file into R as a data frame | `read_csv("data/otter_data.csv")` |
+| `read.csv()` | Base R | Reads a CSV file into R as a data frame | `read.csv("data/otter_data.csv")` |
+
+---
+
+
+
+
+---
+
+## Checking and Inspecting Data
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `nrow()` | Base R | Returns the number of rows in a data frame | `nrow(otter_data)` |
+| `ncol()` | Base R | Returns the number of columns in a data frame | `ncol(otter_data)` |
+| `colnames()` | Base R | Returns the column (variable) names | `colnames(otter_data)` |
+| `str()` | Base R | Shows the structure and data types of each variable | `str(otter_data)` |
+| `glimpse()` | `tidyverse` | A tidyverse alternative to `str()` | `glimpse(otter_data)` |
+| `head()` | Base R | Shows the first 6 rows | `head(otter_data)` |
+| `tail()` | Base R | Shows the last 6 rows | `tail(otter_data)` |
+| `summary()` | Base R | Provides a summary of each variable | `summary(otter_data)` |
+| `tabyl()` | `janitor` | Produces a frequency table for a categorical variable | `tabyl(otter_data, sex)` |
+
+---
+
+## Cleaning and Wrangling Data
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `mutate()` | `tidyverse` | Adds or modifies a column in a data frame | `mutate(treatment = as.factor(treatment))` |
+| `group_by()` | `tidyverse` | Groups data by a variable for subsequent operations | `group_by(sex)` |
+| `summarise()` | `tidyverse` | Calculates summary statistics for each group | `summarise(mean_weight = mean(weight_g))` |
+| `as.factor()` | Base R | Converts a variable to a factor (categorical) | `as.factor(treatment)` |
+| `str_to_lower()` | `tidyverse` | Converts text to lowercase | `str_to_lower(treatment)` |
+| `str_replace_all()` | `tidyverse` | Replaces all occurrences of a pattern in text | `str_replace_all(treatment, " ", "_")` |
+| `filter()` | `tidyverse` | Keeps rows matching a condition | `filter(sex == "female")` |
+| `%>%` | `tidyverse` | Pipe operator — passes result to the next function | `otter_data %>% group_by(sex)` |
+
+---
+
+`r hide("Show example: mutate()")`
+
+```{r}
+# Convert sex to a factor and create a new column for length in metres
+otter_data %>%
+  mutate(
+    sex       = as.factor(sex),
+    length_m  = length_cm / 100
+  )
+```
+
+`r unhide()`
+
+`r hide("Show example: group_by() and summarise()")`
+
+```{r}
+# Calculate mean and standard deviation of spraints by site
+otter_data %>%
+  group_by(site) %>%
+  summarise(
+    n            = n(),
+    mean_spraints = mean(spraints),
+    sd_spraints   = sd(spraints)
+  )
+```
+
+`r unhide()`
+
+`r hide("Show example: filter()")`
+
+```{r}
+# Keep only female otters
+otter_data %>%
+  filter(sex == "female")
+```
+
+`r unhide()`
+
+`r hide("Show example: str_to_lower() and str_replace_all()")`
+
+```{r}
+# Convert site names to lowercase with underscores instead of spaces
+otter_data %>%
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")))
+```
+
+`r unhide()`
+
+`r hide("Show example: the pipe operator %>%")`
+
+```{r}
+# Chain multiple operations together using the pipe
+otter_data %>%
+  filter(season == "winter") %>%
+  group_by(site) %>%
+  summarise(
+    mean_spraints = mean(spraints),
+    n             = n()
+  )
+```
+
+`r unhide()` 
+
+---
+
+## Summary Statistics
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `mean()` | Base R | Calculates the mean | `mean(weight_g)` |
+| `median()` | Base R | Calculates the median | `median(weight_g)` |
+| `sd()` | Base R | Calculates the standard deviation | `sd(weight_g)` |
+| `max()` | Base R | Returns the maximum value | `max(parasite_count)` |
+| `min()` | Base R | Returns the minimum value | `min(parasite_count)` |
+| `range()` | Base R | Returns the minimum and maximum values | `range(parasite_count)` |
+| `diff()` | Base R | Calculates the difference between values | `diff(range(parasite_count))` |
+| `n()` | `tidyverse` | Counts the number of observations in a group | `summarise(n = n())` |
+| `Mode()` | `DescTools` | Calculates the mode | `Mode(parasite_count)` |
+| `table()` | Base R | Creates a frequency table | `table(parasite_count)` |
+| `cor.test()` | Base R | Calculates Pearson or Spearman correlation | `cor.test(x, y, method = "pearson")` |
+
+---
+
+## Statistical Tests
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `t.test()` | Base R | Runs a one-sample or two-sample t-test | `t.test(fly_count ~ tree_type, data = medfly_orchard)` |
+| `shapiro.test()` | Base R | Shapiro-Wilk test for normality | `shapiro.test(spraints)` |
+| `leveneTest()` | `car` | Levene's test for equal variances | `leveneTest(richness ~ treatment, data = grassland)` |
+| `aov()` | Base R | Fits an ANOVA model | `aov(richness ~ treatment, data = grassland)` |
+| `TukeyHSD()` | Base R | Tukey post-hoc test after ANOVA | `TukeyHSD(anova_result)` |
+| `lm()` | Base R | Fits a linear regression model | `lm(spraints ~ fish_index, data = otter_data)` |
+
+---
+
+## Model Outputs and Predictions
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `summary()` | Base R | Prints a summary of a model object | `summary(lm_otter)` |
+| `coef()` | Base R | Extracts the slope and intercept from a model | `coef(lm_otter)` |
+| `confint()` | Base R | Calculates confidence intervals for model coefficients | `confint(lm_otter)` |
+| `predict()` | Base R | Makes predictions from a fitted model | `predict(lm_otter, newdata = data.frame(fish_index = 7))` |
+
+
+---
+
+## Visualisation
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `ggplot()` | `tidyverse` | Creates a ggplot object | `ggplot(otter_data, aes(x = fish_index, y = spraints))` |
+| `geom_histogram()` | `tidyverse` | Adds a histogram layer | `geom_histogram(binwidth = 2, fill = "lightblue")` |
+| `geom_boxplot()` | `tidyverse` | Adds a boxplot layer | `geom_boxplot(colour = "black")` |
+| `geom_point()` | `tidyverse` | Adds a scatterplot layer | `geom_point(colour = "#F8766D", size = 2.5)` |
+| `geom_jitter()` | `tidyverse` | Adds jittered points to avoid overplotting | `geom_jitter(width = 0.1, size = 2)` |
+| `geom_smooth()` | `tidyverse` | Adds a smoothed line (e.g. regression line) | `geom_smooth(method = "lm", se = TRUE)` |
+| `stat_qq()` | `tidyverse` | Adds Q-Q plot points | `stat_qq()` |
+| `stat_qq_line()` | `tidyverse` | Adds the reference line to a Q-Q plot | `stat_qq_line()` |
+| `facet_wrap()` | `tidyverse` | Creates separate panels for each group | `facet_wrap(~ tree_type)` |
+| `labs()` | `tidyverse` | Adds axis labels and titles | `labs(x = "Fish index", y = "Spraint count")` |
+| `theme_minimal()` | `tidyverse` | Applies a minimal plot theme | `theme_minimal(base_size = 13)` |
+| `theme()` | `tidyverse` | Customises plot appearance | `theme(legend.position = "none")` |
+| `scale_fill_manual()` | `tidyverse` | Manually sets fill colours | `scale_fill_manual(values = c("red", "blue"))` |
+| `annotate()` | `tidyverse` | Adds text or shapes to a plot | `annotate("text", x = 2.5, y = 4, label = "Block 1")` |
+| `coord_cartesian()` | `tidyverse` | Sets axis limits without removing data | `coord_cartesian(xlim = c(0.5, 4.5))` |
+
+---
+
+`r hide("Show example: histogram")`
+
+```{r}
+ggplot(otter_data, aes(x = fish_index)) +
+  geom_histogram(binwidth = 2, fill = "lightblue", colour = "black") +
+  labs(x = "Fish availability index", y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+`r unhide()`
+
+`r hide("Show example: boxplot with two variables")`
+
+```{r}
+ggplot(otter_data, aes(x = sex, y = fish_index, fill = season)) +
+  geom_boxplot(colour = "black") +
+  labs(x = "Sex", y = "Fish availability index", fill = "Season") +
+  theme_minimal(base_size = 13)
+```
+
+`r unhide()`
+
+`r hide("Show example: scatterplot with regression line")`
+
+```{r}
+ggplot(otter_data, aes(x = fish_index, y = spraints)) +
+  geom_point(size = 2.5, colour = "#F8766D") +
+  geom_smooth(method = "lm", se = TRUE, colour = "black") +
+  labs(x = "Fish availability index", y = "Spraint count") +
+  theme_minimal(base_size = 13)
+```
+
+`r unhide()`
+
+`r hide("Show example: Q-Q plot")`
+
+```{r}
+ggplot(otter_data, aes(sample = spraints, colour = sex)) +
+  stat_qq() +
+  stat_qq_line() +
+  facet_wrap(~ sex) +
+  labs(x = "Theoretical quantiles", y = "Sample quantiles") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+`r unhide()`
+
+`r hide("Show example: faceted histogram")`
+
+```{r}
+ggplot(otter_data, aes(x = spraints, fill = season)) +
+  geom_histogram(binwidth = 2, colour = "black") +
+  facet_wrap(~ site) +
+  labs(x = "Spraint count", y = "Frequency", fill = "Season") +
+  theme_minimal(base_size = 13)
+```
+
+`r unhide()`
+
+`r hide("Show example: jittered boxplot")`
+
+```{r}
+ggplot(otter_data, aes(x = sex, y = length_cm, fill = sex)) +
+  geom_boxplot(colour = "black", alpha = 0.7) +
+  geom_jitter(width = 0.1, size = 2, colour = "black") +
+  labs(x = "Sex", y = "Body length (cm)") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+`r unhide()`
+
+## Combining Plots
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `+` (patchwork) | `patchwork` | Combines two plots side by side | `plot1 + plot2` |
+| `/` (patchwork) | `patchwork` | Stacks two plots vertically | `plot1 / plot2` |
+
+---
+
+## Randomisation and Simulation
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `set.seed()` | Base R | Sets a random seed to make results reproducible | `set.seed(42)` |
+| `sample()` | Base R | Randomly shuffles or samples a vector | `sample(treatments)` |
+| `rep()` | Base R | Repeats values a specified number of times | `rep(1:5, each = 4)` |
+| `data.frame()` | Base R | Creates a data frame | `data.frame(plot = 1:20, treatment = ...)` |
+
+---
+
+## Formatted Tables
+
+| Function | Package | What it does | Example |
+|---|---|---|---|
+| `kable()` | `kableExtra` | Creates a formatted table | `kable(summary_table, digits = 2)` |
+| `kable_styling()` | `kableExtra` | Applies Bootstrap styling to a kable table | `kable_styling()` |
+

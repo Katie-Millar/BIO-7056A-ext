@@ -2,24 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-20">
+<meta name="dcterms.date" content="2026-10-22">
 
 <title>5&nbsp; Workshop 5 - Testing and Measuring Relationships Extension – Statistics for Biologists - Extension Coursebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,7 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix.html" rel="next">
+<link href="./06-prob-para.html" rel="next">
 <link href="./04-ANOVA.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -80,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dda8771d043933e00db2387e2c02d373.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -226,8 +223,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./06-prob-para.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Workshop 6 - Issues with Probability and Parametric Analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -271,7 +280,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 20, 2026</p>
+      <p class="date">October 22, 2026</p>
     </div>
   </div>
   
@@ -350,20 +359,20 @@ Click to show explanation of the plots
 </ul>
 </div>
 <p><strong>Looking at the fish availability plot, what does the slope of the line suggest?</strong></p>
-<div id="radio_QPQVSKPBHL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QPQVSKPBHL" value="answer"> <span>As fish availability increases, spraint count increases, there is a positive relationship between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_QPQVSKPBHL" value=""> <span>As fish availability increases, spraint count decreases, there is a negative relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_QPQVSKPBHL" value=""> <span>The line is flat, suggesting fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_QPQVSKPBHL" value=""> <span>The relationship between fish availability and spraint count is curved, not linear.</span></label>
+<div id="radio_CATNSVVSDI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CATNSVVSDI" value="answer"> <span>As fish availability increases, spraint count increases, there is a positive relationship between the two variables.</span></label><label><input type="radio" autocomplete="off" name="radio_CATNSVVSDI" value=""> <span>As fish availability increases, spraint count decreases, there is a negative relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_CATNSVVSDI" value=""> <span>The line is flat, suggesting fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_CATNSVVSDI" value=""> <span>The relationship between fish availability and spraint count is curved, not linear.</span></label>
 </div>
 <p><strong>Looking at the body length plot, what does the slope of the line suggest?</strong></p>
-<div id="radio_QGAYBLNWFS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QGAYBLNWFS" value=""> <span>As body length increases, spraint count increases, larger otters mark their territory more.</span></label><label><input type="radio" autocomplete="off" name="radio_QGAYBLNWFS" value=""> <span>As body length increases, spraint count decreases, larger otters mark their territory less.</span></label><label><input type="radio" autocomplete="off" name="radio_QGAYBLNWFS" value="answer"> <span>The line is almost flat, suggesting body length has little or no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_QGAYBLNWFS" value=""> <span>Body length perfectly predicts spraint count.</span></label>
+<div id="radio_AYJBUMEMBD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AYJBUMEMBD" value=""> <span>As body length increases, spraint count increases, larger otters mark their territory more.</span></label><label><input type="radio" autocomplete="off" name="radio_AYJBUMEMBD" value=""> <span>As body length increases, spraint count decreases, larger otters mark their territory less.</span></label><label><input type="radio" autocomplete="off" name="radio_AYJBUMEMBD" value="answer"> <span>The line is almost flat, suggesting body length has little or no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_AYJBUMEMBD" value=""> <span>Body length perfectly predicts spraint count.</span></label>
 </div>
 <p><strong>Comparing the two plots, which variable appears to be a better predictor of spraint count?</strong></p>
-<div id="radio_EZNJCGAYKB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EZNJCGAYKB" value="answer"> <span>Fish availability, the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_EZNJCGAYKB" value=""> <span>Body length, the flat line means there is no noise in the data, making it a more reliable predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_EZNJCGAYKB" value=""> <span>Both variables predict spraint count equally well.</span></label><label><input type="radio" autocomplete="off" name="radio_EZNJCGAYKB" value=""> <span>Neither variable predicts spraint count, both lines are flat.</span></label>
+<div id="radio_COMHEXRCBD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_COMHEXRCBD" value="answer"> <span>Fish availability, the points follow the line more closely and the slope is steeper, suggesting a stronger relationship with spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_COMHEXRCBD" value=""> <span>Body length, the flat line means there is no noise in the data, making it a more reliable predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_COMHEXRCBD" value=""> <span>Both variables predict spraint count equally well.</span></label><label><input type="radio" autocomplete="off" name="radio_COMHEXRCBD" value=""> <span>Neither variable predicts spraint count, both lines are flat.</span></label>
 </div>
 <p><strong>If the slope of the fish availability line was negative instead of positive, what would this mean biologically?</strong></p>
-<div id="radio_JVRAOSQYCA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JVRAOSQYCA" value="answer"> <span>As fish availability increases, otters leave fewer spraints, perhaps because they do not need to defend territory as strongly when food is plentiful.</span></label><label><input type="radio" autocomplete="off" name="radio_JVRAOSQYCA" value=""> <span>Fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_JVRAOSQYCA" value=""> <span>Otters always leave more spraints when fish are scarce.</span></label><label><input type="radio" autocomplete="off" name="radio_JVRAOSQYCA" value=""> <span>The regression assumptions have been violated.</span></label>
+<div id="radio_DSQSDOQXRN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DSQSDOQXRN" value="answer"> <span>As fish availability increases, otters leave fewer spraints, perhaps because they do not need to defend territory as strongly when food is plentiful.</span></label><label><input type="radio" autocomplete="off" name="radio_DSQSDOQXRN" value=""> <span>Fish availability has no effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_DSQSDOQXRN" value=""> <span>Otters always leave more spraints when fish are scarce.</span></label><label><input type="radio" autocomplete="off" name="radio_DSQSDOQXRN" value=""> <span>The regression assumptions have been violated.</span></label>
 </div>
 <p>We test the slope formally using a <strong>t-test</strong>, which produces a p-value:</p>
 <ul>
@@ -454,12 +463,12 @@ F-statistic: 1.623 on 1 and 58 DF,  p-value: 0.2077</code></pre>
 </table>
 <p>For <strong>fish index</strong>, the slope is significantly different from zero (p &lt; 0.001), confirming a positive relationship with spraint count. For <strong>body length</strong>, the slope is not significantly different from zero (p = 0.207), confirming no meaningful relationship.</p>
 <p><strong>Where would you find the p-value for the slope in the <code>summary()</code> output?</strong></p>
-<div id="radio_OUFYHEKTFV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OUFYHEKTFV" value="answer"> <span>In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_OUFYHEKTFV" value=""> <span>In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_OUFYHEKTFV" value=""> <span>In the R-squared value at the bottom of the output.</span></label><label><input type="radio" autocomplete="off" name="radio_OUFYHEKTFV" value=""> <span>In the F-statistic at the bottom of the output.</span></label>
+<div id="radio_VELOLLHINO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VELOLLHINO" value="answer"> <span>In the Coefficients table, in the row labelled fish_index, under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_VELOLLHINO" value=""> <span>In the Coefficients table, in the row labelled (Intercept), under the column Pr(&gt;|t|).</span></label><label><input type="radio" autocomplete="off" name="radio_VELOLLHINO" value=""> <span>In the R-squared value at the bottom of the output.</span></label><label><input type="radio" autocomplete="off" name="radio_VELOLLHINO" value=""> <span>In the F-statistic at the bottom of the output.</span></label>
 </div>
 <p><strong>If the t value for the slope is 8.45, what does this suggest?</strong></p>
-<div id="radio_TQNVCPQDOE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TQNVCPQDOE" value="answer"> <span>The slope is 8.45 standard errors away from zero, strong evidence that the slope is significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_TQNVCPQDOE" value=""> <span>The p-value is 8.45, so the result is not significant.</span></label><label><input type="radio" autocomplete="off" name="radio_TQNVCPQDOE" value=""> <span>The slope itself is 8.45, fish availability increases spraints by 8.45 per unit.</span></label><label><input type="radio" autocomplete="off" name="radio_TQNVCPQDOE" value=""> <span>The R-squared value is 8.45, meaning the model explains 8.45% of the variation.</span></label>
+<div id="radio_FYQDBMJVRK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FYQDBMJVRK" value="answer"> <span>The slope is 8.45 standard errors away from zero, strong evidence that the slope is significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_FYQDBMJVRK" value=""> <span>The p-value is 8.45, so the result is not significant.</span></label><label><input type="radio" autocomplete="off" name="radio_FYQDBMJVRK" value=""> <span>The slope itself is 8.45, fish availability increases spraints by 8.45 per unit.</span></label><label><input type="radio" autocomplete="off" name="radio_FYQDBMJVRK" value=""> <span>The R-squared value is 8.45, meaning the model explains 8.45% of the variation.</span></label>
 </div>
 <hr>
 <p><strong>Step 2: Assess the strength of the relationship</strong></p>
@@ -484,8 +493,8 @@ F-statistic: 1.623 on 1 and 58 DF,  p-value: 0.2077</code></pre>
 </div>
 </div>
 <p><strong>If R² = 0.69 for the relationship between fish index and spraints, and R² = 0.027 for the relationship between body length and spraints, what does this mean?</strong></p>
-<div id="radio_ZPIXQXQXGJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZPIXQXQXGJ" value="answer"> <span>Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_ZPIXQXQXGJ" value=""> <span>Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.</span></label><label><input type="radio" autocomplete="off" name="radio_ZPIXQXQXGJ" value=""> <span>Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_ZPIXQXQXGJ" value=""> <span>An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated.</span></label>
+<div id="radio_LGLFXFRGZI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LGLFXFRGZI" value="answer"> <span>Fish availability explains 69% of the variation in spraint counts, making it a strong predictor. Body length explains only 2.7% of the variation, suggesting it is a very poor predictor of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_LGLFXFRGZI" value=""> <span>Both variables explain a similar proportion of the variation in spraint counts, so neither is a better predictor than the other.</span></label><label><input type="radio" autocomplete="off" name="radio_LGLFXFRGZI" value=""> <span>Body length explains 69% of the variation in spraint counts, while fish availability explains only 2.7%, body length is therefore the stronger predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_LGLFXFRGZI" value=""> <span>An R-squared of 0.69 means the regression line fits the data perfectly, while 0.027 means the model assumptions have been violated.</span></label>
 </div>
 <hr>
 <p><strong>Step 3: Describe the relationship</strong></p>
@@ -509,12 +518,12 @@ F-statistic: 1.623 on 1 and 58 DF,  p-value: 0.2077</code></pre>
 </div>
 </div>
 <p><strong>What does a slope of zero mean in a linear regression?</strong></p>
-<div id="radio_JZGFHBWEVR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JZGFHBWEVR" value=""> <span>The regression line passes through the origin.</span></label><label><input type="radio" autocomplete="off" name="radio_JZGFHBWEVR" value="answer"> <span>The independent variable has no effect on the dependent variable, as x increases, y does not change.</span></label><label><input type="radio" autocomplete="off" name="radio_JZGFHBWEVR" value=""> <span>The R-squared value is equal to 1, meaning the line fits the data perfectly.</span></label><label><input type="radio" autocomplete="off" name="radio_JZGFHBWEVR" value=""> <span>The intercept is equal to zero, meaning the line starts at the origin.</span></label>
+<div id="radio_AKZZCIETWX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AKZZCIETWX" value=""> <span>The regression line passes through the origin.</span></label><label><input type="radio" autocomplete="off" name="radio_AKZZCIETWX" value="answer"> <span>The independent variable has no effect on the dependent variable, as x increases, y does not change.</span></label><label><input type="radio" autocomplete="off" name="radio_AKZZCIETWX" value=""> <span>The R-squared value is equal to 1, meaning the line fits the data perfectly.</span></label><label><input type="radio" autocomplete="off" name="radio_AKZZCIETWX" value=""> <span>The intercept is equal to zero, meaning the line starts at the origin.</span></label>
 </div>
 <p><strong>What does the intercept tell us in our otter regression?</strong></p>
-<div id="radio_TCYLVDQKQC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TCYLVDQKQC" value=""> <span>The rate at which spraints increase as fish availability increases.</span></label><label><input type="radio" autocomplete="off" name="radio_TCYLVDQKQC" value=""> <span>The proportion of variation in spraints explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_TCYLVDQKQC" value="answer"> <span>The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.</span></label><label><input type="radio" autocomplete="off" name="radio_TCYLVDQKQC" value=""> <span>The p-value for the test of whether the slope is significantly different from zero.</span></label>
+<div id="radio_RUUGZMVWZE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RUUGZMVWZE" value=""> <span>The rate at which spraints increase as fish availability increases.</span></label><label><input type="radio" autocomplete="off" name="radio_RUUGZMVWZE" value=""> <span>The proportion of variation in spraints explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_RUUGZMVWZE" value="answer"> <span>The predicted number of spraints when fish index is zero, the baseline spraint count when there are no fish available.</span></label><label><input type="radio" autocomplete="off" name="radio_RUUGZMVWZE" value=""> <span>The p-value for the test of whether the slope is significantly different from zero.</span></label>
 </div>
 <p><strong>In our otter model, what is the dependent variable?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">Fish index</option><option value="">Body length</option><option value="answer">Spraints</option><option value="">Site</option><option value="">Season</option></select></p>
@@ -575,7 +584,7 @@ Show answer, only after attempting the question!
   ..   spraints = col_double(),
   ..   fish_index = col_double()
   .. )
- - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+ - attr(*, "problems")=&lt;pointer: 0x7a2d21980&gt; </code></pre>
 </div>
 </div>
 <table class="caption-top table">
@@ -697,8 +706,8 @@ Note
 <p><strong>You want to know whether fish availability predicts spraint count. Which variables do you need to visualise?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">All variables in the dataset</option><option value="">site, season and spraints only</option><option value="answer">fish_index and spraints only</option><option value="">site and fish_index</option></select></p>
 <p><strong>Which of the following is a well formed research question?</strong></p>
-<div id="radio_XHCUUEYJDA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XHCUUEYJDA" value="answer"> <span>Does fish availability predict spraint count in otters, because otters may mark their territory more actively in areas where fish are more abundant?</span></label><label><input type="radio" autocomplete="off" name="radio_XHCUUEYJDA" value=""> <span>Is there anything interesting in the otter dataset?</span></label><label><input type="radio" autocomplete="off" name="radio_XHCUUEYJDA" value=""> <span>What do all the variables in the otter dataset look like when plotted?</span></label><label><input type="radio" autocomplete="off" name="radio_XHCUUEYJDA" value=""> <span>Can we find a significant result somewhere in the otter dataset?</span></label>
+<div id="radio_WSBEBLNYHJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WSBEBLNYHJ" value="answer"> <span>Does fish availability predict spraint count in otters, because otters may mark their territory more actively in areas where fish are more abundant?</span></label><label><input type="radio" autocomplete="off" name="radio_WSBEBLNYHJ" value=""> <span>Is there anything interesting in the otter dataset?</span></label><label><input type="radio" autocomplete="off" name="radio_WSBEBLNYHJ" value=""> <span>What do all the variables in the otter dataset look like when plotted?</span></label><label><input type="radio" autocomplete="off" name="radio_WSBEBLNYHJ" value=""> <span>Can we find a significant result somewhere in the otter dataset?</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -745,12 +754,12 @@ Click to show explanation
 </div>
 </div>
 <p><strong>What does the scatterplot suggest about the relationship between fish availability and spraint count?</strong></p>
-<div id="radio_CVMVAKZDIY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CVMVAKZDIY" value="answer"> <span>There appears to be a positive linear relationship, as fish availability increases, spraint count tends to increase too.</span></label><label><input type="radio" autocomplete="off" name="radio_CVMVAKZDIY" value=""> <span>There appears to be no relationship, the points are scattered randomly with no pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_CVMVAKZDIY" value=""> <span>There appears to be a negative relationship, as fish availability increases, spraint count decreases.</span></label><label><input type="radio" autocomplete="off" name="radio_CVMVAKZDIY" value=""> <span>The relationship is clearly curved, a straight line is not appropriate.</span></label>
+<div id="radio_SURYMEEPMG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SURYMEEPMG" value="answer"> <span>There appears to be a positive linear relationship, as fish availability increases, spraint count tends to increase too.</span></label><label><input type="radio" autocomplete="off" name="radio_SURYMEEPMG" value=""> <span>There appears to be no relationship, the points are scattered randomly with no pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_SURYMEEPMG" value=""> <span>There appears to be a negative relationship, as fish availability increases, spraint count decreases.</span></label><label><input type="radio" autocomplete="off" name="radio_SURYMEEPMG" value=""> <span>The relationship is clearly curved, a straight line is not appropriate.</span></label>
 </div>
 <p><strong>Is a straight line a reasonable description of this relationship?</strong></p>
-<div id="radio_RAMQPWCEVS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RAMQPWCEVS" value="answer"> <span>Yes, the points follow a roughly linear pattern, suggesting that linear regression is an appropriate model.</span></label><label><input type="radio" autocomplete="off" name="radio_RAMQPWCEVS" value=""> <span>No, the points follow a clear curve, so non-linear regression is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_RAMQPWCEVS" value=""> <span>It is impossible to tell from a scatterplot alone.</span></label><label><input type="radio" autocomplete="off" name="radio_RAMQPWCEVS" value=""> <span>No, there are too many outliers for any model to be appropriate.</span></label>
+<div id="radio_TSFMKJQUEZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TSFMKJQUEZ" value="answer"> <span>Yes, the points follow a roughly linear pattern, suggesting that linear regression is an appropriate model.</span></label><label><input type="radio" autocomplete="off" name="radio_TSFMKJQUEZ" value=""> <span>No, the points follow a clear curve, so non-linear regression is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_TSFMKJQUEZ" value=""> <span>It is impossible to tell from a scatterplot alone.</span></label><label><input type="radio" autocomplete="off" name="radio_TSFMKJQUEZ" value=""> <span>No, there are too many outliers for any model to be appropriate.</span></label>
 </div>
 <hr>
 </section>
@@ -849,12 +858,12 @@ F-statistic:   129 on 1 and 58 DF,  p-value: 2.249e-16</code></pre>
 </div>
 </div>
 <p><strong>What would a random scatter in the residuals plot tell us?</strong></p>
-<div id="radio_WPXRKRKJLY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WPXRKRKJLY" value="answer"> <span>The model assumptions are met, the residuals are evenly distributed around zero with no systematic pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_WPXRKRKJLY" value=""> <span>The model is a poor fit for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_WPXRKRKJLY" value=""> <span>The relationship between fish availability and spraint count is non-linear.</span></label><label><input type="radio" autocomplete="off" name="radio_WPXRKRKJLY" value=""> <span>The variance of the residuals increases with the fitted values.</span></label>
+<div id="radio_JJCCDTDQIL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JJCCDTDQIL" value="answer"> <span>The model assumptions are met, the residuals are evenly distributed around zero with no systematic pattern.</span></label><label><input type="radio" autocomplete="off" name="radio_JJCCDTDQIL" value=""> <span>The model is a poor fit for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_JJCCDTDQIL" value=""> <span>The relationship between fish availability and spraint count is non-linear.</span></label><label><input type="radio" autocomplete="off" name="radio_JJCCDTDQIL" value=""> <span>The variance of the residuals increases with the fitted values.</span></label>
 </div>
 <p><strong>What would a U-shape in the residuals plot suggest?</strong></p>
-<div id="radio_VZJAOGKSYW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VZJAOGKSYW" value="answer"> <span>The relationship is non-linear, a straight line may not be an appropriate model for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_VZJAOGKSYW" value=""> <span>The assumptions are met and we can proceed with the analysis.</span></label><label><input type="radio" autocomplete="off" name="radio_VZJAOGKSYW" value=""> <span>The variance of the residuals is constant across all fitted values.</span></label><label><input type="radio" autocomplete="off" name="radio_VZJAOGKSYW" value=""> <span>The slope is not significantly different from zero.</span></label>
+<div id="radio_QFTIQIEPOU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QFTIQIEPOU" value="answer"> <span>The relationship is non-linear, a straight line may not be an appropriate model for the data.</span></label><label><input type="radio" autocomplete="off" name="radio_QFTIQIEPOU" value=""> <span>The assumptions are met and we can proceed with the analysis.</span></label><label><input type="radio" autocomplete="off" name="radio_QFTIQIEPOU" value=""> <span>The variance of the residuals is constant across all fitted values.</span></label><label><input type="radio" autocomplete="off" name="radio_QFTIQIEPOU" value=""> <span>The slope is not significantly different from zero.</span></label>
 </div>
 <hr>
 </section>
@@ -893,12 +902,12 @@ F-statistic:   129 on 1 and 58 DF,  p-value: 2.249e-16</code></pre>
 </div>
 <p><strong>The F-statistic</strong> tests the null hypothesis that fish availability has no effect on spraint count. A large F-statistic and small p-value tell us the model explains a significant amount of variation in the data.</p>
 <p><strong>What does the slope (fish_index Estimate) tell us?</strong></p>
-<div id="radio_FXYMERRYWM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FXYMERRYWM" value="answer"> <span>How much spraint count increases for each one-unit increase in fish availability index.</span></label><label><input type="radio" autocomplete="off" name="radio_FXYMERRYWM" value=""> <span>The predicted spraint count when fish availability is at its maximum.</span></label><label><input type="radio" autocomplete="off" name="radio_FXYMERRYWM" value=""> <span>The proportion of variation in spraint count explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_FXYMERRYWM" value=""> <span>The p-value for the overall model significance.</span></label>
+<div id="radio_SYKXVOZGZV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SYKXVOZGZV" value="answer"> <span>How much spraint count increases for each one-unit increase in fish availability index.</span></label><label><input type="radio" autocomplete="off" name="radio_SYKXVOZGZV" value=""> <span>The predicted spraint count when fish availability is at its maximum.</span></label><label><input type="radio" autocomplete="off" name="radio_SYKXVOZGZV" value=""> <span>The proportion of variation in spraint count explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_SYKXVOZGZV" value=""> <span>The p-value for the overall model significance.</span></label>
 </div>
 <p><strong>What does the R² value tell us?</strong></p>
-<div id="radio_NZWRMJHOYZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NZWRMJHOYZ" value="answer"> <span>The proportion of variation in spraint count that is explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_NZWRMJHOYZ" value=""> <span>Whether the slope is significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_NZWRMJHOYZ" value=""> <span>The average distance of the data points from the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_NZWRMJHOYZ" value=""> <span>The p-value for the F-statistic.</span></label>
+<div id="radio_UORHEFGLXK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UORHEFGLXK" value="answer"> <span>The proportion of variation in spraint count that is explained by fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_UORHEFGLXK" value=""> <span>Whether the slope is significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_UORHEFGLXK" value=""> <span>The average distance of the data points from the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_UORHEFGLXK" value=""> <span>The p-value for the F-statistic.</span></label>
 </div>
 <hr>
 </section>
@@ -950,12 +959,12 @@ Note
 </div>
 </div>
 <p><strong>Why is the prediction interval always wider than the confidence interval?</strong></p>
-<div id="radio_ESKJIAXLZP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ESKJIAXLZP" value="answer"> <span>Because the prediction interval accounts for both the uncertainty in the mean and the natural variation between individual otters, individual observations are always more variable than means.</span></label><label><input type="radio" autocomplete="off" name="radio_ESKJIAXLZP" value=""> <span>Because the prediction interval uses a different significance threshold.</span></label><label><input type="radio" autocomplete="off" name="radio_ESKJIAXLZP" value=""> <span>Because the confidence interval is calculated incorrectly.</span></label><label><input type="radio" autocomplete="off" name="radio_ESKJIAXLZP" value=""> <span>Because the prediction interval does not use the regression equation.</span></label>
+<div id="radio_ZJEXXIEONE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZJEXXIEONE" value="answer"> <span>Because the prediction interval accounts for both the uncertainty in the mean and the natural variation between individual otters, individual observations are always more variable than means.</span></label><label><input type="radio" autocomplete="off" name="radio_ZJEXXIEONE" value=""> <span>Because the prediction interval uses a different significance threshold.</span></label><label><input type="radio" autocomplete="off" name="radio_ZJEXXIEONE" value=""> <span>Because the confidence interval is calculated incorrectly.</span></label><label><input type="radio" autocomplete="off" name="radio_ZJEXXIEONE" value=""> <span>Because the prediction interval does not use the regression equation.</span></label>
 </div>
 <p><strong>Is it valid to predict the spraint count for a fish index of 15?</strong></p>
-<div id="radio_UKQMEDOGSG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UKQMEDOGSG" value=""> <span>Yes, the regression equation can be used to predict any value of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_UKQMEDOGSG" value="answer"> <span>No, a fish index of 15 is outside the range of the observed data. Extrapolating beyond the data range is unreliable as we do not know whether the linear relationship holds outside the observed values.</span></label><label><input type="radio" autocomplete="off" name="radio_UKQMEDOGSG" value=""> <span>Yes, as long as the R-squared value is high enough.</span></label><label><input type="radio" autocomplete="off" name="radio_UKQMEDOGSG" value=""> <span>No, because the confidence interval would be too wide to be useful.</span></label>
+<div id="radio_VSGDKCHPBW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VSGDKCHPBW" value=""> <span>Yes, the regression equation can be used to predict any value of spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_VSGDKCHPBW" value="answer"> <span>No, a fish index of 15 is outside the range of the observed data. Extrapolating beyond the data range is unreliable as we do not know whether the linear relationship holds outside the observed values.</span></label><label><input type="radio" autocomplete="off" name="radio_VSGDKCHPBW" value=""> <span>Yes, as long as the R-squared value is high enough.</span></label><label><input type="radio" autocomplete="off" name="radio_VSGDKCHPBW" value=""> <span>No, because the confidence interval would be too wide to be useful.</span></label>
 </div>
 
 
@@ -1345,16 +1354,16 @@ window.onload = function() {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
-        for (let i=0; i<cellDetails.length; i++) {
-          const details = cellDetails[i];
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -1711,8 +1720,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix.html" class="pagination-link" aria-label="Appendix - Knowing your R &amp; Statistics">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./06-prob-para.html" class="pagination-link" aria-label="Workshop 6 - Issues with Probability and Parametric Analysis">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Workshop 6 - Issues with Probability and Parametric Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

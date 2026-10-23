@@ -653,15 +653,12 @@ ANOVA asks one overarching question:
 
 ### The Null Hypothesis
 
-Like all statistical tests, ANOVA starts with a **null hypothesis**: a statement 
-that there is no effect or difference. In the context of ANOVA, the null hypothesis 
+Like all statistical tests, ANOVA starts with a **null hypothesis**: a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis 
 states that:
 
 > *All treatment means are equal.*
 
-If the probability of this being true is less than 1 in 20 (p < 0.05), we reject 
-the null hypothesis and conclude that at least one treatment mean is different from 
-the others.
+If the probability of this being true is less than 1 in 20 (p < 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others.
 
 > *If p is significant, the null hypothesis is rejected.*
 

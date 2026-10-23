@@ -1,0 +1,58 @@
+---
+title: "Workshop 6 - Issues with Probability and Parametric Analysis"
+date: today
+format:
+  html:
+    theme: yeti
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+    number-sections: true
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(janitor)
+library(car)
+library(kableExtra)
+library(webexercises)
+library(patchwork)
+
+```
+
+## The Route Through the Workshop: 
+
+## Recapping what we know so far, Chapters 2 - 5
+
+
+
+## Type I and Type II Errors
+These are the two types of errors can occur when we are testing hypotheses, and they are related to the **null hypothesis**. We were first introduced to the idea of the null hypothesis in [Workshop 4](04-ANOVA.qmd). The null hypothesis is a statement that there is `r fitb(c("no effect","no difference"))` between the variables being tested.
+
+### Type I Error
+If we **reject** the null hypothesis when it is actually true, we have made a **Type I error**. 
+ 
+### Type II Error
+If we **fail to reject** the null hypothesis when it is actually false, we have made a **Type II error**. 
+
+
+## Transforming Data
+
+
+
+
+
+
+
+
+
+
+
+
+

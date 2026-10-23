@@ -9,6 +9,8 @@ book:
     - 03-ext.qmd
     - 04-ANOVA.qmd
     - 05-testing-and-measuring-relationships.qmd
+    - 06-prob-para.qmd
+    - function-glossary.qmd
     - appendix.qmd
 
 format:
