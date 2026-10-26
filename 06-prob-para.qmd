@@ -24,13 +24,14 @@ library(kableExtra)
 library(webexercises)
 library(patchwork)
 
+otter_data <- read.csv("data/otter_data_v3.csv")
+mice_parasites <- read.csv("data/mouse_parasite_counts.csv")
+
 ```
 
 ## The Route Through the Workshop: 
 
-## Recapping what we know so far, Chapters 2 - 5
-
-
+## Recapping what we know so far; (Chapters 2 - 5)
 
 ## Type I and Type II Errors
 These are the two types of errors can occur when we are testing hypotheses, and they are related to the **null hypothesis**. We were first introduced to the idea of the null hypothesis in [Workshop 4](04-ANOVA.qmd). The null hypothesis is a statement that there is `r fitb(c("no effect","no difference"))` between the variables being tested.
@@ -44,15 +45,267 @@ If we **fail to reject** the null hypothesis when it is actually false, we have 
 
 ## Transforming Data
 
+So far in this module, we have practised a range of statistical tests, including **t-tests** and **ANOVAs**. Before running these tests, we always check two key assumptions:
+
+1. **Normality**: the data within each group should be approximately normally distributed (checked using the Shapiro-Wilk test and Q-Q plots)
+
+2. **Homogeneity of variance**: the variance within each group should be approximately equal (checked using Levene's test)
+
+When both assumptions are met, we can proceed with a **parametric test**. When they are not met, we have two options:
+
+- Use a **non-parametric alternative** (covered in [Workshop 3](03-ext.qmd))
+- **Transform the data** to see whether the assumptions can be satisfied on a different scale
+
+This section focuses on the second option — data transformation.
+
+::: {.callout-note}
+**What is a transformation?**
+
+A transformation applies a mathematical function to every value in a variable. This changes the **scale** of the data but not the relationships within it — the same otters that had higher tick counts before transformation will still have relatively high counts after transformation. The goal is to make the distribution more symmetrical and closer to normal.
+:::
+
+---
+
+### Common Transformations
+
+| Transformation | R code | When to use |
+|---|---|---|
+| **Log** | `log(x)` or `log10(x)` | Right-skewed data, counts, data spanning several orders of magnitude |
+| **Square root** | `sqrt(x)` | Count data with moderate right skew |
+| **Reciprocal** | `1/x` | Extreme right skew |
+
+The most commonly used transformation in biology is the **log transformation**, which is particularly useful for count data such as tick counts or parasite counts, as seen in [Workshop 2](02-ext.qmd) and this workshop.
+
+What is written in the table may seem a bit daunting at first — the dropdown below explains each transformation in more detail.
+
+`r hide("Common transformations in more detail")`
+
+### Log Transformation
+
+A log transformation is used when your data are **right skewed**. As you may remember from the histograms in [Workshop 2](02-ext.qmd), right-skewed data have a long tail stretching to the right — most values are clustered at the low end, but a small number of very high values pull the tail outward.
+
+Log transformation works best when the data are:
+
+- **Right skewed** — as described above
+- **Counts or measurements that cannot be negative** — log transformation only works on positive values. Examples from our workshops include:
+    - `parasite_count` from the wood mouse dataset — the number of parasites found on each mouse (discrete)
+    - `tick_count` from the otter dataset — the number of ticks recorded on each otter (discrete)
+    - `fish_index` from the otter dataset — a continuous measure of fish availability (continuous)
+- **Spanning a wide range of values** — for example, values ranging from 1 to 1,000, where the high values are distorting the distribution
+
+---
+
+### Square Root Transformation
+
+A square root transformation is a **milder** version of the log transformation. It is useful when the data are moderately right-skewed but the skew is not as extreme.
+
+> *If the log transformation overcorrects and makes the data left-skewed, try the square root transformation instead.*
+
+It works best for:
+
+- **Count data** with moderate skew
+- Data where zeros are present
+
+---
+
+### Reciprocal Transformation
+
+The reciprocal transformation (`1/x`) is the **strongest** of the three and is used only when the data are **extremely right skewed** — for example, reaction times or waiting times, where a few very large values dominate the distribution.
+
+::: {.callout-warning}
+The reciprocal transformation **reverses the order** of the data — a large value becomes a small value and vice versa. This means results must be interpreted carefully. It also cannot be applied when any values are zero.
+:::
+
+`r unhide()`
+
+::: {.callout-warning}
+**Important:** `log(0)` is undefined in mathematics. If your data contain zeros (which count data often does), always use `log(x + 1)` instead. This shifts all values up by 1 before taking the log, avoiding the problem.
+:::
+
+---
+
+### The Workflow
+
+The key principle is to **check, transform, then check again**:
+
+```{=html}
+<ul style="list-style: none;">
+  <li><input type="checkbox"> Check normality of the original data (Shapiro-Wilk)</li>
+  <li><input type="checkbox"> If assumptions are violated, apply a transformation</li>
+  <li><input type="checkbox"> Check normality of the transformed data (Shapiro-Wilk)</li>
+  <li><input type="checkbox"> If assumptions are now met, proceed with parametric test on transformed data</li>
+  <li><input type="checkbox"> If assumptions are still violated, consider a non-parametric test instead</li>
+</ul>
+```
+
+---
+
+### Step 1: Check the Original Data
+
+We will use the `tick_count` variable from the otter dataset — the number of ticks recorded on each otter during the survey. Like many count variables in biology, we might expect this to be right-skewed.
+
+```{r transform-original, fig.cap="Figure 1. Distribution of raw tick counts in otters.", fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = tick_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Tick count", y = "Frequency",
+       title = "Before: raw tick counts") +
+  theme_minimal(base_size = 13)
+
+# Formally test normality
+shapiro.test(otter_data$tick_count)
+```
+
+**What does the histogram tell us about the distribution of tick counts?**
+
+`r longmcq(c(
+answer = "The data are strongly right-skewed, most otters have very few or no ticks, but a small number have very high counts. This suggests a log transformation may be appropriate.",
+"The data are approximately normally distributed and no transformation is needed.",
+"The data are left-skewed, so a log transformation would not be appropriate.",
+"The histogram tells us nothing about whether transformation is needed."
+))`
+
+---
+
+### Step 2: Apply the Log Transformation
+
+```{r transform-apply}
+otter_data <- otter_data %>%
+  mutate(log_tick_count = log(tick_count + 1))
+# We use log(x + 1) because some otters have a tick count of 0
+# and log(0) is undefined
+```
+
+::: {.callout-note}
+**Why are we using `log(x + 1)` and not just `log(x)`?**
+
+Some otters in this dataset have a tick count of 0, they had no ticks recorded during the survey. `log(0)` is undefined and R will return `-Inf`. Adding 1 to every value before taking the log avoids this problem, while having a very small effect on the shape of the distribution.
+:::
 
 
+---
 
+### Step 3: Check the Transformed Data
 
+```{r transform-compare, fig.cap="Figure 2. Raw (left) vs log-transformed (right) tick counts. The transformation makes the distribution more symmetrical.", fig.width=10, fig.height=4}
+plot_tick_raw <- ggplot(otter_data, aes(x = tick_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Tick count", y = "Frequency",
+       title = "Before: raw tick counts") +
+  theme_minimal(base_size = 13)
 
+plot_tick_log <- ggplot(otter_data, aes(x = log_tick_count)) +
+  geom_histogram(binwidth = 0.2, fill = "#7CAE00", colour = "black") +
+  labs(x = "Log(tick count + 1)", y = "Frequency",
+       title = "After: log-transformed tick counts") +
+  theme_minimal(base_size = 13)
 
+plot_tick_raw + plot_tick_log
 
+# Check normality of transformed data
+shapiro.test(otter_data$log_tick_count)
+```
 
+**Comparing the two histograms, what effect has the log transformation had?**
 
+`r longmcq(c(
+"The transformation has made the distribution more right-skewed.",
+"The transformation has had no effect on the shape of the distribution.",
+answer = "The transformation has compressed the high values and pulled the long right tail back in, making the distribution more symmetrical.",
+"The transformation has removed all the zeros from the data."
+))`
 
+**Why do we use `log(tick_count + 1)` rather than `log(tick_count)`?**
 
+`r longmcq(c(
+"Because adding 1 makes the transformation more powerful.",
+"Because R cannot calculate log values for integers.",
+answer = "Because some otters have a tick count of 0, and log(0) is undefined — adding 1 ensures all values are positive before the transformation is applied.",
+"Because the tick counts need to be standardised first."
+))`
 
+---
+
+### Step 4: Decide Whether to Proceed
+
+After transformation, we check the Shapiro-Wilk test again:
+
+- If **p > 0.05**: the transformed data are approximately normal; proceed with a parametric test using `log_tick_count`
+- If **p < 0.05**: the transformation has not resolved the issue; consider a **non-parametric test** instead
+
+In our case, the Shapiro-Wilk test returns **p = 0.112** after log transformation, the tick count data are now approximately normally distributed and we can proceed with a parametric test.
+
+```{r transform-ttest}
+# Run a t-test on the log-transformed tick counts by sex
+t.test(log_tick_count ~ sex, data = otter_data, var.equal = TRUE)
+```
+
+::: {.callout-note}
+**Interpreting results on a transformed scale:**
+
+When you transform your data, your results are on the **transformed scale**. 
+For example, the t-test above compares `log(tick_count + 1)` between male and 
+female otters — the difference between groups is expressed in log units, not 
+raw tick counts. This is worth mentioning when writing up your results.
+:::
+
+**If the Shapiro-Wilk test still returns p < 0.05 after log transformation, what should you do?**
+
+`r longmcq(c(
+"Try more transformations until p > 0.05.",
+answer = "Use a non-parametric alternative such as the Mann-Whitney U test or Kruskal-Wallis test, which do not require normality.",
+"Proceed with the parametric test anyway.",
+"Remove all outliers and rerun the transformation."
+))`
+
+::: {.callout-warning}
+**Transformation is not always the answer.**
+
+If the data are still non-normal after transformation, do not keep trying different transformations until one works. Instead, use a non-parametric test. Refer back to the parametric vs non-parametric table in [Workshop 3](03-ext.qmd).
+:::
+
+---
+
+### When Transformation Does Not Work
+
+To illustrate that transformation does not always solve the problem, let us revisit the `parasite_count` variable from the wood mouse dataset in [Workshop 2](02-ext.qmd). This variable is also right-skewed, but has a much larger proportion of zeros — most mice had no parasites at all.
+
+```{r transform-mice, fig.cap="Figure 3. Raw (left) vs log-transformed (right) parasite counts in wood mice. The large number of zeros means the transformation is less successful.", fig.width=10, fig.height=4}
+
+mice_parasites <- read_csv("data/mouse_parasite_counts.csv")
+
+mice_parasites <- mice_parasites %>%
+  mutate(log_parasite_count = log(parasite_count + 1))
+
+plot_mice_raw <- ggplot(mice_parasites, aes(x = parasite_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Parasite count", y = "Frequency",
+       title = "Before: raw parasite counts") +
+  theme_minimal(base_size = 13)
+
+plot_mice_log <- ggplot(mice_parasites, aes(x = log_parasite_count)) +
+  geom_histogram(binwidth = 0.2, fill = "#F8766D", colour = "black") +
+  labs(x = "Log(parasite count + 1)", y = "Frequency",
+       title = "After: log-transformed parasite counts") +
+  theme_minimal(base_size = 13)
+
+plot_mice_raw + plot_mice_log
+
+# Shapiro-Wilk before and after
+shapiro.test(mice_parasites$parasite_count)
+shapiro.test(mice_parasites$log_parasite_count)
+```
+
+::: {.callout-note}
+Even after log transformation, the parasite count data remain significantly non-normal (p < 0.05). This is because the large number of zeros creates a spike at the left end of the distribution that transformation cannot remove. In this case, a **non-parametric test** would be the appropriate choice.
+
+This contrast between the tick count data (transformation successful) and the parasite count data (transformation unsuccessful) illustrates an important principle — **log transformation works best when zeros are relatively rare**.
+:::
+
+**Comparing the tick count and parasite count results, what is the key difference that determines whether log transformation is successful?**
+
+`r longmcq(c(
+answer = "The parasite count data contain a much larger proportion of zeros, which creates a spike that log transformation cannot remove — the tick count data have fewer zeros and transform more successfully.",
+"The parasite count data have a larger mean than the tick count data.",
+"Log transformation always works for count data regardless of the number of zeros.",
+"The tick count data are from a different species, which is why the transformation works better."
+))`

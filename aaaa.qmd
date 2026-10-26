@@ -1,0 +1,59 @@
+### A Successful Transformation — Tick Counts in Otters
+
+As well as spraints, our otter dataset also contains a `tick_count` variable — 
+the number of ticks recorded on each otter during the survey. Like parasite 
+counts, tick counts are **right-skewed** — most otters have very few ticks, 
+but a small number have many. This makes it a good candidate for log 
+transformation.
+
+```{r tick-transform, fig.cap="Figure 4. Raw (left) vs log-transformed (right) tick counts. Unlike the parasite data, the log transformation successfully normalises the tick count data.", fig.width=10, fig.height=4}
+
+# Apply log transformation
+otter_data <- otter_data %>%
+  mutate(log_tick_count = log(tick_count + 1))
+
+# Before
+plot_tick_raw <- ggplot(otter_data, aes(x = tick_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Tick count", y = "Frequency",
+       title = "Before: raw tick counts") +
+  theme_minimal(base_size = 13)
+
+# After
+plot_tick_log <- ggplot(otter_data, aes(x = log_tick_count)) +
+  geom_histogram(binwidth = 0.2, fill = "#7CAE00", colour = "black") +
+  labs(x = "Log(tick count + 1)", y = "Frequency",
+       title = "After: log-transformed tick counts") +
+  theme_minimal(base_size = 13)
+
+plot_tick_raw + plot_tick_log
+```
+
+```{r tick-shapiro}
+# Shapiro-Wilk before transformation
+shapiro.test(otter_data$tick_count)
+
+# Shapiro-Wilk after transformation
+shapiro.test(otter_data$log_tick_count)
+```
+
+::: {.callout-note}
+Notice that after log transformation, the Shapiro-Wilk test returns **p = 0.112** 
+— the data are now approximately normally distributed and a parametric test would 
+be appropriate. This contrasts with the parasite count data, where the large 
+number of zeros meant the transformation was less successful.
+
+This illustrates an important point — **log transformation works best when zeros 
+are rare**. When a large proportion of the data are zeros (as with the parasite 
+counts), a non-parametric test is often the better choice.
+:::
+
+**Comparing the tick count results with the parasite count results, what does 
+this tell us about when log transformation is most effective?**
+
+`r longmcq(c(
+answer = "Log transformation works best when the data are right-skewed but zeros are relatively rare — when many values are zero, the transformation is less likely to achieve normality.",
+"Log transformation always works regardless of how many zeros are in the data.",
+"Log transformation only works on continuous variables, not count data.",
+"Log transformation is equally effective for all right-skewed datasets."
+))`
