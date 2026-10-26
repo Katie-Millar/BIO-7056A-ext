@@ -309,3 +309,20 @@ answer = "The parasite count data contain a much larger proportion of zeros, whi
 "Log transformation always works for count data regardless of the number of zeros.",
 "The tick count data are from a different species, which is why the transformation works better."
 ))`
+
+### Non-Parametric Alternatives
+When transformation does not work, we can use a **non-parametric test** instead. Non-parametric tests do not assume that the data are normally distributed, and they are often based on **ranks** rather than raw values.
+
+If you can remember from [Chapter 3](03-ext.qmd), the Mann-Whitney U test (also called the Wilcoxon rank-sum test) is a non-parametric alternative to the independent samples t-test, and the Kruskal-Wallis test is a non-parametric alternative to one-way ANOVA.
+
+
+| Parametric test | Non-parametric equivalent |
+|---|---|
+| One-sample t-test | Wilcoxon signed-rank test |
+| Two-sample t-test (unpaired) | Mann-Whitney U/Wilcoxon rank-sum test |
+| Two-sample t-test (paired) | Wilcoxon signed-rank test |
+| Pearson correlation | Spearman correlation |
+| One-way analysis of variance | Kruskal-Wallis test |                       
+                       
+: Common parametric tests and their non-parametric equivalents,  (Field, A. (2024)) {.striped .hover}                     
+
