@@ -311,18 +311,383 @@ answer = "The parasite count data contain a much larger proportion of zeros, whi
 ))`
 
 ### Non-Parametric Alternatives
-When transformation does not work, we can use a **non-parametric test** instead. Non-parametric tests do not assume that the data are normally distributed, and they are often based on **ranks** rather than raw values.
 
-If you can remember from [Chapter 3](03-ext.qmd), the Mann-Whitney U test (also called the Wilcoxon rank-sum test) is a non-parametric alternative to the independent samples t-test, and the Kruskal-Wallis test is a non-parametric alternative to one-way ANOVA.
+When transformation does not work, we can use a **non-parametric test** instead. Non-parametric tests do not assume that the data are normally distributed, and they make no assumptions about the distribution of the data at all. They do not 
+work by predicting the likely values of population parameters from sample 
+statistics.
 
+If you remember from [Workshop 3](03-ext.qmd), we introduced the concept of non-parametric equivalents. The table below serves as a reminder:
 
 | Parametric test | Non-parametric equivalent |
 |---|---|
 | One-sample t-test | Wilcoxon signed-rank test |
-| Two-sample t-test (unpaired) | Mann-Whitney U/Wilcoxon rank-sum test |
+| Two-sample t-test (unpaired) | Mann-Whitney U / Wilcoxon rank-sum test |
 | Two-sample t-test (paired) | Wilcoxon signed-rank test |
 | Pearson correlation | Spearman correlation |
-| One-way analysis of variance | Kruskal-Wallis test |                       
-                       
-: Common parametric tests and their non-parametric equivalents,  (Field, A. (2024)) {.striped .hover}                     
+| One-way ANOVA | Kruskal-Wallis test |
+| Randomised block two-way ANOVA | Friedman's test |
+
+: Common parametric tests and their non-parametric equivalents (Field, A. (2024)) {.striped .hover}
+
+---
+
+As discussed in the [Main Workbook](https://ellenbell.github.io/7056Aworkshop-6---issues-with-probability-and-parametric-analysis.html), non-parametric tests achieve this in one of three ways:
+
+
+#### Median Tests
+
+Most parametric tests compare **means**: a t-test compares the mean of one group to the mean of another, an ANOVA compares the means of multiple groups, and linear regression asks whether the mean of one variable changes in relation to another. However, when the data are skewed, the mean is pulled in the direction of the skew and no longer represents where most of the data sit.
+
+Rather than comparing means, median tests compare **medians**. Because the median is the middle value, it is far less affected by extreme values and skew. Use the tabs below to switch between the mean and median plots and see the difference:
+
+::: {.panel-tabset}
+
+## Median
+
+```{r median-plot, echo=FALSE, fig.cap="Figure 4. Median parasite count by sex in wood mice. The line inside each box shows the median — notice how low it is compared to the mean.", fig.width=6, fig.height=4}
+ggplot(mice_parasites, aes(x = sex, y = parasite_count, fill = sex)) +
+  geom_boxplot(colour = "black") +
+  scale_fill_manual(values = c("#F8766D", "#00BFC4")) +
+  labs(x = "Sex", y = "Parasite count",
+       title = "Median parasite count by sex") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+```{r median-values, echo=FALSE}
+mice_parasites %>%
+  group_by(sex) %>%
+  summarise(median = median(parasite_count))
+```
+
+## Mean
+
+```{r mean-plot, echo=FALSE, fig.cap="Figure 4. Mean parasite count by sex in wood mice. Error bars show one standard deviation. Notice how much higher the mean is compared to the median — it is being pulled upward by a small number of mice with very high parasite counts.", fig.width=6, fig.height=4}
+mice_parasites %>%
+  group_by(sex) %>%
+  summarise(
+    mean_parasites = mean(parasite_count),
+    sd_parasites   = sd(parasite_count)
+  ) %>%
+  ggplot(aes(x = sex, y = mean_parasites, fill = sex)) +
+  geom_col(colour = "black", width = 0.5) +
+  geom_errorbar(aes(ymin = mean_parasites - sd_parasites,
+                    ymax = mean_parasites + sd_parasites),
+                width = 0.2, linewidth = 0.8) +
+  scale_fill_manual(values = c("#F8766D", "#00BFC4")) +
+  labs(x = "Sex", y = "Parasite count",
+       title = "Mean parasite count by sex") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+```{r, echo=FALSE}
+mice_parasites %>%
+  group_by(sex) %>%
+  summarise(mean = mean(parasite_count))
+```
+
+:::
+
+**Comparing the two tabs, what do you notice about the difference between the mean and median for each group?**
+
+`r longmcq(c(
+"The mean and median are identical for both groups, showing that it does not matter which measure of centre we use.",
+"The median is higher than the mean for both groups, showing that the median is more affected by extreme values.",
+answer = "The mean is higher than the median for both groups, showing that the mean is being pulled upward by the small number of mice with very high parasite counts. The median gives a more representative picture of the typical mouse.",
+"The mean and median differ only for female mice, showing that the difference is due to the distribution of parasite counts in each sex group."
+))`
+
+**Looking at the plot, why is the median a better measure of centre than the mean for this dataset?**
+
+`r longmcq(c(
+answer = "The median is unaffected by the small number of mice with very high parasite counts, making it a more representative summary of where most of the data sit.",
+"The mean is calculated incorrectly for count data — the median should always be used when working with whole numbers.",
+"The median is always the better measure of centre regardless of the data type, as it is less sensitive to variation in the dataset.",
+"The mean and median are similar enough here that either would be an equally valid measure of centre for this dataset."
+))`
+
+---
+
+#### Rank Tests
+
+Rather than using the actual values, the data are sorted into order and each observation is assigned a **rank**. The test then examines whether one group tends to rank consistently higher than another. Because the test uses ranks rather than raw values, it is not affected by skew or extreme values, making it a good choice for data that violate the normality assumption.
+
+The table below shows how the ranking process works using parasite counts from a small sample of wood mice:
+
+
+```{r rank-table, echo=FALSE}
+mice_parasites %>%
+  select(host_id, sex, parasite_count) %>%
+  arrange(parasite_count) %>%
+  mutate(rank = rank(parasite_count, ties.method = "average")) %>%
+  head(12)
+```
+
+Rather than asking *"is the mean parasite count higher in males or females?"*, 
+a rank test asks *"do males tend to have higher ranks than females?"* Use the 
+tabs below to switch between the raw values and the ranked values:
+
+::: {.panel-tabset}
+
+## Raw values
+
+```{r raw-plot, echo=FALSE, fig.cap="Figure 5. Raw parasite counts by sex.", fig.width=6, fig.height=4}
+ggplot(mice_parasites, aes(x = sex, y = parasite_count, fill = sex)) +
+  geom_boxplot(colour = "black") +
+  scale_fill_manual(values = c("#F8766D", "#00BFC4")) +
+  scale_y_continuous(limits = c(0, 60)) +
+  labs(x = "Sex", y = "Parasite count",
+       title = "Raw parasite counts by sex",
+       subtitle = "Actual values — affected by extreme observations") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+## Ranked values
+
+```{r rank-plot, echo=FALSE, fig.cap="Figure 5. Ranked parasite counts by sex.", fig.width=6, fig.height=4}
+mice_parasites %>%
+  mutate(rank = rank(parasite_count, ties.method = "average")) %>%
+  ggplot(aes(x = sex, y = rank, fill = sex)) +
+  geom_boxplot(colour = "black") +
+  scale_fill_manual(values = c("#F8766D", "#00BFC4")) +
+  scale_y_continuous(limits = c(0, 60)) +
+  labs(x = "Sex", y = "Rank position (1 to 60)",
+       title = "Ranked parasite counts by sex",
+       subtitle = "Ranks — extreme values no longer dominate") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+:::
+
+**Comparing the two tabs, what effect does ranking have on the data?**
+
+`r longmcq(c(
+"Ranking spreads the extreme values further apart, making the distribution more skewed than the raw values.",
+"Ranking produces the same distribution as the raw values but rescaled to run from 1 to 60.",
+answer = "Ranking replaces each value with its position in order, so extreme values have no more influence on the test than any other observation.",
+"Ranking removes the zeros from the data so that the test is not affected by mice with no parasites."
+))`
+
+
+When comparing **two groups**, we use the **Wilcoxon rank-sum test** (also called the Mann-Whitney U test), the rank-based equivalent of a two-sample t-test:
+
+```{r, echo=FALSE}
+wilcox.test(parasite_count ~ sex, data = mice_parasites)
+```
+
+When comparing **more than two groups**, we use the **Kruskal-Wallis test**. The rank-based equivalent of a one-way ANOVA.
+
+```{r, echo=FALSE}
+kruskal.test(spraints ~ site, data = otter_data)
+```
+
+
+::: {.callout-note}
+**Understanding the test statistics:**
+
+- The **Mann-Whitney U test** produces a **W statistic**: if large enough relative to a critical value, it indicates a significant difference between the two groups. 
+- The **Kruskal-Wallis test** produces a **chi-squared statistic** (sometimes called H). The larger the value, the more evidence that at least one group has a 
+different rank distribution from the others
+
+In both cases, the **p-value** tells us whether the result is statistically significant (p < 0.05).
+:::
+
+**What is the key difference between a rank test and a parametric test?**
+
+`r longmcq(c(
+answer = "A rank test replaces the actual values with their rank order, a parametric test uses the actual values and assumes they are normally distributed.",
+"A rank test always produces a smaller p-value than a parametric test, as it is more powerful.",
+"A rank test can only be used when the data are normally distributed, while a parametric test can be used with any distribution.",
+"A rank test and a parametric test will always produce identical results, regardless of the data distribution."
+))`
+
+**If the Kruskal-Wallis test returns a significant result, what does this tell us?**
+`r longmcq(c(
+"All groups are significantly different from each other.",
+"The data are normally distributed.",
+"We should use a parametric test instead.",
+answer = "At least one group has a significantly different rank distribution from the others."
+))`
+
+---
+
+#### Patterns of Deviation
+
+Rather than looking at the **size** of differences, these methods look at the **direction** of differences. For example, do otters with higher fish availability tend to also have higher spraint counts? We are not asking by how much, just whether the two variables tend to move **together**.
+
+**Non-parametric tests for association:**
+
+When we want to measure the strength of association between two variables, we use a **correlation coefficient**. The most common parametric version is **Pearson's r**, which measures the strength and direction of a linear relationship between two continuous, normally distributed variables and ranges from -1 to 1.
+
+When the data are not normally distributed, or have been collected as ranks, the non-parametric alternatives are **Spearman's** and **Kendall's** correlation coefficients. Both are based on ranking data, yield coefficients comparable to Pearson's r, and a significant result (p < 0.05) indicates a significant association.
+
+**To remind ourselves about the parametric Pearson's r: What does a Pearson's r value of -0.85 tell us?**
+
+`r longmcq(c(
+answer = "There is a strong negative association between the two variables — as one increases, the other tends to decrease, and the relationship accounts for a large proportion of the variation.",
+"There is a strong positive association between the two variables.",
+"There is no meaningful association between the two variables.",
+"The relationship between the two variables is non-linear."
+))`
+
+```{r, echo=FALSE, warning=FALSE}
+otter_data %>%
+  select(otter_id, fish_index, spraints) %>%
+  mutate(
+    rank_fish     = rank(fish_index, ties.method = "average"),
+    rank_spraints = rank(spraints,   ties.method = "average")
+  ) %>%
+  head(10)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Figure 6. Ranks of fish availability index plotted against ranks of spraint count.", fig.width=6, fig.height=4}
+otter_data %>%
+  mutate(
+    rank_fish     = rank(fish_index, ties.method = "average"),
+    rank_spraints = rank(spraints,   ties.method = "average")
+  ) %>%
+  ggplot(aes(x = rank_fish, y = rank_spraints)) +
+  geom_point(colour = "#F8766D", size = 2.5) +
+  geom_smooth(method = "lm", colour = "black", se = TRUE) +
+  labs(x = "Rank of fish availability index",
+       y = "Rank of spraint count") +
+  theme_minimal(base_size = 13)
+```
+
+**Spearman's correlation** is the most commonly used non-parametric correlation in biology. It converts both variables to ranks and tests whether the ranks tend to move together:
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+cor.test(otter_data$fish_index, otter_data$spraints,
+         method = "spearman")
+```
+
+**Kendall's correlation** is an alternative to Spearman's that handles ties more reliably and can be more accurate with smaller sample sizes. It is calculated slightly differently but interpreted in the same way:
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+cor.test(otter_data$fish_index, otter_data$spraints,
+         method = "kendall")
+```
+
+::: {.callout-note}
+**Spearman's (ρ) and Kendall's (τ) correlation coefficients** both range 
+from -1 to 1, just like Pearson's r:
+
+- **1** — a perfect positive rank association
+- **0** — no association between the ranks
+- **-1** — a perfect negative rank association
+
+Kendall's τ is typically slightly smaller in value than Spearman's ρ for the same data — this is normal and does not mean one is better than the other. Both lead to the same conclusion about statistical significance. 
+In practice, Spearman's is more commonly reported in biology, but either is acceptable.
+:::
+
+**What is the key difference between Spearman's and Pearson's correlation?**
+
+`r longmcq(c(
+answer = "Spearman's uses ranks rather than actual values, making it appropriate for non-normal data or ranked variables — Pearson's uses the actual values and assumes a linear relationship between normally distributed variables.",
+"Spearman's always produces a higher correlation coefficient than Pearson's.",
+"Pearson's can be used for any type of data, while Spearman's can only be used for ranked data.",
+"Spearman's and Pearson's always produce identical results."
+))`
+
+**When would you choose Kendall's correlation over Spearman's?**
+
+`r longmcq(c(
+answer = "When the sample size is small or there are many tied values in the data, as Kendall's handles these situations more reliably than Spearman's.",
+"When the data are normally distributed and a parametric test is appropriate.",
+"When you want a larger correlation coefficient than Spearman's would give.",
+"Kendall's and Spearman's are identical tests and there is never a reason to choose one over the other."
+))`
+
+---
+
+### The difficulties of non-parametric tests
+
+Non-parametric tests might seem like an easy solution. If the assumptions are violated or transformation does not work, just switch to a non-parametric test right?! However, there are some important things to be aware of before doing this.
+
+
+When two or more observations share the same value, they are said to be **tied**. Most non-parametric tests are based on ranking, and ties create a problem because two observations cannot occupy the same rank position. R handles this automatically by assigning the **average rank** to tied values, but it is worth knowing this happens.
+
+**If three mice all have a parasite count of 0 and would occupy ranks 1, 2 and 3, what rank does each receive when ties are handled by averaging?**
+
+`r longmcq(c( 
+"Each receives rank 1, as they all share the lowest value.",
+ answer = "Each receives rank 2. The average of ranks 1, 2 and 3.",
+"Each receives rank 3, as there are three of them.",
+"The tied observations are removed from the analysis entirely."
+))`
+
+
+---
+
+#### When Should You Use a Non-Parametric Test?
+
+::: {.callout-note}
+Use a non-parametric test when:
+
+- The data **are not normally distributed**, and does not meet the assumptions of a parametric test
+- The data **cannot be transformed** to meet the normality assumption
+- The data were **collected as ranks** or represent an index rather than a true measurement
+- The **sample size is very small** and you cannot reliably assess normality
+
+Do **not** use a non-parametric test simply because it is easier or to avoid checking assumptions — always check assumptions first and only switch to a non-parametric test if they cannot be met.
+:::
+
+---
+
+### What Comes Next?
+
+A more flexible framework called **Generalised Linear Models (GLMs)** extends the logic of linear regression to handle a much wider range of data types and distributions. This is what you will explore in the next module.
+
+**Which of the following situations would a Generalised Linear Model be more appropriate for than a standard linear regression?**
+
+`r longmcq(c(
+answer = "Modelling the number of parasites found on a mouse, because count data are always zero or above and standard linear regression can predict negative values, which is not possible for counts.",
+"Modelling the body mass of otters, because body mass is a continuous variable that is approximately normally distributed.",
+"Modelling the difference in species richness between two grassland treatments, because a t-test would be simpler.",
+"Modelling fish availability index as a predictor of spraint count, because both variables are continuous."
+))`
+
+
+## Case Study: Using it in Action 
+
+Now let's put everything together and see how it works in practice. For this workshop, we will be using a bird survey from a woodland. 60 woodland plots across two habitat types were collected, these were (i) ancient woodland and (ii) plantation woodland, to investigate whether habitat type affects bird diversity and seed availability.
+
+We loaded up the packages needed at the beginning of this chapter, but we will also need to load the data for this case study. The data are in a CSV file called `bird_data.csv`. Call this data frame `bird_data` and take a look at the first few rows of the data.
+
+```{r, include=FALSE}
+bird_data <- read.csv("data/woodland_bird_survey.csv")
+```
+
+
+::: {.callout-tip}
+As there are many new functions and terms we are learning throughout this module, there is now a new section in the workbook; a [Function Gloassary](function-glossary.qmd) that you can refer to if you are unsure about a function or term. This will be updated throughout the module.
+:::
+
+
+#### 1. Check out the data frame 
+Use some checking and inspecting functions to get a feel for the data frame.
+
+
+
+#### 2. Check out the distribution of the response variable
+The response variable is `bird_diversity`, which is a count of the number of bird species recorded in each plot. Use a histogram to visualise the distribution of this variable.
+
+
+::: {.callout-tip}
+Write the code to create a histogram of the `bird_diversity` variable in the `bird_data` data frame. Use the ggplot function with appropriate labels for the x-axis and y-axis. 
+:::
+
+```{r}
+ggplot(bird_data, aes(x = canopy_cover)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Canopy Cover", y = "Frequency") +
+  theme_minimal(base_size = 13)
+```
+
+
+
+
 
