@@ -23,15 +23,30 @@ library(car)
 library(kableExtra)
 library(webexercises)
 library(patchwork)
+library(reactable)
 
-otter_data <- read.csv("data/otter_data_v3.csv")
+otter_data <- read.csv("data/otter_data_v2.csv")
 mice_parasites <- read.csv("data/mouse_parasite_counts.csv")
 
 ```
 
 ## The Route Through the Workshop: 
 
-## Recapping what we know so far; (Chapters 2 - 5)
+In this workshop we will cover:
+
+1. **Type I and Type II errors** — what happens when we make the wrong decision about the null hypothesis
+2. **Data transformation** — what to do when the assumptions of a parametric test are violated, using the otter tick count data as a worked example
+3. **Non-parametric alternatives** — what to do when transformation does not work, including median tests, rank tests and patterns of deviation
+4. **Case study** — putting it all together using a woodland bird survey, working through the full decision-making process from checking assumptions to choosing and running the appropriate test
+
+By the end of this workshop you will be able to decide whether to transform your data, use a parametric test, or use a non-parametric alternative — and justify that decision.
+
+### Loading Packages
+Today you will need the packages: `tidyverse`, `janitor`, `car` and `patchwork`. It is a new workspace, so please install them and then load them in.
+
+### Reading in Data
+Today we will be working with 3 different datasets. Please load them in. Two of these we have worked with before. We will be using an updated version of our otter dataset, our mice parasite dataset and a new dataset on bird territory counts. The datasets can be found in the data folder as `otter_data_v2.csv`, `mouse_parasite_counts.csv` and `bird_territory_counts.csv`. 
+
 
 ## Type I and Type II Errors
 These are the two types of errors can occur when we are testing hypotheses, and they are related to the **null hypothesis**. We were first introduced to the idea of the null hypothesis in [Workshop 4](04-ANOVA.qmd). The null hypothesis is a statement that there is `r fitb(c("no effect","no difference"))` between the variables being tested.
@@ -42,8 +57,17 @@ If we **reject** the null hypothesis when it is actually true, we have made a **
 ### Type II Error
 If we **fail to reject** the null hypothesis when it is actually false, we have made a **Type II error**. 
 
+**Bill Bailey, the well known bird lover, concluded that ancient woodland has more bird territories than plantation woodland, but in reality there is no difference. What type of error has been made?**
+
+`r mcq(c(answer = "Type I error", "Type II error"))`
+
+### Type II Error
+If we **fail to reject** the null hypothesis when it is actually false, we have made a **Type II error**. This is also known as a `r fitb(c("false negative", "false-negative"))` result — we miss a real effect that is actually there.
+
 
 ## Transforming Data
+
+### Background to transformations 
 
 So far in this module, we have practised a range of statistical tests, including **t-tests** and **ANOVAs**. Before running these tests, we always check two key assumptions:
 
@@ -140,7 +164,7 @@ The key principle is to **check, transform, then check again**:
 
 ---
 
-### Step 1: Check the Original Data
+#### Step 1: Check the Original Data
 
 We will use the `tick_count` variable from the otter dataset — the number of ticks recorded on each otter during the survey. Like many count variables in biology, we might expect this to be right-skewed.
 
@@ -166,7 +190,7 @@ answer = "The data are strongly right-skewed, most otters have very few or no ti
 
 ---
 
-### Step 2: Apply the Log Transformation
+#### Step 2: Apply the Log Transformation
 
 ```{r transform-apply}
 otter_data <- otter_data %>%
@@ -184,7 +208,7 @@ Some otters in this dataset have a tick count of 0, they had no ticks recorded d
 
 ---
 
-### Step 3: Check the Transformed Data
+#### Step 3: Check the Transformed Data
 
 ```{r transform-compare, fig.cap="Figure 2. Raw (left) vs log-transformed (right) tick counts. The transformation makes the distribution more symmetrical.", fig.width=10, fig.height=4}
 plot_tick_raw <- ggplot(otter_data, aes(x = tick_count)) +
@@ -225,7 +249,7 @@ answer = "Because some otters have a tick count of 0, and log(0) is undefined �
 
 ---
 
-### Step 4: Decide Whether to Proceed
+#### Step 4: Decide Whether to Proceed
 
 After transformation, we check the Shapiro-Wilk test again:
 
@@ -263,15 +287,25 @@ answer = "Use a non-parametric alternative such as the Mann-Whitney U test or Kr
 If the data are still non-normal after transformation, do not keep trying different transformations until one works. Instead, use a non-parametric test. Refer back to the parametric vs non-parametric table in [Workshop 3](03-ext.qmd).
 :::
 
+Complete the workflow below by filling in the blanks:
+
+We have just done a histogram on the original data. The second step is to check `r fitb(c("normality", "the normality"))` of the original data using the `r fitb(c("Shapiro-Wilk", "shaprio wilk", "shapiro-wilk"))` test.
+
+If the data fail this test, we apply a `r fitb(c("log+1", "log"))` transformation.
+
+If the transformed data pass (p `r fitb(">")` 0.05), we proceed with a `r fitb("parametric")` test.
+
+If the transformed data still fail, we use a `r fitb("non-parametric")` test instead.
+
+
 ---
 
-### When Transformation Does Not Work
+## When Transformation Does Not Work
 
 To illustrate that transformation does not always solve the problem, let us revisit the `parasite_count` variable from the wood mouse dataset in [Workshop 2](02-ext.qmd). This variable is also right-skewed, but has a much larger proportion of zeros — most mice had no parasites at all.
 
 ```{r transform-mice, fig.cap="Figure 3. Raw (left) vs log-transformed (right) parasite counts in wood mice. The large number of zeros means the transformation is less successful.", fig.width=10, fig.height=4}
 
-mice_parasites <- read_csv("data/mouse_parasite_counts.csv")
 
 mice_parasites <- mice_parasites %>%
   mutate(log_parasite_count = log(parasite_count + 1))
@@ -310,7 +344,7 @@ answer = "The parasite count data contain a much larger proportion of zeros, whi
 "The tick count data are from a different species, which is why the transformation works better."
 ))`
 
-### Non-Parametric Alternatives
+## Non-Parametric Alternatives
 
 When transformation does not work, we can use a **non-parametric test** instead. Non-parametric tests do not assume that the data are normally distributed, and they make no assumptions about the distribution of the data at all. They do not 
 work by predicting the likely values of population parameters from sample 
@@ -331,10 +365,11 @@ If you remember from [Workshop 3](03-ext.qmd), we introduced the concept of non-
 
 ---
 
+
 As discussed in the [Main Workbook](https://ellenbell.github.io/7056Aworkshop-6---issues-with-probability-and-parametric-analysis.html), non-parametric tests achieve this in one of three ways:
 
 
-#### Median Tests
+### Median Tests
 
 Most parametric tests compare **means**: a t-test compares the mean of one group to the mean of another, an ANOVA compares the means of multiple groups, and linear regression asks whether the mean of one variable changes in relation to another. However, when the data are skewed, the mean is pulled in the direction of the skew and no longer represents where most of the data sit.
 
@@ -409,7 +444,7 @@ answer = "The median is unaffected by the small number of mice with very high pa
 
 ---
 
-#### Rank Tests
+### Rank Tests
 
 Rather than using the actual values, the data are sorted into order and each observation is assigned a **rank**. The test then examines whether one group tends to rank consistently higher than another. Because the test uses ranks rather than raw values, it is not affected by skew or extreme values, making it a good choice for data that violate the normality assumption.
 
@@ -424,9 +459,7 @@ mice_parasites %>%
   head(12)
 ```
 
-Rather than asking *"is the mean parasite count higher in males or females?"*, 
-a rank test asks *"do males tend to have higher ranks than females?"* Use the 
-tabs below to switch between the raw values and the ranked values:
+Rather than asking *"is the mean parasite count higher in males or females?"*, a rank test asks *"do males tend to have higher ranks than females?"* Use the tabs below to switch between the raw values and the ranked values:
 
 ::: {.panel-tabset}
 
@@ -514,7 +547,7 @@ answer = "At least one group has a significantly different rank distribution fro
 
 ---
 
-#### Patterns of Deviation
+### Patterns of Deviation
 
 Rather than looking at the **size** of differences, these methods look at the **direction** of differences. For example, do otters with higher fish availability tend to also have higher spraint counts? We are not asking by how much, just whether the two variables tend to move **together**.
 
@@ -603,7 +636,7 @@ answer = "When the sample size is small or there are many tied values in the dat
 
 ---
 
-### The difficulties of non-parametric tests
+## The difficulties of non-parametric tests
 
 Non-parametric tests might seem like an easy solution. If the assumptions are violated or transformation does not work, just switch to a non-parametric test right?! However, there are some important things to be aware of before doing this.
 
@@ -622,7 +655,7 @@ When two or more observations share the same value, they are said to be **tied**
 
 ---
 
-#### When Should You Use a Non-Parametric Test?
+## When Should You Use a Non-Parametric Test?
 
 ::: {.callout-note}
 Use a non-parametric test when:
@@ -637,7 +670,7 @@ Do **not** use a non-parametric test simply because it is easier or to avoid che
 
 ---
 
-### What Comes Next?
+## What Comes Next?
 
 A more flexible framework called **Generalised Linear Models (GLMs)** extends the logic of linear regression to handle a much wider range of data types and distributions. This is what you will explore in the next module.
 
@@ -653,41 +686,331 @@ answer = "Modelling the number of parasites found on a mouse, because count data
 
 ## Case Study: Using it in Action 
 
-Now let's put everything together and see how it works in practice. For this workshop, we will be using a bird survey from a woodland. 60 woodland plots across two habitat types were collected, these were (i) ancient woodland and (ii) plantation woodland, to investigate whether habitat type affects bird diversity and seed availability.
+Now let's put everything together and see how it works in practice. For this workshop, we will be using a bird survey from a woodland. 60 woodland plots across two habitat types were collected, these were (i) ancient woodland and (ii) plantation woodland, to investigate whether habitat type affects territory count and seed availability.
 
-We loaded up the packages needed at the beginning of this chapter, but we will also need to load the data for this case study. The data are in a CSV file called `bird_data.csv`. Call this data frame `bird_data` and take a look at the first few rows of the data.
+### The effect of habitat on territory count in woodland birds 
+
+
+
+We loaded up the packages needed at the beginning of this chapter, but we will also need to load the data for this case study. The data are in a CSV file called `woodland_bird_survey.csv`. Call this data frame `bird_data` and take a look at the first few rows of the data.
 
 ```{r, include=FALSE}
 bird_data <- read.csv("data/woodland_bird_survey.csv")
 ```
 
 
-::: {.callout-tip}
-As there are many new functions and terms we are learning throughout this module, there is now a new section in the workbook; a [Function Gloassary](function-glossary.qmd) that you can refer to if you are unsure about a function or term. This will be updated throughout the module.
+
+::: {.callout-note}
+As there are many new functions and terms we are learning throughout this module, there is now a new section in the workbook; a [Function Glossary](function-glossary.qmd) that you can refer to if you are unsure about a function or term. This will be updated throughout the module.
 :::
 
 
-#### 1. Check out the data frame 
+
+#### Step 1: Check out the data frame 
 Use some checking and inspecting functions to get a feel for the data frame.
 
 
 
-#### 2. Check out the distribution of the response variable
-The response variable is `bird_diversity`, which is a count of the number of bird species recorded in each plot. Use a histogram to visualise the distribution of this variable.
+#### Step 2: Check out the distribution of the response variable
+The response variable is `territory_count`, which is a count of the number of bird species recorded in each plot. Use a histogram to visualise the distribution of this variable.
 
 
 ::: {.callout-tip}
-Write the code to create a histogram of the `bird_diversity` variable in the `bird_data` data frame. Use the ggplot function with appropriate labels for the x-axis and y-axis. 
+**Task**: Write the code to create a histogram of the `territory_count` variable in the `bird_data` data frame. Use the ggplot function with appropriate labels for the x-axis and y-axis. 
 :::
 
-```{r}
-ggplot(bird_data, aes(x = canopy_cover)) +
+```{r, echo=FALSE}
+ggplot(bird_data, aes(x = territory_count)) +
   geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
-  labs(x = "Canopy Cover", y = "Frequency") +
+  labs(x = "Territory Count", y = "Frequency") +
   theme_minimal(base_size = 13)
+```
+
+**Looking at the histogram of territory count, what can you say about the distribution?**
+
+`r longmcq(c(
+"The data are approximately normally distributed and no transformation is needed.",
+"The data are left-skewed, with most plots having high territory counts.",
+"The data are bimodal, suggesting two clearly separate groups of plots.",
+answer = "The data are strongly right-skewed, most plots have low territory counts but a small number have very high counts."
+))`
+
+
+
+#### Step 3. Check the normality of the response variable
+We have the idea from our response variable that it is right-skewed, but we can also do formal tests to check the normality of the data. Our normality tests are the Shapiro-Wilk test and the Levene's test.
+
+**What assumptions are being tested by the Shapiro-Wilk and Levene's test?**
+
+`r longmcq(c(
+"Shapiro-Wilk tests whether the means of the groups are significantly different, and Levene's test checks whether the data are normally distributed.",
+answer = "Shapiro-Wilk tests whether the data are normally distributed, and Levene's test checks whether the variances are  equal.",
+"Shapiro-Wilk tests whether the variances across groups are equal, and Levene's test checks whether the data are normally distributed.",
+"Shapiro-Wilk tests whether the relationship between variables is linear, and Levene's test checks whether the sample sizes across groups are equal."
+))`
+
+::: {.callout-tip}
+**Task**: Write the code to perform Shapiro-Wilk test on the `territory_count` variable in the `bird_data` data frame. Remember you can use the [Function Glossary](function-glossary.qmd) if you are stuck. 
+:::
+
+```{r, echo=FALSE}
+shapiro.test(bird_data$territory_count)
+```
+
+
+**What do the results of the Shapiro-Wilk test tell us?**
+
+`r longmcq(c(
+answer = "The territory count data are significantly non-normal (p < 0.05)", 
+"The territory count data are approximately normal (p > 0.05)"
+))`
+
+
+
+
+
+
+**Given the Shapiro-Wilk result, what should our next step be?**
+
+`r longmcq(c(
+"Proceed with a standard t-test as the Levene's test passed.",
+answer = "Attempt a log transformation and recheck normality before deciding on a test.",
+"Immediately use a Mann-Whitney U test without attempting transformation.",
+"Remove the non-normal plots from the dataset and rerun the Shapiro-Wilk test."
+))`
+
+#### Step 4. Transforming the data
+
+::: {.callout-tip}
+**Task**: Write the code to perform a log transformation of the `territory_count` variable. Use the `mutate` function to create a new variable called `log_territory_count` in the `bird_data` data frame. 
+:::
+```{r, echo=FALSE}
+bird_data <- bird_data %>%
+  mutate(log_territory_count = log(territory_count + 1))
+
+head(bird_data)
+
+```
+
+
+#### Step 5. Check the transformed data
+
+
+::: {.callout-tip}
+**Task**: Use **patchwork()** to create a side-by-side histogram of the raw and log-transformed `territory_count` variable. Use appropriate labels for the x-axis and y-axis. See the [Function Glossary](function-glossary.qmd) if you are stuck with remembering functions. 
+:::
+```{r, echo=FALSE}
+ plot_territory_raw <- ggplot(bird_data, aes(x = territory_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Territory Count", y = "Frequency") +
+  theme_minimal(base_size = 13)
+
+plot_territory_log <- ggplot(bird_data, aes(x = log_territory_count)) +
+  geom_histogram(binwidth = 0.2, fill = "#7CAE00", colour = "black") +
+  labs(x = "Log(Territory Count + 1)", y = "Frequency") +
+  theme_minimal(base_size = 13)
+
+plot_territory_raw + plot_territory_log
+```
+
+::: {.callout-tip}
+**Task**: Restest the assumptions of normality and equal variance on the log-transformed `territory_count` variable. Use the Shapiro-Wilk and Levene's tests again.
+:::
+
+```{r, echo=FALSE}
+shapiro.test(bird_data$log_territory_count)
+```
+```{r, echo=FALSE}
+leveneTest(log_territory_count ~ habitat, data = bird_data)
 ```
 
 
 
 
 
+### The effect of habitat on seed availability in woodland birds
+
+Our first question was whether habitat type affects bird diversity, but we also would like to know if there is a relationship between bird diversity and seed availability. 
+
+::: {.callout-tip}
+**Task**: Like before, check the normality of the data. Create a histogram of `seed_count`, and run the Shapiro-Wilk test. 
+:::
+
+```{r, echo=FALSE}
+ggplot(bird_data, aes(x = seed_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Seed Count", y = "Frequency") +
+  theme_minimal(base_size = 13)
+```
+
+```{r, echo=FALSE}
+shapiro.test(bird_data$seed_count)
+```
+
+
+
+::: {.callout-tip}
+**Task**: Using the `mutate` function, create a new variable called `log_seed_count` in the `bird_data` data frame that is a log transformation of the `seed_count` variable.
+:::
+```{r, echo=FALSE}
+bird_data <- bird_data %>%
+  mutate(log_seed_count = log(seed_count + 1))
+
+head(bird_data)
+```
+
+
+::: {.callout-tip}
+**Task**: Check whether the log transformation has worked for `seed_count`. Plot the raw and log-transformed distributions side by side using `patchwork`, then run a Shapiro-Wilk test on the log-transformed variable to formally check normality.
+:::
+
+```{r, echo=FALSE}
+ plot_seed_raw <- ggplot(bird_data, aes(x = seed_count)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Seed Count", y = "Frequency") +
+  theme_minimal(base_size = 13)
+
+plot_seed_log <- ggplot(bird_data, aes(x = log_seed_count)) +
+  geom_histogram(binwidth = 0.2, fill = "#7CAE00", colour = "black") +
+  labs(x = "Log(Seed Count + 1)", y = "Frequency") +
+  theme_minimal(base_size = 13)
+
+plot_seed_raw + plot_seed_log
+```
+
+```{r, echo=FALSE}
+shapiro.test(bird_data$log_seed_count)
+```
+
+Since log transformation has not resolved the normality issue for `seed_count`, we need to use a **non-parametric alternative**. As we covered earlier in this workshop, one way non-parametric tests work is through **ranking**: replacing the actual values with their position in order so that extreme values no longer dominate the analysis. The **Wilcoxon rank-sum test** uses exactly this approach, making it suitable for data that violate the normality assumption.
+
+Referring back to our equivalents table, the Wilcoxon rank-sum test test is the non-parametric equivalent of a two-sample t-test — which is exactly what we need here, as we are comparing seed counts between two groups (ancient woodland and plantation woodland).
+
+```{r, echo=FALSE}
+library(reactable)
+
+data.frame(
+  Parametric = c(
+    "One-sample t-test",
+    "Two-sample t-test (unpaired)",
+    "Two-sample t-test (paired)",
+    "Pearson correlation",
+    "One-way ANOVA",
+    "Randomised block two-way ANOVA"
+  ),
+  Non_parametric = c(
+    "Wilcoxon signed-rank test",
+    "Mann-Whitney U / Wilcoxon rank-sum test",
+    "Wilcoxon signed-rank test",
+    "Spearman correlation",
+    "Kruskal-Wallis test",
+    "Friedman's test"
+  ),
+  When_to_use = c(
+    "Compare one sample mean to a known value",
+    "Compare means of two independent groups",
+    "Compare means of two related/matched groups",
+    "Test association between two continuous variables",
+    "Compare means across three or more groups",
+    "Compare treatments across blocks or repeated measures"
+  )
+) %>%
+  reactable(
+    columns = list(
+      Parametric     = colDef(name = "Parametric test",
+                              style = list(color = "#00BFC4", fontWeight = "bold")),
+      Non_parametric = colDef(name = "Non-parametric equivalent",
+                              style = list(color = "#F8766D", fontWeight = "bold")),
+      When_to_use    = colDef(name = "When to use", show = FALSE)
+    ),
+    details = function(index) {
+      htmltools::div(
+        style = "padding: 10px; background: #f9f9f9; border-left: 3px solid #00BFC4;",
+        paste("When to use:", data.frame(
+          When_to_use = c(
+            "Compare one sample mean to a known value",
+            "Compare means of two independent groups",
+            "Compare means of two related/matched groups",
+            "Test association between two continuous variables",
+            "Compare means across three or more groups",
+            "Compare treatments across blocks or repeated measures"
+          )
+        )$When_to_use[index])
+      )
+    },
+    striped = TRUE,
+    highlight = TRUE,
+    bordered = TRUE
+  )
+```
+
+
+
+::: {.callout-tip}
+**Task**: Run a Wilcoxon rank-sum test to compare seed counts between ancient woodland and plantation woodland using `wilcox.test()`.
+:::
+
+```{r, echo=FALSE}
+wilcox.test(seed_count ~ habitat, data = bird_data)
+```
+
+**Looking at the output, is there a significant difference in seed counts between the two habitat types?**
+
+`r longmcq(c(
+answer = "Yes. p < 0.05, so we reject the null hypothesis and conclude that seed counts differ significantly between ancient and plantation woodland.",
+"No. p > 0.05, so we cannot conclude the two habitats differ in seed count.",
+"We cannot tell because the data are non-normal.",
+"Yes. but the result is unreliable because we used a non-parametric test."
+))`
+
+**Why did we use a Wilcoxon rank-sum test here rather than a t-test?**
+
+`r longmcq(c(
+"The Wilcoxon rank-sum test is always more powerful than a t-test, so it should be used whenever possible regardless of whether assumptions are met.",
+"The two groups had unequal sample sizes, which means parametric tests cannot be used as they require equal numbers of observations in each group.",
+answer = "The seed count data remained significantly non-normal after log transformation (p = 0.019), meaning the parametric assumption of normality could not be met and a rank-based alternative was needed.",
+"A t-test requires both variables to be continuous, but seed count is a discrete count variable so a non-parametric test must be used instead."
+))`
+
+::: {.callout-note}
+**Writing up the result:**
+
+When reporting a Wilcoxon rank-sum test, include the W statistic, the p-value, and the direction of the difference. Because the test is based on ranks rather than raw values, report the **median** rather than the mean:
+
+```{r, echo=FALSE}
+bird_data %>%
+  group_by(habitat) %>%
+  summarise(median_seed_count = median(seed_count))
+```
+
+*"Seed counts were significantly higher in ancient woodland than plantation woodland (Wilcoxon rank-sum: W = 597.5, p = 0.027). Median seed count was 5 in ancient woodland compared to 3 in plantation woodland."*
+:::
+
+**When writing up the result of a Wilcoxon rank-sum test, which measure of centre should you report?**
+
+`r longmcq(c(
+answer = "The median — because the Wilcoxon rank-sum test is based on ranks and the median is a more appropriate measure of centre for non-normal data.",
+"The mean, because it is always the standard measure of centre in biology.",
+"Both the mean and the median.",
+"Neither, non-parametric tests do not require a measure of centre."
+))`
+
+
+
+**Across both analyses in this case study, we used two different tests. Which statement best summarises the decision-making process?**
+
+`r longmcq(c(
+"We used a t-test for territory count because it is more powerful, and a Wilcoxon test for seed count because it is simpler to interpret.",
+answer = "The choice of test was driven by whether the data could be transformed to meet normality — territory count was successfully log-transformed and analysed with a t-test, while seed count could not be normalised and required a Wilcoxon rank-sum test.",
+"Both tests were chosen before looking at the data — the t-test for continuous variables and the Wilcoxon test for count variables.",
+"The choice of test was arbitrary — both tests would have given the same result regardless of which variable was analysed."
+))`
+
+**What is the single most important lesson from this case study?**
+
+`r longmcq(c(
+answer = "Always check assumptions before choosing a test, and be prepared to adapt your approach. the biological question is fixed but the statistical method should fit the data.",
+"Always use non-parametric tests to avoid having to check assumptions.",
+"Always use parametric tests because they are more powerful than non-parametric alternatives.",
+"The choice of statistical test does not affect the biological conclusion."
+))`
