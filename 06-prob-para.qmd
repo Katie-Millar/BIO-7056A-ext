@@ -34,12 +34,12 @@ mice_parasites <- read.csv("data/mouse_parasite_counts.csv")
 
 In this workshop we will cover:
 
-1. **Type I and Type II errors** — what happens when we make the wrong decision about the null hypothesis
-2. **Data transformation** — what to do when the assumptions of a parametric test are violated, using the otter tick count data as a worked example
-3. **Non-parametric alternatives** — what to do when transformation does not work, including median tests, rank tests and patterns of deviation
-4. **Case study** — putting it all together using a woodland bird survey, working through the full decision-making process from checking assumptions to choosing and running the appropriate test
+1. **Type I and Type II errors**: what happens when we make the wrong decision about the null hypothesis
+2. **Data transformation**: — what to do when the assumptions of a parametric test are violated, using the otter tick count data as a worked example
+3. **Non-parametric alternatives**: — what to do when transformation does not work, including median tests, rank tests and patterns of deviation
+4. **Case study**: putting it all together using a woodland bird survey, working through the full decision-making process from checking assumptions to choosing and running the appropriate test
 
-By the end of this workshop you will be able to decide whether to transform your data, use a parametric test, or use a non-parametric alternative — and justify that decision.
+By the end of this workshop you will be able to decide whether to transform your data, use a parametric test, or use a non-parametric alternative, and justify that decision.
 
 ### Loading Packages
 Today you will need the packages: `tidyverse`, `janitor`, `car` and `patchwork`. It is a new workspace, so please install them and then load them in.
@@ -55,14 +55,13 @@ These are the two types of errors can occur when we are testing hypotheses, and 
 If we **reject** the null hypothesis when it is actually true, we have made a **Type I error**. 
  
 ### Type II Error
-If we **fail to reject** the null hypothesis when it is actually false, we have made a **Type II error**. 
+If we **fail to reject** the null hypothesis when it is actually false, we have made a **Type II error**. This is also known as a `r fitb(c("false negative", "false-negative"))` result. We miss a real effect that is actually there.
 
 **Bill Bailey, the well known bird lover, concluded that ancient woodland has more bird territories than plantation woodland, but in reality there is no difference. What type of error has been made?**
 
 `r mcq(c(answer = "Type I error", "Type II error"))`
 
-### Type II Error
-If we **fail to reject** the null hypothesis when it is actually false, we have made a **Type II error**. This is also known as a `r fitb(c("false negative", "false-negative"))` result — we miss a real effect that is actually there.
+If we **fail to reject** the null hypothesis when it is actually false, we have made a **Type II error**. This is also known as a `r fitb(c("false negative", "false-negative"))` result. We miss a real effect that is actually there.
 
 
 ## Transforming Data
@@ -80,7 +79,7 @@ When both assumptions are met, we can proceed with a **parametric test**. When t
 - Use a **non-parametric alternative** (covered in [Workshop 3](03-ext.qmd))
 - **Transform the data** to see whether the assumptions can be satisfied on a different scale
 
-This section focuses on the second option — data transformation.
+This section focuses on the second option; data transformation.
 
 ::: {.callout-note}
 **What is a transformation?**
@@ -100,17 +99,17 @@ A transformation applies a mathematical function to every value in a variable. T
 
 The most commonly used transformation in biology is the **log transformation**, which is particularly useful for count data such as tick counts or parasite counts, as seen in [Workshop 2](02-ext.qmd) and this workshop.
 
-What is written in the table may seem a bit daunting at first — the dropdown below explains each transformation in more detail.
+What is written in the table may seem a bit daunting at first, but the dropdown below explains each transformation in more detail.
 
 `r hide("Common transformations in more detail")`
 
-### Log Transformation
+**Log Transformation**
 
 A log transformation is used when your data are **right skewed**. As you may remember from the histograms in [Workshop 2](02-ext.qmd), right-skewed data have a long tail stretching to the right — most values are clustered at the low end, but a small number of very high values pull the tail outward.
 
 Log transformation works best when the data are:
 
-- **Right skewed** — as described above
+- **Right skewed**: as described above
 - **Counts or measurements that cannot be negative** — log transformation only works on positive values. Examples from our workshops include:
     - `parasite_count` from the wood mouse dataset — the number of parasites found on each mouse (discrete)
     - `tick_count` from the otter dataset — the number of ticks recorded on each otter (discrete)
@@ -119,7 +118,7 @@ Log transformation works best when the data are:
 
 ---
 
-### Square Root Transformation
+**Square Root Transformation**
 
 A square root transformation is a **milder** version of the log transformation. It is useful when the data are moderately right-skewed but the skew is not as extreme.
 
@@ -132,7 +131,7 @@ It works best for:
 
 ---
 
-### Reciprocal Transformation
+**Reciprocal Transformation**
 
 The reciprocal transformation (`1/x`) is the **strongest** of the three and is used only when the data are **extremely right skewed** — for example, reaction times or waiting times, where a few very large values dominate the distribution.
 
@@ -164,9 +163,11 @@ The key principle is to **check, transform, then check again**:
 
 ---
 
+We will first go through examples of how to do this together, you will then be tasked with applying the workflow to a new dataset in the exercise, and writing the code yourselves. 
+
 #### Step 1: Check the Original Data
 
-We will use the `tick_count` variable from the otter dataset — the number of ticks recorded on each otter during the survey. Like many count variables in biology, we might expect this to be right-skewed.
+We will use the `tick_count` variable from the otter dataset, this is the number of ticks recorded on each otter during the survey. 
 
 ```{r transform-original, fig.cap="Figure 1. Distribution of raw tick counts in otters.", fig.width=6, fig.height=4}
 ggplot(otter_data, aes(x = tick_count)) +
@@ -192,9 +193,11 @@ answer = "The data are strongly right-skewed, most otters have very few or no ti
 
 #### Step 2: Apply the Log Transformation
 
-```{r transform-apply}
+```{r}
 otter_data <- otter_data %>%
   mutate(log_tick_count = log(tick_count + 1))
+
+head(otter_data)
 # We use log(x + 1) because some otters have a tick count of 0
 # and log(0) is undefined
 ```
@@ -232,19 +235,19 @@ shapiro.test(otter_data$log_tick_count)
 **Comparing the two histograms, what effect has the log transformation had?**
 
 `r longmcq(c(
-"The transformation has made the distribution more right-skewed.",
-"The transformation has had no effect on the shape of the distribution.",
-answer = "The transformation has compressed the high values and pulled the long right tail back in, making the distribution more symmetrical.",
-"The transformation has removed all the zeros from the data."
+"The transformation has made the distribution more right-skewed by spreading the high values further apart from the low values.",
+"The transformation has had no effect on the shape of the distribution, both histograms look identical regardless of the scale used.",
+answer = "The transformation has pulled the long right tail back in, making the distribution more symmetrical and closer to normal.",
+"The transformation has removed all the zeros from the data, which is why the distribution looks different after transformation."
 ))`
 
 **Why do we use `log(tick_count + 1)` rather than `log(tick_count)`?**
 
 `r longmcq(c(
-"Because adding 1 makes the transformation more powerful.",
-"Because R cannot calculate log values for integers.",
-answer = "Because some otters have a tick count of 0, and log(0) is undefined — adding 1 ensures all values are positive before the transformation is applied.",
-"Because the tick counts need to be standardised first."
+"Adding 1 makes the transformation more powerful by increasing all values before the log is applied, which improves the shape of the distribution.",
+"R cannot calculate log values for integers, so adding 1 converts the counts to decimals that R can process correctly.",
+answer = "Some otters have a tick count of 0, and log(0) is undefined, adding 1 ensures all values are positive before the transformation is applied.",
+"The tick counts need to be standardised before transformation, and adding 1 shifts all values onto a comparable scale."
 ))`
 
 ---
@@ -266,45 +269,43 @@ t.test(log_tick_count ~ sex, data = otter_data, var.equal = TRUE)
 ::: {.callout-note}
 **Interpreting results on a transformed scale:**
 
-When you transform your data, your results are on the **transformed scale**. 
-For example, the t-test above compares `log(tick_count + 1)` between male and 
-female otters — the difference between groups is expressed in log units, not 
+When you transform your data, your results are on the **transformed scale**. For example, the t-test above compares `log(tick_count + 1)` between male and female otters. The difference between groups is expressed in log units, not 
 raw tick counts. This is worth mentioning when writing up your results.
 :::
 
 **If the Shapiro-Wilk test still returns p < 0.05 after log transformation, what should you do?**
 
 `r longmcq(c(
-"Try more transformations until p > 0.05.",
-answer = "Use a non-parametric alternative such as the Mann-Whitney U test or Kruskal-Wallis test, which do not require normality.",
-"Proceed with the parametric test anyway.",
-"Remove all outliers and rerun the transformation."
+"Keep trying different transformations such as square root or reciprocal until one produces a p-value above 0.05.",
+answer = "Use a non-parametric alternative such as the Mann-Whitney U test or Kruskal-Wallis test, which do not require the data to be normally distributed.",
+"Proceed with the parametric test anyway, as a single failed Shapiro-Wilk test is not sufficient reason to abandon a parametric approach.",
+"Remove any outliers from the dataset and rerun the transformation, as extreme values are likely causing the test to fail."
 ))`
 
 ::: {.callout-warning}
 **Transformation is not always the answer.**
-
 If the data are still non-normal after transformation, do not keep trying different transformations until one works. Instead, use a non-parametric test. Refer back to the parametric vs non-parametric table in [Workshop 3](03-ext.qmd).
 :::
 
-Complete the workflow below by filling in the blanks:
+**Complete the workflow below by filling in the blanks:**
 
-We have just done a histogram on the original data. The second step is to check `r fitb(c("normality", "the normality"))` of the original data using the `r fitb(c("Shapiro-Wilk", "shaprio wilk", "shapiro-wilk"))` test.
+We have just done a histogram on the original data. The next step is to formally check `r fitb(c("normality", "the normality"))` of the original data using the `r fitb(c("Shapiro-Wilk", "shapiro wilk", "shapiro-wilk", "Shapiro Wilk"))` test.
 
 If the data fail this test, we apply a `r fitb(c("log+1", "log"))` transformation.
 
-If the transformed data pass (p `r fitb(">")` 0.05), we proceed with a `r fitb("parametric")` test.
+If the Shapiro-Wilk test on the transformed data returns a p-value `r fitb(c("greater than", "above", "over"))` 0.05, we proceed with a `r fitb("parametric")` test.
 
-If the transformed data still fail, we use a `r fitb("non-parametric")` test instead.
-
+If the transformed data still fail the Shapiro-Wilk test, we use a `r fitb(c("non-parametric", "nonparametric"))` test instead.
 
 ---
 
 ## When Transformation Does Not Work
 
-To illustrate that transformation does not always solve the problem, let us revisit the `parasite_count` variable from the wood mouse dataset in [Workshop 2](02-ext.qmd). This variable is also right-skewed, but has a much larger proportion of zeros — most mice had no parasites at all.
+To illustrate that transformation does not always solve the problem, let us revisit the `parasite_count` variable from the wood mouse dataset in [Workshop 2](02-ext.qmd). We found that this variable is also right-skewed, but has a much larger proportion of zeros, as most mice had no parasites at all.
 
-```{r transform-mice, fig.cap="Figure 3. Raw (left) vs log-transformed (right) parasite counts in wood mice. The large number of zeros means the transformation is less successful.", fig.width=10, fig.height=4}
+Let's compare the plots below to compare the raw and transformed parasite count variable. 
+
+```{r, fig.cap="Figure 3. Raw (left) vs log-transformed (right) parasite counts in wood mice. The large number of zeros means the transformation is less successful.", fig.width=10, fig.height=4}
 
 
 mice_parasites <- mice_parasites %>%
@@ -323,32 +324,34 @@ plot_mice_log <- ggplot(mice_parasites, aes(x = log_parasite_count)) +
   theme_minimal(base_size = 13)
 
 plot_mice_raw + plot_mice_log
+```
 
-# Shapiro-Wilk before and after
+
+We can also see this in the Shapiro-Wilk test results below, which show that the parasite count data are significantly non-normal both before and after log transformation (p < 0.05).
+```{r}
 shapiro.test(mice_parasites$parasite_count)
 shapiro.test(mice_parasites$log_parasite_count)
 ```
 
 ::: {.callout-note}
-Even after log transformation, the parasite count data remain significantly non-normal (p < 0.05). This is because the large number of zeros creates a spike at the left end of the distribution that transformation cannot remove. In this case, a **non-parametric test** would be the appropriate choice.
+Even after log transformation, the parasite count data remain significantly "non-normal" (p < 0.05). This is because the large number of zeros creates a spike at the left end of the distribution that transformation cannot remove. In this case, a **non-parametric test** would be the appropriate choice.
 
-This contrast between the tick count data (transformation successful) and the parasite count data (transformation unsuccessful) illustrates an important principle — **log transformation works best when zeros are relatively rare**.
+This contrast between the tick count data (transformation successful) and the parasite count data (transformation unsuccessful) illustrates an important principle:  **log transformation works best when zeros are relatively rare**.
 :::
 
 **Comparing the tick count and parasite count results, what is the key difference that determines whether log transformation is successful?**
 
 `r longmcq(c(
 answer = "The parasite count data contain a much larger proportion of zeros, which creates a spike that log transformation cannot remove — the tick count data have fewer zeros and transform more successfully.",
-"The parasite count data have a larger mean than the tick count data.",
-"Log transformation always works for count data regardless of the number of zeros.",
-"The tick count data are from a different species, which is why the transformation works better."
+"The tick count data have a smaller mean and lower variance than the parasite count data, which makes them easier to normalise regardless of their distribution.",
+"The parasite count data come from a different type of survey and were collected using a different method, which affects how well transformations work on the data.",
+"Log transformation always works for right-skewed count data — the parasite count transformation must have failed due to a coding error rather than a property of the data itself."
 ))`
 
 ## Non-Parametric Alternatives
 
 When transformation does not work, we can use a **non-parametric test** instead. Non-parametric tests do not assume that the data are normally distributed, and they make no assumptions about the distribution of the data at all. They do not 
-work by predicting the likely values of population parameters from sample 
-statistics.
+work by predicting the likely values of population parameters from sample statistics.
 
 If you remember from [Workshop 3](03-ext.qmd), we introduced the concept of non-parametric equivalents. The table below serves as a reminder:
 
@@ -366,12 +369,12 @@ If you remember from [Workshop 3](03-ext.qmd), we introduced the concept of non-
 ---
 
 
-As discussed in the [Main Workbook](https://ellenbell.github.io/7056Aworkshop-6---issues-with-probability-and-parametric-analysis.html), non-parametric tests achieve this in one of three ways:
-
-
+As discussed in the [Main Workbook](https://ellenbell.github.io/7056A/workshop-6---issues-with-probability-and-parametric-analysis.html), non-parametric tests achieve this in one of three ways:                          
+                 
+                    
 ### Median Tests
 
-Most parametric tests compare **means**: a t-test compares the mean of one group to the mean of another, an ANOVA compares the means of multiple groups, and linear regression asks whether the mean of one variable changes in relation to another. However, when the data are skewed, the mean is pulled in the direction of the skew and no longer represents where most of the data sit.
+Most parametric tests compare **means**. For example, a t-test compares the mean of one group to the mean of another, an ANOVA compares the means of multiple groups, and linear regression asks whether the mean of one variable changes in relation to another. However, when the data are skewed, the mean is pulled in the direction of the skew and no longer represents where most of the data sit.
 
 Rather than comparing means, median tests compare **medians**. Because the median is the middle value, it is far less affected by extreme values and skew. Use the tabs below to switch between the mean and median plots and see the difference:
 
@@ -427,17 +430,17 @@ mice_parasites %>%
 **Comparing the two tabs, what do you notice about the difference between the mean and median for each group?**
 
 `r longmcq(c(
-"The mean and median are identical for both groups, showing that it does not matter which measure of centre we use.",
-"The median is higher than the mean for both groups, showing that the median is more affected by extreme values.",
-answer = "The mean is higher than the median for both groups, showing that the mean is being pulled upward by the small number of mice with very high parasite counts. The median gives a more representative picture of the typical mouse.",
-"The mean and median differ only for female mice, showing that the difference is due to the distribution of parasite counts in each sex group."
+"The mean and median are identical for both groups, suggesting the parasite count data are symmetrically distributed around a central value.",
+"The median is higher than the mean for both groups, showing that the extreme values are pulling the median upward rather than the mean.",
+answer = "The mean is higher than the median for both groups, showing that the extreme values are pulling the mean upward — the median gives a more representative picture of the typical mouse.",
+"The mean and median differ only for female mice, suggesting that the distribution of parasite counts is skewed in females but not in males."
 ))`
 
 **Looking at the plot, why is the median a better measure of centre than the mean for this dataset?**
 
 `r longmcq(c(
 answer = "The median is unaffected by the small number of mice with very high parasite counts, making it a more representative summary of where most of the data sit.",
-"The mean is calculated incorrectly for count data — the median should always be used when working with whole numbers.",
+"The mean is calculated incorrectly for count data, the median should always be used when working with whole numbers.",
 "The median is always the better measure of centre regardless of the data type, as it is less sensitive to variation in the dataset.",
 "The mean and median are similar enough here that either would be an equally valid measure of centre for this dataset."
 ))`
@@ -459,7 +462,9 @@ mice_parasites %>%
   head(12)
 ```
 
-Rather than asking *"is the mean parasite count higher in males or females?"*, a rank test asks *"do males tend to have higher ranks than females?"* Use the tabs below to switch between the raw values and the ranked values:
+Rather than asking *"is the mean parasite count higher in males or females?"*, a rank test asks *"do males tend to have higher ranks than females?"*               
+                  
+Use the tabs below to switch between the raw values and the ranked values:
 
 ::: {.panel-tabset}
 
@@ -472,7 +477,7 @@ ggplot(mice_parasites, aes(x = sex, y = parasite_count, fill = sex)) +
   scale_y_continuous(limits = c(0, 60)) +
   labs(x = "Sex", y = "Parasite count",
        title = "Raw parasite counts by sex",
-       subtitle = "Actual values — affected by extreme observations") +
+       subtitle = "Actual values") +
   theme_minimal(base_size = 13) +
   theme(legend.position = "none")
 ```
@@ -488,7 +493,7 @@ mice_parasites %>%
   scale_y_continuous(limits = c(0, 60)) +
   labs(x = "Sex", y = "Rank position (1 to 60)",
        title = "Ranked parasite counts by sex",
-       subtitle = "Ranks — extreme values no longer dominate") +
+       subtitle = "Ranks") +
   theme_minimal(base_size = 13) +
   theme(legend.position = "none")
 ```
@@ -507,13 +512,13 @@ answer = "Ranking replaces each value with its position in order, so extreme val
 
 When comparing **two groups**, we use the **Wilcoxon rank-sum test** (also called the Mann-Whitney U test), the rank-based equivalent of a two-sample t-test:
 
-```{r, echo=FALSE}
+```{r}
 wilcox.test(parasite_count ~ sex, data = mice_parasites)
 ```
 
 When comparing **more than two groups**, we use the **Kruskal-Wallis test**. The rank-based equivalent of a one-way ANOVA.
 
-```{r, echo=FALSE}
+```{r}
 kruskal.test(spraints ~ site, data = otter_data)
 ```
 
@@ -521,7 +526,7 @@ kruskal.test(spraints ~ site, data = otter_data)
 ::: {.callout-note}
 **Understanding the test statistics:**
 
-- The **Mann-Whitney U test** produces a **W statistic**: if large enough relative to a critical value, it indicates a significant difference between the two groups. 
+- The **Wilcoxon rank-sum test** (also called the Mann-Whitney U test) produces a **W statistic**: if large enough relative to a critical value, it indicates a significant difference between the two groups. 
 - The **Kruskal-Wallis test** produces a **chi-squared statistic** (sometimes called H). The larger the value, the more evidence that at least one group has a 
 different rank distribution from the others
 
@@ -533,25 +538,28 @@ In both cases, the **p-value** tells us whether the result is statistically sign
 `r longmcq(c(
 answer = "A rank test replaces the actual values with their rank order, a parametric test uses the actual values and assumes they are normally distributed.",
 "A rank test always produces a smaller p-value than a parametric test, as it is more powerful.",
-"A rank test can only be used when the data are normally distributed, while a parametric test can be used with any distribution.",
+"A rank test can only be used when the data are normally distributed, while a parametric test can be used with any distribution making it more flexible and useable in this scenario.",
 "A rank test and a parametric test will always produce identical results, regardless of the data distribution."
 ))`
 
 **If the Kruskal-Wallis test returns a significant result, what does this tell us?**
+
 `r longmcq(c(
-"All groups are significantly different from each other.",
-"The data are normally distributed.",
-"We should use a parametric test instead.",
-answer = "At least one group has a significantly different rank distribution from the others."
+"All possible pairs of groups are significantly different from each other. The test compares every combination and flags those that differ.",
+"The data within each group are approximately normally distributed, meaning the parametric assumptions have been met after all.",
+"We should switch to a parametric test, as a significant Kruskal-Wallis result indicates the data are suitable for ANOVA.",
+answer = "At least one group has a significantly different rank distribution from the others, but a post-hoc test would be needed to identify which specific groups differ."
 ))`
 
 ---
 
 ### Patterns of Deviation
 
-Rather than looking at the **size** of differences, these methods look at the **direction** of differences. For example, do otters with higher fish availability tend to also have higher spraint counts? We are not asking by how much, just whether the two variables tend to move **together**.
-
-**Non-parametric tests for association:**
+Rather than looking at the **size** of differences, these methods look at the **direction** of differences. For example, do otters with higher fish availability tend to also have higher spraint counts? We are not asking by how much, just whether the two variables tend to move **together**.                  
+                                         
+                   
+             
+#### Non-parametric tests for association            
 
 When we want to measure the strength of association between two variables, we use a **correlation coefficient**. The most common parametric version is **Pearson's r**, which measures the strength and direction of a linear relationship between two continuous, normally distributed variables and ranges from -1 to 1.
 
@@ -560,14 +568,29 @@ When the data are not normally distributed, or have been collected as ranks, the
 **To remind ourselves about the parametric Pearson's r: What does a Pearson's r value of -0.85 tell us?**
 
 `r longmcq(c(
-answer = "There is a strong negative association between the two variables — as one increases, the other tends to decrease, and the relationship accounts for a large proportion of the variation.",
-"There is a strong positive association between the two variables.",
-"There is no meaningful association between the two variables.",
-"The relationship between the two variables is non-linear."
+answer = "There is a strong negative association between the two variables. As one increases, the other decreases.",
+"There is a strong positive association between the two variables, but the relationship is not linear.",
+"There is no meaningful association between the two variables, neither is linear.",
+"The relationship between the two variables is non-linear, and the correlation coefficient does not capture this relationship."
 ))`
 
+
+#### The difficulties of non-parametric tests
+
+Non-parametric tests might seem like an easy solution. If the assumptions are violated or transformation does not work, just switch to a non-parametric test right?! However, there are some important things to be aware of before doing this.
+
+
+When two or more observations share the same value, they are said to be **tied**. Most non-parametric tests are based on ranking, and ties create a problem because two observations cannot occupy the same rank position. R handles this automatically by assigning the **average rank** to tied values, but it is worth knowing this happens.
+
+#### Spearman's and Kendall's Correlation 
+So far in this section we have looked at tests for **differences between groups**: the Wilcoxon rank-sum test and the Kruskal-Wallis test. But what if we want to test for an **association between two variables**, just as we used linear regression in [Workshop 5](05-testing-and-measuring-relationships.qmd). 
+
+Both work by examining whether the **ranks** of the two variables tend to move together, rather than the raw values. 
+
+Let's have a look at a ranked version of the otter dataset, and visualise this with a scatterplot of the ranks of fish availability index against the ranks of spraint count: 
+
 ```{r, echo=FALSE, warning=FALSE}
-otter_data %>%
+ otter_data %>%
   select(otter_id, fish_index, spraints) %>%
   mutate(
     rank_fish     = rank(fish_index, ties.method = "average"),
@@ -590,9 +613,19 @@ otter_data %>%
   theme_minimal(base_size = 13)
 ```
 
-**Spearman's correlation** is the most commonly used non-parametric correlation in biology. It converts both variables to ranks and tests whether the ranks tend to move together:
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+**Looking at the plot, what does the pattern of ranks suggest about the relationship between fish availability and spraint count?**
+
+`r longmcq(c(
+"There is no association. The ranks are scattered randomly with no pattern, suggesting no relationship.",
+"There is a negative association. Otters in areas with higher ranked fish availability tend to have lower ranked spraint counts.",
+answer = "There is a positive association. Otters with higher ranked fish availability tend to have higher ranked spraint counts.",
+"The plot cannot tell us anything about association because the axes show ranks rather than raw values."
+))`
+
+Now we have seen how the ranks of the two variables relate to each other, we can formally test this using a non-parametric correlation. **Spearman's correlation** is the most commonly used non-parametric correlation in biology. It converts both variables to ranks and tests whether the ranks tend to move together:
+
+```{r}
 cor.test(otter_data$fish_index, otter_data$spraints,
          method = "spearman")
 ```
@@ -605,43 +638,34 @@ cor.test(otter_data$fish_index, otter_data$spraints,
 ```
 
 ::: {.callout-note}
-**Spearman's (ρ) and Kendall's (τ) correlation coefficients** both range 
-from -1 to 1, just like Pearson's r:
+**Spearman's (ρ) and Kendall's (τ) correlation coefficients** both range from -1 to 1, just like Pearson's r, the value has a specific meaning:
 
-- **1** — a perfect positive rank association
-- **0** — no association between the ranks
-- **-1** — a perfect negative rank association
+- **1**: a perfect positive rank association
+- **0**: no association between the ranks
+- **-1**: a perfect negative rank association
 
-Kendall's τ is typically slightly smaller in value than Spearman's ρ for the same data — this is normal and does not mean one is better than the other. Both lead to the same conclusion about statistical significance. 
-In practice, Spearman's is more commonly reported in biology, but either is acceptable.
 :::
 
 **What is the key difference between Spearman's and Pearson's correlation?**
 
 `r longmcq(c(
-answer = "Spearman's uses ranks rather than actual values, making it appropriate for non-normal data or ranked variables — Pearson's uses the actual values and assumes a linear relationship between normally distributed variables.",
-"Spearman's always produces a higher correlation coefficient than Pearson's.",
-"Pearson's can be used for any type of data, while Spearman's can only be used for ranked data.",
-"Spearman's and Pearson's always produce identical results."
+answer = "Spearman's converts the raw values to ranks before calculating the correlation, making it appropriate when data are not normally distributed or were collected as ranks.",
+"Spearman's always produces a higher correlation coefficient than Pearson's because ranking removes the influence of extreme values from the calculation.",
+"Pearson's can be used with any type of data regardless of distribution, while Spearman's can only be used when data have been explicitly collected as ranks.",
+"Spearman's and Pearson's always produce identical correlation coefficients because both measure the strength of association between two variables."
 ))`
 
 **When would you choose Kendall's correlation over Spearman's?**
 
 `r longmcq(c(
-answer = "When the sample size is small or there are many tied values in the data, as Kendall's handles these situations more reliably than Spearman's.",
-"When the data are normally distributed and a parametric test is appropriate.",
-"When you want a larger correlation coefficient than Spearman's would give.",
-"Kendall's and Spearman's are identical tests and there is never a reason to choose one over the other."
+"When the data are normally distributed, as Kendall's is specifically designed for parametric data unlike Spearman's.",
+"When you want a larger correlation coefficient, as Kendall's consistently produces higher values than Spearman's for the same data.",
+"There is never a reason to choose one over the other as both tests always produce identical results and conclusions.",
+answer = "When the sample size is small, as Kendall's tends to be more accurate than Spearman's when there are fewer observations to rank."
 ))`
 
 ---
 
-## The difficulties of non-parametric tests
-
-Non-parametric tests might seem like an easy solution. If the assumptions are violated or transformation does not work, just switch to a non-parametric test right?! However, there are some important things to be aware of before doing this.
-
-
-When two or more observations share the same value, they are said to be **tied**. Most non-parametric tests are based on ranking, and ties create a problem because two observations cannot occupy the same rank position. R handles this automatically by assigning the **average rank** to tied values, but it is worth knowing this happens.
 
 **If three mice all have a parasite count of 0 and would occupy ranks 1, 2 and 3, what rank does each receive when ties are handled by averaging?**
 
@@ -670,18 +694,6 @@ Do **not** use a non-parametric test simply because it is easier or to avoid che
 
 ---
 
-## What Comes Next?
-
-A more flexible framework called **Generalised Linear Models (GLMs)** extends the logic of linear regression to handle a much wider range of data types and distributions. This is what you will explore in the next module.
-
-**Which of the following situations would a Generalised Linear Model be more appropriate for than a standard linear regression?**
-
-`r longmcq(c(
-answer = "Modelling the number of parasites found on a mouse, because count data are always zero or above and standard linear regression can predict negative values, which is not possible for counts.",
-"Modelling the body mass of otters, because body mass is a continuous variable that is approximately normally distributed.",
-"Modelling the difference in species richness between two grassland treatments, because a t-test would be simpler.",
-"Modelling fish availability index as a predictor of spraint count, because both variables are continuous."
-))`
 
 
 ## Case Study: Using it in Action 
@@ -989,7 +1001,7 @@ bird_data %>%
 **When writing up the result of a Wilcoxon rank-sum test, which measure of centre should you report?**
 
 `r longmcq(c(
-answer = "The median — because the Wilcoxon rank-sum test is based on ranks and the median is a more appropriate measure of centre for non-normal data.",
+answer = "The median, because the Wilcoxon rank-sum test is based on ranks and the median is a more appropriate measure of centre for non-normal data.",
 "The mean, because it is always the standard measure of centre in biology.",
 "Both the mean and the median.",
 "Neither, non-parametric tests do not require a measure of centre."
@@ -1001,16 +1013,16 @@ answer = "The median — because the Wilcoxon rank-sum test is based on ranks an
 
 `r longmcq(c(
 "We used a t-test for territory count because it is more powerful, and a Wilcoxon test for seed count because it is simpler to interpret.",
-answer = "The choice of test was driven by whether the data could be transformed to meet normality — territory count was successfully log-transformed and analysed with a t-test, while seed count could not be normalised and required a Wilcoxon rank-sum test.",
-"Both tests were chosen before looking at the data — the t-test for continuous variables and the Wilcoxon test for count variables.",
-"The choice of test was arbitrary — both tests would have given the same result regardless of which variable was analysed."
+answer = "The choice of test was driven by whether the data could be transformed to meet normality, territory count was successfully log-transformed and analysed with a t-test, while seed count could not be normalised and required a Wilcoxon rank-sum test.",
+"Both tests were chosen before looking at the data, the t-test for continuous variables and the Wilcoxon test for count variables.",
+"The choice of test was arbitrary, both tests would have given the same result regardless of which variable was analysed."
 ))`
 
 **What is the single most important lesson from this case study?**
 
 `r longmcq(c(
-answer = "Always check assumptions before choosing a test, and be prepared to adapt your approach. the biological question is fixed but the statistical method should fit the data.",
 "Always use non-parametric tests to avoid having to check assumptions.",
 "Always use parametric tests because they are more powerful than non-parametric alternatives.",
-"The choice of statistical test does not affect the biological conclusion."
+"The choice of statistical test does not affect the biological conclusion.", 
+answer = "Always check assumptions before choosing a test, and be prepared to adapt your approach."
 ))`

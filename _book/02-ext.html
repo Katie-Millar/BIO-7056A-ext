@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -79,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dda8771d043933e00db2387e2c02d373.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -413,7 +410,7 @@ The measure of asymmetry in the distribution of data. A positive skew indicates 
   ..   weight_g = col_double(),
   ..   parasite_count = col_double()
   .. )
- - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+ - attr(*, "problems")=&lt;pointer: 0xc431500b0&gt; </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mice_parasites) <span class="co"># summary of the data structure, tidyverse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -484,13 +481,13 @@ $ parasite_count &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 8, 1, 0, 0, 5, 0, 0, 1, 0, 0, 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mice_parasites) <span class="co"># summary of the data, Base R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   host_id              sex               weight_g     parasite_count  
- Length:60          Length:60          Min.   :13.00   Min.   : 0.000  
- Class :character   Class :character   1st Qu.:20.00   1st Qu.: 0.000  
- Mode  :character   Mode  :character   Median :21.05   Median : 0.500  
-                                       Mean   :21.55   Mean   : 3.417  
-                                       3rd Qu.:23.40   3rd Qu.: 4.000  
-                                       Max.   :28.20   Max.   :27.000  </code></pre>
+<pre><code>      host_id          sex        weight_g     parasite_count  
+ Length   :60   Length   :60   Min.   :13.00   Min.   : 0.000  
+ N.unique :60   N.unique : 2   1st Qu.:20.00   1st Qu.: 0.000  
+ N.blank  : 0   N.blank  : 0   Median :21.05   Median : 0.500  
+ Min.nchar: 4   Min.nchar: 1   Mean   :21.55   Mean   : 3.417  
+ Max.nchar: 4   Max.nchar: 1   3rd Qu.:23.40   3rd Qu.: 4.000  
+                               Max.   :28.20   Max.   :27.000  </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mice_parasites, sex) <span class="co"># frequency, janitor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -532,8 +529,8 @@ $ parasite_count &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 8, 1, 0, 0, 5, 0, 0, 1, 0, 0, 
 </div>
 <p>You can see that choosing a binwidth of 1 produces a large number of bars, which gives a more detailed view of the distribution. If we were to increase the binwidth, we would see fewer bars, and a smoother overview of the distribution.</p>
 <p><strong>What can we tell about where the data is concentrated? Is it skewed? If so, in which direction?</strong></p>
-<div id="radio_BBXCNKWWXN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BBXCNKWWXN" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_BBXCNKWWXN" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_BBXCNKWWXN" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_BBXCNKWWXN" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_PFTXBBVPAL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PFTXBBVPAL" value="answer"> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_PFTXBBVPAL" value=""> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_PFTXBBVPAL" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_PFTXBBVPAL" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -616,8 +613,8 @@ Show explanation
 </div>
 </div>
 <p><strong>In which direction is the data skewed?</strong></p>
-<div id="radio_QRQAVLJUMG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QRQAVLJUMG" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QRQAVLJUMG" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_QRQAVLJUMG" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_QRQAVLJUMG" value=""> <span>The data is bimodal with two equal peaks</span></label>
+<div id="radio_FHTHAIWYIB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FHTHAIWYIB" value=""> <span>The data is concentrated at low values (near 0), with a long right tail, positively (right) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_FHTHAIWYIB" value="answer"> <span>The data is concentrated at high values, with a long left tail, negatively (left) skewed</span></label><label><input type="radio" autocomplete="off" name="radio_FHTHAIWYIB" value=""> <span>The data is symmetric with no skew</span></label><label><input type="radio" autocomplete="off" name="radio_FHTHAIWYIB" value=""> <span>The data is bimodal with two equal peaks</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -771,8 +768,8 @@ attr(,"freq")
 </div>
 </div>
 <p><strong>What can we tell from this plot?</strong></p>
-<div id="radio_QFMSLZVQRJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QFMSLZVQRJ" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_QFMSLZVQRJ" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_QFMSLZVQRJ" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
+<div id="radio_UXXEBMJZNU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UXXEBMJZNU" value=""> <span>Parasite count increases steadily and linearly with weight</span></label><label><input type="radio" autocomplete="off" name="radio_UXXEBMJZNU" value="answer"> <span>Most mice have low parasite counts regardless of weight, with a handful of higher-count outliers around 20 to 24g</span></label><label><input type="radio" autocomplete="off" name="radio_UXXEBMJZNU" value=""> <span>Weight has no effect on parasite count at all, since every mouse has exactly the same count</span></label>
 </div>
 
 
@@ -1160,16 +1157,16 @@ window.onload = function() {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
-        for (let i=0; i<cellDetails.length; i++) {
-          const details = cellDetails[i];
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
