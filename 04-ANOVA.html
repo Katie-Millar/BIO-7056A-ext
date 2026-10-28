@@ -2,24 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-21">
+<meta name="dcterms.date" content="2026-10-28">
 
 <title>4&nbsp; Workshop 4 - Introduction to Design and Analysis of Experiments – Statistics for Biologists - Extension Coursebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -80,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dda8771d043933e00db2387e2c02d373.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -226,8 +223,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./06-prob-para.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Workshop 6 - Issues with Probability and Parametric Analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -295,7 +304,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 21, 2026</p>
+      <p class="date">October 28, 2026</p>
     </div>
   </div>
   
@@ -1793,16 +1802,16 @@ window.onload = function() {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
-        for (let i=0; i<cellDetails.length; i++) {
-          const details = cellDetails[i];
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -2819,397 +2828,394 @@ window.onload = function() {
 <span id="cb29-655"><a href="#cb29-655" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-656"><a href="#cb29-656" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Null Hypothesis</span></span>
 <span id="cb29-657"><a href="#cb29-657" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-658"><a href="#cb29-658" aria-hidden="true" tabindex="-1"></a>Like all statistical tests, ANOVA starts with a **null hypothesis**: a statement </span>
-<span id="cb29-659"><a href="#cb29-659" aria-hidden="true" tabindex="-1"></a>that there is no effect or difference. In the context of ANOVA, the null hypothesis </span>
-<span id="cb29-660"><a href="#cb29-660" aria-hidden="true" tabindex="-1"></a>states that:</span>
-<span id="cb29-661"><a href="#cb29-661" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-662"><a href="#cb29-662" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *All treatment means are equal.*</span></span>
-<span id="cb29-663"><a href="#cb29-663" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-664"><a href="#cb29-664" aria-hidden="true" tabindex="-1"></a>If the probability of this being true is less than 1 in 20 (p &lt; 0.05), we reject </span>
-<span id="cb29-665"><a href="#cb29-665" aria-hidden="true" tabindex="-1"></a>the null hypothesis and conclude that at least one treatment mean is different from </span>
-<span id="cb29-666"><a href="#cb29-666" aria-hidden="true" tabindex="-1"></a>the others.</span>
+<span id="cb29-658"><a href="#cb29-658" aria-hidden="true" tabindex="-1"></a>Like all statistical tests, ANOVA starts with a **null hypothesis**: a statement that there is no effect or difference. In the context of ANOVA, the null hypothesis </span>
+<span id="cb29-659"><a href="#cb29-659" aria-hidden="true" tabindex="-1"></a>states that:</span>
+<span id="cb29-660"><a href="#cb29-660" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-661"><a href="#cb29-661" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *All treatment means are equal.*</span></span>
+<span id="cb29-662"><a href="#cb29-662" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-663"><a href="#cb29-663" aria-hidden="true" tabindex="-1"></a>If the probability of this being true is less than 1 in 20 (p &lt; 0.05), we reject the null hypothesis and conclude that at least one treatment mean is different from the others.</span>
+<span id="cb29-664"><a href="#cb29-664" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-665"><a href="#cb29-665" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If p is significant, the null hypothesis is rejected.*</span></span>
+<span id="cb29-666"><a href="#cb29-666" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-667"><a href="#cb29-667" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-668"><a href="#cb29-668" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *If p is significant, the null hypothesis is rejected.*</span></span>
+<span id="cb29-668"><a href="#cb29-668" aria-hidden="true" tabindex="-1"></a>**In our grassland experiment, we are testing whether vegetation treatment affects species richness. What is the null hypothesis?**</span>
 <span id="cb29-669"><a href="#cb29-669" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-670"><a href="#cb29-670" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-671"><a href="#cb29-671" aria-hidden="true" tabindex="-1"></a>**In our grassland experiment, we are testing whether vegetation treatment affects species richness. What is the null hypothesis?**</span>
-<span id="cb29-672"><a href="#cb29-672" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-673"><a href="#cb29-673" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("At least one treatment produces a different mean species richness.", "Species richness is normally distributed within each treatment group.", "The variances of all four treatment groups are equal.", answer = "All four treatment means are equal, there is no difference in species richness between Control, Autumn Cut, Spring Burn and Sheep Grazing."))`</span></span>
-<span id="cb29-674"><a href="#cb29-674" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-675"><a href="#cb29-675" aria-hidden="true" tabindex="-1"></a>**If p = 0.032 in an ANOVA, what do we conclude?**</span>
+<span id="cb29-670"><a href="#cb29-670" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("At least one treatment produces a different mean species richness.", "Species richness is normally distributed within each treatment group.", "The variances of all four treatment groups are equal.", answer = "All four treatment means are equal, there is no difference in species richness between Control, Autumn Cut, Spring Burn and Sheep Grazing."))`</span></span>
+<span id="cb29-671"><a href="#cb29-671" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-672"><a href="#cb29-672" aria-hidden="true" tabindex="-1"></a>**If p = 0.032 in an ANOVA, what do we conclude?**</span>
+<span id="cb29-673"><a href="#cb29-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-674"><a href="#cb29-674" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "We reject the null hypothesis: at least one treatment mean is significantly different from the others.", "We accept the null hypothesis: all treatment means are equal.", "We conclude that all treatments are significantly different from each other.", "We conclude that the data are not normally distributed."))`</span></span>
+<span id="cb29-675"><a href="#cb29-675" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-676"><a href="#cb29-676" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-677"><a href="#cb29-677" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "We reject the null hypothesis: at least one treatment mean is significantly different from the others.", "We accept the null hypothesis: all treatment means are equal.", "We conclude that all treatments are significantly different from each other.", "We conclude that the data are not normally distributed."))`</span></span>
+<span id="cb29-677"><a href="#cb29-677" aria-hidden="true" tabindex="-1"></a><span class="fu">### How Does ANOVA Work?</span></span>
 <span id="cb29-678"><a href="#cb29-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-679"><a href="#cb29-679" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-680"><a href="#cb29-680" aria-hidden="true" tabindex="-1"></a><span class="fu">### How Does ANOVA Work?</span></span>
-<span id="cb29-681"><a href="#cb29-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-682"><a href="#cb29-682" aria-hidden="true" tabindex="-1"></a>ANOVA works by comparing two types of variation in the data:</span>
-<span id="cb29-683"><a href="#cb29-683" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-684"><a href="#cb29-684" aria-hidden="true" tabindex="-1"></a>**1. Within-group variance: the background noise**</span>
-<span id="cb29-685"><a href="#cb29-685" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-686"><a href="#cb29-686" aria-hidden="true" tabindex="-1"></a>Imagine you have 5 Control plots. You would expect them all to have a similar number </span>
-<span id="cb29-687"><a href="#cb29-687" aria-hidden="true" tabindex="-1"></a>of plant species, because they all received the same treatment. But in reality they </span>
-<span id="cb29-688"><a href="#cb29-688" aria-hidden="true" tabindex="-1"></a>will not be identical, one plot might have 8 species, another 10, another 7. This </span>
-<span id="cb29-689"><a href="#cb29-689" aria-hidden="true" tabindex="-1"></a>is the natural variation that exists even though the treatment was the same.</span>
-<span id="cb29-690"><a href="#cb29-690" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-691"><a href="#cb29-691" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Within-group variance measures how different plots are from each other within the </span></span>
-<span id="cb29-692"><a href="#cb29-692" aria-hidden="true" tabindex="-1"></a><span class="at">same treatment group, the natural background noise that exists regardless of </span></span>
-<span id="cb29-693"><a href="#cb29-693" aria-hidden="true" tabindex="-1"></a><span class="at">treatment.*</span></span>
-<span id="cb29-694"><a href="#cb29-694" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-695"><a href="#cb29-695" aria-hidden="true" tabindex="-1"></a>To calculate this, we look at how far each plot's value is from its **group mean**, </span>
-<span id="cb29-696"><a href="#cb29-696" aria-hidden="true" tabindex="-1"></a>square those differences (so that negative and positive differences do not cancel </span>
-<span id="cb29-697"><a href="#cb29-697" aria-hidden="true" tabindex="-1"></a>each other out), and add them all up. This is called the **within-group sum of </span>
-<span id="cb29-698"><a href="#cb29-698" aria-hidden="true" tabindex="-1"></a>squares (SSW)**.</span>
-<span id="cb29-699"><a href="#cb29-699" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-700"><a href="#cb29-700" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb29-701"><a href="#cb29-701" aria-hidden="true" tabindex="-1"></a>**Important:** a significant ANOVA result tells you that *at least one* treatment mean is different, but not *which* ones differ. For that, you need a **post-hoc test.**</span>
-<span id="cb29-702"><a href="#cb29-702" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb29-703"><a href="#cb29-703" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-704"><a href="#cb29-704" aria-hidden="true" tabindex="-1"></a>**Which of the following would contribute to within-group variance?**</span>
-<span id="cb29-705"><a href="#cb29-705" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-706"><a href="#cb29-706" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "Two Control plots having different species richness values, even though they received the same treatment.", "The mean species richness of Control plots being higher than the mean of Sheep Grazing plots.", "The F-ratio being greater than 1.", "The Shapiro-Wilk test returning p &gt; 0.05."))`</span></span>
-<span id="cb29-707"><a href="#cb29-707" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-708"><a href="#cb29-708" aria-hidden="true" tabindex="-1"></a>**If the within-group sum of squares is very large, what does this suggest?**</span>
+<span id="cb29-679"><a href="#cb29-679" aria-hidden="true" tabindex="-1"></a>ANOVA works by comparing two types of variation in the data:</span>
+<span id="cb29-680"><a href="#cb29-680" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-681"><a href="#cb29-681" aria-hidden="true" tabindex="-1"></a>**1. Within-group variance: the background noise**</span>
+<span id="cb29-682"><a href="#cb29-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-683"><a href="#cb29-683" aria-hidden="true" tabindex="-1"></a>Imagine you have 5 Control plots. You would expect them all to have a similar number </span>
+<span id="cb29-684"><a href="#cb29-684" aria-hidden="true" tabindex="-1"></a>of plant species, because they all received the same treatment. But in reality they </span>
+<span id="cb29-685"><a href="#cb29-685" aria-hidden="true" tabindex="-1"></a>will not be identical, one plot might have 8 species, another 10, another 7. This </span>
+<span id="cb29-686"><a href="#cb29-686" aria-hidden="true" tabindex="-1"></a>is the natural variation that exists even though the treatment was the same.</span>
+<span id="cb29-687"><a href="#cb29-687" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-688"><a href="#cb29-688" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Within-group variance measures how different plots are from each other within the </span></span>
+<span id="cb29-689"><a href="#cb29-689" aria-hidden="true" tabindex="-1"></a><span class="at">same treatment group, the natural background noise that exists regardless of </span></span>
+<span id="cb29-690"><a href="#cb29-690" aria-hidden="true" tabindex="-1"></a><span class="at">treatment.*</span></span>
+<span id="cb29-691"><a href="#cb29-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-692"><a href="#cb29-692" aria-hidden="true" tabindex="-1"></a>To calculate this, we look at how far each plot's value is from its **group mean**, </span>
+<span id="cb29-693"><a href="#cb29-693" aria-hidden="true" tabindex="-1"></a>square those differences (so that negative and positive differences do not cancel </span>
+<span id="cb29-694"><a href="#cb29-694" aria-hidden="true" tabindex="-1"></a>each other out), and add them all up. This is called the **within-group sum of </span>
+<span id="cb29-695"><a href="#cb29-695" aria-hidden="true" tabindex="-1"></a>squares (SSW)**.</span>
+<span id="cb29-696"><a href="#cb29-696" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-697"><a href="#cb29-697" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb29-698"><a href="#cb29-698" aria-hidden="true" tabindex="-1"></a>**Important:** a significant ANOVA result tells you that *at least one* treatment mean is different, but not *which* ones differ. For that, you need a **post-hoc test.**</span>
+<span id="cb29-699"><a href="#cb29-699" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-700"><a href="#cb29-700" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-701"><a href="#cb29-701" aria-hidden="true" tabindex="-1"></a>**Which of the following would contribute to within-group variance?**</span>
+<span id="cb29-702"><a href="#cb29-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-703"><a href="#cb29-703" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "Two Control plots having different species richness values, even though they received the same treatment.", "The mean species richness of Control plots being higher than the mean of Sheep Grazing plots.", "The F-ratio being greater than 1.", "The Shapiro-Wilk test returning p &gt; 0.05."))`</span></span>
+<span id="cb29-704"><a href="#cb29-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-705"><a href="#cb29-705" aria-hidden="true" tabindex="-1"></a>**If the within-group sum of squares is very large, what does this suggest?**</span>
+<span id="cb29-706"><a href="#cb29-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-707"><a href="#cb29-707" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("The treatments are having a strong effect on species richness.", answer = "There is a lot of natural background variation within treatment groups, plots receiving the same treatment are very different from each other.", "The F-ratio will be large and the result will be significant.", "The data are not normally distributed."))`</span></span>
+<span id="cb29-708"><a href="#cb29-708" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-709"><a href="#cb29-709" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-710"><a href="#cb29-710" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("The treatments are having a strong effect on species richness.", answer = "There is a lot of natural background variation within treatment groups, plots receiving the same treatment are very different from each other.", "The F-ratio will be large and the result will be significant.", "The data are not normally distributed."))`</span></span>
+<span id="cb29-710"><a href="#cb29-710" aria-hidden="true" tabindex="-1"></a>**2. Between-group variance: the treatment signal**</span>
 <span id="cb29-711"><a href="#cb29-711" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-712"><a href="#cb29-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-713"><a href="#cb29-713" aria-hidden="true" tabindex="-1"></a>**2. Between-group variance: the treatment signal**</span>
-<span id="cb29-714"><a href="#cb29-714" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-715"><a href="#cb29-715" aria-hidden="true" tabindex="-1"></a>Now imagine comparing the **average** species richness across the four treatment </span>
-<span id="cb29-716"><a href="#cb29-716" aria-hidden="true" tabindex="-1"></a>groups. If the treatments have no effect, these averages should all be similar. If </span>
-<span id="cb29-717"><a href="#cb29-717" aria-hidden="true" tabindex="-1"></a>treatments do have an effect, the averages will differ more than you would expect </span>
-<span id="cb29-718"><a href="#cb29-718" aria-hidden="true" tabindex="-1"></a>from background noise alone.</span>
-<span id="cb29-719"><a href="#cb29-719" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-720"><a href="#cb29-720" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Between-group variance measures how different the treatment group means are from each other: the signal we are hoping to detect.*</span></span>
-<span id="cb29-721"><a href="#cb29-721" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-722"><a href="#cb29-722" aria-hidden="true" tabindex="-1"></a>**Which of the following would contribute to between-group variance?**</span>
-<span id="cb29-723"><a href="#cb29-723" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-724"><a href="#cb29-724" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Two Control plots having slightly different species richness values.", "The standard deviation within the Autumn Cut group being large.", "The Shapiro-Wilk test returning p &lt; 0.05 for one group.", answer = "The mean species richness of Sheep Grazing plots (12.8) being much higher than the mean of Control plots (8.8)."))`</span></span>
-<span id="cb29-725"><a href="#cb29-725" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-726"><a href="#cb29-726" aria-hidden="true" tabindex="-1"></a>**If the between-group variance is similar in size to the within-group variance, what does this suggest?**</span>
+<span id="cb29-712"><a href="#cb29-712" aria-hidden="true" tabindex="-1"></a>Now imagine comparing the **average** species richness across the four treatment </span>
+<span id="cb29-713"><a href="#cb29-713" aria-hidden="true" tabindex="-1"></a>groups. If the treatments have no effect, these averages should all be similar. If </span>
+<span id="cb29-714"><a href="#cb29-714" aria-hidden="true" tabindex="-1"></a>treatments do have an effect, the averages will differ more than you would expect </span>
+<span id="cb29-715"><a href="#cb29-715" aria-hidden="true" tabindex="-1"></a>from background noise alone.</span>
+<span id="cb29-716"><a href="#cb29-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-717"><a href="#cb29-717" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Between-group variance measures how different the treatment group means are from each other: the signal we are hoping to detect.*</span></span>
+<span id="cb29-718"><a href="#cb29-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-719"><a href="#cb29-719" aria-hidden="true" tabindex="-1"></a>**Which of the following would contribute to between-group variance?**</span>
+<span id="cb29-720"><a href="#cb29-720" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-721"><a href="#cb29-721" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Two Control plots having slightly different species richness values.", "The standard deviation within the Autumn Cut group being large.", "The Shapiro-Wilk test returning p &lt; 0.05 for one group.", answer = "The mean species richness of Sheep Grazing plots (12.8) being much higher than the mean of Control plots (8.8)."))`</span></span>
+<span id="cb29-722"><a href="#cb29-722" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-723"><a href="#cb29-723" aria-hidden="true" tabindex="-1"></a>**If the between-group variance is similar in size to the within-group variance, what does this suggest?**</span>
+<span id="cb29-724"><a href="#cb29-724" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-725"><a href="#cb29-725" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("The treatments are definitely having a significant effect.", answer = "The treatments are probably not having a meaningful effect — the differences between group means are no larger than the background noise within groups.", "The data are normally distributed.", "The F-ratio will be much greater than 1."))`</span></span>
+<span id="cb29-726"><a href="#cb29-726" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-727"><a href="#cb29-727" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-728"><a href="#cb29-728" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("The treatments are definitely having a significant effect.", answer = "The treatments are probably not having a meaningful effect — the differences between group means are no larger than the background noise within groups.", "The data are normally distributed.", "The F-ratio will be much greater than 1."))`</span></span>
+<span id="cb29-728"><a href="#cb29-728" aria-hidden="true" tabindex="-1"></a><span class="fu">### The F-ratio</span></span>
 <span id="cb29-729"><a href="#cb29-729" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-730"><a href="#cb29-730" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-731"><a href="#cb29-731" aria-hidden="true" tabindex="-1"></a><span class="fu">### The F-ratio</span></span>
-<span id="cb29-732"><a href="#cb29-732" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-733"><a href="#cb29-733" aria-hidden="true" tabindex="-1"></a>ANOVA combines these two estimates into a single value called the **F-ratio**:</span>
-<span id="cb29-734"><a href="#cb29-734" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-735"><a href="#cb29-735" aria-hidden="true" tabindex="-1"></a>$$F = \frac{\text{Between-group variance}}{\text{Within-group variance}}$$</span>
+<span id="cb29-730"><a href="#cb29-730" aria-hidden="true" tabindex="-1"></a>ANOVA combines these two estimates into a single value called the **F-ratio**:</span>
+<span id="cb29-731"><a href="#cb29-731" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-732"><a href="#cb29-732" aria-hidden="true" tabindex="-1"></a>$$F = \frac{\text{Between-group variance}}{\text{Within-group variance}}$$</span>
+<span id="cb29-733"><a href="#cb29-733" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-734"><a href="#cb29-734" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the two variances are **similar in size**, F will be close to **1**, meaning the treatment signal is being drowned out by background noise</span>
+<span id="cb29-735"><a href="#cb29-735" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the between-group variance is **much larger** than the within-group variance, F will be **greater than 1** — the treatment signal stands out clearly</span>
 <span id="cb29-736"><a href="#cb29-736" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-737"><a href="#cb29-737" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the two variances are **similar in size**, F will be close to **1**, meaning the treatment signal is being drowned out by background noise</span>
-<span id="cb29-738"><a href="#cb29-738" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If the between-group variance is **much larger** than the within-group variance, F will be **greater than 1** — the treatment signal stands out clearly</span>
+<span id="cb29-737"><a href="#cb29-737" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *The larger the F-ratio, the more convincing the evidence that at least one treatment is producing a genuinely different result.*</span></span>
+<span id="cb29-738"><a href="#cb29-738" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-739"><a href="#cb29-739" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-740"><a href="#cb29-740" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *The larger the F-ratio, the more convincing the evidence that at least one treatment is producing a genuinely different result.*</span></span>
+<span id="cb29-740"><a href="#cb29-740" aria-hidden="true" tabindex="-1"></a>**If the F-ratio is close to 1, what does this tell us?**</span>
 <span id="cb29-741"><a href="#cb29-741" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-742"><a href="#cb29-742" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-743"><a href="#cb29-743" aria-hidden="true" tabindex="-1"></a>**If the F-ratio is close to 1, what does this tell us?**</span>
-<span id="cb29-744"><a href="#cb29-744" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-745"><a href="#cb29-745" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("The result is definitely significant.", "The null hypothesis is definitely true.", answer = "The between-group variance and within-group variance are similar in size, there is little evidence of a treatment effect.", "The data are not normally distributed."))`</span></span>
-<span id="cb29-746"><a href="#cb29-746" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-747"><a href="#cb29-747" aria-hidden="true" tabindex="-1"></a>**If the F-ratio is 15.3, what does this suggest?**</span>
-<span id="cb29-748"><a href="#cb29-748" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-749"><a href="#cb29-749" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The between-group variance is much larger than the within-group variance, there is strong evidence that at least one treatment is producing a different result.", "The p-value is definitely less than 0.05.", "All four treatment means are significantly different from each other.", "The within-group variance is larger than the between-group variance."))`</span></span>
-<span id="cb29-750"><a href="#cb29-750" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-751"><a href="#cb29-751" aria-hidden="true" tabindex="-1"></a>**A student says: 'A significant ANOVA result proves that Sheep Grazing produces higher species richness than all other treatments.' Is this correct?**</span>
+<span id="cb29-742"><a href="#cb29-742" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("The result is definitely significant.", "The null hypothesis is definitely true.", answer = "The between-group variance and within-group variance are similar in size, there is little evidence of a treatment effect.", "The data are not normally distributed."))`</span></span>
+<span id="cb29-743"><a href="#cb29-743" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-744"><a href="#cb29-744" aria-hidden="true" tabindex="-1"></a>**If the F-ratio is 15.3, what does this suggest?**</span>
+<span id="cb29-745"><a href="#cb29-745" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-746"><a href="#cb29-746" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The between-group variance is much larger than the within-group variance, there is strong evidence that at least one treatment is producing a different result.", "The p-value is definitely less than 0.05.", "All four treatment means are significantly different from each other.", "The within-group variance is larger than the between-group variance."))`</span></span>
+<span id="cb29-747"><a href="#cb29-747" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-748"><a href="#cb29-748" aria-hidden="true" tabindex="-1"></a>**A student says: 'A significant ANOVA result proves that Sheep Grazing produces higher species richness than all other treatments.' Is this correct?**</span>
+<span id="cb29-749"><a href="#cb29-749" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-750"><a href="#cb29-750" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Yes, a significant ANOVA result tells us exactly which treatments differ.", answer = "No, a significant ANOVA result only tells us that at least one treatment mean is different. We need a post-hoc test to find out which specific treatments differ from each other.", "Yes, the treatment with the highest mean is always significantly different from all others.", "No, a significant ANOVA result means none of the treatments differ."))`</span></span>
+<span id="cb29-751"><a href="#cb29-751" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-752"><a href="#cb29-752" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-753"><a href="#cb29-753" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Yes, a significant ANOVA result tells us exactly which treatments differ.", answer = "No, a significant ANOVA result only tells us that at least one treatment mean is different. We need a post-hoc test to find out which specific treatments differ from each other.", "Yes, the treatment with the highest mean is always significantly different from all others.", "No, a significant ANOVA result means none of the treatments differ."))`</span></span>
-<span id="cb29-754"><a href="#cb29-754" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-753"><a href="#cb29-753" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-754"><a href="#cb29-754" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb29-755"><a href="#cb29-755" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-756"><a href="#cb29-756" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-757"><a href="#cb29-757" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb29-758"><a href="#cb29-758" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-759"><a href="#cb29-759" aria-hidden="true" tabindex="-1"></a><span class="fu">## One-Way ANOVA</span></span>
-<span id="cb29-760"><a href="#cb29-760" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-761"><a href="#cb29-761" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb29-762"><a href="#cb29-762" aria-hidden="true" tabindex="-1"></a>A **one-way ANOVA** is used when you have **one factor** and want to test whether </span>
-<span id="cb29-763"><a href="#cb29-763" aria-hidden="true" tabindex="-1"></a>its levels produce different means. In our grassland experiment, that one factor is </span>
-<span id="cb29-764"><a href="#cb29-764" aria-hidden="true" tabindex="-1"></a>**treatment**.</span>
-<span id="cb29-765"><a href="#cb29-765" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb29-766"><a href="#cb29-766" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-767"><a href="#cb29-767" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 1: Read in and Check the Data</span></span>
+<span id="cb29-756"><a href="#cb29-756" aria-hidden="true" tabindex="-1"></a><span class="fu">## One-Way ANOVA</span></span>
+<span id="cb29-757"><a href="#cb29-757" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-758"><a href="#cb29-758" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb29-759"><a href="#cb29-759" aria-hidden="true" tabindex="-1"></a>A **one-way ANOVA** is used when you have **one factor** and want to test whether </span>
+<span id="cb29-760"><a href="#cb29-760" aria-hidden="true" tabindex="-1"></a>its levels produce different means. In our grassland experiment, that one factor is </span>
+<span id="cb29-761"><a href="#cb29-761" aria-hidden="true" tabindex="-1"></a>**treatment**.</span>
+<span id="cb29-762"><a href="#cb29-762" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-763"><a href="#cb29-763" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-764"><a href="#cb29-764" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 1: Read in and Check the Data</span></span>
+<span id="cb29-765"><a href="#cb29-765" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-766"><a href="#cb29-766" aria-hidden="true" tabindex="-1"></a>For the one-way ANOVA, we will use <span class="in">`grassland_species.csv`</span> — this dataset contains </span>
+<span id="cb29-767"><a href="#cb29-767" aria-hidden="true" tabindex="-1"></a>treatment and species richness only, with no soil type variable.</span>
 <span id="cb29-768"><a href="#cb29-768" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-769"><a href="#cb29-769" aria-hidden="true" tabindex="-1"></a>For the one-way ANOVA, we will use <span class="in">`grassland_species.csv`</span> — this dataset contains </span>
-<span id="cb29-770"><a href="#cb29-770" aria-hidden="true" tabindex="-1"></a>treatment and species richness only, with no soil type variable.</span>
-<span id="cb29-771"><a href="#cb29-771" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-772"><a href="#cb29-772" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-one-way}</span></span>
-<span id="cb29-773"><a href="#cb29-773" aria-hidden="true" tabindex="-1"></a>grassland_species <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/grassland_species.csv"</span>)</span>
-<span id="cb29-774"><a href="#cb29-774" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-775"><a href="#cb29-775" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-776"><a href="#cb29-776" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: data checks")`</span></span>
-<span id="cb29-777"><a href="#cb29-777" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-778"><a href="#cb29-778" aria-hidden="true" tabindex="-1"></a><span class="in">```{r check-one-way, results='hide'}</span></span>
-<span id="cb29-779"><a href="#cb29-779" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(grassland_species)</span>
-<span id="cb29-780"><a href="#cb29-780" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(grassland_species)</span>
-<span id="cb29-781"><a href="#cb29-781" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grassland_species)</span>
-<span id="cb29-782"><a href="#cb29-782" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(grassland_species)</span>
-<span id="cb29-783"><a href="#cb29-783" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grassland_species)</span>
-<span id="cb29-784"><a href="#cb29-784" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(grassland_species)</span>
-<span id="cb29-785"><a href="#cb29-785" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(grassland_species, treatment)</span>
-<span id="cb29-786"><a href="#cb29-786" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-787"><a href="#cb29-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-788"><a href="#cb29-788" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb29-789"><a href="#cb29-789" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-790"><a href="#cb29-790" aria-hidden="true" tabindex="-1"></a><span class="in">```{r clean-one-way}</span></span>
-<span id="cb29-791"><a href="#cb29-791" aria-hidden="true" tabindex="-1"></a>grassland_species_clean <span class="ot">&lt;-</span> grassland_species <span class="sc">%&gt;%</span></span>
-<span id="cb29-792"><a href="#cb29-792" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">as.factor</span>(</span>
-<span id="cb29-793"><a href="#cb29-793" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_to_lower</span>(<span class="fu">str_replace_all</span>(treatment, <span class="st">" "</span>, <span class="st">"_"</span>))))</span>
-<span id="cb29-794"><a href="#cb29-794" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-795"><a href="#cb29-795" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-796"><a href="#cb29-796" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2: Visualise the Data</span></span>
-<span id="cb29-797"><a href="#cb29-797" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-798"><a href="#cb29-798" aria-hidden="true" tabindex="-1"></a><span class="in">```{r one-way-boxplot, fig.cap="Figure 5. Species richness by treatment group."}</span></span>
-<span id="cb29-799"><a href="#cb29-799" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grassland_species_clean, </span>
-<span id="cb29-800"><a href="#cb29-800" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> richness, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb29-801"><a href="#cb29-801" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb29-802"><a href="#cb29-802" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb29-803"><a href="#cb29-803" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>, <span class="at">y =</span> <span class="st">"Species richness"</span>) <span class="sc">+</span></span>
-<span id="cb29-804"><a href="#cb29-804" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb29-805"><a href="#cb29-805" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb29-806"><a href="#cb29-806" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-769"><a href="#cb29-769" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-one-way}</span></span>
+<span id="cb29-770"><a href="#cb29-770" aria-hidden="true" tabindex="-1"></a>grassland_species <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/grassland_species.csv"</span>)</span>
+<span id="cb29-771"><a href="#cb29-771" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-772"><a href="#cb29-772" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-773"><a href="#cb29-773" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: data checks")`</span></span>
+<span id="cb29-774"><a href="#cb29-774" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-775"><a href="#cb29-775" aria-hidden="true" tabindex="-1"></a><span class="in">```{r check-one-way, results='hide'}</span></span>
+<span id="cb29-776"><a href="#cb29-776" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(grassland_species)</span>
+<span id="cb29-777"><a href="#cb29-777" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(grassland_species)</span>
+<span id="cb29-778"><a href="#cb29-778" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grassland_species)</span>
+<span id="cb29-779"><a href="#cb29-779" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(grassland_species)</span>
+<span id="cb29-780"><a href="#cb29-780" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grassland_species)</span>
+<span id="cb29-781"><a href="#cb29-781" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(grassland_species)</span>
+<span id="cb29-782"><a href="#cb29-782" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(grassland_species, treatment)</span>
+<span id="cb29-783"><a href="#cb29-783" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-784"><a href="#cb29-784" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-785"><a href="#cb29-785" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb29-786"><a href="#cb29-786" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-787"><a href="#cb29-787" aria-hidden="true" tabindex="-1"></a><span class="in">```{r clean-one-way}</span></span>
+<span id="cb29-788"><a href="#cb29-788" aria-hidden="true" tabindex="-1"></a>grassland_species_clean <span class="ot">&lt;-</span> grassland_species <span class="sc">%&gt;%</span></span>
+<span id="cb29-789"><a href="#cb29-789" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">as.factor</span>(</span>
+<span id="cb29-790"><a href="#cb29-790" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_to_lower</span>(<span class="fu">str_replace_all</span>(treatment, <span class="st">" "</span>, <span class="st">"_"</span>))))</span>
+<span id="cb29-791"><a href="#cb29-791" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-792"><a href="#cb29-792" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-793"><a href="#cb29-793" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2: Visualise the Data</span></span>
+<span id="cb29-794"><a href="#cb29-794" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-795"><a href="#cb29-795" aria-hidden="true" tabindex="-1"></a><span class="in">```{r one-way-boxplot, fig.cap="Figure 5. Species richness by treatment group."}</span></span>
+<span id="cb29-796"><a href="#cb29-796" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grassland_species_clean, </span>
+<span id="cb29-797"><a href="#cb29-797" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> richness, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb29-798"><a href="#cb29-798" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb29-799"><a href="#cb29-799" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb29-800"><a href="#cb29-800" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>, <span class="at">y =</span> <span class="st">"Species richness"</span>) <span class="sc">+</span></span>
+<span id="cb29-801"><a href="#cb29-801" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb29-802"><a href="#cb29-802" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb29-803"><a href="#cb29-803" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-804"><a href="#cb29-804" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-805"><a href="#cb29-805" aria-hidden="true" tabindex="-1"></a>**Based on the boxplot, which treatment appears to produce the highest species </span>
+<span id="cb29-806"><a href="#cb29-806" aria-hidden="true" tabindex="-1"></a>richness?**</span>
 <span id="cb29-807"><a href="#cb29-807" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-808"><a href="#cb29-808" aria-hidden="true" tabindex="-1"></a>**Based on the boxplot, which treatment appears to produce the highest species </span>
-<span id="cb29-809"><a href="#cb29-809" aria-hidden="true" tabindex="-1"></a>richness?**</span>
-<span id="cb29-810"><a href="#cb29-810" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-811"><a href="#cb29-811" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("control", "spring_burn", answer = "sheep_grazing", "autumn_cut"))`</span></span>
-<span id="cb29-812"><a href="#cb29-812" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-813"><a href="#cb29-813" aria-hidden="true" tabindex="-1"></a>**Which two treatments appear most similar to each other?**</span>
+<span id="cb29-808"><a href="#cb29-808" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("control", "spring_burn", answer = "sheep_grazing", "autumn_cut"))`</span></span>
+<span id="cb29-809"><a href="#cb29-809" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-810"><a href="#cb29-810" aria-hidden="true" tabindex="-1"></a>**Which two treatments appear most similar to each other?**</span>
+<span id="cb29-811"><a href="#cb29-811" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-812"><a href="#cb29-812" aria-hidden="true" tabindex="-1"></a>`r mcq(c(answer = "autumn_cut and sheep_grazing", "control and spring_burn", </span>
+<span id="cb29-813"><a href="#cb29-813" aria-hidden="true" tabindex="-1"></a>"control and autumn_cut", "spring_burn and sheep_grazing"))`</span>
 <span id="cb29-814"><a href="#cb29-814" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-815"><a href="#cb29-815" aria-hidden="true" tabindex="-1"></a>`r mcq(c(answer = "autumn_cut and sheep_grazing", "control and spring_burn", </span>
-<span id="cb29-816"><a href="#cb29-816" aria-hidden="true" tabindex="-1"></a>"control and autumn_cut", "spring_burn and sheep_grazing"))`</span>
-<span id="cb29-817"><a href="#cb29-817" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-818"><a href="#cb29-818" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
-<span id="cb29-819"><a href="#cb29-819" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-820"><a href="#cb29-820" aria-hidden="true" tabindex="-1"></a>Looking at the mean species richness values:</span>
-<span id="cb29-821"><a href="#cb29-821" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-822"><a href="#cb29-822" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Treatment <span class="pp">|</span> Mean species richness <span class="pp">|</span></span>
-<span id="cb29-823"><a href="#cb29-823" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
-<span id="cb29-824"><a href="#cb29-824" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> control <span class="pp">|</span> 8.8 <span class="pp">|</span></span>
-<span id="cb29-825"><a href="#cb29-825" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> spring_burn <span class="pp">|</span> 8.4 <span class="pp">|</span></span>
-<span id="cb29-826"><a href="#cb29-826" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> autumn_cut <span class="pp">|</span> 12.6 <span class="pp">|</span></span>
-<span id="cb29-827"><a href="#cb29-827" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> sheep_grazing <span class="pp">|</span> 12.8 <span class="pp">|</span></span>
-<span id="cb29-828"><a href="#cb29-828" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-829"><a href="#cb29-829" aria-hidden="true" tabindex="-1"></a>**Autumn Cut** and **Sheep Grazing** are only 0.2 species apart, while **Control** </span>
-<span id="cb29-830"><a href="#cb29-830" aria-hidden="true" tabindex="-1"></a>and **Spring Burn** also sit close together at the lower end. This suggests the </span>
-<span id="cb29-831"><a href="#cb29-831" aria-hidden="true" tabindex="-1"></a>treatments fall into two broad groups — which a post-hoc test will confirm.</span>
-<span id="cb29-832"><a href="#cb29-832" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-833"><a href="#cb29-833" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb29-834"><a href="#cb29-834" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-835"><a href="#cb29-835" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3: Check Assumptions</span></span>
-<span id="cb29-836"><a href="#cb29-836" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-837"><a href="#cb29-837" aria-hidden="true" tabindex="-1"></a><span class="in">```{r one-way-assumptions}</span></span>
-<span id="cb29-838"><a href="#cb29-838" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro-Wilk test</span></span>
-<span id="cb29-839"><a href="#cb29-839" aria-hidden="true" tabindex="-1"></a>grassland_species_clean <span class="sc">%&gt;%</span></span>
-<span id="cb29-840"><a href="#cb29-840" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb29-841"><a href="#cb29-841" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb29-842"><a href="#cb29-842" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>statistic,</span>
-<span id="cb29-843"><a href="#cb29-843" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>p.value</span>
-<span id="cb29-844"><a href="#cb29-844" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-845"><a href="#cb29-845" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-846"><a href="#cb29-846" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's test</span></span>
-<span id="cb29-847"><a href="#cb29-847" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(richness <span class="sc">~</span> treatment, <span class="at">data =</span> grassland_species_clean)</span>
-<span id="cb29-848"><a href="#cb29-848" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-849"><a href="#cb29-849" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-850"><a href="#cb29-850" aria-hidden="true" tabindex="-1"></a>**What does a Shapiro-Wilk p-value above 0.05 tell us?**</span>
-<span id="cb29-851"><a href="#cb29-851" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-852"><a href="#cb29-852" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The data within that group are approximately normally distributed, so the normality assumption is satisfied.", "The data are significantly non-normal and a non-parametric test must be used.", "The variances between groups are equal.", "The ANOVA result will definitely be significant."))`</span></span>
-<span id="cb29-853"><a href="#cb29-853" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-854"><a href="#cb29-854" aria-hidden="true" tabindex="-1"></a>**What does Levene's test assess, and what does a p-value above 0.05 indicate?**</span>
-<span id="cb29-855"><a href="#cb29-855" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-856"><a href="#cb29-856" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "Levene's test checks whether the variances across treatment groups are approximately equal; a p-value above 0.05 suggests the equal variances assumption is satisfied.", "Levene's test checks whether the data are normally distributed.", "Levene's test checks whether the treatment means are significantly different.", "Levene's test checks whether the sample sizes are equal across groups."))`</span></span>
-<span id="cb29-857"><a href="#cb29-857" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-858"><a href="#cb29-858" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4: Run the One-Way ANOVA</span></span>
-<span id="cb29-859"><a href="#cb29-859" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-860"><a href="#cb29-860" aria-hidden="true" tabindex="-1"></a><span class="in">```{r one-way-anova}</span></span>
-<span id="cb29-861"><a href="#cb29-861" aria-hidden="true" tabindex="-1"></a>anova_one_way <span class="ot">&lt;-</span> <span class="fu">aov</span>(richness <span class="sc">~</span> treatment, <span class="at">data =</span> grassland_species_clean)</span>
-<span id="cb29-862"><a href="#cb29-862" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_one_way)</span>
-<span id="cb29-863"><a href="#cb29-863" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-864"><a href="#cb29-864" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-865"><a href="#cb29-865" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> What it means <span class="pp">|</span></span>
-<span id="cb29-866"><a href="#cb29-866" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
-<span id="cb29-867"><a href="#cb29-867" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Df`</span> <span class="pp">|</span> Degrees of freedom <span class="pp">|</span></span>
-<span id="cb29-868"><a href="#cb29-868" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Sum Sq`</span> <span class="pp">|</span> Sum of squares <span class="pp">|</span></span>
-<span id="cb29-869"><a href="#cb29-869" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Mean Sq`</span> <span class="pp">|</span> Mean square (Sum Sq / Df) <span class="pp">|</span></span>
-<span id="cb29-870"><a href="#cb29-870" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`F value`</span> <span class="pp">|</span> The F-ratio <span class="pp">|</span></span>
-<span id="cb29-871"><a href="#cb29-871" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Pr(&gt;F)`</span> <span class="pp">|</span> The p-value <span class="pp">|</span></span>
-<span id="cb29-872"><a href="#cb29-872" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-873"><a href="#cb29-873" aria-hidden="true" tabindex="-1"></a>**If the p-value is less than 0.05, what can we conclude?**</span>
-<span id="cb29-874"><a href="#cb29-874" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-875"><a href="#cb29-875" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "At least one treatment mean is significantly different from the others, but we do not yet know which ones differ.", "All treatment means are significantly different from each other.", "The null hypothesis is definitely true.", "We should use a non-parametric test instead."))`</span></span>
-<span id="cb29-876"><a href="#cb29-876" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-877"><a href="#cb29-877" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb29-878"><a href="#cb29-878" aria-hidden="true" tabindex="-1"></a>A significant one-way ANOVA tells us **at least one** treatment differs — but not </span>
-<span id="cb29-879"><a href="#cb29-879" aria-hidden="true" tabindex="-1"></a>which ones. We will cover post-hoc tests shortly.</span>
-<span id="cb29-880"><a href="#cb29-880" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb29-881"><a href="#cb29-881" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-882"><a href="#cb29-882" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb29-883"><a href="#cb29-883" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-884"><a href="#cb29-884" aria-hidden="true" tabindex="-1"></a><span class="fu">## Two-Way ANOVA</span></span>
-<span id="cb29-885"><a href="#cb29-885" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-886"><a href="#cb29-886" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb29-887"><a href="#cb29-887" aria-hidden="true" tabindex="-1"></a>A **two-way ANOVA** is used when you have **two factors** and want to test not only </span>
-<span id="cb29-888"><a href="#cb29-888" aria-hidden="true" tabindex="-1"></a>whether each factor has an effect, but whether the two factors **interact** with each </span>
-<span id="cb29-889"><a href="#cb29-889" aria-hidden="true" tabindex="-1"></a>other — in other words, whether the effect of one factor depends on the level of the </span>
-<span id="cb29-890"><a href="#cb29-890" aria-hidden="true" tabindex="-1"></a>other.</span>
-<span id="cb29-891"><a href="#cb29-891" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb29-892"><a href="#cb29-892" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-893"><a href="#cb29-893" aria-hidden="true" tabindex="-1"></a>In our grassland experiment, we now have two factors:</span>
+<span id="cb29-815"><a href="#cb29-815" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
+<span id="cb29-816"><a href="#cb29-816" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-817"><a href="#cb29-817" aria-hidden="true" tabindex="-1"></a>Looking at the mean species richness values:</span>
+<span id="cb29-818"><a href="#cb29-818" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-819"><a href="#cb29-819" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Treatment <span class="pp">|</span> Mean species richness <span class="pp">|</span></span>
+<span id="cb29-820"><a href="#cb29-820" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb29-821"><a href="#cb29-821" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> control <span class="pp">|</span> 8.8 <span class="pp">|</span></span>
+<span id="cb29-822"><a href="#cb29-822" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> spring_burn <span class="pp">|</span> 8.4 <span class="pp">|</span></span>
+<span id="cb29-823"><a href="#cb29-823" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> autumn_cut <span class="pp">|</span> 12.6 <span class="pp">|</span></span>
+<span id="cb29-824"><a href="#cb29-824" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> sheep_grazing <span class="pp">|</span> 12.8 <span class="pp">|</span></span>
+<span id="cb29-825"><a href="#cb29-825" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-826"><a href="#cb29-826" aria-hidden="true" tabindex="-1"></a>**Autumn Cut** and **Sheep Grazing** are only 0.2 species apart, while **Control** </span>
+<span id="cb29-827"><a href="#cb29-827" aria-hidden="true" tabindex="-1"></a>and **Spring Burn** also sit close together at the lower end. This suggests the </span>
+<span id="cb29-828"><a href="#cb29-828" aria-hidden="true" tabindex="-1"></a>treatments fall into two broad groups — which a post-hoc test will confirm.</span>
+<span id="cb29-829"><a href="#cb29-829" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-830"><a href="#cb29-830" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb29-831"><a href="#cb29-831" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-832"><a href="#cb29-832" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3: Check Assumptions</span></span>
+<span id="cb29-833"><a href="#cb29-833" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-834"><a href="#cb29-834" aria-hidden="true" tabindex="-1"></a><span class="in">```{r one-way-assumptions}</span></span>
+<span id="cb29-835"><a href="#cb29-835" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro-Wilk test</span></span>
+<span id="cb29-836"><a href="#cb29-836" aria-hidden="true" tabindex="-1"></a>grassland_species_clean <span class="sc">%&gt;%</span></span>
+<span id="cb29-837"><a href="#cb29-837" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
+<span id="cb29-838"><a href="#cb29-838" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb29-839"><a href="#cb29-839" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>statistic,</span>
+<span id="cb29-840"><a href="#cb29-840" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>p.value</span>
+<span id="cb29-841"><a href="#cb29-841" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-842"><a href="#cb29-842" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-843"><a href="#cb29-843" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's test</span></span>
+<span id="cb29-844"><a href="#cb29-844" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(richness <span class="sc">~</span> treatment, <span class="at">data =</span> grassland_species_clean)</span>
+<span id="cb29-845"><a href="#cb29-845" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-846"><a href="#cb29-846" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-847"><a href="#cb29-847" aria-hidden="true" tabindex="-1"></a>**What does a Shapiro-Wilk p-value above 0.05 tell us?**</span>
+<span id="cb29-848"><a href="#cb29-848" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-849"><a href="#cb29-849" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The data within that group are approximately normally distributed, so the normality assumption is satisfied.", "The data are significantly non-normal and a non-parametric test must be used.", "The variances between groups are equal.", "The ANOVA result will definitely be significant."))`</span></span>
+<span id="cb29-850"><a href="#cb29-850" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-851"><a href="#cb29-851" aria-hidden="true" tabindex="-1"></a>**What does Levene's test assess, and what does a p-value above 0.05 indicate?**</span>
+<span id="cb29-852"><a href="#cb29-852" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-853"><a href="#cb29-853" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "Levene's test checks whether the variances across treatment groups are approximately equal; a p-value above 0.05 suggests the equal variances assumption is satisfied.", "Levene's test checks whether the data are normally distributed.", "Levene's test checks whether the treatment means are significantly different.", "Levene's test checks whether the sample sizes are equal across groups."))`</span></span>
+<span id="cb29-854"><a href="#cb29-854" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-855"><a href="#cb29-855" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4: Run the One-Way ANOVA</span></span>
+<span id="cb29-856"><a href="#cb29-856" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-857"><a href="#cb29-857" aria-hidden="true" tabindex="-1"></a><span class="in">```{r one-way-anova}</span></span>
+<span id="cb29-858"><a href="#cb29-858" aria-hidden="true" tabindex="-1"></a>anova_one_way <span class="ot">&lt;-</span> <span class="fu">aov</span>(richness <span class="sc">~</span> treatment, <span class="at">data =</span> grassland_species_clean)</span>
+<span id="cb29-859"><a href="#cb29-859" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_one_way)</span>
+<span id="cb29-860"><a href="#cb29-860" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-861"><a href="#cb29-861" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-862"><a href="#cb29-862" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> What it means <span class="pp">|</span></span>
+<span id="cb29-863"><a href="#cb29-863" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb29-864"><a href="#cb29-864" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Df`</span> <span class="pp">|</span> Degrees of freedom <span class="pp">|</span></span>
+<span id="cb29-865"><a href="#cb29-865" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Sum Sq`</span> <span class="pp">|</span> Sum of squares <span class="pp">|</span></span>
+<span id="cb29-866"><a href="#cb29-866" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Mean Sq`</span> <span class="pp">|</span> Mean square (Sum Sq / Df) <span class="pp">|</span></span>
+<span id="cb29-867"><a href="#cb29-867" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`F value`</span> <span class="pp">|</span> The F-ratio <span class="pp">|</span></span>
+<span id="cb29-868"><a href="#cb29-868" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Pr(&gt;F)`</span> <span class="pp">|</span> The p-value <span class="pp">|</span></span>
+<span id="cb29-869"><a href="#cb29-869" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-870"><a href="#cb29-870" aria-hidden="true" tabindex="-1"></a>**If the p-value is less than 0.05, what can we conclude?**</span>
+<span id="cb29-871"><a href="#cb29-871" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-872"><a href="#cb29-872" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "At least one treatment mean is significantly different from the others, but we do not yet know which ones differ.", "All treatment means are significantly different from each other.", "The null hypothesis is definitely true.", "We should use a non-parametric test instead."))`</span></span>
+<span id="cb29-873"><a href="#cb29-873" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-874"><a href="#cb29-874" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb29-875"><a href="#cb29-875" aria-hidden="true" tabindex="-1"></a>A significant one-way ANOVA tells us **at least one** treatment differs — but not </span>
+<span id="cb29-876"><a href="#cb29-876" aria-hidden="true" tabindex="-1"></a>which ones. We will cover post-hoc tests shortly.</span>
+<span id="cb29-877"><a href="#cb29-877" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-878"><a href="#cb29-878" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-879"><a href="#cb29-879" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb29-880"><a href="#cb29-880" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-881"><a href="#cb29-881" aria-hidden="true" tabindex="-1"></a><span class="fu">## Two-Way ANOVA</span></span>
+<span id="cb29-882"><a href="#cb29-882" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-883"><a href="#cb29-883" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb29-884"><a href="#cb29-884" aria-hidden="true" tabindex="-1"></a>A **two-way ANOVA** is used when you have **two factors** and want to test not only </span>
+<span id="cb29-885"><a href="#cb29-885" aria-hidden="true" tabindex="-1"></a>whether each factor has an effect, but whether the two factors **interact** with each </span>
+<span id="cb29-886"><a href="#cb29-886" aria-hidden="true" tabindex="-1"></a>other — in other words, whether the effect of one factor depends on the level of the </span>
+<span id="cb29-887"><a href="#cb29-887" aria-hidden="true" tabindex="-1"></a>other.</span>
+<span id="cb29-888"><a href="#cb29-888" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-889"><a href="#cb29-889" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-890"><a href="#cb29-890" aria-hidden="true" tabindex="-1"></a>In our grassland experiment, we now have two factors:</span>
+<span id="cb29-891"><a href="#cb29-891" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-892"><a href="#cb29-892" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Treatment**: Control, Autumn Cut, Spring Burn, Sheep Grazing</span>
+<span id="cb29-893"><a href="#cb29-893" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Soil type**: clay vs sandy</span>
 <span id="cb29-894"><a href="#cb29-894" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-895"><a href="#cb29-895" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Treatment**: Control, Autumn Cut, Spring Burn, Sheep Grazing</span>
-<span id="cb29-896"><a href="#cb29-896" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Soil type**: clay vs sandy</span>
-<span id="cb29-897"><a href="#cb29-897" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-898"><a href="#cb29-898" aria-hidden="true" tabindex="-1"></a>The key question the two-way ANOVA adds is:</span>
-<span id="cb29-899"><a href="#cb29-899" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-900"><a href="#cb29-900" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Does the effect of treatment on species richness depend on soil type?"*</span></span>
-<span id="cb29-901"><a href="#cb29-901" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-902"><a href="#cb29-902" aria-hidden="true" tabindex="-1"></a><span class="fu">### What is an Interaction?</span></span>
-<span id="cb29-903"><a href="#cb29-903" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-904"><a href="#cb29-904" aria-hidden="true" tabindex="-1"></a>An interaction occurs when the effect of one factor **changes depending on the level of another factor**. For example:</span>
-<span id="cb29-905"><a href="#cb29-905" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-906"><a href="#cb29-906" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Sheep Grazing increases species richness on sandy soil, but not on clay soil."*</span></span>
-<span id="cb29-907"><a href="#cb29-907" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-908"><a href="#cb29-908" aria-hidden="true" tabindex="-1"></a>If this were true, we would say there is an **interaction between treatment and soil </span>
-<span id="cb29-909"><a href="#cb29-909" aria-hidden="true" tabindex="-1"></a>type**. The best treatment would depend on the soil — you cannot give one answer </span>
-<span id="cb29-910"><a href="#cb29-910" aria-hidden="true" tabindex="-1"></a>without knowing the other factor.</span>
-<span id="cb29-911"><a href="#cb29-911" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-912"><a href="#cb29-912" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb29-913"><a href="#cb29-913" aria-hidden="true" tabindex="-1"></a>**No interaction** — the lines on an interaction plot are roughly parallel.        </span>
-<span id="cb29-914"><a href="#cb29-914" aria-hidden="true" tabindex="-1"></a>**Interaction present** — the lines cross or converge, showing the effect of one </span>
-<span id="cb29-915"><a href="#cb29-915" aria-hidden="true" tabindex="-1"></a>factor changes across levels of the other.</span>
-<span id="cb29-916"><a href="#cb29-916" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb29-917"><a href="#cb29-917" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-918"><a href="#cb29-918" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 1: Read in and Check the Data</span></span>
-<span id="cb29-919"><a href="#cb29-919" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-920"><a href="#cb29-920" aria-hidden="true" tabindex="-1"></a>For the two-way ANOVA, we will use <span class="in">`grassland_species_v2.csv`</span> — this dataset includes the soil type variable.</span>
-<span id="cb29-921"><a href="#cb29-921" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-922"><a href="#cb29-922" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-two-way}</span></span>
-<span id="cb29-923"><a href="#cb29-923" aria-hidden="true" tabindex="-1"></a>grassland_species_v2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/grassland_species_v2.csv"</span>)</span>
-<span id="cb29-924"><a href="#cb29-924" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-925"><a href="#cb29-925" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-926"><a href="#cb29-926" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: data checks")`</span></span>
-<span id="cb29-927"><a href="#cb29-927" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-928"><a href="#cb29-928" aria-hidden="true" tabindex="-1"></a><span class="in">```{r check-two-way, results='hide'}</span></span>
-<span id="cb29-929"><a href="#cb29-929" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(grassland_species_v2)</span>
-<span id="cb29-930"><a href="#cb29-930" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(grassland_species_v2)</span>
-<span id="cb29-931"><a href="#cb29-931" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grassland_species_v2)</span>
-<span id="cb29-932"><a href="#cb29-932" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(grassland_species_v2)</span>
-<span id="cb29-933"><a href="#cb29-933" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grassland_species_v2)</span>
-<span id="cb29-934"><a href="#cb29-934" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(grassland_species_v2)</span>
-<span id="cb29-935"><a href="#cb29-935" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(grassland_species_v2, treatment)</span>
-<span id="cb29-936"><a href="#cb29-936" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(grassland_species_v2, soil_type)</span>
-<span id="cb29-937"><a href="#cb29-937" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-938"><a href="#cb29-938" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-939"><a href="#cb29-939" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
-<span id="cb29-940"><a href="#cb29-940" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-941"><a href="#cb29-941" aria-hidden="true" tabindex="-1"></a>Like before, we will need to clean the treatment variable to make it easier to work with, and convert soil type and treatment to a factor. </span>
-<span id="cb29-942"><a href="#cb29-942" aria-hidden="true" tabindex="-1"></a><span class="in">```{r clean-two-way}</span></span>
-<span id="cb29-943"><a href="#cb29-943" aria-hidden="true" tabindex="-1"></a>grassland_species_v2_clean <span class="ot">&lt;-</span> grassland_species_v2 <span class="sc">%&gt;%</span></span>
-<span id="cb29-944"><a href="#cb29-944" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-945"><a href="#cb29-945" aria-hidden="true" tabindex="-1"></a>    <span class="at">treatment =</span> <span class="fu">as.factor</span>(<span class="fu">str_to_lower</span>(<span class="fu">str_replace_all</span>(treatment, <span class="st">" "</span>, <span class="st">"_"</span>))),</span>
-<span id="cb29-946"><a href="#cb29-946" aria-hidden="true" tabindex="-1"></a>    <span class="at">soil_type =</span> <span class="fu">as.factor</span>(soil_type)</span>
-<span id="cb29-947"><a href="#cb29-947" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-948"><a href="#cb29-948" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-949"><a href="#cb29-949" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-950"><a href="#cb29-950" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2: Visualise the Data</span></span>
-<span id="cb29-951"><a href="#cb29-951" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-952"><a href="#cb29-952" aria-hidden="true" tabindex="-1"></a><span class="in">```{r two-way-boxplot, fig.cap="Figure 7. Species richness by treatment group and soil type."}</span></span>
-<span id="cb29-953"><a href="#cb29-953" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grassland_species_v2_clean, </span>
-<span id="cb29-954"><a href="#cb29-954" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> richness, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb29-955"><a href="#cb29-955" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb29-956"><a href="#cb29-956" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> soil_type) <span class="sc">+</span></span>
-<span id="cb29-957"><a href="#cb29-957" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>, <span class="at">y =</span> <span class="st">"Species richness"</span>) <span class="sc">+</span></span>
-<span id="cb29-958"><a href="#cb29-958" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb29-959"><a href="#cb29-959" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb29-960"><a href="#cb29-960" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb29-961"><a href="#cb29-961" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
-<span id="cb29-962"><a href="#cb29-962" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-963"><a href="#cb29-963" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-964"><a href="#cb29-964" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-965"><a href="#cb29-965" aria-hidden="true" tabindex="-1"></a>**Which treatment produces the highest species richness on clay soil?**</span>
-<span id="cb29-966"><a href="#cb29-966" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-967"><a href="#cb29-967" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("control", answer = "autumn_cut", "spring_burn", "sheep_grazing"))`</span></span>
-<span id="cb29-968"><a href="#cb29-968" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-969"><a href="#cb29-969" aria-hidden="true" tabindex="-1"></a>**Which treatment produces the highest species richness on sandy soil?**</span>
-<span id="cb29-970"><a href="#cb29-970" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-971"><a href="#cb29-971" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("control", "autumn_cut", "spring_burn", answer = "sheep_grazing"))`</span></span>
-<span id="cb29-972"><a href="#cb29-972" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-973"><a href="#cb29-973" aria-hidden="true" tabindex="-1"></a>**What does this pattern suggest?**</span>
-<span id="cb29-974"><a href="#cb29-974" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-975"><a href="#cb29-975" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The effect of treatment depends on soil type — this is an interaction effect.", "Soil type has no effect on species richness.", "Treatment has no effect on species richness.", "All treatments produce the same richness regardless of soil type."))`</span></span>
-<span id="cb29-976"><a href="#cb29-976" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-977"><a href="#cb29-977" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3: Check Assumptions</span></span>
-<span id="cb29-978"><a href="#cb29-978" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-979"><a href="#cb29-979" aria-hidden="true" tabindex="-1"></a><span class="in">```{r two-way-assumptions}</span></span>
-<span id="cb29-980"><a href="#cb29-980" aria-hidden="true" tabindex="-1"></a>grassland_species_v2_clean <span class="sc">%&gt;%</span></span>
-<span id="cb29-981"><a href="#cb29-981" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment, soil_type) <span class="sc">%&gt;%</span></span>
-<span id="cb29-982"><a href="#cb29-982" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb29-983"><a href="#cb29-983" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>statistic,</span>
-<span id="cb29-984"><a href="#cb29-984" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>p.value,</span>
-<span id="cb29-985"><a href="#cb29-985" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb29-986"><a href="#cb29-986" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-987"><a href="#cb29-987" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-988"><a href="#cb29-988" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(richness <span class="sc">~</span> treatment <span class="sc">*</span> soil_type, </span>
-<span id="cb29-989"><a href="#cb29-989" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> grassland_species_v2_clean)</span>
-<span id="cb29-990"><a href="#cb29-990" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-991"><a href="#cb29-991" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-992"><a href="#cb29-992" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb29-993"><a href="#cb29-993" aria-hidden="true" tabindex="-1"></a>With only 3 replicates per group, the Shapiro-Wilk test has very limited power. </span>
-<span id="cb29-994"><a href="#cb29-994" aria-hidden="true" tabindex="-1"></a>In practice, visual inspection and subject knowledge are just as important as </span>
-<span id="cb29-995"><a href="#cb29-995" aria-hidden="true" tabindex="-1"></a>formal tests with such small sample sizes.</span>
-<span id="cb29-996"><a href="#cb29-996" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb29-997"><a href="#cb29-997" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-998"><a href="#cb29-998" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4: Run the Two-Way ANOVA</span></span>
-<span id="cb29-999"><a href="#cb29-999" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1000"><a href="#cb29-1000" aria-hidden="true" tabindex="-1"></a><span class="in">```{r two-way-anova}</span></span>
-<span id="cb29-1001"><a href="#cb29-1001" aria-hidden="true" tabindex="-1"></a>anova_two_way <span class="ot">&lt;-</span> <span class="fu">aov</span>(richness <span class="sc">~</span> treatment <span class="sc">*</span> soil_type, </span>
-<span id="cb29-1002"><a href="#cb29-1002" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> grassland_species_v2_clean)</span>
-<span id="cb29-1003"><a href="#cb29-1003" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_two_way)</span>
-<span id="cb29-1004"><a href="#cb29-1004" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-1005"><a href="#cb29-1005" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1006"><a href="#cb29-1006" aria-hidden="true" tabindex="-1"></a>The output now has four rows:</span>
-<span id="cb29-1007"><a href="#cb29-1007" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1008"><a href="#cb29-1008" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Row <span class="pp">|</span> What it tests <span class="pp">|</span></span>
-<span id="cb29-1009"><a href="#cb29-1009" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
-<span id="cb29-1010"><a href="#cb29-1010" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`treatment`</span> <span class="pp">|</span> Main effect of treatment <span class="pp">|</span></span>
-<span id="cb29-1011"><a href="#cb29-1011" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`soil_type`</span> <span class="pp">|</span> Main effect of soil type <span class="pp">|</span></span>
-<span id="cb29-1012"><a href="#cb29-1012" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`treatment:soil_type`</span> <span class="pp">|</span> Interaction between treatment and soil type <span class="pp">|</span></span>
-<span id="cb29-1013"><a href="#cb29-1013" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Residuals`</span> <span class="pp">|</span> Within-group variance (background noise) <span class="pp">|</span></span>
-<span id="cb29-1014"><a href="#cb29-1014" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1015"><a href="#cb29-1015" aria-hidden="true" tabindex="-1"></a>**If the interaction term is significant (p &lt; 0.05), what does this mean?**</span>
-<span id="cb29-1016"><a href="#cb29-1016" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1017"><a href="#cb29-1017" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The effect of treatment on species richness depends on soil type — the best treatment differs between clay and sandy soils.", "Both treatment and soil type have significant main effects.", "Neither treatment nor soil type has any effect.", "The ANOVA assumptions have been violated."))`</span></span>
-<span id="cb29-1018"><a href="#cb29-1018" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1019"><a href="#cb29-1019" aria-hidden="true" tabindex="-1"></a>**If the interaction is significant, should we focus on the main effects?**</span>
-<span id="cb29-1020"><a href="#cb29-1020" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1021"><a href="#cb29-1021" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Yes — the main effects are always the most important part.", answer = "No — when an interaction is significant, the main effects can be misleading. We should interpret the interaction directly and use a post-hoc test.", "Yes — the interaction can be ignored if main effects are significant.", "No — a significant interaction means the ANOVA result is invalid."))`</span></span>
-<span id="cb29-1022"><a href="#cb29-1022" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1023"><a href="#cb29-1023" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 5: Visualise the Interaction</span></span>
-<span id="cb29-1024"><a href="#cb29-1024" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1025"><a href="#cb29-1025" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interaction-plot, fig.cap="Figure 8. Interaction plot showing mean species richness by treatment and soil type."}</span></span>
-<span id="cb29-1026"><a href="#cb29-1026" aria-hidden="true" tabindex="-1"></a>grassland_species_v2_clean <span class="sc">%&gt;%</span></span>
-<span id="cb29-1027"><a href="#cb29-1027" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment, soil_type) <span class="sc">%&gt;%</span></span>
-<span id="cb29-1028"><a href="#cb29-1028" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_richness =</span> <span class="fu">mean</span>(richness), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-1029"><a href="#cb29-1029" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> mean_richness, </span>
-<span id="cb29-1030"><a href="#cb29-1030" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> soil_type, <span class="at">group =</span> soil_type)) <span class="sc">+</span></span>
-<span id="cb29-1031"><a href="#cb29-1031" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb29-1032"><a href="#cb29-1032" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb29-1033"><a href="#cb29-1033" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>, </span>
-<span id="cb29-1034"><a href="#cb29-1034" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean species richness"</span>,</span>
-<span id="cb29-1035"><a href="#cb29-1035" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Soil type"</span>) <span class="sc">+</span></span>
-<span id="cb29-1036"><a href="#cb29-1036" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb29-1037"><a href="#cb29-1037" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb29-1038"><a href="#cb29-1038" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb29-1039"><a href="#cb29-1039" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1040"><a href="#cb29-1040" aria-hidden="true" tabindex="-1"></a>**What does crossing lines in an interaction plot indicate?**</span>
-<span id="cb29-1041"><a href="#cb29-1041" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1042"><a href="#cb29-1042" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The effect of treatment reverses depending on soil type — a classic interaction effect.", "The two soil types produce identical results.", "The ANOVA result is not significant.", "The data are not normally distributed."))`</span></span>
-<span id="cb29-1043"><a href="#cb29-1043" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-1044"><a href="#cb29-1044" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb29-1045"><a href="#cb29-1045" aria-hidden="true" tabindex="-1"></a>Notice how the lines cross between Autumn Cut and Sheep Grazing — Autumn Cut </span>
-<span id="cb29-1046"><a href="#cb29-1046" aria-hidden="true" tabindex="-1"></a>produces higher richness on clay, while Sheep Grazing produces higher richness </span>
-<span id="cb29-1047"><a href="#cb29-1047" aria-hidden="true" tabindex="-1"></a>on sandy soil. This crossing pattern is the visual signature of an interaction.</span>
-<span id="cb29-1048"><a href="#cb29-1048" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-895"><a href="#cb29-895" aria-hidden="true" tabindex="-1"></a>The key question the two-way ANOVA adds is:</span>
+<span id="cb29-896"><a href="#cb29-896" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-897"><a href="#cb29-897" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Does the effect of treatment on species richness depend on soil type?"*</span></span>
+<span id="cb29-898"><a href="#cb29-898" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-899"><a href="#cb29-899" aria-hidden="true" tabindex="-1"></a><span class="fu">### What is an Interaction?</span></span>
+<span id="cb29-900"><a href="#cb29-900" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-901"><a href="#cb29-901" aria-hidden="true" tabindex="-1"></a>An interaction occurs when the effect of one factor **changes depending on the level of another factor**. For example:</span>
+<span id="cb29-902"><a href="#cb29-902" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-903"><a href="#cb29-903" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *"Sheep Grazing increases species richness on sandy soil, but not on clay soil."*</span></span>
+<span id="cb29-904"><a href="#cb29-904" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-905"><a href="#cb29-905" aria-hidden="true" tabindex="-1"></a>If this were true, we would say there is an **interaction between treatment and soil </span>
+<span id="cb29-906"><a href="#cb29-906" aria-hidden="true" tabindex="-1"></a>type**. The best treatment would depend on the soil — you cannot give one answer </span>
+<span id="cb29-907"><a href="#cb29-907" aria-hidden="true" tabindex="-1"></a>without knowing the other factor.</span>
+<span id="cb29-908"><a href="#cb29-908" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-909"><a href="#cb29-909" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb29-910"><a href="#cb29-910" aria-hidden="true" tabindex="-1"></a>**No interaction** — the lines on an interaction plot are roughly parallel.        </span>
+<span id="cb29-911"><a href="#cb29-911" aria-hidden="true" tabindex="-1"></a>**Interaction present** — the lines cross or converge, showing the effect of one </span>
+<span id="cb29-912"><a href="#cb29-912" aria-hidden="true" tabindex="-1"></a>factor changes across levels of the other.</span>
+<span id="cb29-913"><a href="#cb29-913" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-914"><a href="#cb29-914" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-915"><a href="#cb29-915" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 1: Read in and Check the Data</span></span>
+<span id="cb29-916"><a href="#cb29-916" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-917"><a href="#cb29-917" aria-hidden="true" tabindex="-1"></a>For the two-way ANOVA, we will use <span class="in">`grassland_species_v2.csv`</span> — this dataset includes the soil type variable.</span>
+<span id="cb29-918"><a href="#cb29-918" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-919"><a href="#cb29-919" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-two-way}</span></span>
+<span id="cb29-920"><a href="#cb29-920" aria-hidden="true" tabindex="-1"></a>grassland_species_v2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/grassland_species_v2.csv"</span>)</span>
+<span id="cb29-921"><a href="#cb29-921" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-922"><a href="#cb29-922" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-923"><a href="#cb29-923" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show: data checks")`</span></span>
+<span id="cb29-924"><a href="#cb29-924" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-925"><a href="#cb29-925" aria-hidden="true" tabindex="-1"></a><span class="in">```{r check-two-way, results='hide'}</span></span>
+<span id="cb29-926"><a href="#cb29-926" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(grassland_species_v2)</span>
+<span id="cb29-927"><a href="#cb29-927" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(grassland_species_v2)</span>
+<span id="cb29-928"><a href="#cb29-928" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grassland_species_v2)</span>
+<span id="cb29-929"><a href="#cb29-929" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(grassland_species_v2)</span>
+<span id="cb29-930"><a href="#cb29-930" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grassland_species_v2)</span>
+<span id="cb29-931"><a href="#cb29-931" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(grassland_species_v2)</span>
+<span id="cb29-932"><a href="#cb29-932" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(grassland_species_v2, treatment)</span>
+<span id="cb29-933"><a href="#cb29-933" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(grassland_species_v2, soil_type)</span>
+<span id="cb29-934"><a href="#cb29-934" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-935"><a href="#cb29-935" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-936"><a href="#cb29-936" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb29-937"><a href="#cb29-937" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-938"><a href="#cb29-938" aria-hidden="true" tabindex="-1"></a>Like before, we will need to clean the treatment variable to make it easier to work with, and convert soil type and treatment to a factor. </span>
+<span id="cb29-939"><a href="#cb29-939" aria-hidden="true" tabindex="-1"></a><span class="in">```{r clean-two-way}</span></span>
+<span id="cb29-940"><a href="#cb29-940" aria-hidden="true" tabindex="-1"></a>grassland_species_v2_clean <span class="ot">&lt;-</span> grassland_species_v2 <span class="sc">%&gt;%</span></span>
+<span id="cb29-941"><a href="#cb29-941" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-942"><a href="#cb29-942" aria-hidden="true" tabindex="-1"></a>    <span class="at">treatment =</span> <span class="fu">as.factor</span>(<span class="fu">str_to_lower</span>(<span class="fu">str_replace_all</span>(treatment, <span class="st">" "</span>, <span class="st">"_"</span>))),</span>
+<span id="cb29-943"><a href="#cb29-943" aria-hidden="true" tabindex="-1"></a>    <span class="at">soil_type =</span> <span class="fu">as.factor</span>(soil_type)</span>
+<span id="cb29-944"><a href="#cb29-944" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-945"><a href="#cb29-945" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-946"><a href="#cb29-946" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-947"><a href="#cb29-947" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2: Visualise the Data</span></span>
+<span id="cb29-948"><a href="#cb29-948" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-949"><a href="#cb29-949" aria-hidden="true" tabindex="-1"></a><span class="in">```{r two-way-boxplot, fig.cap="Figure 7. Species richness by treatment group and soil type."}</span></span>
+<span id="cb29-950"><a href="#cb29-950" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grassland_species_v2_clean, </span>
+<span id="cb29-951"><a href="#cb29-951" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> richness, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb29-952"><a href="#cb29-952" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb29-953"><a href="#cb29-953" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> soil_type) <span class="sc">+</span></span>
+<span id="cb29-954"><a href="#cb29-954" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>, <span class="at">y =</span> <span class="st">"Species richness"</span>) <span class="sc">+</span></span>
+<span id="cb29-955"><a href="#cb29-955" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb29-956"><a href="#cb29-956" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb29-957"><a href="#cb29-957" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb29-958"><a href="#cb29-958" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb29-959"><a href="#cb29-959" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-960"><a href="#cb29-960" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-961"><a href="#cb29-961" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-962"><a href="#cb29-962" aria-hidden="true" tabindex="-1"></a>**Which treatment produces the highest species richness on clay soil?**</span>
+<span id="cb29-963"><a href="#cb29-963" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-964"><a href="#cb29-964" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("control", answer = "autumn_cut", "spring_burn", "sheep_grazing"))`</span></span>
+<span id="cb29-965"><a href="#cb29-965" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-966"><a href="#cb29-966" aria-hidden="true" tabindex="-1"></a>**Which treatment produces the highest species richness on sandy soil?**</span>
+<span id="cb29-967"><a href="#cb29-967" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-968"><a href="#cb29-968" aria-hidden="true" tabindex="-1"></a><span class="in">`r mcq(c("control", "autumn_cut", "spring_burn", answer = "sheep_grazing"))`</span></span>
+<span id="cb29-969"><a href="#cb29-969" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-970"><a href="#cb29-970" aria-hidden="true" tabindex="-1"></a>**What does this pattern suggest?**</span>
+<span id="cb29-971"><a href="#cb29-971" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-972"><a href="#cb29-972" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The effect of treatment depends on soil type — this is an interaction effect.", "Soil type has no effect on species richness.", "Treatment has no effect on species richness.", "All treatments produce the same richness regardless of soil type."))`</span></span>
+<span id="cb29-973"><a href="#cb29-973" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-974"><a href="#cb29-974" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3: Check Assumptions</span></span>
+<span id="cb29-975"><a href="#cb29-975" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-976"><a href="#cb29-976" aria-hidden="true" tabindex="-1"></a><span class="in">```{r two-way-assumptions}</span></span>
+<span id="cb29-977"><a href="#cb29-977" aria-hidden="true" tabindex="-1"></a>grassland_species_v2_clean <span class="sc">%&gt;%</span></span>
+<span id="cb29-978"><a href="#cb29-978" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment, soil_type) <span class="sc">%&gt;%</span></span>
+<span id="cb29-979"><a href="#cb29-979" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb29-980"><a href="#cb29-980" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_w =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>statistic,</span>
+<span id="cb29-981"><a href="#cb29-981" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapiro_p =</span> <span class="fu">shapiro.test</span>(richness)<span class="sc">$</span>p.value,</span>
+<span id="cb29-982"><a href="#cb29-982" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb29-983"><a href="#cb29-983" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-984"><a href="#cb29-984" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-985"><a href="#cb29-985" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(richness <span class="sc">~</span> treatment <span class="sc">*</span> soil_type, </span>
+<span id="cb29-986"><a href="#cb29-986" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> grassland_species_v2_clean)</span>
+<span id="cb29-987"><a href="#cb29-987" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-988"><a href="#cb29-988" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-989"><a href="#cb29-989" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb29-990"><a href="#cb29-990" aria-hidden="true" tabindex="-1"></a>With only 3 replicates per group, the Shapiro-Wilk test has very limited power. </span>
+<span id="cb29-991"><a href="#cb29-991" aria-hidden="true" tabindex="-1"></a>In practice, visual inspection and subject knowledge are just as important as </span>
+<span id="cb29-992"><a href="#cb29-992" aria-hidden="true" tabindex="-1"></a>formal tests with such small sample sizes.</span>
+<span id="cb29-993"><a href="#cb29-993" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-994"><a href="#cb29-994" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-995"><a href="#cb29-995" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4: Run the Two-Way ANOVA</span></span>
+<span id="cb29-996"><a href="#cb29-996" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-997"><a href="#cb29-997" aria-hidden="true" tabindex="-1"></a><span class="in">```{r two-way-anova}</span></span>
+<span id="cb29-998"><a href="#cb29-998" aria-hidden="true" tabindex="-1"></a>anova_two_way <span class="ot">&lt;-</span> <span class="fu">aov</span>(richness <span class="sc">~</span> treatment <span class="sc">*</span> soil_type, </span>
+<span id="cb29-999"><a href="#cb29-999" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> grassland_species_v2_clean)</span>
+<span id="cb29-1000"><a href="#cb29-1000" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_two_way)</span>
+<span id="cb29-1001"><a href="#cb29-1001" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-1002"><a href="#cb29-1002" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1003"><a href="#cb29-1003" aria-hidden="true" tabindex="-1"></a>The output now has four rows:</span>
+<span id="cb29-1004"><a href="#cb29-1004" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1005"><a href="#cb29-1005" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Row <span class="pp">|</span> What it tests <span class="pp">|</span></span>
+<span id="cb29-1006"><a href="#cb29-1006" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb29-1007"><a href="#cb29-1007" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`treatment`</span> <span class="pp">|</span> Main effect of treatment <span class="pp">|</span></span>
+<span id="cb29-1008"><a href="#cb29-1008" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`soil_type`</span> <span class="pp">|</span> Main effect of soil type <span class="pp">|</span></span>
+<span id="cb29-1009"><a href="#cb29-1009" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`treatment:soil_type`</span> <span class="pp">|</span> Interaction between treatment and soil type <span class="pp">|</span></span>
+<span id="cb29-1010"><a href="#cb29-1010" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Residuals`</span> <span class="pp">|</span> Within-group variance (background noise) <span class="pp">|</span></span>
+<span id="cb29-1011"><a href="#cb29-1011" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1012"><a href="#cb29-1012" aria-hidden="true" tabindex="-1"></a>**If the interaction term is significant (p &lt; 0.05), what does this mean?**</span>
+<span id="cb29-1013"><a href="#cb29-1013" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1014"><a href="#cb29-1014" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The effect of treatment on species richness depends on soil type — the best treatment differs between clay and sandy soils.", "Both treatment and soil type have significant main effects.", "Neither treatment nor soil type has any effect.", "The ANOVA assumptions have been violated."))`</span></span>
+<span id="cb29-1015"><a href="#cb29-1015" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1016"><a href="#cb29-1016" aria-hidden="true" tabindex="-1"></a>**If the interaction is significant, should we focus on the main effects?**</span>
+<span id="cb29-1017"><a href="#cb29-1017" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1018"><a href="#cb29-1018" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c("Yes — the main effects are always the most important part.", answer = "No — when an interaction is significant, the main effects can be misleading. We should interpret the interaction directly and use a post-hoc test.", "Yes — the interaction can be ignored if main effects are significant.", "No — a significant interaction means the ANOVA result is invalid."))`</span></span>
+<span id="cb29-1019"><a href="#cb29-1019" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1020"><a href="#cb29-1020" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 5: Visualise the Interaction</span></span>
+<span id="cb29-1021"><a href="#cb29-1021" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1022"><a href="#cb29-1022" aria-hidden="true" tabindex="-1"></a><span class="in">```{r interaction-plot, fig.cap="Figure 8. Interaction plot showing mean species richness by treatment and soil type."}</span></span>
+<span id="cb29-1023"><a href="#cb29-1023" aria-hidden="true" tabindex="-1"></a>grassland_species_v2_clean <span class="sc">%&gt;%</span></span>
+<span id="cb29-1024"><a href="#cb29-1024" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment, soil_type) <span class="sc">%&gt;%</span></span>
+<span id="cb29-1025"><a href="#cb29-1025" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_richness =</span> <span class="fu">mean</span>(richness), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-1026"><a href="#cb29-1026" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> mean_richness, </span>
+<span id="cb29-1027"><a href="#cb29-1027" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> soil_type, <span class="at">group =</span> soil_type)) <span class="sc">+</span></span>
+<span id="cb29-1028"><a href="#cb29-1028" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb29-1029"><a href="#cb29-1029" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb29-1030"><a href="#cb29-1030" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>, </span>
+<span id="cb29-1031"><a href="#cb29-1031" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean species richness"</span>,</span>
+<span id="cb29-1032"><a href="#cb29-1032" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Soil type"</span>) <span class="sc">+</span></span>
+<span id="cb29-1033"><a href="#cb29-1033" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb29-1034"><a href="#cb29-1034" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb29-1035"><a href="#cb29-1035" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-1036"><a href="#cb29-1036" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1037"><a href="#cb29-1037" aria-hidden="true" tabindex="-1"></a>**What does crossing lines in an interaction plot indicate?**</span>
+<span id="cb29-1038"><a href="#cb29-1038" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1039"><a href="#cb29-1039" aria-hidden="true" tabindex="-1"></a><span class="in">`r longmcq(c(answer = "The effect of treatment reverses depending on soil type — a classic interaction effect.", "The two soil types produce identical results.", "The ANOVA result is not significant.", "The data are not normally distributed."))`</span></span>
+<span id="cb29-1040"><a href="#cb29-1040" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-1041"><a href="#cb29-1041" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb29-1042"><a href="#cb29-1042" aria-hidden="true" tabindex="-1"></a>Notice how the lines cross between Autumn Cut and Sheep Grazing — Autumn Cut </span>
+<span id="cb29-1043"><a href="#cb29-1043" aria-hidden="true" tabindex="-1"></a>produces higher richness on clay, while Sheep Grazing produces higher richness </span>
+<span id="cb29-1044"><a href="#cb29-1044" aria-hidden="true" tabindex="-1"></a>on sandy soil. This crossing pattern is the visual signature of an interaction.</span>
+<span id="cb29-1045"><a href="#cb29-1045" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
