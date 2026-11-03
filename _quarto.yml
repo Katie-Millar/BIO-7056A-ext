@@ -10,6 +10,7 @@ book:
     - 04-ANOVA.qmd
     - 05-testing-and-measuring-relationships.qmd
     - 06-prob-para.qmd
+    - 07-plots.qmd
     - function-glossary.qmd
     - appendix.qmd
 

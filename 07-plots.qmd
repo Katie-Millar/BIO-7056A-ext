@@ -282,7 +282,13 @@ You want to know whether body mass is symmetrical, skewed, or has more than one 
 
 `r hide("Click to show the code and plot")`
 
-`mass_kg` is one continuous variable. A histogram cuts it into bins and counts how many otters fall into each, which shows the shape of the distribution.
+**Step 1: Look at what the data are.**
+
+`mass_kg` is **one continuous variable**. Each otter has a measured weight, and we want to see how those weights are spread out.
+
+**Step 2: Build the plot.**
+
+A histogram cuts the range of `mass_kg` into bins and counts how many otters fall into each one. The shape of the bars shows the shape of the distribution.
 
 ```{r choose-hist, fig.width=6, fig.height=4}
 ggplot(otter_data, aes(x = mass_kg)) +
@@ -290,6 +296,14 @@ ggplot(otter_data, aes(x = mass_kg)) +
   labs(x = "Body mass (kg)", y = "Frequency") +
   theme_minimal(base_size = 13)
 ```
+
+**Why the other options are wrong:**
+
+| Option | Why it does not fit |
+|---|---|
+| Bar chart | Bar charts count the rows in each **category**. `mass_kg` has no categories, so every otter would get its own bar and the shape would be lost. |
+| Scatterplot | Needs **two** variables. We only have one, so there is nothing to put on the other axis. |
+| Line plot | Joins points in a sequence, such as measurements over time. Body mass has no sequence, so a line would have no meaning. |
 
 ::: {.callout-note}
 Try changing `binwidth`. A very small value makes the plot spiky and a very large value hides the shape. It is worth trying a few before you decide what the distribution looks like.
@@ -309,7 +323,13 @@ You have one continuous variable (`length_cm`) and one categorical variable with
 
 `r hide("Click to show the code and plot")`
 
-A boxplot compares the centre and spread of a continuous variable across groups. Adding the raw points with `geom_jitter()` shows how many otters sit behind each box.
+**Step 1: Look at what the data are.**
+
+The question compares a **continuous** variable (`length_cm`) **between groups** (`sex`). So we need a plot that summarises the centre and spread of lengths separately for each sex, side by side.
+
+**Step 2: Build the plot.**
+
+A boxplot does this. Adding the raw points with `geom_jitter()` shows how many otters sit behind each box.
 
 ```{r choose-box, fig.width=6, fig.height=4}
 ggplot(otter_data, aes(x = sex, y = length_cm, fill = sex)) +
@@ -319,6 +339,14 @@ ggplot(otter_data, aes(x = sex, y = length_cm, fill = sex)) +
   theme_minimal(base_size = 13) +
   theme(legend.position = "none")
 ```
+
+**Why the other options are wrong:**
+
+| Option | Why it does not fit |
+|---|---|
+| Histogram of `length_cm` only | Mixes males and females together, so you cannot see whether the sexes differ. It ignores the question. |
+| Scatterplot of `sex` against `length_cm` | Possible, but weak. The points stack in two vertical lines and overlap heavily, and it gives no summary of centre or spread. |
+| Bar chart of `sex` | Only counts how many males and females there are. It says nothing about body length. |
 
 ::: {.callout-note}
 `outlier.shape = NA` hides the boxplot's own outlier points, because `geom_jitter()` already draws every point. Without it, outliers would appear twice.
@@ -330,7 +358,7 @@ ggplot(otter_data, aes(x = sex, y = length_cm, fill = sex)) +
 
 ### Challenge 4: Does fish availability relate to spraint count?
 
-You have two continuous or count variables and you want to see whether they move together.
+You have two numeric variables and you want to see whether they move together.
 
 **Which plot would you choose?**
 
@@ -342,6 +370,12 @@ The explanatory variable (x) is `r fitb("fish_index")` and the response variable
 
 `r hide("Click to show the code and plot")`
 
+**Step 1: Look at what the data are.**
+
+Both `fish_index` and `spraints` are numeric, and every otter has a value for each. The question is about **how one changes as the other changes**, so we need each otter to appear as one point at the meeting place of its two values.
+
+**Step 2: Build the plot.**
+
 ```{r choose-scatter, fig.width=6, fig.height=4}
 ggplot(otter_data, aes(x = fish_index, y = spraints)) +
   geom_point(colour = "#F8766D", size = 2.5) +
@@ -351,6 +385,14 @@ ggplot(otter_data, aes(x = fish_index, y = spraints)) +
 ```
 
 By convention, the variable you think is doing the explaining goes on the x axis and the variable you think is responding goes on the y axis.
+
+**Why the other options are wrong:**
+
+| Option | Why it does not fit |
+|---|---|
+| Bar chart | Counts rows in categories. Neither variable is a category, and a bar chart cannot show a relationship between two numbers. |
+| Histogram | Shows the distribution of **one** variable. It cannot show how two variables relate to each other. |
+| Boxplot | Summarises a numeric variable across **groups**. `fish_index` is continuous, so there are no groups unless you force the values into bins and lose detail. |
 
 `r unhide()`
 
@@ -370,6 +412,12 @@ answer = "Put site on the x axis and use fill to show season, so each site has o
 ))`
 
 `r hide("Click to show the code and plot")`
+
+**Step 1: Look at what the data are.**
+
+The question asks whether the effect of one category (`season`) **changes across** another (`site`). So both categories must be visible at once, with `spraints` as the measured value.
+
+**Step 2: Build the plot.**
 
 Mapping a second categorical variable to `fill` splits each box into side by side groups.
 
@@ -395,6 +443,14 @@ otter_data %>%
 
 The boxplot shows the **spread** of the data. The interaction plot shows only the **means**, but makes a possible interaction easier to see. Neither is wrong.
 
+**Why the other options are wrong:**
+
+| Option | Why it does not fit |
+|---|---|
+| Two histograms, ignoring season | Throws away `season`, so you cannot tell whether the seasonal effect differs between sites. That is the whole question. |
+| Scatterplot of `site` against `season` | Both variables are categories, so points land on a handful of grid positions and pile on top of each other. `spraints` is not shown at all. |
+| One bar chart of total spraints | Adds everything together, which hides both the sites and the seasons. |
+
 `r unhide()`
 
 ---
@@ -413,6 +469,12 @@ answer = "Draw a scatterplot of one continuous variable against the other, and c
 ))`
 
 `r hide("Click to show the code and plot")`
+
+**Step 1: Look at what the data are.**
+
+Two continuous variables relate to each other, so a scatterplot is the starting point. The third variable, `sex`, is a category, so we add it as a **colour** rather than as another axis.
+
+**Step 2: Build the plot.**
 
 ```{r choose-colour, fig.width=6, fig.height=4}
 ggplot(otter_data, aes(x = length_cm, y = mass_kg, colour = sex)) +
@@ -433,6 +495,14 @@ ggplot(otter_data, aes(x = length_cm, y = mass_kg)) +
 
 Colour keeps everything in one panel, which makes direct comparison easy. Facets avoid overlap, but you have to compare across panels.
 
+**Why the other options are wrong:**
+
+| Option | Why it does not fit |
+|---|---|
+| Histogram of both variables | A histogram shows one variable at a time, so it cannot show how length and mass relate to each other. |
+| Bar chart of `sex` with mean length | Shows only one continuous variable, drops `mass_kg`, and reduces each sex to a single average. |
+| Boxplot with both variables on one y axis | Length (cm) and mass (kg) are on completely different scales, so they cannot share an axis meaningfully. It also hides the relationship between them. |
+
 `r unhide()`
 
 ---
@@ -452,6 +522,12 @@ answer = "Draw a histogram of the raw counts next to a histogram of the log tran
 
 `r hide("Click to show the code and plot")`
 
+**Step 1: Look at what the data are.**
+
+You want to see the **shape** of one variable, and to **compare** that shape before and after a transformation. Histograms show shape, and placing two side by side makes the comparison direct.
+
+**Step 2: Build the plots.**
+
 ```{r choose-compare, fig.width=10, fig.height=4}
 otter_log <- otter_data %>%
   mutate(log_tick_count = log(tick_count + 1))
@@ -470,6 +546,14 @@ plot_raw + plot_log
 ```
 
 `patchwork` places two plots side by side with a simple `+`.
+
+**Why the other options are wrong:**
+
+| Option | Why it does not fit |
+|---|---|
+| Boxplot of raw counts only | A boxplot can hint at skew, but it does not show the shape of the distribution as clearly as a histogram, and it has no transformed version to compare with. |
+| Scatterplot of tick count against otter ID | Otter ID is just a label, so its order means nothing. The plot would not show the distribution. |
+| Bar chart of total ticks | Adds all the counts into one number, which hides the distribution completely. |
 
 `r unhide()`
 
@@ -495,7 +579,21 @@ answer = "Both variables are categorical, so the points can only sit on a few gr
 "The geom_point function cannot be used with text variables, so R would return an error message."
 ))`
 
-`r hide("Click to show some good pairings to try")`
+`r hide("Click to show the explanation and some good pairings to try")`
+
+**Why the right answer is right.**
+
+`site` has three values and `season` has two, so there are only six possible positions on the plot. Every otter at the same site and season lands on exactly the same spot, and you cannot tell whether a spot holds 2 otters or 20.
+
+**Why the other options are wrong:**
+
+| Option | Why it is wrong |
+|---|---|
+| Both variables are continuous | This is false. `site` and `season` are text categories, not numbers. |
+| Scatterplots need a log transformation | This is false. Scatterplots work on raw numbers, and a transformation is only needed if the data are badly skewed. |
+| `geom_point()` cannot use text variables | This is false. R **will** draw the plot without an error, which is exactly why it is a poor choice. It looks like a plot, but it tells you nothing. |
+
+**Some good pairings to try:**
 
 | Variables | Types | Plot to try |
 |---|---|---|
