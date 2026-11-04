@@ -41,7 +41,7 @@ By the end of this workshop you will be able to look at a set of variables, deci
 
 Today you will need the packages `tidyverse` and `patchwork`. Install them from the **console** using `install.packages()` if you have not already, then load them at the top of your script.
 
-We will work with the newest version of the otter data throughout. Please read in `otter_data_v3.csv` from the data folder and call it `otter_data`.
+We will work with the newest version of the otter data throughout. Please read in `otter_data_2.csv` from the data folder and call it `otter_data`.
 
 ::: {.callout-tip}
 `ggplot2` is part of `tidyverse`, so loading `tidyverse` gives you every function used in this workshop except `patchwork`.
@@ -399,10 +399,10 @@ answer = "geom_bar() counts the rows in each category for you, while geom_col() 
 **A student writes `ggplot(otter_data, aes(x = spraints)) + geom_point()`. Why does this give an error?**
 
 `r longmcq(c(
-answer = "geom_point() needs both an x and a y, and only an x has been supplied in aes().",
 "geom_point() can only be used with categorical variables, but spraints is a numeric count.",
 "geom_point() must always be followed by geom_smooth() or it cannot draw the plot properly.",
-"geom_point() cannot be used when the data frame contains more than one grouping variable."
+"geom_point() cannot be used when the data frame contains more than one grouping variable.",
+answer = "geom_point() needs both an x and a y, and only an x has been supplied in aes()."
 ))`
 
 To draw a regression line over a scatterplot, you add `r fitb(c("geom_smooth", "geom_smooth()"))` with `method = "lm"`.
@@ -629,9 +629,9 @@ You have one count variable (`spraints`) and **two** categorical variables (`sit
 **What is the best way to show both categorical variables at once?**
 
 `r longmcq(c(
-answer = "Put site on the x axis and use fill to show season, so each site has one box per season.",
 "Make two separate histograms of spraints, one for each site, and ignore season entirely.",
 "Draw a scatterplot of site against season, with each point representing one otter.",
+answer = "Put site on the x axis and use fill to show season, so each site has one box per season.",
 "Draw a single bar chart of the total spraints, which combines every site and season together."
 ))`
 
@@ -738,10 +738,10 @@ Colour keeps everything in one panel, which makes direct comparison easy. Facets
 **What is the most useful way to show this?**
 
 `r longmcq(c(
-answer = "Draw a histogram of the raw counts next to a histogram of the log transformed counts.",
 "Draw a boxplot of the raw counts only, because boxplots always show skew more clearly.",
 "Draw a scatterplot of tick count against otter ID, so that each otter is shown separately.",
-"Draw a bar chart of the total number of ticks, so that the overall burden is easy to see."
+"Draw a bar chart of the total number of ticks, so that the overall burden is easy to see.",
+answer = "Draw a histogram of the raw counts next to a histogram of the log transformed counts."
 ))`
 
 `r hide("Click to show the code and plot")`
@@ -797,9 +797,9 @@ Work through these steps:
 **A student plots `site` against `season` using `geom_point()`. Why is this a poor choice?**
 
 `r longmcq(c(
-answer = "Both variables are categorical, so the points can only sit on a few grid positions and many otters would overlap.",
 "Both variables are continuous, so a scatterplot cannot show the full range of values for each otter.",
 "Scatterplots can only be drawn when one of the variables has been transformed using a logarithm.",
+answer = "Both variables are categorical, so the points can only sit on a few grid positions and many otters would overlap.",
 "The geom_point function cannot be used with text variables, so R would return an error message."
 ))`
 
@@ -957,10 +957,10 @@ answer = "Boxplot and points, because every otter is drawn as its own point and 
 **Which view would you choose to see whether the two sexes overlap in body mass?**
 
 `r longmcq(c(
-answer = "Density, because both curves share one axis and the region where they overlap is easy to see.",
 "Boxplot, because the whiskers show the full range of each group and make the overlap obvious.",
 "Bar chart, because the height of each bar shows the average mass of each group of otters.",
-"Scatterplot, because each otter is plotted against the order in which it was measured."
+"Scatterplot, because each otter is plotted against the order in which it was measured.",
+answer = "Density, because both curves share one axis and the region where they overlap is easy to see."
 ))`
 
 ### What a plot can hide
@@ -1018,9 +1018,9 @@ The white diamond is the **mean** and the thick line is the **median**.
 **In a right skewed variable such as `tick_count`, where do you expect the mean to sit compared with the median?**
 
 `r longmcq(c(
-answer = "Above the median, because a small number of very high counts pull the mean upwards.",
 "Below the median, because a large number of zero counts pull the mean towards the bottom.",
 "On the median, because the mean and median are always equal for count data of this type.",
+answer = "Above the median, because a small number of very high counts pull the mean upwards.",
 "Outside the box, because the mean is always further from the centre than the median is."
 ))`
 

@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-28">
+<meta name="dcterms.date" content="2026-11-04">
 
 <title>6&nbsp; Workshop 6 - Issues with Probability and Parametric Analysis – Statistics for Biologists - Extension Coursebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./function-glossary.html" rel="next">
+<link href="./07-plots.html" rel="next">
 <link href="./05-testing-and-measuring-relationships.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -77,10 +80,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dda8771d043933e00db2387e2c02d373.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -194,14 +197,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workshop 7 - Data Visualisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./function-glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -262,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 28, 2026</p>
+      <p class="date">November 4, 2026</p>
     </div>
   </div>
   
@@ -474,8 +483,8 @@ W = 0.83418, p-value = 1.072e-06</code></pre>
 </div>
 </div>
 <p><strong>What does the histogram tell us about the distribution of tick counts?</strong></p>
-<div id="radio_PJGUXDTEZC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PJGUXDTEZC" value="answer"> <span>The data are strongly right-skewed, most otters have very few or no ticks, but a small number have very high counts. This suggests a log transformation may be appropriate.</span></label><label><input type="radio" autocomplete="off" name="radio_PJGUXDTEZC" value=""> <span>The data are approximately normally distributed and no transformation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_PJGUXDTEZC" value=""> <span>The data are left-skewed, so a log transformation would not be appropriate.</span></label><label><input type="radio" autocomplete="off" name="radio_PJGUXDTEZC" value=""> <span>The histogram tells us nothing about whether transformation is needed.</span></label>
+<div id="radio_CCYXIIEOMM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CCYXIIEOMM" value="answer"> <span>The data are strongly right-skewed, most otters have very few or no ticks, but a small number have very high counts. This suggests a log transformation may be appropriate.</span></label><label><input type="radio" autocomplete="off" name="radio_CCYXIIEOMM" value=""> <span>The data are approximately normally distributed and no transformation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_CCYXIIEOMM" value=""> <span>The data are left-skewed, so a log transformation would not be appropriate.</span></label><label><input type="radio" autocomplete="off" name="radio_CCYXIIEOMM" value=""> <span>The histogram tells us nothing about whether transformation is needed.</span></label>
 </div>
 <hr>
 </section>
@@ -556,12 +565,12 @@ W = 0.96763, p-value = 0.1117</code></pre>
 </div>
 </div>
 <p><strong>Comparing the two histograms, what effect has the log transformation had?</strong></p>
-<div id="radio_AUCPIJKMKF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AUCPIJKMKF" value=""> <span>The transformation has made the distribution more right-skewed by spreading the high values further apart from the low values.</span></label><label><input type="radio" autocomplete="off" name="radio_AUCPIJKMKF" value=""> <span>The transformation has had no effect on the shape of the distribution, both histograms look identical regardless of the scale used.</span></label><label><input type="radio" autocomplete="off" name="radio_AUCPIJKMKF" value="answer"> <span>The transformation has pulled the long right tail back in, making the distribution more symmetrical and closer to normal.</span></label><label><input type="radio" autocomplete="off" name="radio_AUCPIJKMKF" value=""> <span>The transformation has removed all the zeros from the data, which is why the distribution looks different after transformation.</span></label>
+<div id="radio_WSSKZQYSMS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WSSKZQYSMS" value=""> <span>The transformation has made the distribution more right-skewed by spreading the high values further apart from the low values.</span></label><label><input type="radio" autocomplete="off" name="radio_WSSKZQYSMS" value=""> <span>The transformation has had no effect on the shape of the distribution, both histograms look identical regardless of the scale used.</span></label><label><input type="radio" autocomplete="off" name="radio_WSSKZQYSMS" value="answer"> <span>The transformation has pulled the long right tail back in, making the distribution more symmetrical and closer to normal.</span></label><label><input type="radio" autocomplete="off" name="radio_WSSKZQYSMS" value=""> <span>The transformation has removed all the zeros from the data, which is why the distribution looks different after transformation.</span></label>
 </div>
 <p><strong>Why do we use <code>log(tick_count + 1)</code> rather than <code>log(tick_count)</code>?</strong></p>
-<div id="radio_XWOXXFZPPV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XWOXXFZPPV" value=""> <span>Adding 1 makes the transformation more powerful by increasing all values before the log is applied, which improves the shape of the distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_XWOXXFZPPV" value=""> <span>R cannot calculate log values for integers, so adding 1 converts the counts to decimals that R can process correctly.</span></label><label><input type="radio" autocomplete="off" name="radio_XWOXXFZPPV" value="answer"> <span>Some otters have a tick count of 0, and log(0) is undefined, adding 1 ensures all values are positive before the transformation is applied.</span></label><label><input type="radio" autocomplete="off" name="radio_XWOXXFZPPV" value=""> <span>The tick counts need to be standardised before transformation, and adding 1 shifts all values onto a comparable scale.</span></label>
+<div id="radio_XQAYXWJTZG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XQAYXWJTZG" value=""> <span>Adding 1 makes the transformation more powerful by increasing all values before the log is applied, which improves the shape of the distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_XQAYXWJTZG" value=""> <span>R cannot calculate log values for integers, so adding 1 converts the counts to decimals that R can process correctly.</span></label><label><input type="radio" autocomplete="off" name="radio_XQAYXWJTZG" value="answer"> <span>Some otters have a tick count of 0, and log(0) is undefined, adding 1 ensures all values are positive before the transformation is applied.</span></label><label><input type="radio" autocomplete="off" name="radio_XQAYXWJTZG" value=""> <span>The tick counts need to be standardised before transformation, and adding 1 shifts all values onto a comparable scale.</span></label>
 </div>
 <hr>
 </section>
@@ -605,8 +614,8 @@ Note
 </div>
 </div>
 <p><strong>If the Shapiro-Wilk test still returns p &lt; 0.05 after log transformation, what should you do?</strong></p>
-<div id="radio_EDSNTQPBXN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EDSNTQPBXN" value=""> <span>Keep trying different transformations such as square root or reciprocal until one produces a p-value above 0.05.</span></label><label><input type="radio" autocomplete="off" name="radio_EDSNTQPBXN" value="answer"> <span>Use a non-parametric alternative such as the Mann-Whitney U test or Kruskal-Wallis test, which do not require the data to be normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_EDSNTQPBXN" value=""> <span>Proceed with the parametric test anyway, as a single failed Shapiro-Wilk test is not sufficient reason to abandon a parametric approach.</span></label><label><input type="radio" autocomplete="off" name="radio_EDSNTQPBXN" value=""> <span>Remove any outliers from the dataset and rerun the transformation, as extreme values are likely causing the test to fail.</span></label>
+<div id="radio_OCYEEGHLJT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OCYEEGHLJT" value=""> <span>Keep trying different transformations such as square root or reciprocal until one produces a p-value above 0.05.</span></label><label><input type="radio" autocomplete="off" name="radio_OCYEEGHLJT" value="answer"> <span>Use a non-parametric alternative such as the Mann-Whitney U test or Kruskal-Wallis test, which do not require the data to be normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_OCYEEGHLJT" value=""> <span>Proceed with the parametric test anyway, as a single failed Shapiro-Wilk test is not sufficient reason to abandon a parametric approach.</span></label><label><input type="radio" autocomplete="off" name="radio_OCYEEGHLJT" value=""> <span>Remove any outliers from the dataset and rerun the transformation, as extreme values are likely causing the test to fail.</span></label>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -694,8 +703,8 @@ Note
 </div>
 </div>
 <p><strong>Comparing the tick count and parasite count results, what is the key difference that determines whether log transformation is successful?</strong></p>
-<div id="radio_ZDROIGZLPZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZDROIGZLPZ" value="answer"> <span>The parasite count data contain a much larger proportion of zeros, which creates a spike that log transformation cannot remove — the tick count data have fewer zeros and transform more successfully.</span></label><label><input type="radio" autocomplete="off" name="radio_ZDROIGZLPZ" value=""> <span>The tick count data have a smaller mean and lower variance than the parasite count data, which makes them easier to normalise regardless of their distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_ZDROIGZLPZ" value=""> <span>The parasite count data come from a different type of survey and were collected using a different method, which affects how well transformations work on the data.</span></label><label><input type="radio" autocomplete="off" name="radio_ZDROIGZLPZ" value=""> <span>Log transformation always works for right-skewed count data — the parasite count transformation must have failed due to a coding error rather than a property of the data itself.</span></label>
+<div id="radio_RVGEUMQGDF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RVGEUMQGDF" value="answer"> <span>The parasite count data contain a much larger proportion of zeros, which creates a spike that log transformation cannot remove — the tick count data have fewer zeros and transform more successfully.</span></label><label><input type="radio" autocomplete="off" name="radio_RVGEUMQGDF" value=""> <span>The tick count data have a smaller mean and lower variance than the parasite count data, which makes them easier to normalise regardless of their distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_RVGEUMQGDF" value=""> <span>The parasite count data come from a different type of survey and were collected using a different method, which affects how well transformations work on the data.</span></label><label><input type="radio" autocomplete="off" name="radio_RVGEUMQGDF" value=""> <span>Log transformation always works for right-skewed count data — the parasite count transformation must have failed due to a coding error rather than a property of the data itself.</span></label>
 </div>
 </section>
 <section id="non-parametric-alternatives" class="level2" data-number="6.5">
@@ -795,12 +804,12 @@ Note
 </div>
 </div>
 <p><strong>Comparing the two tabs, what do you notice about the difference between the mean and median for each group?</strong></p>
-<div id="radio_BYVQUOTOXG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BYVQUOTOXG" value=""> <span>The mean and median are identical for both groups, suggesting the parasite count data are symmetrically distributed around a central value.</span></label><label><input type="radio" autocomplete="off" name="radio_BYVQUOTOXG" value=""> <span>The median is higher than the mean for both groups, showing that the extreme values are pulling the median upward rather than the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_BYVQUOTOXG" value="answer"> <span>The mean is higher than the median for both groups, showing that the extreme values are pulling the mean upward — the median gives a more representative picture of the typical mouse.</span></label><label><input type="radio" autocomplete="off" name="radio_BYVQUOTOXG" value=""> <span>The mean and median differ only for female mice, suggesting that the distribution of parasite counts is skewed in females but not in males.</span></label>
+<div id="radio_QVRMPHOWGJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QVRMPHOWGJ" value=""> <span>The mean and median are identical for both groups, suggesting the parasite count data are symmetrically distributed around a central value.</span></label><label><input type="radio" autocomplete="off" name="radio_QVRMPHOWGJ" value=""> <span>The median is higher than the mean for both groups, showing that the extreme values are pulling the median upward rather than the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_QVRMPHOWGJ" value="answer"> <span>The mean is higher than the median for both groups, showing that the extreme values are pulling the mean upward — the median gives a more representative picture of the typical mouse.</span></label><label><input type="radio" autocomplete="off" name="radio_QVRMPHOWGJ" value=""> <span>The mean and median differ only for female mice, suggesting that the distribution of parasite counts is skewed in females but not in males.</span></label>
 </div>
 <p><strong>Looking at the plot, why is the median a better measure of centre than the mean for this dataset?</strong></p>
-<div id="radio_MEBWMPXKTC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MEBWMPXKTC" value="answer"> <span>The median is unaffected by the small number of mice with very high parasite counts, making it a more representative summary of where most of the data sit.</span></label><label><input type="radio" autocomplete="off" name="radio_MEBWMPXKTC" value=""> <span>The mean is calculated incorrectly for count data, the median should always be used when working with whole numbers.</span></label><label><input type="radio" autocomplete="off" name="radio_MEBWMPXKTC" value=""> <span>The median is always the better measure of centre regardless of the data type, as it is less sensitive to variation in the dataset.</span></label><label><input type="radio" autocomplete="off" name="radio_MEBWMPXKTC" value=""> <span>The mean and median are similar enough here that either would be an equally valid measure of centre for this dataset.</span></label>
+<div id="radio_LRLLPDFMKJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LRLLPDFMKJ" value="answer"> <span>The median is unaffected by the small number of mice with very high parasite counts, making it a more representative summary of where most of the data sit.</span></label><label><input type="radio" autocomplete="off" name="radio_LRLLPDFMKJ" value=""> <span>The mean is calculated incorrectly for count data, the median should always be used when working with whole numbers.</span></label><label><input type="radio" autocomplete="off" name="radio_LRLLPDFMKJ" value=""> <span>The median is always the better measure of centre regardless of the data type, as it is less sensitive to variation in the dataset.</span></label><label><input type="radio" autocomplete="off" name="radio_LRLLPDFMKJ" value=""> <span>The mean and median are similar enough here that either would be an equally valid measure of centre for this dataset.</span></label>
 </div>
 <hr>
 </section>
@@ -857,8 +866,8 @@ Note
 </div>
 </div>
 <p><strong>Comparing the two tabs, what effect does ranking have on the data?</strong></p>
-<div id="radio_IOEGAEKYVQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IOEGAEKYVQ" value=""> <span>Ranking spreads the extreme values further apart, making the distribution more skewed than the raw values.</span></label><label><input type="radio" autocomplete="off" name="radio_IOEGAEKYVQ" value=""> <span>Ranking produces the same distribution as the raw values but rescaled to run from 1 to 60.</span></label><label><input type="radio" autocomplete="off" name="radio_IOEGAEKYVQ" value="answer"> <span>Ranking replaces each value with its position in order, so extreme values have no more influence on the test than any other observation.</span></label><label><input type="radio" autocomplete="off" name="radio_IOEGAEKYVQ" value=""> <span>Ranking removes the zeros from the data so that the test is not affected by mice with no parasites.</span></label>
+<div id="radio_ZZGEKEOHCO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZZGEKEOHCO" value=""> <span>Ranking spreads the extreme values further apart, making the distribution more skewed than the raw values.</span></label><label><input type="radio" autocomplete="off" name="radio_ZZGEKEOHCO" value=""> <span>Ranking produces the same distribution as the raw values but rescaled to run from 1 to 60.</span></label><label><input type="radio" autocomplete="off" name="radio_ZZGEKEOHCO" value="answer"> <span>Ranking replaces each value with its position in order, so extreme values have no more influence on the test than any other observation.</span></label><label><input type="radio" autocomplete="off" name="radio_ZZGEKEOHCO" value=""> <span>Ranking removes the zeros from the data so that the test is not affected by mice with no parasites.</span></label>
 </div>
 <p>When comparing <strong>two groups</strong>, we use the <strong>Wilcoxon rank-sum test</strong> (also called the Mann-Whitney U test), the rank-based equivalent of a two-sample t-test:</p>
 <div class="cell">
@@ -902,12 +911,12 @@ Note
 </div>
 </div>
 <p><strong>What is the key difference between a rank test and a parametric test?</strong></p>
-<div id="radio_UPFTBCCZEX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UPFTBCCZEX" value="answer"> <span>A rank test replaces the actual values with their rank order, a parametric test uses the actual values and assumes they are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_UPFTBCCZEX" value=""> <span>A rank test always produces a smaller p-value than a parametric test, as it is more powerful.</span></label><label><input type="radio" autocomplete="off" name="radio_UPFTBCCZEX" value=""> <span>A rank test can only be used when the data are normally distributed, while a parametric test can be used with any distribution making it more flexible and useable in this scenario.</span></label><label><input type="radio" autocomplete="off" name="radio_UPFTBCCZEX" value=""> <span>A rank test and a parametric test will always produce identical results, regardless of the data distribution.</span></label>
+<div id="radio_AOEHTGQMJC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AOEHTGQMJC" value="answer"> <span>A rank test replaces the actual values with their rank order, a parametric test uses the actual values and assumes they are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_AOEHTGQMJC" value=""> <span>A rank test always produces a smaller p-value than a parametric test, as it is more powerful.</span></label><label><input type="radio" autocomplete="off" name="radio_AOEHTGQMJC" value=""> <span>A rank test can only be used when the data are normally distributed, while a parametric test can be used with any distribution making it more flexible and useable in this scenario.</span></label><label><input type="radio" autocomplete="off" name="radio_AOEHTGQMJC" value=""> <span>A rank test and a parametric test will always produce identical results, regardless of the data distribution.</span></label>
 </div>
 <p><strong>If the Kruskal-Wallis test returns a significant result, what does this tell us?</strong></p>
-<div id="radio_DOTZEHYCGZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DOTZEHYCGZ" value=""> <span>All possible pairs of groups are significantly different from each other. The test compares every combination and flags those that differ.</span></label><label><input type="radio" autocomplete="off" name="radio_DOTZEHYCGZ" value=""> <span>The data within each group are approximately normally distributed, meaning the parametric assumptions have been met after all.</span></label><label><input type="radio" autocomplete="off" name="radio_DOTZEHYCGZ" value=""> <span>We should switch to a parametric test, as a significant Kruskal-Wallis result indicates the data are suitable for ANOVA.</span></label><label><input type="radio" autocomplete="off" name="radio_DOTZEHYCGZ" value="answer"> <span>At least one group has a significantly different rank distribution from the others, but a post-hoc test would be needed to identify which specific groups differ.</span></label>
+<div id="radio_DIRSKVJDEK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DIRSKVJDEK" value=""> <span>All possible pairs of groups are significantly different from each other. The test compares every combination and flags those that differ.</span></label><label><input type="radio" autocomplete="off" name="radio_DIRSKVJDEK" value=""> <span>The data within each group are approximately normally distributed, meaning the parametric assumptions have been met after all.</span></label><label><input type="radio" autocomplete="off" name="radio_DIRSKVJDEK" value=""> <span>We should switch to a parametric test, as a significant Kruskal-Wallis result indicates the data are suitable for ANOVA.</span></label><label><input type="radio" autocomplete="off" name="radio_DIRSKVJDEK" value="answer"> <span>At least one group has a significantly different rank distribution from the others, but a post-hoc test would be needed to identify which specific groups differ.</span></label>
 </div>
 <hr>
 </section>
@@ -919,8 +928,8 @@ Note
 <p>When we want to measure the strength of association between two variables, we use a <strong>correlation coefficient</strong>. The most common parametric version is <strong>Pearson’s r</strong>, which measures the strength and direction of a linear relationship between two continuous, normally distributed variables and ranges from -1 to 1.</p>
 <p>When the data are not normally distributed, or have been collected as ranks, the non-parametric alternatives are <strong>Spearman’s</strong> and <strong>Kendall’s</strong> correlation coefficients. Both are based on ranking data, yield coefficients comparable to Pearson’s r, and a significant result (p &lt; 0.05) indicates a significant association.</p>
 <p><strong>To remind ourselves about the parametric Pearson’s r: What does a Pearson’s r value of -0.85 tell us?</strong></p>
-<div id="radio_ZMDCEOYZTM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZMDCEOYZTM" value="answer"> <span>There is a strong negative association between the two variables. As one increases, the other decreases.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMDCEOYZTM" value=""> <span>There is a strong positive association between the two variables, but the relationship is not linear.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMDCEOYZTM" value=""> <span>There is no meaningful association between the two variables, neither is linear.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMDCEOYZTM" value=""> <span>The relationship between the two variables is non-linear, and the correlation coefficient does not capture this relationship.</span></label>
+<div id="radio_SZSRTOEOBQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SZSRTOEOBQ" value="answer"> <span>There is a strong negative association between the two variables. As one increases, the other decreases.</span></label><label><input type="radio" autocomplete="off" name="radio_SZSRTOEOBQ" value=""> <span>There is a strong positive association between the two variables, but the relationship is not linear.</span></label><label><input type="radio" autocomplete="off" name="radio_SZSRTOEOBQ" value=""> <span>There is no meaningful association between the two variables, neither is linear.</span></label><label><input type="radio" autocomplete="off" name="radio_SZSRTOEOBQ" value=""> <span>The relationship between the two variables is non-linear, and the correlation coefficient does not capture this relationship.</span></label>
 </div>
 </section>
 <section id="the-difficulties-of-non-parametric-tests" class="level4" data-number="6.5.3.2">
@@ -959,8 +968,8 @@ Note
 </div>
 </div>
 <p><strong>Looking at the plot, what does the pattern of ranks suggest about the relationship between fish availability and spraint count?</strong></p>
-<div id="radio_VXCKLKZNLY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VXCKLKZNLY" value=""> <span>There is no association. The ranks are scattered randomly with no pattern, suggesting no relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_VXCKLKZNLY" value=""> <span>There is a negative association. Otters in areas with higher ranked fish availability tend to have lower ranked spraint counts.</span></label><label><input type="radio" autocomplete="off" name="radio_VXCKLKZNLY" value="answer"> <span>There is a positive association. Otters with higher ranked fish availability tend to have higher ranked spraint counts.</span></label><label><input type="radio" autocomplete="off" name="radio_VXCKLKZNLY" value=""> <span>The plot cannot tell us anything about association because the axes show ranks rather than raw values.</span></label>
+<div id="radio_NHYPEVDWSP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NHYPEVDWSP" value=""> <span>There is no association. The ranks are scattered randomly with no pattern, suggesting no relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_NHYPEVDWSP" value=""> <span>There is a negative association. Otters in areas with higher ranked fish availability tend to have lower ranked spraint counts.</span></label><label><input type="radio" autocomplete="off" name="radio_NHYPEVDWSP" value="answer"> <span>There is a positive association. Otters with higher ranked fish availability tend to have higher ranked spraint counts.</span></label><label><input type="radio" autocomplete="off" name="radio_NHYPEVDWSP" value=""> <span>The plot cannot tell us anything about association because the axes show ranks rather than raw values.</span></label>
 </div>
 <p>Now we have seen how the ranks of the two variables relate to each other, we can formally test this using a non-parametric correlation. <strong>Spearman’s correlation</strong> is the most commonly used non-parametric correlation in biology. It converts both variables to ranks and tests whether the ranks tend to move together:</p>
 <div class="cell">
@@ -1015,17 +1024,17 @@ Note
 </div>
 </div>
 <p><strong>What is the key difference between Spearman’s and Pearson’s correlation?</strong></p>
-<div id="radio_AHJODLKZFZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AHJODLKZFZ" value="answer"> <span>Spearman's converts the raw values to ranks before calculating the correlation, making it appropriate when data are not normally distributed or were collected as ranks.</span></label><label><input type="radio" autocomplete="off" name="radio_AHJODLKZFZ" value=""> <span>Spearman's always produces a higher correlation coefficient than Pearson's because ranking removes the influence of extreme values from the calculation.</span></label><label><input type="radio" autocomplete="off" name="radio_AHJODLKZFZ" value=""> <span>Pearson's can be used with any type of data regardless of distribution, while Spearman's can only be used when data have been explicitly collected as ranks.</span></label><label><input type="radio" autocomplete="off" name="radio_AHJODLKZFZ" value=""> <span>Spearman's and Pearson's always produce identical correlation coefficients because both measure the strength of association between two variables.</span></label>
+<div id="radio_AWETYJSYWR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AWETYJSYWR" value="answer"> <span>Spearman's converts the raw values to ranks before calculating the correlation, making it appropriate when data are not normally distributed or were collected as ranks.</span></label><label><input type="radio" autocomplete="off" name="radio_AWETYJSYWR" value=""> <span>Spearman's always produces a higher correlation coefficient than Pearson's because ranking removes the influence of extreme values from the calculation.</span></label><label><input type="radio" autocomplete="off" name="radio_AWETYJSYWR" value=""> <span>Pearson's can be used with any type of data regardless of distribution, while Spearman's can only be used when data have been explicitly collected as ranks.</span></label><label><input type="radio" autocomplete="off" name="radio_AWETYJSYWR" value=""> <span>Spearman's and Pearson's always produce identical correlation coefficients because both measure the strength of association between two variables.</span></label>
 </div>
 <p><strong>When would you choose Kendall’s correlation over Spearman’s?</strong></p>
-<div id="radio_IIUDOFVWHU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IIUDOFVWHU" value=""> <span>When the data are normally distributed, as Kendall's is specifically designed for parametric data unlike Spearman's.</span></label><label><input type="radio" autocomplete="off" name="radio_IIUDOFVWHU" value=""> <span>When you want a larger correlation coefficient, as Kendall's consistently produces higher values than Spearman's for the same data.</span></label><label><input type="radio" autocomplete="off" name="radio_IIUDOFVWHU" value=""> <span>There is never a reason to choose one over the other as both tests always produce identical results and conclusions.</span></label><label><input type="radio" autocomplete="off" name="radio_IIUDOFVWHU" value="answer"> <span>When the sample size is small, as Kendall's tends to be more accurate than Spearman's when there are fewer observations to rank.</span></label>
+<div id="radio_YWOJXVNNCA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YWOJXVNNCA" value=""> <span>When the data are normally distributed, as Kendall's is specifically designed for parametric data unlike Spearman's.</span></label><label><input type="radio" autocomplete="off" name="radio_YWOJXVNNCA" value=""> <span>When you want a larger correlation coefficient, as Kendall's consistently produces higher values than Spearman's for the same data.</span></label><label><input type="radio" autocomplete="off" name="radio_YWOJXVNNCA" value=""> <span>There is never a reason to choose one over the other as both tests always produce identical results and conclusions.</span></label><label><input type="radio" autocomplete="off" name="radio_YWOJXVNNCA" value="answer"> <span>When the sample size is small, as Kendall's tends to be more accurate than Spearman's when there are fewer observations to rank.</span></label>
 </div>
 <hr>
 <p><strong>If three mice all have a parasite count of 0 and would occupy ranks 1, 2 and 3, what rank does each receive when ties are handled by averaging?</strong></p>
-<div id="radio_OBMQHCCEJG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OBMQHCCEJG" value=""> <span>Each receives rank 1, as they all share the lowest value.</span></label><label><input type="radio" autocomplete="off" name="radio_OBMQHCCEJG" value="answer"> <span>Each receives rank 2. The average of ranks 1, 2 and 3.</span></label><label><input type="radio" autocomplete="off" name="radio_OBMQHCCEJG" value=""> <span>Each receives rank 3, as there are three of them.</span></label><label><input type="radio" autocomplete="off" name="radio_OBMQHCCEJG" value=""> <span>The tied observations are removed from the analysis entirely.</span></label>
+<div id="radio_TJJSROJFOP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TJJSROJFOP" value=""> <span>Each receives rank 1, as they all share the lowest value.</span></label><label><input type="radio" autocomplete="off" name="radio_TJJSROJFOP" value="answer"> <span>Each receives rank 2. The average of ranks 1, 2 and 3.</span></label><label><input type="radio" autocomplete="off" name="radio_TJJSROJFOP" value=""> <span>Each receives rank 3, as there are three of them.</span></label><label><input type="radio" autocomplete="off" name="radio_TJJSROJFOP" value=""> <span>The tied observations are removed from the analysis entirely.</span></label>
 </div>
 <hr>
 </section>
@@ -1104,16 +1113,16 @@ Tip
 </div>
 </div>
 <p><strong>Looking at the histogram of territory count, what can you say about the distribution?</strong></p>
-<div id="radio_CDLNJWONSM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CDLNJWONSM" value=""> <span>The data are approximately normally distributed and no transformation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_CDLNJWONSM" value=""> <span>The data are left-skewed, with most plots having high territory counts.</span></label><label><input type="radio" autocomplete="off" name="radio_CDLNJWONSM" value=""> <span>The data are bimodal, suggesting two clearly separate groups of plots.</span></label><label><input type="radio" autocomplete="off" name="radio_CDLNJWONSM" value="answer"> <span>The data are strongly right-skewed, most plots have low territory counts but a small number have very high counts.</span></label>
+<div id="radio_RFDDHLBWFQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RFDDHLBWFQ" value=""> <span>The data are approximately normally distributed and no transformation is needed.</span></label><label><input type="radio" autocomplete="off" name="radio_RFDDHLBWFQ" value=""> <span>The data are left-skewed, with most plots having high territory counts.</span></label><label><input type="radio" autocomplete="off" name="radio_RFDDHLBWFQ" value=""> <span>The data are bimodal, suggesting two clearly separate groups of plots.</span></label><label><input type="radio" autocomplete="off" name="radio_RFDDHLBWFQ" value="answer"> <span>The data are strongly right-skewed, most plots have low territory counts but a small number have very high counts.</span></label>
 </div>
 </section>
 <section id="step-3.-check-the-normality-of-the-response-variable" class="level4" data-number="6.7.1.3">
 <h4 data-number="6.7.1.3" class="anchored" data-anchor-id="step-3.-check-the-normality-of-the-response-variable"><span class="header-section-number">6.7.1.3</span> Step 3. Check the normality of the response variable</h4>
 <p>We have the idea from our response variable that it is right-skewed, but we can also do formal tests to check the normality of the data. Our normality tests are the Shapiro-Wilk test and the Levene’s test.</p>
 <p><strong>What assumptions are being tested by the Shapiro-Wilk and Levene’s test?</strong></p>
-<div id="radio_PPVKYUCTFV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PPVKYUCTFV" value=""> <span>Shapiro-Wilk tests whether the means of the groups are significantly different, and Levene's test checks whether the data are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_PPVKYUCTFV" value="answer"> <span>Shapiro-Wilk tests whether the data are normally distributed, and Levene's test checks whether the variances are equal.</span></label><label><input type="radio" autocomplete="off" name="radio_PPVKYUCTFV" value=""> <span>Shapiro-Wilk tests whether the variances across groups are equal, and Levene's test checks whether the data are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_PPVKYUCTFV" value=""> <span>Shapiro-Wilk tests whether the relationship between variables is linear, and Levene's test checks whether the sample sizes across groups are equal.</span></label>
+<div id="radio_QYPNTWCHCY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QYPNTWCHCY" value=""> <span>Shapiro-Wilk tests whether the means of the groups are significantly different, and Levene's test checks whether the data are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_QYPNTWCHCY" value="answer"> <span>Shapiro-Wilk tests whether the data are normally distributed, and Levene's test checks whether the variances are equal.</span></label><label><input type="radio" autocomplete="off" name="radio_QYPNTWCHCY" value=""> <span>Shapiro-Wilk tests whether the variances across groups are equal, and Levene's test checks whether the data are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_QYPNTWCHCY" value=""> <span>Shapiro-Wilk tests whether the relationship between variables is linear, and Levene's test checks whether the sample sizes across groups are equal.</span></label>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1138,12 +1147,12 @@ W = 0.82049, p-value = 4.546e-07</code></pre>
 </div>
 </div>
 <p><strong>What do the results of the Shapiro-Wilk test tell us?</strong></p>
-<div id="radio_LHNPAXLZAH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LHNPAXLZAH" value="answer"> <span>The territory count data are significantly non-normal (p &lt; 0.05)</span></label><label><input type="radio" autocomplete="off" name="radio_LHNPAXLZAH" value=""> <span>The territory count data are approximately normal (p &gt; 0.05)</span></label>
+<div id="radio_GELNYGHNLN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GELNYGHNLN" value="answer"> <span>The territory count data are significantly non-normal (p &lt; 0.05)</span></label><label><input type="radio" autocomplete="off" name="radio_GELNYGHNLN" value=""> <span>The territory count data are approximately normal (p &gt; 0.05)</span></label>
 </div>
 <p><strong>Given the Shapiro-Wilk result, what should our next step be?</strong></p>
-<div id="radio_PYYXDCOQXG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PYYXDCOQXG" value=""> <span>Proceed with a standard t-test as the Levene's test passed.</span></label><label><input type="radio" autocomplete="off" name="radio_PYYXDCOQXG" value="answer"> <span>Attempt a log transformation and recheck normality before deciding on a test.</span></label><label><input type="radio" autocomplete="off" name="radio_PYYXDCOQXG" value=""> <span>Immediately use a Mann-Whitney U test without attempting transformation.</span></label><label><input type="radio" autocomplete="off" name="radio_PYYXDCOQXG" value=""> <span>Remove the non-normal plots from the dataset and rerun the Shapiro-Wilk test.</span></label>
+<div id="radio_WEWKNLHYVV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WEWKNLHYVV" value=""> <span>Proceed with a standard t-test as the Levene's test passed.</span></label><label><input type="radio" autocomplete="off" name="radio_WEWKNLHYVV" value="answer"> <span>Attempt a log transformation and recheck normality before deciding on a test.</span></label><label><input type="radio" autocomplete="off" name="radio_WEWKNLHYVV" value=""> <span>Immediately use a Mann-Whitney U test without attempting transformation.</span></label><label><input type="radio" autocomplete="off" name="radio_WEWKNLHYVV" value=""> <span>Remove the non-normal plots from the dataset and rerun the Shapiro-Wilk test.</span></label>
 </div>
 </section>
 <section id="step-4.-transforming-the-data" class="level4" data-number="6.7.1.4">
@@ -1340,8 +1349,8 @@ W = 0.95157, p-value = 0.01847</code></pre>
 <p>Referring back to our equivalents table, the Wilcoxon rank-sum test test is the non-parametric equivalent of a two-sample t-test — which is exactly what we need here, as we are comparing seed counts between two groups (ancient woodland and plantation woodland).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-2c126bcff3f6ec57033c" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-2c126bcff3f6ec57033c">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Parametric":["One-sample t-test","Two-sample t-test (unpaired)","Two-sample t-test (paired)","Pearson correlation","One-way ANOVA","Randomised block two-way ANOVA"],"Non_parametric":["Wilcoxon signed-rank test","Mann-Whitney U / Wilcoxon rank-sum test","Wilcoxon signed-rank test","Spearman correlation","Kruskal-Wallis test","Friedman's test"],"When_to_use":["Compare one sample mean to a known value","Compare means of two independent groups","Compare means of two related/matched groups","Test association between two continuous variables","Compare means across three or more groups","Compare treatments across blocks or repeated measures"]},"columns":[{"id":".details","name":"","type":null,"sortable":false,"resizable":false,"filterable":false,"searchable":false,"width":45,"align":"center","details":[{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare one sample mean to a known value"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare means of two independent groups"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare means of two related/matched groups"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Test association between two continuous variables"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare means across three or more groups"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare treatments across blocks or repeated measures"]}]},{"id":"Parametric","name":"Parametric test","type":"character","style":{"color":"#00BFC4","fontWeight":"bold"}},{"id":"Non_parametric","name":"Non-parametric equivalent","type":"character","style":{"color":"#F8766D","fontWeight":"bold"}},{"id":"When_to_use","name":"When to use","type":"character","show":false}],"highlight":true,"bordered":true,"striped":true,"dataKey":"f310998120bd0d16c87145f1f34973f7"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-6eb3cb4c8aca1e3e365d" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6eb3cb4c8aca1e3e365d">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Parametric":["One-sample t-test","Two-sample t-test (unpaired)","Two-sample t-test (paired)","Pearson correlation","One-way ANOVA","Randomised block two-way ANOVA"],"Non_parametric":["Wilcoxon signed-rank test","Mann-Whitney U / Wilcoxon rank-sum test","Wilcoxon signed-rank test","Spearman correlation","Kruskal-Wallis test","Friedman's test"],"When_to_use":["Compare one sample mean to a known value","Compare means of two independent groups","Compare means of two related/matched groups","Test association between two continuous variables","Compare means across three or more groups","Compare treatments across blocks or repeated measures"]},"columns":[{"id":".details","name":"","type":null,"sortable":false,"resizable":false,"filterable":false,"searchable":false,"width":45,"align":"center","details":[{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare one sample mean to a known value"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare means of two independent groups"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare means of two related/matched groups"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Test association between two continuous variables"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare means across three or more groups"]},{"name":"div","attribs":{"style":{"padding":"10px","background":"#f9f9f9","border-left":"3px solid #00BFC4"}},"children":["When to use: Compare treatments across blocks or repeated measures"]}]},{"id":"Parametric","name":"Parametric test","type":"character","style":{"color":"#00BFC4","fontWeight":"bold"}},{"id":"Non_parametric","name":"Non-parametric equivalent","type":"character","style":{"color":"#F8766D","fontWeight":"bold"}},{"id":"When_to_use","name":"When to use","type":"character","show":false}],"highlight":true,"bordered":true,"striped":true,"dataKey":"f310998120bd0d16c87145f1f34973f7"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1368,12 +1377,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <p><strong>Looking at the output, is there a significant difference in seed counts between the two habitat types?</strong></p>
-<div id="radio_MSLPTWMXDD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MSLPTWMXDD" value="answer"> <span>Yes. p &lt; 0.05, so we reject the null hypothesis and conclude that seed counts differ significantly between ancient and plantation woodland.</span></label><label><input type="radio" autocomplete="off" name="radio_MSLPTWMXDD" value=""> <span>No.&nbsp;p &gt; 0.05, so we cannot conclude the two habitats differ in seed count.</span></label><label><input type="radio" autocomplete="off" name="radio_MSLPTWMXDD" value=""> <span>We cannot tell because the data are non-normal.</span></label><label><input type="radio" autocomplete="off" name="radio_MSLPTWMXDD" value=""> <span>Yes. but the result is unreliable because we used a non-parametric test.</span></label>
+<div id="radio_OTLMKKWVSQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OTLMKKWVSQ" value="answer"> <span>Yes. p &lt; 0.05, so we reject the null hypothesis and conclude that seed counts differ significantly between ancient and plantation woodland.</span></label><label><input type="radio" autocomplete="off" name="radio_OTLMKKWVSQ" value=""> <span>No.&nbsp;p &gt; 0.05, so we cannot conclude the two habitats differ in seed count.</span></label><label><input type="radio" autocomplete="off" name="radio_OTLMKKWVSQ" value=""> <span>We cannot tell because the data are non-normal.</span></label><label><input type="radio" autocomplete="off" name="radio_OTLMKKWVSQ" value=""> <span>Yes. but the result is unreliable because we used a non-parametric test.</span></label>
 </div>
 <p><strong>Why did we use a Wilcoxon rank-sum test here rather than a t-test?</strong></p>
-<div id="radio_XJCJXSFJID" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XJCJXSFJID" value=""> <span>The Wilcoxon rank-sum test is always more powerful than a t-test, so it should be used whenever possible regardless of whether assumptions are met.</span></label><label><input type="radio" autocomplete="off" name="radio_XJCJXSFJID" value=""> <span>The two groups had unequal sample sizes, which means parametric tests cannot be used as they require equal numbers of observations in each group.</span></label><label><input type="radio" autocomplete="off" name="radio_XJCJXSFJID" value="answer"> <span>The seed count data remained significantly non-normal after log transformation (p = 0.019), meaning the parametric assumption of normality could not be met and a rank-based alternative was needed.</span></label><label><input type="radio" autocomplete="off" name="radio_XJCJXSFJID" value=""> <span>A t-test requires both variables to be continuous, but seed count is a discrete count variable so a non-parametric test must be used instead.</span></label>
+<div id="radio_MAIZBADCQG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MAIZBADCQG" value=""> <span>The Wilcoxon rank-sum test is always more powerful than a t-test, so it should be used whenever possible regardless of whether assumptions are met.</span></label><label><input type="radio" autocomplete="off" name="radio_MAIZBADCQG" value=""> <span>The two groups had unequal sample sizes, which means parametric tests cannot be used as they require equal numbers of observations in each group.</span></label><label><input type="radio" autocomplete="off" name="radio_MAIZBADCQG" value="answer"> <span>The seed count data remained significantly non-normal after log transformation (p = 0.019), meaning the parametric assumption of normality could not be met and a rank-based alternative was needed.</span></label><label><input type="radio" autocomplete="off" name="radio_MAIZBADCQG" value=""> <span>A t-test requires both variables to be continuous, but seed count is a discrete count variable so a non-parametric test must be used instead.</span></label>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1400,16 +1409,16 @@ Note
 </div>
 </div>
 <p><strong>When writing up the result of a Wilcoxon rank-sum test, which measure of centre should you report?</strong></p>
-<div id="radio_AFYRSIPGWQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AFYRSIPGWQ" value="answer"> <span>The median, because the Wilcoxon rank-sum test is based on ranks and the median is a more appropriate measure of centre for non-normal data.</span></label><label><input type="radio" autocomplete="off" name="radio_AFYRSIPGWQ" value=""> <span>The mean, because it is always the standard measure of centre in biology.</span></label><label><input type="radio" autocomplete="off" name="radio_AFYRSIPGWQ" value=""> <span>Both the mean and the median.</span></label><label><input type="radio" autocomplete="off" name="radio_AFYRSIPGWQ" value=""> <span>Neither, non-parametric tests do not require a measure of centre.</span></label>
+<div id="radio_WYHWQDXIWP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WYHWQDXIWP" value="answer"> <span>The median, because the Wilcoxon rank-sum test is based on ranks and the median is a more appropriate measure of centre for non-normal data.</span></label><label><input type="radio" autocomplete="off" name="radio_WYHWQDXIWP" value=""> <span>The mean, because it is always the standard measure of centre in biology.</span></label><label><input type="radio" autocomplete="off" name="radio_WYHWQDXIWP" value=""> <span>Both the mean and the median.</span></label><label><input type="radio" autocomplete="off" name="radio_WYHWQDXIWP" value=""> <span>Neither, non-parametric tests do not require a measure of centre.</span></label>
 </div>
 <p><strong>Across both analyses in this case study, we used two different tests. Which statement best summarises the decision-making process?</strong></p>
-<div id="radio_WSSYBBPCLH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WSSYBBPCLH" value=""> <span>We used a t-test for territory count because it is more powerful, and a Wilcoxon test for seed count because it is simpler to interpret.</span></label><label><input type="radio" autocomplete="off" name="radio_WSSYBBPCLH" value="answer"> <span>The choice of test was driven by whether the data could be transformed to meet normality, territory count was successfully log-transformed and analysed with a t-test, while seed count could not be normalised and required a Wilcoxon rank-sum test.</span></label><label><input type="radio" autocomplete="off" name="radio_WSSYBBPCLH" value=""> <span>Both tests were chosen before looking at the data, the t-test for continuous variables and the Wilcoxon test for count variables.</span></label><label><input type="radio" autocomplete="off" name="radio_WSSYBBPCLH" value=""> <span>The choice of test was arbitrary, both tests would have given the same result regardless of which variable was analysed.</span></label>
+<div id="radio_TJYEEWKQSH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TJYEEWKQSH" value=""> <span>We used a t-test for territory count because it is more powerful, and a Wilcoxon test for seed count because it is simpler to interpret.</span></label><label><input type="radio" autocomplete="off" name="radio_TJYEEWKQSH" value="answer"> <span>The choice of test was driven by whether the data could be transformed to meet normality, territory count was successfully log-transformed and analysed with a t-test, while seed count could not be normalised and required a Wilcoxon rank-sum test.</span></label><label><input type="radio" autocomplete="off" name="radio_TJYEEWKQSH" value=""> <span>Both tests were chosen before looking at the data, the t-test for continuous variables and the Wilcoxon test for count variables.</span></label><label><input type="radio" autocomplete="off" name="radio_TJYEEWKQSH" value=""> <span>The choice of test was arbitrary, both tests would have given the same result regardless of which variable was analysed.</span></label>
 </div>
 <p><strong>What is the single most important lesson from this case study?</strong></p>
-<div id="radio_FGTRDALRNY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FGTRDALRNY" value=""> <span>Always use non-parametric tests to avoid having to check assumptions.</span></label><label><input type="radio" autocomplete="off" name="radio_FGTRDALRNY" value=""> <span>Always use parametric tests because they are more powerful than non-parametric alternatives.</span></label><label><input type="radio" autocomplete="off" name="radio_FGTRDALRNY" value=""> <span>The choice of statistical test does not affect the biological conclusion.</span></label><label><input type="radio" autocomplete="off" name="radio_FGTRDALRNY" value="answer"> <span>Always check assumptions before choosing a test, and be prepared to adapt your approach.</span></label>
+<div id="radio_IOZQDKXKNH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IOZQDKXKNH" value=""> <span>Always use non-parametric tests to avoid having to check assumptions.</span></label><label><input type="radio" autocomplete="off" name="radio_IOZQDKXKNH" value=""> <span>Always use parametric tests because they are more powerful than non-parametric alternatives.</span></label><label><input type="radio" autocomplete="off" name="radio_IOZQDKXKNH" value=""> <span>The choice of statistical test does not affect the biological conclusion.</span></label><label><input type="radio" autocomplete="off" name="radio_IOZQDKXKNH" value="answer"> <span>Always check assumptions before choosing a test, and be prepared to adapt your approach.</span></label>
 </div>
 
 
@@ -1798,16 +1807,16 @@ window.onload = function() {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -2164,8 +2173,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./function-glossary.html" class="pagination-link" aria-label="R Function Glossary">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-plots.html" class="pagination-link" aria-label="Workshop 7 - Data Visualisation">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workshop 7 - Data Visualisation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
