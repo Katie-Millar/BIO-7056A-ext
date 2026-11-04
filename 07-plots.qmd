@@ -1,5 +1,5 @@
 ---
-title: "Workshop 7 - Data Visualisation!"
+title: "Workshop 7 - Data Visualisation"
 date: today
 format:
   html:
@@ -14,66 +14,69 @@ format:
     html-math-method: katex
     number-sections: true
 ---
+
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+
 library(tidyverse)     # ggplot2, dplyr and read_csv()
 library(patchwork)     # combining plots side by side
 library(webexercises)  # hide(), unhide(), mcq(), longmcq(), fitb()
-library(janitor)       # tabyl()
-library(car)           # leveneTest()
-library(kableExtra)    # kable() tables
-library(reactable)     # interactive tables
-
 
 otter_data <- read_csv("data/otter_data_v2.csv")
 ```
 
-## Understanding ggplot2
-To visualise our data so far in this module, we have been using the `ggplot2` package. This is a very powerful package for creating graphics in R. It is based on the **"Grammar of Graphics"** which allows you to build plots in a layered approach.
+## The Route Through the Workshop
 
-Every plot you will code is made up of three main components:
-1. **Data**: The data frame that contains the variables you want to plot.
-2. **Aesthetics**: The mapping of variables to visual properties (like x and y axes, color, size, etc.).
-3. **Geometries**: The type of plot you want to create (like points, lines, bars, etc.).
-4. **Labels**: The titles and labels for the axes and legend.
-5. **Theme**: The overall look and feel of the plot (like background color, grid lines, font size, etc.).
+In this workshop we will cover:
+
+1. **Understanding ggplot2**: the five components of every plot and how they fit together
+2. **Building a plot layer by layer**: starting from an empty canvas and adding one instruction at a time
+3. **Aesthetics and geoms**: how variables are mapped to visual features, and which shapes suit which data
+4. **Choosing a plot**: working out which plot to use from the number and type of your variables
+5. **Seeing the whole distribution**: why no single plot shows everything, and what different plots reveal about the same data
+
+By the end of this workshop you will be able to look at a set of variables, decide how to plot them, and explain why that plot is a good choice.
+
+### Loading packages and data
+
+Today you will need the packages `tidyverse` and `patchwork`. Install them from the **console** using `install.packages()` if you have not already, then load them at the top of your script.
+
+We will work with the newest version of the otter data throughout. Please read in `otter_data_v3.csv` from the data folder and call it `otter_data`.
+
+::: {.callout-tip}
+`ggplot2` is part of `tidyverse`, so loading `tidyverse` gives you every function used in this workshop except `patchwork`.
+:::
+
+## Understanding ggplot2
+
+Throughout this module we have used the `ggplot2` package to visualise our data. It is based on the **Grammar of Graphics**, which means every plot is built in **layers**, added together with `+`. You start with a blank canvas and add one instruction at a time.
+
+Every plot is made from five components:
+
+1. **Data**: the data frame that contains the variables you want to plot
+2. **Aesthetics**: the mapping of variables to visual features, such as the x and y axes, colour and size
+3. **Geoms**: the shape used to draw the data, such as points, bars or boxes
+4. **Labels**: the titles and axis labels
+5. **Theme**: the overall look of the plot, such as the background, gridlines and font size
 
 ### The syntax of ggplot2
+
+Here is a template. Focus on the syntax and the order of the layers. It makes a scatterplot with a trend line, a custom colour scale, one panel per group and a minimal theme.
+
+```r
+ggplot(data = my_data, aes(x = var1, y = var2, colour = group)) +
+  geom_point() +                           # layer 1: scatter points
+  geom_smooth(method = "lm") +             # layer 2: linear trend line
+  scale_colour_brewer(palette = "Set1") +  # customise the colour scale
+  facet_wrap(~ group) +                    # one panel per group
+  theme_minimal()                          # clean, non data styling
 ```
-library(ggplot2)
 
-ggplot(data = my_data, aes(x = var1, y = var2)) +
-  geom_point() +            # layer 1: scatter points
-  geom_smooth(method = "lm") +  # layer 2: linear trend line
-  scale_colour_brewer() +   # customise colour scale
-  facet_wrap(~ group) +     # one panel per group
-  theme_minimal()           # clean non-data styling
-```
+**Which line of the template splits the plot into one panel for each group?**
 
-| Geom | Use for |
-|---|---|
-| `geom_point()` | Scatter plots |
-| `geom_line()` | Line charts / time series |
-| `geom_bar()` / `geom_col()` | Bar charts |
-| `geom_histogram()` | Distributions of a single variable |
-| `geom_boxplot()` | Distributions across groups |
-| `geom_smooth()` | Fitted curves / regression lines |
-| `geom_tile()` | Heatmaps |
+`r mcq(c("geom_smooth(method = 'lm')", answer = "facet_wrap(~ group)", "scale_colour_brewer(palette = 'Set1')", "theme_minimal()"))`
 
-: Key ggplot2 geoms. A geom defines the visual mark drawn for each data point; layer multiple geoms with `+`.
-
-## Visualisation with ggplot2
-
-### Reading in the data
-Today we will be working with the newest otter data. Please read in `otter_data_v2.csv` from the data folder. 
-
-
-### The grammar of graphics
-Every ggplot is built in **layers**, added together with `+`. You start with a blank canvas and add one instruction at a time. There are four things to decide:
-
-1. **The data**: which data frame are we plotting?
-2. **The aesthetics**: which variables go on which axes?
-3. **The geom**: what shape represents the data (points, bars, boxes)?
-4. **The finishing touches**: labels and theme
+### Building a plot layer by layer
 
 The tabs below build a plot from nothing. Click through them in order and notice what each new line adds.
 
@@ -93,7 +96,7 @@ ggplot(data = otter_data)
 ggplot(data = otter_data, aes(x = fish_index, y = spraints))
 ```
 
-`aes()` is short for aesthetics. It maps variables to the plot, here `fish_index` to the x axis and `spraints` to the y axis. The axes now appear, but there is still nothing drawn.
+`aes()` is short for aesthetics. It maps variables to the plot, here `fish_index` to the x axis and `spraints` to the y axis. The axes now appear, but nothing is drawn yet.
 
 ## 3. Geom
 
@@ -131,7 +134,7 @@ ggplot(data = otter_data, aes(x = fish_index, y = spraints)) +
 
 **Which line of code adds the points to the plot?**
 
-`r mcq(c("ggplot(data = otter_data)", "aes(x = fish_index, y = spraints)", answer = "geom_point()", "labs(x = \"Fish index\")"))`
+`r mcq(c("ggplot(data = otter_data)", "aes(x = fish_index, y = spraints)", answer = "geom_point()", "labs(x = 'Fish index')"))`
 
 **What does `aes()` do?**
 
@@ -153,9 +156,8 @@ answer = "R draws the axes but nothing else, because no instruction has been giv
 
 ### Your turn
 
-
 ::: {.callout-tip}
-You will need to use the actual variable names, so think back to the code you can use to check out the data or use the [Glossary Chapter](function-glossary.qmd) to help you with this!
+You will need the actual variable names, so think back to the code you can use to check out the data, or use the [Function Glossary](function-glossary.qmd) to help you.
 :::
 
 Fill in the blanks to build a scatterplot of body length against body mass. You can put either variable on either axis.
@@ -172,7 +174,6 @@ The geom that draws each otter as a point is: `r fitb(c("geom_point", "geom_poin
 ggplot(data = ___, aes(x = ___, y = ___)) +
   ___()
 ```
-
 `r hide("Click to show the solution")`
 
 ```{r gg-solution, fig.width=6, fig.height=4}
@@ -182,9 +183,233 @@ ggplot(data = otter_data, aes(x = length_cm, y = mass_kg)) +
 
 `r unhide()`
 
+**A student puts `length_cm` on both axes. What will the plot show?**
+
+`r longmcq(c(
+"A scatterplot with a weak positive relationship, because body length varies between otters.",
+answer = "Every point falls on a perfect diagonal line, because each otter's length is plotted against itself.",
+"An error message, because the same variable cannot be used for both the x and y axes.",
+"A histogram of body length, because only one variable has been supplied to the plot."
+))`
+
+
+
 ::: {.callout-tip}
 **A common mistake:** the `+` must go at the **end** of a line, not the start of the next one. If you put it at the start, R thinks the code has finished and throws an error.
-::: 
+:::
+
+## Aesthetics and Geoms
+
+### Aesthetics
+
+An **aesthetic** is a visual feature of the plot. Position on the x and y axes is the most important one, but you can also map variables to colour, size and shape, which lets one plot show more than two variables.
+
+| Aesthetic | What it controls |
+|---|---|
+| `x`, `y` | Position on the axes |
+| `colour` | The colour of points and lines, or the outline of shapes |
+| `fill` | The colour inside shapes such as bars and boxes |
+| `size` | The size of points |
+| `shape` | The shape of points |
+| `alpha` | Transparency, from 0 (invisible) to 1 (solid) |
+
+There are two different ways to use an aesthetic, and they behave differently:
+
+- **Mapped** inside `aes()`: the feature changes according to a **variable** in the data
+- **Set** outside `aes()`: the feature is a **fixed value** that applies to every observation
+
+::: {.panel-tabset}
+
+## Mapped to a variable
+
+```{r aes-mapped, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = length_cm, y = mass_kg, colour = sex)) +
+  geom_point(size = 2.5) +
+  labs(x = "Body length (cm)", y = "Body mass (kg)", colour = "Sex") +
+  theme_minimal(base_size = 13)
+```
+
+`colour = sex` is inside `aes()`, so each sex gets its own colour and ggplot adds a legend.
+
+## Set to a fixed value
+
+```{r aes-set, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = length_cm, y = mass_kg)) +
+  geom_point(colour = "#F8766D", size = 2.5) +
+  labs(x = "Body length (cm)", y = "Body mass (kg)") +
+  theme_minimal(base_size = 13)
+```
+
+`colour = "#F8766D"` is outside `aes()`, so every point is the same colour and there is no legend.
+
+:::
+
+**A student wants every point in a scatterplot to be red, whatever the data say. Where should `colour = "red"` go?**
+
+`r longmcq(c(
+answer = "Inside geom_point() but outside aes(), because it is a fixed value and not a variable in the data.",
+"Inside aes(), because every colour setting has to be written inside the aes() function.",
+"Inside ggplot() as a separate argument, because the data frame must be told which colour to use.",
+"Inside labs(), because the colour is part of the labels that describe the plot to readers."
+))`
+
+
+
+### Geoms
+
+A **geom** is the shape ggplot draws for your data. The data and the `aes()` mapping stay the same, and the geom decides how they are displayed. Change the geom and the same data becomes a different plot.
+
+Each geom expects certain kinds of variable, so the main skill is matching the geom to your data.
+
+| Geom | Draws | Needs | Use for |
+|---|---|---|---|
+| `geom_point()` | One point per row | Two numeric variables | Scatterplots |
+| `geom_line()` | A line joining points in order | An ordered x and a numeric y | Trends, and means across ordered groups |
+| `geom_bar()` | Bars, with R counting the rows | One categorical variable | Counts per category |
+| `geom_col()` | Bars, with you giving the heights | One categorical and one numeric variable | Plotting values you have already calculated |
+| `geom_histogram()` | Bars of binned counts | One numeric variable | The shape of one variable |
+| `geom_boxplot()` | A box and whiskers | A categorical x and a numeric y | Comparing a variable across groups |
+| `geom_smooth()` | A fitted line | Two numeric variables | Trends and regression lines |
+
+: Key ggplot2 geoms. A geom defines the visual mark drawn for the data, and you can layer several geoms with `+`.
+
+#### The same data with different geoms
+
+The tabs below show seven geoms on the otter data. As you click through, notice what kind of variable each one needs.
+
+::: {.panel-tabset}
+
+## Point
+
+```{r geom-point, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = fish_index, y = spraints)) +
+  geom_point(colour = "#F8766D", size = 2.5) +
+  labs(x = "Fish availability index", y = "Spraint count") +
+  theme_minimal(base_size = 13)
+```
+
+One point per otter. Both axes are numeric, so each point sits where its two values meet.
+
+## Smooth
+
+```{r geom-smooth, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = fish_index, y = spraints)) +
+  geom_point(colour = "#F8766D", size = 2.5) +
+  geom_smooth(method = "lm", colour = "black", se = TRUE) +
+  labs(x = "Fish availability index", y = "Spraint count") +
+  theme_minimal(base_size = 13)
+```
+
+`geom_smooth()` adds a fitted line on top of the points. `method = "lm"` fits a straight line, the same one `lm()` fits. The grey band is the confidence interval, and `se = FALSE` removes it.
+
+## Histogram
+
+```{r geom-hist, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = spraints)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", colour = "black") +
+  labs(x = "Spraint count", y = "Frequency") +
+  theme_minimal(base_size = 13)
+```
+
+Only **one** variable is needed. R bins the values and counts how many otters fall into each bin, so there is no `y` in `aes()`.
+
+## Boxplot
+
+```{r geom-box, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = site, y = spraints, fill = site)) +
+  geom_boxplot(colour = "black") +
+  labs(x = "Site", y = "Spraint count") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+A categorical x and a numeric y. Each box summarises one group, so you can compare groups directly.
+
+## Bar
+
+```{r geom-bar, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = site)) +
+  geom_bar(fill = "lightblue", colour = "black") +
+  labs(x = "Site", y = "Number of otters") +
+  theme_minimal(base_size = 13)
+```
+
+`geom_bar()` counts the rows in each category for you. It plots **how many otters**, not how many spraints.
+
+## Col
+
+```{r geom-col, fig.width=6, fig.height=4}
+otter_data %>%
+  group_by(site) %>%
+  summarise(mean_spraints = mean(spraints)) %>%
+  ggplot(aes(x = site, y = mean_spraints)) +
+  geom_col(fill = "lightblue", colour = "black") +
+  labs(x = "Site", y = "Mean spraint count") +
+  theme_minimal(base_size = 13)
+```
+
+`geom_col()` draws bars at the heights you provide. Here we worked out the mean per site first and then plotted it.
+
+## Line
+
+```{r geom-line, fig.width=6, fig.height=4}
+otter_data %>%
+  group_by(site, season) %>%
+  summarise(mean_spraints = mean(spraints), .groups = "drop") %>%
+  ggplot(aes(x = site, y = mean_spraints, colour = season, group = season)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  labs(x = "Site", y = "Mean spraint count", colour = "Season") +
+  theme_minimal(base_size = 13)
+```
+
+`geom_line()` joins points in order, and `group = season` tells it which points belong to the same line. This is the interaction plot from earlier workshops. The lines here join **group means** so that we can compare the two seasons across sites. A line across unordered categories is not a trend, so do not use one to join raw observations.
+
+:::
+
+#### Layering geoms
+
+Geoms are layers, so you can stack several in one plot. The order matters, because later layers are drawn on top of earlier ones.
+
+```{r geom-layers, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = site, y = spraints)) +
+  geom_boxplot(fill = "lightblue", colour = "black", outlier.shape = NA) +
+  geom_jitter(width = 0.1, size = 2, colour = "#F8766D") +
+  labs(x = "Site", y = "Spraint count") +
+  theme_minimal(base_size = 13)
+```
+
+The boxplot is drawn first and the jittered points sit on top of it. If you swapped the two lines, the box would cover the points.
+
+#### Check your understanding
+
+**Which geom would you use to show how many otters were recorded in each age class?**
+
+`r mcq(c(answer = "geom_bar()", "geom_histogram()", "geom_smooth()", "geom_boxplot()"))`
+
+**What is the difference between `geom_bar()` and `geom_col()`?**
+
+`r longmcq(c(
+answer = "geom_bar() counts the rows in each category for you, while geom_col() draws bars at heights you supply.",
+"geom_bar() draws horizontal bars, while geom_col() draws vertical bars of the same type of data.",
+"geom_bar() needs a numeric x variable, while geom_col() needs a categorical x variable to work.",
+"geom_bar() is used for means, while geom_col() is used for counts of the number of rows."
+))`
+
+**A student writes `ggplot(otter_data, aes(x = spraints)) + geom_point()`. Why does this give an error?**
+
+`r longmcq(c(
+answer = "geom_point() needs both an x and a y, and only an x has been supplied in aes().",
+"geom_point() can only be used with categorical variables, but spraints is a numeric count.",
+"geom_point() must always be followed by geom_smooth() or it cannot draw the plot properly.",
+"geom_point() cannot be used when the data frame contains more than one grouping variable."
+))`
+
+To draw a regression line over a scatterplot, you add `r fitb(c("geom_smooth", "geom_smooth()"))` with `method = "lm"`.
+
+::: {.callout-tip}
+When you are unsure which geom to use, ask two questions. How many variables am I plotting? Are they categorical or numeric? The table at the start of this section answers the rest.
+:::
 
 ## Choosing How to Visualise Your Data
 
@@ -193,7 +418,7 @@ So far you have been told which plot to make. In real analysis, nobody does that
 Two questions get you most of the way there:
 
 1. **How many variables** am I plotting?
-2. **What type** is each variable (categorical, discrete, or continuous)?
+2. **What type** is each variable (categorical, discrete or continuous)?
 
 Here are the variables in the otter dataset:
 
@@ -202,7 +427,6 @@ Here are the variables in the otter dataset:
 | `site`, `season`, `sex`, `age_class` | Categorical |
 | `spraints`, `tick_count` | Discrete (counts) |
 | `length_cm`, `mass_kg`, `fish_index` | Continuous |
-
 
 **A decision guide for choosing a plot type:**
 
@@ -217,8 +441,6 @@ Here are the variables in the otter dataset:
 | One variable, one panel per group | Faceted plot | `facet_wrap()` |
 
 These are starting points, not rules. Often more than one plot is reasonable, and the best choice depends on the question you are asking.
-
-
 
 ### Challenge 1: How many otters were surveyed at each site?
 
@@ -243,7 +465,7 @@ otter_data %>%
   count(site)
 ```
 
-Each site now has one number: how many otters were recorded there. A bar chart draws exactly these numbers as bars.
+Each site now has one number: how many otters were recorded there. A bar chart draws exactly these numbers as bars. Here every site has the same number, which tells you the survey was **balanced**.
 
 **Step 3: Let `geom_bar()` do the counting.**
 
@@ -271,6 +493,8 @@ Use `geom_bar()` when R should count the rows for you, as here. Use `geom_col()`
 :::
 
 `r unhide()`
+
+---
 
 ### Challenge 2: What does the distribution of body mass look like?
 
@@ -509,7 +733,7 @@ Colour keeps everything in one panel, which makes direct comparison easy. Facets
 
 ### Challenge 7: Is tick count normally distributed?
 
-`tick_count` is a count variable and you suspect it is right-skewed. You also want to check whether a log transformation would help.
+`tick_count` is a count variable and you suspect it is right skewed. You also want to check whether a log transformation would help.
 
 **What is the most useful way to show this?**
 
@@ -613,5 +837,204 @@ ggplot(otter_data, aes(x = site, fill = sex)) +
 
 ::: {.callout-tip}
 **The main habit to build:** before you write any code, say out loud what each variable is and what question you are asking. The plot type usually follows from that.
+:::
+
+## Seeing the Whole Distribution
+
+A boxplot is quick and compact, but it squeezes a whole variable into five numbers. Different plots show different parts of the same data. Here we look at body mass (`mass_kg`) split by `sex`, and build up from the simplest view to the most detailed.
+
+### Reading a boxplot
+
+Before choosing between plots, it helps to know what a boxplot is made of. Every part comes from a summary statistic:
+
+```{r box-summary}
+otter_data %>%
+  group_by(sex) %>%
+  summarise(
+    minimum = min(mass_kg),
+    q1      = quantile(mass_kg, 0.25),
+    median  = median(mass_kg),
+    q3      = quantile(mass_kg, 0.75),
+    maximum = max(mass_kg)
+  )
+```
+
+| Part of the boxplot | What it shows |
+|---|---|
+| Thick line in the box | The **median**, the middle value |
+| Bottom and top of the box | The **first and third quartiles** (`q1` and `q3`), so the box holds the middle 50% of otters |
+| Height of the box | The **interquartile range** (IQR), `q3` minus `q1` |
+| Whiskers | The furthest values within 1.5 times the IQR of the box |
+| Individual dots | **Outliers**, values beyond the whiskers |
+
+**What does the height of the box tell you?**
+
+`r longmcq(c(
+answer = "How spread out the middle half of the otters are, because the box runs from the first to the third quartile.",
+"How spread out every otter in the group is, because the box runs from the smallest to the largest value.",
+"How many otters were measured in the group, because a taller box means that more otters were included.",
+"Where the average value sits, because the box is drawn around the mean of the group."
+))`
+
+### One variable, five views
+
+The tabs below show the **same data** in five ways. Click through them and notice what appears and disappears each time.
+
+::: {.panel-tabset}
+
+## Boxplot
+
+```{r view-box, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = sex, y = mass_kg, fill = sex)) +
+  geom_boxplot(colour = "black") +
+  labs(x = "Sex", y = "Body mass (kg)") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+Shows the median, the spread of the middle half, and any outliers. It does **not** show how many otters there are or what shape the data take between the quartiles.
+
+## Boxplot and points
+
+```{r view-jitter, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = sex, y = mass_kg, fill = sex)) +
+  geom_boxplot(colour = "black", alpha = 0.5, outlier.shape = NA) +
+  geom_jitter(width = 0.1, size = 2) +
+  labs(x = "Sex", y = "Body mass (kg)") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+Adds every otter as a point, so you can see the **sample size** and any gaps or clusters. `outlier.shape = NA` stops the outliers being drawn twice.
+
+## Violin
+
+```{r view-violin, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = sex, y = mass_kg, fill = sex)) +
+  geom_violin(colour = "black", trim = FALSE) +
+  labs(x = "Sex", y = "Body mass (kg)") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+The width of the shape shows **where the otters are concentrated**. A wide part means many otters at that mass, and a narrow part means few.
+
+## Density
+
+```{r view-density, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = mass_kg, fill = sex)) +
+  geom_density(alpha = 0.5) +
+  labs(x = "Body mass (kg)", y = "Density", fill = "Sex") +
+  theme_minimal(base_size = 13)
+```
+
+A smoothed histogram. Drawing both sexes on the same axis makes it easy to see **how much the groups overlap**.
+
+## Histogram
+
+```{r view-hist, fig.width=8, fig.height=4}
+ggplot(otter_data, aes(x = mass_kg, fill = sex)) +
+  geom_histogram(binwidth = 0.5, colour = "black") +
+  facet_wrap(~ sex) +
+  labs(x = "Body mass (kg)", y = "Frequency") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+The most literal view. Each bar is a count of otters, and the plot is split by sex so the two shapes can be compared.
+
+:::
+
+**You want to know how many otters of each sex were measured. Which view shows this best?**
+
+`r longmcq(c(
+answer = "Boxplot and points, because every otter is drawn as its own point and the points can be counted.",
+"Boxplot, because the height of each box is proportional to the number of otters in that group.",
+"Violin, because the total area of each violin is always scaled to the number of otters measured.",
+"Density, because the height of each curve at its peak shows how many otters were in the group."
+))`
+
+**Which view would you choose to see whether the two sexes overlap in body mass?**
+
+`r longmcq(c(
+answer = "Density, because both curves share one axis and the region where they overlap is easy to see.",
+"Boxplot, because the whiskers show the full range of each group and make the overlap obvious.",
+"Bar chart, because the height of each bar shows the average mass of each group of otters.",
+"Scatterplot, because each otter is plotted against the order in which it was measured."
+))`
+
+### What a plot can hide
+
+A summary of the whole sample can hide structure inside it. Here is body mass for **all otters together**, ignoring sex:
+
+```{r hide-hist, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = mass_kg)) +
+  geom_histogram(binwidth = 0.5, fill = "lightblue", colour = "black") +
+  labs(x = "Body mass (kg)", y = "Frequency") +
+  theme_minimal(base_size = 13)
+```
+
+**This histogram is not a clean bell shape. What is the most likely explanation?**
+
+`r longmcq(c(
+answer = "Two groups with different average masses have been mixed together, so the histogram shows both groups at once.",
+"The otters were measured badly, so the values are scattered randomly and no real shape can be found.",
+"The binwidth is too small, so any dataset would look uneven and nothing can be said about it.",
+"Body mass is always bimodal in wild animals, so this shape is expected for any species."
+))`
+
+`r hide("Click to show the same data split by sex")`
+
+```{r hide-split, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = mass_kg, fill = sex)) +
+  geom_histogram(binwidth = 0.5, colour = "black", alpha = 0.7) +
+  labs(x = "Body mass (kg)", y = "Frequency", fill = "Sex") +
+  theme_minimal(base_size = 13)
+```
+
+Males and females have different typical masses, so combining them gives a lumpy shape. Neither group is oddly shaped on its own. A single summary of the whole sample would hide this.
+
+::: {.callout-note}
+This matters for the assumption checks in this module. A Shapiro-Wilk test on the **whole** variable can fail simply because two groups have been mixed, so it is better to check normality **within each group**, as we have done throughout.
+:::
+
+`r unhide()`
+
+### Putting a summary on top of the raw data
+
+You can also show the mean on a boxplot, to compare it with the median:
+
+```{r mean-on-box, fig.width=6, fig.height=4}
+ggplot(otter_data, aes(x = sex, y = tick_count, fill = sex)) +
+  geom_boxplot(colour = "black", alpha = 0.6) +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 4, fill = "white") +
+  labs(x = "Sex", y = "Tick count") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+The white diamond is the **mean** and the thick line is the **median**.
+
+**In a right skewed variable such as `tick_count`, where do you expect the mean to sit compared with the median?**
+
+`r longmcq(c(
+answer = "Above the median, because a small number of very high counts pull the mean upwards.",
+"Below the median, because a large number of zero counts pull the mean towards the bottom.",
+"On the median, because the mean and median are always equal for count data of this type.",
+"Outside the box, because the mean is always further from the centre than the median is."
+))`
+
+### Choosing between them
+
+| If you want to see | Try |
+|---|---|
+| A quick summary of centre and spread for several groups | Boxplot |
+| The summary **and** the sample size | Boxplot with `geom_jitter()` |
+| The shape of each group | Violin or faceted histogram |
+| How much groups overlap | Density plot |
+| Whether a variable is skewed | Histogram |
+
+::: {.callout-tip}
+No single plot shows everything. When you are exploring new data, make **two or three** different plots of the same variable before you decide what it looks like.
 :::
 
