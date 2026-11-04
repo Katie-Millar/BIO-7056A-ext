@@ -294,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="loading-packages-and-data" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="loading-packages-and-data"><span class="header-section-number">7.1.1</span> Loading packages and data</h3>
 <p>Today you will need the packages <code>tidyverse</code> and <code>patchwork</code>. Install them from the <strong>console</strong> using <code>install.packages()</code> if you have not already, then load them at the top of your script.</p>
-<p>We will work with the newest version of the otter data throughout. Please read in <code>otter_data_v3.csv</code> from the data folder and call it <code>otter_data</code>.</p>
+<p>We will work with the newest version of the otter data throughout. Please read in <code>otter_data_2.csv</code> from the data folder and call it <code>otter_data</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -417,12 +417,12 @@ Tip
 <p><strong>Which line of code adds the points to the plot?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">ggplot(data = otter_data)</option><option value="">aes(x = fish_index, y = spraints)</option><option value="answer">geom_point()</option><option value="">labs(x = ‘Fish index’)</option></select></p>
 <p><strong>What does <code>aes()</code> do?</strong></p>
-<div id="radio_WUYCERMYLW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WUYCERMYLW" value=""> <span>It chooses the shape that is drawn, such as points, bars or boxes, for each observation.</span></label><label><input type="radio" autocomplete="off" name="radio_WUYCERMYLW" value=""> <span>It changes the appearance of the plot, such as the background, font size and gridlines.</span></label><label><input type="radio" autocomplete="off" name="radio_WUYCERMYLW" value="answer"> <span>It maps variables in the data frame to features of the plot, such as the x axis, y axis or colour.</span></label><label><input type="radio" autocomplete="off" name="radio_WUYCERMYLW" value=""> <span>It adds the axis titles and the plot title so that the figure can be read by others.</span></label>
+<div id="radio_TUPXAFTIUG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value=""> <span>It chooses the shape that is drawn, such as points, bars or boxes, for each observation.</span></label><label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value=""> <span>It changes the appearance of the plot, such as the background, font size and gridlines.</span></label><label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value="answer"> <span>It maps variables in the data frame to features of the plot, such as the x axis, y axis or colour.</span></label><label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value=""> <span>It adds the axis titles and the plot title so that the figure can be read by others.</span></label>
 </div>
 <p><strong>What happens if you run <code>ggplot(otter_data, aes(x = fish_index, y = spraints))</code> without adding a geom?</strong></p>
-<div id="radio_ERDZBMGUJQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ERDZBMGUJQ" value=""> <span>R draws a scatterplot by default, because both variables are continuous numeric columns.</span></label><label><input type="radio" autocomplete="off" name="radio_ERDZBMGUJQ" value=""> <span>R returns an error, because a plot cannot be created without at least one geom layer.</span></label><label><input type="radio" autocomplete="off" name="radio_ERDZBMGUJQ" value="answer"> <span>R draws the axes but nothing else, because no instruction has been given for how to display the data.</span></label><label><input type="radio" autocomplete="off" name="radio_ERDZBMGUJQ" value=""> <span>R draws a histogram of fish_index, because the first variable is always plotted on its own.</span></label>
+<div id="radio_LJGPZKIJUE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value=""> <span>R draws a scatterplot by default, because both variables are continuous numeric columns.</span></label><label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value=""> <span>R returns an error, because a plot cannot be created without at least one geom layer.</span></label><label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value="answer"> <span>R draws the axes but nothing else, because no instruction has been given for how to display the data.</span></label><label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value=""> <span>R draws a histogram of fish_index, because the first variable is always plotted on its own.</span></label>
 </div>
 </section>
 <section id="your-turn" class="level3" data-number="7.2.3">
@@ -464,8 +464,8 @@ Click to show the solution
 </div>
 </div>
 <p><strong>A student puts <code>length_cm</code> on both axes. What will the plot show?</strong></p>
-<div id="radio_YODHJKKVJS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YODHJKKVJS" value=""> <span>A scatterplot with a weak positive relationship, because body length varies between otters.</span></label><label><input type="radio" autocomplete="off" name="radio_YODHJKKVJS" value="answer"> <span>Every point falls on a perfect diagonal line, because each otter's length is plotted against itself.</span></label><label><input type="radio" autocomplete="off" name="radio_YODHJKKVJS" value=""> <span>An error message, because the same variable cannot be used for both the x and y axes.</span></label><label><input type="radio" autocomplete="off" name="radio_YODHJKKVJS" value=""> <span>A histogram of body length, because only one variable has been supplied to the plot.</span></label>
+<div id="radio_DDHNGJNGZW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value=""> <span>A scatterplot with a weak positive relationship, because body length varies between otters.</span></label><label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value="answer"> <span>Every point falls on a perfect diagonal line, because each otter's length is plotted against itself.</span></label><label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value=""> <span>An error message, because the same variable cannot be used for both the x and y axes.</span></label><label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value=""> <span>A histogram of body length, because only one variable has been supplied to the plot.</span></label>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -564,8 +564,8 @@ Tip
 </div>
 </div>
 <p><strong>A student wants every point in a scatterplot to be red, whatever the data say. Where should <code>colour = "red"</code> go?</strong></p>
-<div id="radio_LMYYYIMPYY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LMYYYIMPYY" value="answer"> <span>Inside geom_point() but outside aes(), because it is a fixed value and not a variable in the data.</span></label><label><input type="radio" autocomplete="off" name="radio_LMYYYIMPYY" value=""> <span>Inside aes(), because every colour setting has to be written inside the aes() function.</span></label><label><input type="radio" autocomplete="off" name="radio_LMYYYIMPYY" value=""> <span>Inside ggplot() as a separate argument, because the data frame must be told which colour to use.</span></label><label><input type="radio" autocomplete="off" name="radio_LMYYYIMPYY" value=""> <span>Inside labs(), because the colour is part of the labels that describe the plot to readers.</span></label>
+<div id="radio_UVRFVRQTMM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value="answer"> <span>Inside geom_point() but outside aes(), because it is a fixed value and not a variable in the data.</span></label><label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value=""> <span>Inside aes(), because every colour setting has to be written inside the aes() function.</span></label><label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value=""> <span>Inside ggplot() as a separate argument, because the data frame must be told which colour to use.</span></label><label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value=""> <span>Inside labs(), because the colour is part of the labels that describe the plot to readers.</span></label>
 </div>
 </section>
 <section id="geoms" class="level3" data-number="7.3.2">
@@ -787,12 +787,12 @@ Tip
 <p><strong>Which geom would you use to show how many otters were recorded in each age class?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="answer">geom_bar()</option><option value="">geom_histogram()</option><option value="">geom_smooth()</option><option value="">geom_boxplot()</option></select></p>
 <p><strong>What is the difference between <code>geom_bar()</code> and <code>geom_col()</code>?</strong></p>
-<div id="radio_KBTGXFSBAY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KBTGXFSBAY" value="answer"> <span>geom_bar() counts the rows in each category for you, while geom_col() draws bars at heights you supply.</span></label><label><input type="radio" autocomplete="off" name="radio_KBTGXFSBAY" value=""> <span>geom_bar() draws horizontal bars, while geom_col() draws vertical bars of the same type of data.</span></label><label><input type="radio" autocomplete="off" name="radio_KBTGXFSBAY" value=""> <span>geom_bar() needs a numeric x variable, while geom_col() needs a categorical x variable to work.</span></label><label><input type="radio" autocomplete="off" name="radio_KBTGXFSBAY" value=""> <span>geom_bar() is used for means, while geom_col() is used for counts of the number of rows.</span></label>
+<div id="radio_DOWCTCPEIK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value="answer"> <span>geom_bar() counts the rows in each category for you, while geom_col() draws bars at heights you supply.</span></label><label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value=""> <span>geom_bar() draws horizontal bars, while geom_col() draws vertical bars of the same type of data.</span></label><label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value=""> <span>geom_bar() needs a numeric x variable, while geom_col() needs a categorical x variable to work.</span></label><label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value=""> <span>geom_bar() is used for means, while geom_col() is used for counts of the number of rows.</span></label>
 </div>
 <p><strong>A student writes <code>ggplot(otter_data, aes(x = spraints)) + geom_point()</code>. Why does this give an error?</strong></p>
-<div id="radio_JEOUPHYLIP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JEOUPHYLIP" value=""> <span>geom_point() can only be used with categorical variables, but spraints is a numeric count.</span></label><label><input type="radio" autocomplete="off" name="radio_JEOUPHYLIP" value=""> <span>geom_point() must always be followed by geom_smooth() or it cannot draw the plot properly.</span></label><label><input type="radio" autocomplete="off" name="radio_JEOUPHYLIP" value=""> <span>geom_point() cannot be used when the data frame contains more than one grouping variable.</span></label><label><input type="radio" autocomplete="off" name="radio_JEOUPHYLIP" value="answer"> <span>geom_point() needs both an x and a y, and only an x has been supplied in aes().</span></label>
+<div id="radio_RONSTYIGTX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value=""> <span>geom_point() can only be used with categorical variables, but spraints is a numeric count.</span></label><label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value=""> <span>geom_point() must always be followed by geom_smooth() or it cannot draw the plot properly.</span></label><label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value=""> <span>geom_point() cannot be used when the data frame contains more than one grouping variable.</span></label><label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value="answer"> <span>geom_point() needs both an x and a y, and only an x has been supplied in aes().</span></label>
 </div>
 <p>To draw a regression line over a scatterplot, you add <input class="webex-solveme nospaces" size="13" data-answer="[&quot;geom_smooth&quot;,&quot;geom_smooth()&quot;]"> with <code>method = "lm"</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1183,8 +1183,8 @@ Click to show the code and plot
 <h3 data-number="7.4.5" class="anchored" data-anchor-id="challenge-5-does-the-effect-of-season-depend-on-the-site"><span class="header-section-number">7.4.5</span> Challenge 5: Does the effect of season depend on the site?</h3>
 <p>You have one count variable (<code>spraints</code>) and <strong>two</strong> categorical variables (<code>site</code> and <code>season</code>).</p>
 <p><strong>What is the best way to show both categorical variables at once?</strong></p>
-<div id="radio_GRHMCSOWCX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GRHMCSOWCX" value=""> <span>Make two separate histograms of spraints, one for each site, and ignore season entirely.</span></label><label><input type="radio" autocomplete="off" name="radio_GRHMCSOWCX" value=""> <span>Draw a scatterplot of site against season, with each point representing one otter.</span></label><label><input type="radio" autocomplete="off" name="radio_GRHMCSOWCX" value="answer"> <span>Put site on the x axis and use fill to show season, so each site has one box per season.</span></label><label><input type="radio" autocomplete="off" name="radio_GRHMCSOWCX" value=""> <span>Draw a single bar chart of the total spraints, which combines every site and season together.</span></label>
+<div id="radio_OXIUBAKTJM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value=""> <span>Make two separate histograms of spraints, one for each site, and ignore season entirely.</span></label><label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value=""> <span>Draw a scatterplot of site against season, with each point representing one otter.</span></label><label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value="answer"> <span>Put site on the x axis and use fill to show season, so each site has one box per season.</span></label><label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value=""> <span>Draw a single bar chart of the total spraints, which combines every site and season together.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1260,8 +1260,8 @@ Click to show the code and plot
 <h3 data-number="7.4.6" class="anchored" data-anchor-id="challenge-6-does-the-length-and-mass-relationship-differ-between-the-sexes"><span class="header-section-number">7.4.6</span> Challenge 6: Does the length and mass relationship differ between the sexes?</h3>
 <p>You have two continuous variables (<code>length_cm</code> and <code>mass_kg</code>) and a categorical variable (<code>sex</code>).</p>
 <p><strong>How could you show all three variables on one plot?</strong></p>
-<div id="radio_QAALZEVPJO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QAALZEVPJO" value="answer"> <span>Draw a scatterplot of one continuous variable against the other, and colour the points by sex.</span></label><label><input type="radio" autocomplete="off" name="radio_QAALZEVPJO" value=""> <span>Draw a histogram of both continuous variables, and use a separate bar for each sex.</span></label><label><input type="radio" autocomplete="off" name="radio_QAALZEVPJO" value=""> <span>Draw a bar chart of sex, and use the height of each bar to show the mean length.</span></label><label><input type="radio" autocomplete="off" name="radio_QAALZEVPJO" value=""> <span>Draw a boxplot of sex on the x axis, and plot both continuous variables on the same y axis.</span></label>
+<div id="radio_JXKWQXIMXX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value="answer"> <span>Draw a scatterplot of one continuous variable against the other, and colour the points by sex.</span></label><label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value=""> <span>Draw a histogram of both continuous variables, and use a separate bar for each sex.</span></label><label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value=""> <span>Draw a bar chart of sex, and use the height of each bar to show the mean length.</span></label><label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value=""> <span>Draw a boxplot of sex on the x axis, and plot both continuous variables on the same y axis.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1333,8 +1333,8 @@ Click to show the code and plot
 <h3 data-number="7.4.7" class="anchored" data-anchor-id="challenge-7-is-tick-count-normally-distributed"><span class="header-section-number">7.4.7</span> Challenge 7: Is tick count normally distributed?</h3>
 <p><code>tick_count</code> is a count variable and you suspect it is right skewed. You also want to check whether a log transformation would help.</p>
 <p><strong>What is the most useful way to show this?</strong></p>
-<div id="radio_CFJJLXZPJG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CFJJLXZPJG" value=""> <span>Draw a boxplot of the raw counts only, because boxplots always show skew more clearly.</span></label><label><input type="radio" autocomplete="off" name="radio_CFJJLXZPJG" value=""> <span>Draw a scatterplot of tick count against otter ID, so that each otter is shown separately.</span></label><label><input type="radio" autocomplete="off" name="radio_CFJJLXZPJG" value=""> <span>Draw a bar chart of the total number of ticks, so that the overall burden is easy to see.</span></label><label><input type="radio" autocomplete="off" name="radio_CFJJLXZPJG" value="answer"> <span>Draw a histogram of the raw counts next to a histogram of the log transformed counts.</span></label>
+<div id="radio_ILHVBTEMID" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value=""> <span>Draw a boxplot of the raw counts only, because boxplots always show skew more clearly.</span></label><label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value=""> <span>Draw a scatterplot of tick count against otter ID, so that each otter is shown separately.</span></label><label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value=""> <span>Draw a bar chart of the total number of ticks, so that the overall burden is easy to see.</span></label><label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value="answer"> <span>Draw a histogram of the raw counts next to a histogram of the log transformed counts.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1408,8 +1408,8 @@ Click to show the code and plot
 <li>Ask yourself whether the plot actually answers a question.</li>
 </ol>
 <p><strong>A student plots <code>site</code> against <code>season</code> using <code>geom_point()</code>. Why is this a poor choice?</strong></p>
-<div id="radio_OPGLVPCPHI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OPGLVPCPHI" value=""> <span>Both variables are continuous, so a scatterplot cannot show the full range of values for each otter.</span></label><label><input type="radio" autocomplete="off" name="radio_OPGLVPCPHI" value=""> <span>Scatterplots can only be drawn when one of the variables has been transformed using a logarithm.</span></label><label><input type="radio" autocomplete="off" name="radio_OPGLVPCPHI" value="answer"> <span>Both variables are categorical, so the points can only sit on a few grid positions and many otters would overlap.</span></label><label><input type="radio" autocomplete="off" name="radio_OPGLVPCPHI" value=""> <span>The geom_point function cannot be used with text variables, so R would return an error message.</span></label>
+<div id="radio_HAHVJLJRIO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value=""> <span>Both variables are continuous, so a scatterplot cannot show the full range of values for each otter.</span></label><label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value=""> <span>Scatterplots can only be drawn when one of the variables has been transformed using a logarithm.</span></label><label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value="answer"> <span>Both variables are categorical, so the points can only sit on a few grid positions and many otters would overlap.</span></label><label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value=""> <span>The geom_point function cannot be used with text variables, so R would return an error message.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1569,8 +1569,8 @@ Tip
 </tbody>
 </table>
 <p><strong>What does the height of the box tell you?</strong></p>
-<div id="radio_RYZZYZWEBY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RYZZYZWEBY" value="answer"> <span>How spread out the middle half of the otters are, because the box runs from the first to the third quartile.</span></label><label><input type="radio" autocomplete="off" name="radio_RYZZYZWEBY" value=""> <span>How spread out every otter in the group is, because the box runs from the smallest to the largest value.</span></label><label><input type="radio" autocomplete="off" name="radio_RYZZYZWEBY" value=""> <span>How many otters were measured in the group, because a taller box means that more otters were included.</span></label><label><input type="radio" autocomplete="off" name="radio_RYZZYZWEBY" value=""> <span>Where the average value sits, because the box is drawn around the mean of the group.</span></label>
+<div id="radio_NOQHOXUVQP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value="answer"> <span>How spread out the middle half of the otters are, because the box runs from the first to the third quartile.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value=""> <span>How spread out every otter in the group is, because the box runs from the smallest to the largest value.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value=""> <span>How many otters were measured in the group, because a taller box means that more otters were included.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value=""> <span>Where the average value sits, because the box is drawn around the mean of the group.</span></label>
 </div>
 </section>
 <section id="one-variable-five-views" class="level3" data-number="7.5.2">
@@ -1668,12 +1668,12 @@ Tip
 </div>
 </div>
 <p><strong>You want to know how many otters of each sex were measured. Which view shows this best?</strong></p>
-<div id="radio_RWRUCMLTTZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RWRUCMLTTZ" value="answer"> <span>Boxplot and points, because every otter is drawn as its own point and the points can be counted.</span></label><label><input type="radio" autocomplete="off" name="radio_RWRUCMLTTZ" value=""> <span>Boxplot, because the height of each box is proportional to the number of otters in that group.</span></label><label><input type="radio" autocomplete="off" name="radio_RWRUCMLTTZ" value=""> <span>Violin, because the total area of each violin is always scaled to the number of otters measured.</span></label><label><input type="radio" autocomplete="off" name="radio_RWRUCMLTTZ" value=""> <span>Density, because the height of each curve at its peak shows how many otters were in the group.</span></label>
+<div id="radio_SHCPTCQTYH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value="answer"> <span>Boxplot and points, because every otter is drawn as its own point and the points can be counted.</span></label><label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value=""> <span>Boxplot, because the height of each box is proportional to the number of otters in that group.</span></label><label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value=""> <span>Violin, because the total area of each violin is always scaled to the number of otters measured.</span></label><label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value=""> <span>Density, because the height of each curve at its peak shows how many otters were in the group.</span></label>
 </div>
 <p><strong>Which view would you choose to see whether the two sexes overlap in body mass?</strong></p>
-<div id="radio_BSAMZUEMXP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BSAMZUEMXP" value=""> <span>Boxplot, because the whiskers show the full range of each group and make the overlap obvious.</span></label><label><input type="radio" autocomplete="off" name="radio_BSAMZUEMXP" value=""> <span>Bar chart, because the height of each bar shows the average mass of each group of otters.</span></label><label><input type="radio" autocomplete="off" name="radio_BSAMZUEMXP" value=""> <span>Scatterplot, because each otter is plotted against the order in which it was measured.</span></label><label><input type="radio" autocomplete="off" name="radio_BSAMZUEMXP" value="answer"> <span>Density, because both curves share one axis and the region where they overlap is easy to see.</span></label>
+<div id="radio_NQVHJXNHZG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value=""> <span>Boxplot, because the whiskers show the full range of each group and make the overlap obvious.</span></label><label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value=""> <span>Bar chart, because the height of each bar shows the average mass of each group of otters.</span></label><label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value=""> <span>Scatterplot, because each otter is plotted against the order in which it was measured.</span></label><label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value="answer"> <span>Density, because both curves share one axis and the region where they overlap is easy to see.</span></label>
 </div>
 </section>
 <section id="what-a-plot-can-hide" class="level3" data-number="7.5.3">
@@ -1693,8 +1693,8 @@ Tip
 </div>
 </div>
 <p><strong>This histogram is not a clean bell shape. What is the most likely explanation?</strong></p>
-<div id="radio_WZVOFLAYTF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WZVOFLAYTF" value="answer"> <span>Two groups with different average masses have been mixed together, so the histogram shows both groups at once.</span></label><label><input type="radio" autocomplete="off" name="radio_WZVOFLAYTF" value=""> <span>The otters were measured badly, so the values are scattered randomly and no real shape can be found.</span></label><label><input type="radio" autocomplete="off" name="radio_WZVOFLAYTF" value=""> <span>The binwidth is too small, so any dataset would look uneven and nothing can be said about it.</span></label><label><input type="radio" autocomplete="off" name="radio_WZVOFLAYTF" value=""> <span>Body mass is always bimodal in wild animals, so this shape is expected for any species.</span></label>
+<div id="radio_ZASAQWPTJL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value="answer"> <span>Two groups with different average masses have been mixed together, so the histogram shows both groups at once.</span></label><label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value=""> <span>The otters were measured badly, so the values are scattered randomly and no real shape can be found.</span></label><label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value=""> <span>The binwidth is too small, so any dataset would look uneven and nothing can be said about it.</span></label><label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value=""> <span>Body mass is always bimodal in wild animals, so this shape is expected for any species.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1749,8 +1749,8 @@ Note
 </div>
 <p>The white diamond is the <strong>mean</strong> and the thick line is the <strong>median</strong>.</p>
 <p><strong>In a right skewed variable such as <code>tick_count</code>, where do you expect the mean to sit compared with the median?</strong></p>
-<div id="radio_HIIRESCHBQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HIIRESCHBQ" value=""> <span>Below the median, because a large number of zero counts pull the mean towards the bottom.</span></label><label><input type="radio" autocomplete="off" name="radio_HIIRESCHBQ" value=""> <span>On the median, because the mean and median are always equal for count data of this type.</span></label><label><input type="radio" autocomplete="off" name="radio_HIIRESCHBQ" value="answer"> <span>Above the median, because a small number of very high counts pull the mean upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_HIIRESCHBQ" value=""> <span>Outside the box, because the mean is always further from the centre than the median is.</span></label>
+<div id="radio_AKEEZYUUNC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value=""> <span>Below the median, because a large number of zero counts pull the mean towards the bottom.</span></label><label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value=""> <span>On the median, because the mean and median are always equal for count data of this type.</span></label><label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value="answer"> <span>Above the median, because a small number of very high counts pull the mean upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value=""> <span>Outside the box, because the mean is always further from the centre than the median is.</span></label>
 </div>
 </section>
 <section id="choosing-between-them" class="level3" data-number="7.5.5">
@@ -2599,7 +2599,7 @@ window.onload = function() {
 <span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a>Today you will need the packages <span class="in">`tidyverse`</span> and <span class="in">`patchwork`</span>. Install them from the **console** using <span class="in">`install.packages()`</span> if you have not already, then load them at the top of your script.</span>
 <span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>We will work with the newest version of the otter data throughout. Please read in <span class="in">`otter_data_v3.csv`</span> from the data folder and call it <span class="in">`otter_data`</span>.</span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>We will work with the newest version of the otter data throughout. Please read in <span class="in">`otter_data_2.csv`</span> from the data folder and call it <span class="in">`otter_data`</span>.</span>
 <span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
 <span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a><span class="in">`ggplot2`</span> is part of <span class="in">`tidyverse`</span>, so loading <span class="in">`tidyverse`</span> gives you every function used in this workshop except <span class="in">`patchwork`</span>.</span>
