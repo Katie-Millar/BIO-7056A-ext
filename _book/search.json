@@ -548,5 +548,15 @@
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Appendix - Knowing your R & Statistics</span>"
     ]
+  },
+  {
+    "objectID": "08-mv.html",
+    "href": "08-mv.html",
+    "title": "8  Workshop 8 - Multivariate Linear Models",
+    "section": "",
+    "text": "So far, our linear models have generally had one predictor (independent variable) and one dependent variable, for example spraint count predicted by fish availability. Multiple linear regression extends this to two or more predictors used together to explain a single dependent variable.\ny = b_0 + b_1x_1 + b_2x_2 + \\dots + b_kx_k\nWhere b_0 is the intercept, and each b is the slope for one predictor (x_1 to x_k).\nThe process and output are similar to simple linear regression. We still fit the model with lm() and read the coefficients table, the R² value and the F-statistic from summary(). The key difference is in how the coefficients are read:\n\nEach coefficient tells us the effect of that predictor while holding all the other predictors constant.\n\nAim: to explain the variance in the dependent variable, as in simple regression, but now using several predictor variables at once.\n\n8.0.0.1 Unique and shared variance\nEach predictor may explain a unique part of the variance in the dependent variable, that no other predictor explains. Predictors may also share some of the variance they explain, which happens when the predictors are themselves related to each other.\n\n\n\n\n\n\nNote\n\n\n\nWhy shared variance matters\nIf two predictors are closely related, much of what each explains is the same information. Each predictor’s unique contribution in the combined model is then smaller than its effect on its own. When predictors are very strongly related (called multicollinearity), the coefficient estimates become unstable and hard to interpret.\n\n\n\n\n8.0.0.2 Fitting a multiple regression in R\nTo add more predictors, join them with + on the right of the ~:\nlm_multiple &lt;- lm(spraints ~ fish_index + length_cm, data = otter_data)\nsummary(lm_multiple)\nIn the model above, what does the coefficient for fish_index tell us?\n\n The change in spraint count for each one unit increase in fish index, with body length held constant. The change in spraint count for each one unit increase in fish index, ignoring body length completely. The proportion of variation in spraint count that fish index and body length explain together. The change in body length for each one unit increase in fish index, with spraint count held constant.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Workshop 8 - Multivariate Linear Models</span>"
+    ]
   }
 ]

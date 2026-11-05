@@ -11,6 +11,7 @@ book:
     - 05-testing-and-measuring-relationships.qmd
     - 06-prob-para.qmd
     - 07-plots.qmd
+    - 08-mv.qmd
     - function-glossary.qmd
     - appendix.qmd
 

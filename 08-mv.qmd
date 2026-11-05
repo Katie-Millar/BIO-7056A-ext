@@ -1,0 +1,68 @@
+---
+title: "Workshop 8 - Multivariate Linear Models"
+date: today
+format:
+  html:
+    theme: yeti
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    css: [style.css, include/webex.css]
+    include-after-body: include/webex.js
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+    number-sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+
+library(tidyverse)     # ggplot2, dplyr and read_csv()
+library(patchwork)     # combining plots side by side
+library(webexercises)  # hide(), unhide(), mcq(), longmcq(), fitb()
+
+```
+
+
+So far, our linear models have generally had **one predictor** (independent variable) and one **dependent variable**, for example spraint count predicted by fish availability. **Multiple linear regression** extends this to **two or more predictors** used together to explain a single dependent variable.
+
+$$y = b_0 + b_1x_1 + b_2x_2 + \dots + b_kx_k$$
+
+Where $b_0$ is the intercept, and each $b$ is the slope for one predictor ($x_1$ to $x_k$).
+
+The process and output are similar to simple linear regression. We still fit the model with `lm()` and read the coefficients table, the R² value and the F-statistic from `summary()`. The key difference is in how the coefficients are read:
+
+> *Each coefficient tells us the effect of that predictor **while holding all the other predictors constant**.*
+
+**Aim:** to explain the variance in the dependent variable, as in simple regression, but now using several predictor variables at once.
+
+#### Unique and shared variance
+
+Each predictor may explain a **unique** part of the variance in the dependent variable, that no other predictor explains. Predictors may also **share** some of the variance they explain, which happens when the predictors are themselves related to each other.
+
+::: {.callout-note}
+**Why shared variance matters**
+
+If two predictors are closely related, much of what each explains is the same information. Each predictor's **unique** contribution in the combined model is then smaller than its effect on its own. When predictors are very strongly related (called **multicollinearity**), the coefficient estimates become unstable and hard to interpret.
+:::
+
+#### Fitting a multiple regression in R
+
+To add more predictors, join them with `+` on the right of the `~`:
+
+```r
+lm_multiple <- lm(spraints ~ fish_index + length_cm, data = otter_data)
+summary(lm_multiple)
+```
+
+**In the model above, what does the coefficient for `fish_index` tell us?**
+
+`r longmcq(c(
+answer = "The change in spraint count for each one unit increase in fish index, with body length held constant.",
+"The change in spraint count for each one unit increase in fish index, ignoring body length completely.",
+"The proportion of variation in spraint count that fish index and body length explain together.",
+"The change in body length for each one unit increase in fish index, with spraint count held constant."
+))`
+
+
