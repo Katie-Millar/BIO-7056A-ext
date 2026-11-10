@@ -15,54 +15,51 @@ format:
     number-sections: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```{r, results='hide', message=FALSE, warning=FALSE}
+library(webexercises)
+library(tidyverse)
 
-library(tidyverse)     # ggplot2, dplyr and read_csv()
-library(patchwork)     # combining plots side by side
-library(webexercises)  # hide(), unhide(), mcq(), longmcq(), fitb()
+otter_data <- read_csv("data/otter_data_v2.csv")
+
 
 ```
 
+## Multiple Linear Regression
 
-So far, our linear models have generally had **one predictor** (independent variable) and one **dependent variable**, for example spraint count predicted by fish availability. **Multiple linear regression** extends this to **two or more predictors** used together to explain a single dependent variable.
+So far, our linear models have had **one predictor** (independent variable) and one **dependent variable**. In Workshop 5, for example, we used fish availability to predict spraint count. But most outcomes in biology have more than one influence. Spraint count might depend on fish availability, but also on body length, the season or the river.
 
-$$y = b_0 + b_1x_1 + b_2x_2 + \dots + b_kx_k$$
+**Multiple linear regression** extends the linear model to **two or more predictors** used together to explain a single dependent variable. The process is very similar to the regression you already know. We fit the model with `lm()`, read a coefficients table, and check R² and the F-statistic. The main new idea is how to read each slope.
 
-Where $b_0$ is the intercept, and each $b$ is the slope for one predictor ($x_1$ to $x_k$).
+By the end of this section you will be able to:
 
-The process and output are similar to simple linear regression. We still fit the model with `lm()` and read the coefficients table, the R² value and the F-statistic from `summary()`. The key difference is in how the coefficients are read:
+- write the equation for a model with more than one predictor
+- fit a multiple regression in R and read the output
+- explain what it means for a slope to be estimated **holding the other predictors constant**
+- explain why a predictor can add very little to a model
 
-> *Each coefficient tells us the effect of that predictor **while holding all the other predictors constant**.*
+### Packages and data
 
-**Aim:** to explain the variance in the dependent variable, as in simple regression, but now using several predictor variables at once.
+Today you will need the package `tidyverse`. It is a new workspace, so please install it from the **console** using `install.packages()` before loading it into your script with `library()`.
 
-#### Unique and shared variance
+We will use the otter data again, so please read in `otter_data_v3.csv` from the data folder and call it `otter_data`.
 
-Each predictor may explain a **unique** part of the variance in the dependent variable, that no other predictor explains. Predictors may also **share** some of the variance they explain, which happens when the predictors are themselves related to each other.
+```{r, results='hide', message=FALSE, warning=FALSE}
+library(tidyverse)
+
+otter_data <- read_csv("data/otter_data_v2.csv")
+```
 
 ::: {.callout-note}
-**Why shared variance matters**
-
-If two predictors are closely related, much of what each explains is the same information. Each predictor's **unique** contribution in the combined model is then smaller than its effect on its own. When predictors are very strongly related (called **multicollinearity**), the coefficient estimates become unstable and hard to interpret.
+In Posit Cloud, packages need to be reinstalled each time you start a new session. If you use RStudio Desktop or Positron, you only install them once, but you still load them each session with `library()`.
 :::
 
-#### Fitting a multiple regression in R
+### A quick recap
 
-To add more predictors, join them with `+` on the right of the `~`:
-
-```r
-lm_multiple <- lm(spraints ~ fish_index + length_cm, data = otter_data)
-summary(lm_multiple)
-```
-
-**In the model above, what does the coefficient for `fish_index` tell us?**
+**In a simple linear regression of spraint count on fish index, what does the slope tell us?**
 
 `r longmcq(c(
-answer = "The change in spraint count for each one unit increase in fish index, with body length held constant.",
-"The change in spraint count for each one unit increase in fish index, ignoring body length completely.",
-"The proportion of variation in spraint count that fish index and body length explain together.",
-"The change in body length for each one unit increase in fish index, with spraint count held constant."
+answer = "How much the predicted spraint count changes for each one unit increase in fish index.",
+"The predicted spraint count for an otter when the fish index is equal to zero.",
+"The proportion of the variation in spraint count that is explained by fish index.",
+"Whether the relationship between fish index and spraint count is statistically significant."
 ))`
-
-
