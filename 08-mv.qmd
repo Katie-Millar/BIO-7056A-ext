@@ -32,7 +32,7 @@ So far, our linear models have had **one predictor** (independent variable) and 
 
 By the end of this section you will be able to:
 
-- write the equation for a model with more than one predictor
+- Write the equation for a model with more than one predictor
 - fit a multiple regression in R and read the output
 - explain what it means for a slope to be estimated **holding the other predictors constant**
 - explain why a predictor can add very little to a model
@@ -63,3 +63,156 @@ answer = "How much the predicted spraint count changes for each one unit increas
 "The proportion of the variation in spraint count that is explained by fish index.",
 "Whether the relationship between fish index and spraint count is statistically significant."
 ))`
+
+#### Step 1: The equation you already know
+
+In Workshop 5 we described the relationship between fish index and spraints with a straight line:
+
+$$\text{spraints} = a + b \times \text{fish index}$$
+
+Fitting this to the otter data gives:
+
+$$\text{spraints} = 0.25 + 1.81 \times \text{fish index}$$
+
+- The **intercept**, 0.25, is the predicted spraint count when fish index is 0.
+- The **slope**, 1.81, is how much the predicted spraint count increases for each 1 unit increase in fish index.
+
+Read it as a recipe. Start at 0.25 spraints, then add 1.81 more for every 1 unit of fish index.
+
+#### Step 2: Add a second predictor
+
+Now suppose we also think body length might matter. We do not change the recipe, we just add one more ingredient: another slope multiplied by the new predictor.
+
+$$\text{spraints} = a + b_1 \times \text{fish index} + b_2 \times \text{body length}$$
+
+The only changes are that the slope $b$ is now called $b_1$, and there is a new term for body length with its own slope, $b_2$. The numbering just tells the slopes apart.
+
+Fitting this to the otter data gives:
+
+$$\text{spraints} = -1.24 + 1.84 \times \text{fish index} + 0.012 \times \text{body length}$$
+
+#### Step 3: Use it to make a prediction
+
+For an otter with a fish index of 7 and a body length of 105 cm:
+
+$$-1.24 + (1.84 \times 7) + (0.012 \times 105) \approx 12.9 \text{ spraints}$$
+
+**What does the 0.012 tell us?**
+
+`r longmcq(c(
+"For every 0.012 cm of body length, the model predicts one extra spraint, whatever the fish index is.",
+"Body length explains 1.2% of the variation in spraint count, with fish index held at its average value.",
+answer = "For two otters with the same fish index, the longer one is predicted to have 0.012 more spraints for each extra cm of body length.",
+"For every extra spraint, an otter's body length is predicted to increase by 0.012 cm, with fish index fixed."
+))`
+
+#### Step 4: Add as many predictors as you like
+
+The pattern never changes. Each extra predictor adds one more slope multiplied by that predictor. Written in general, with $x_1$, $x_2$ and so on standing for the predictors, it looks like this:
+
+`r hide("Click to show the general equation")`
+
+$$y = a + b_1x_1 + b_2x_2 + b_3x_3 + \dots$$
+
+Where $y$ is the dependent variable, $a$ is the intercept, and each $b$ is the slope for the predictor next to it. For our otter model, $y$ is spraints, $x_1$ is fish index and $x_2$ is body length, so it is the same equation as in Step 2.
+
+`r unhide()`
+
+::: {.callout-note}
+Each slope is the effect of **that predictor while holding the other predictors constant**. In Step 2, $b_1$ is the effect of fish index among otters of the same body length.
+:::
+
+#### Step 5: Fit the model in R
+
+::: {.callout-tip}
+Remember, you can use functions such as `col_names` to see the names of the variables in your data frame. 
+:::
+
+To add a second predictor, join it to the first with `+` on the right of the `~`. Complete the code below.
+
+The dependent variable is: `r fitb("spraints")`
+
+The two predictors are: `r fitb(c("fish_index", "length_cm"))` and `r fitb(c("length_cm", "fish_index"))`
+
+```r
+lm_multiple <- lm(___ ~ ___ + ___, data = otter_data)
+summary(lm_multiple)
+```
+
+`r hide("Click to show the solution")`
+
+```{r lm-multiple}
+lm_multiple <- lm(spraints ~ fish_index + length_cm, data = otter_data)
+summary(lm_multiple)
+```
+
+`r unhide()`
+
+#### Step 6: Read the output
+
+The output looks like the simple regression output, with one row for each predictor in the coefficients table.
+
+| Part of the output | What it tells us here |
+|---|---|
+| `(Intercept)` | The predicted spraint count when both predictors are 0, the starting point of the equation |
+| `fish_index` | 1.84 more spraints per unit of fish index, with body length held constant (p < 0.001) |
+| `length_cm` | 0.012 more spraints per cm of body length, with fish index held constant (p = 0.526) |
+| `Multiple R-squared` | The proportion of variation explained by **both predictors together** (0.692) |
+| `F-statistic` | Tests whether the predictors **together** explain a significant amount of variation (p < 0.001) |
+The output looks like the simple regression output, with one row for each predictor in the coefficients table.
+
+| Part of the output | What it tells us here |
+|---|---|
+| `(Intercept)` | The predicted spraint count when both predictors are 0, the starting point of the equation |
+| `fish_index` | 1.84 more spraints per unit of fish index, with body length held constant (p < 0.001) |
+| `length_cm` | 0.012 more spraints per cm of body length, with fish index held constant (p = 0.526) |
+| `Multiple R-squared` | The proportion of variation explained by **both predictors together** (0.692) |
+| `F-statistic` | Tests whether the predictors **together** explain a significant amount of variation (p < 0.001) |
+
+**What do the p-values in the coefficients table tell us?**
+
+`r longmcq(c(
+"Body length is a significant predictor (p = 0.526), but fish index is not (p < 0.001), once body length is in the model.",
+answer = "Fish index is a significant predictor (p < 0.001), but body length is not (p = 0.526), once fish index is in the model.",
+"Both predictors are significant, because the F-statistic for the whole model has a p-value below 0.05.",
+"Neither predictor is significant, because the intercept has a p-value above 0.05 in the coefficients table."
+))`
+
+#### Step 7: Why did body length add so little?
+
+Compare the model with fish index on its own to the model with both predictors:
+
+| Model | Slope for fish index | R² |
+|---|---|---|
+| Fish index only | 1.81 | 0.690 |
+| Fish index and body length | 1.84 | 0.692 |
+
+The fish index slope hardly changes, and R² barely rises. This is because of how the predictors share out the variance in spraint count:
+
+- Each predictor may explain a **unique** part of the variance, which no other predictor explains.
+- Predictors may also **share** some of the variance they explain, because they are related to each other and carry some of the same information.
+
+Here, body length explains almost nothing that fish index does not already explain, so its unique part is tiny. It is also only weakly related to fish index, so there is very little shared variance either.
+
+**Adding body length changed R² from 0.690 to 0.692. What does this tell us?**
+
+`r longmcq(c(
+"Body length explains a large share of the variation, but this is hidden because it is shared with fish index.",
+"The model has become worse, because any rise in R² of less than 0.05 means the predictor should be removed.",
+"Body length must be a poor predictor in general, so it should never be used to model spraint counts.",
+answer = "Body length explains very little unique variation in spraint count that fish index does not already explain."
+))`
+
+::: {.callout-note}
+**When predictors share a lot of variance**
+
+If two predictors are strongly related to each other, much of what each explains is the same information. Their slopes can then change a lot when both are in the model, and become unstable. This is called **multicollinearity**.
+:::
+
+::: {.callout-note}
+**Adjusted R²**
+
+R² can only go up when you add a predictor, even a useless one. **Adjusted R²** corrects for this by penalising each extra predictor. Here it goes **down** slightly, from 0.684 to 0.681, which also suggests body length is not improving the model. Use adjusted R² when comparing models with different numbers of predictors.
+:::
+
+**Aim:** to explain the variance in the dependent variable, as in simple regression, but now using several predictor variables at once. Each slope shows that predictor's effect with the others held constant, and R² and the F-statistic describe how well the predictors do **together**.
