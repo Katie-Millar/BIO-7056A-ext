@@ -357,9 +357,11 @@ answer = "Part of the link between fish index and spraints could really be a riv
 "Fish index can no longer be a predictor, because predictors are not allowed to differ between groups."
 ))`
 
-Now let us plot spraints against fish index, coloured by river, with a separate line for each river.
+::: {.callout-tip}
+**Task**: Code the relevant plot spraints against fish index, coloured by river, with a separate points and line for each river. Use the [Function Glossary](function-glossary.qmd) to help you. 
+:::
 
-```{r mlr-scatter, fig.width=6.5, fig.height=4}
+```{r mlr-scatter, fig.width=6.5, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(otter_data, aes(x = fish_index, y = spraints, colour = site)) +
   geom_point(size = 2.5) +
   geom_smooth(method = "lm", se = FALSE) +
@@ -375,10 +377,13 @@ Within each river the lines slope upwards, but each river also sits at a differe
 **Task**: Fit a simple regression of `spraints` on `fish_index` and save it as `lm_simple`. Then look at the `summary()`.
 :::
 
-`r hide("Click to show the solution")`
+`r hide("Click to show the results of the model")`
+
+```{r, echo=FALSE}
+lm_simple <- lm(spraints ~ fish_index, data = otter_data)
+```
 
 ```{r mlr-simple}
-lm_simple <- lm(spraints ~ fish_index, data = otter_data)
 summary(lm_simple)
 ```
 
@@ -388,7 +393,7 @@ This is the model from Workshop 5. The slope is 1.81 and R² is 0.690.
 
 ### Step 4: Add the covariates
 
-Now we add river and season. We join them to fish index with `+`, exactly as in the two predictor model.
+Now we add river and season. We join them to fish index with `+`, exactly as in the two predictor model. Remember to use the actual dataset variable names, and use one of the checking functions to see this. 
 
 The dependent variable is: `r fitb("spraints")`
 
@@ -399,10 +404,15 @@ lm_full <- lm(___ ~ ___ + ___ + ___, data = otter_data)
 summary(lm_full)
 ```
 
-`r hide("Click to show the solution")`
+`r hide("Click to show the results of the model")`
 
-```{r mlr-full}
+```{r, echo=FALSE}
 lm_full <- lm(spraints ~ fish_index + season + site, data = otter_data)
+```
+
+
+```{r}
+
 summary(lm_full)
 ```
 
@@ -423,8 +433,8 @@ Fish index is numeric, so it has one row and one slope. `season` and `site` are 
 **Why is there no row for `River Bure` in the output?**
 
 `r longmcq(c(
-answer = "River Bure is the reference level, so the other rivers are compared with it and its effect is in the intercept.",
 "River Bure was removed from the model, because it had too few otters to produce a reliable estimate.",
+answer = "River Bure is the reference level, so the other rivers are compared with it and its effect is in the intercept.",
 "River Bure has no effect on spraint counts, so R left it out of the model automatically.",
 "River Bure is the dependent variable, so it cannot also appear as a predictor in the coefficients table."
 ))`
@@ -454,11 +464,31 @@ Adding season changes almost nothing. Adding river nearly halves the slope and r
 **The fish index slope fell from 1.81 to 0.88 after adding river and season. What is the best explanation?**
 
 `r longmcq(c(
-answer = "Fish index and river share variance in spraint count, so part of the original slope was really a difference between rivers.",
 "Adding predictors always makes every slope smaller, because the model has more terms to share the variation between.",
 "Fish index has become a worse predictor, so it is no longer significant now that river and season are in the model.",
-"The model has been fitted incorrectly, because a slope should not change when other predictors are added to the model."
+"The model has been fitted incorrectly, because a slope should not change when other predictors are added to the model.", 
+answer = "Fish index and river share variance in spraint count, so part of the original slope was really a difference between rivers."
 ))`
+
+`r hide("Click to show the explanation")`
+
+Rivers differ in both fish index and spraint count. The River Wensum has the highest fish index (about 8.4) and the River Yare has the lowest (about 5.2), and spraint counts follow the same pattern (you can check the plots you've generated to see this). In the simple model, the fish index slope was doing two jobs at once. It picked up the effect of fish index, and it also picked up the differences between rivers, because fish index acts as a stand in for river.
+
+Once river is in the model, the comparison changes. The slope is now estimated **among otters at the same river**, so the between river differences no longer inflate it. This is what "holding the other predictors constant" means in practice. You can see the same thing in the scatterplot coloured by river, where the lines within each river are flatter than the overall trend.
+
+**Why the other options are wrong:**
+
+| Option | Why it is wrong |
+|---|---|
+| Adding predictors always makes every slope smaller | This is false. Adding season changed the slope from 1.81 to only 1.80, because season is barely related to fish index. A slope only changes much when the new predictor shares variance with it. |
+| Fish index has become a worse predictor and is no longer significant | This is false. The slope is smaller, but fish index is still significant (p = 0.005). A smaller slope is not the same as a weaker effect. |
+| The model has been fitted incorrectly | This is false. Slopes are expected to change when predictors are related. The slope in a multiple regression answers a different question from the slope in a simple one. |
+
+::: {.callout-note}
+If two predictors were **completely unrelated**, adding one would not change the other's slope at all. The size of the change is a rough guide to how much variance the predictors share.
+:::
+
+`r unhide()`
 
 **Is fish index still a useful predictor of spraint count?**
 
