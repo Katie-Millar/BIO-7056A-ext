@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-11-04">
+<meta name="dcterms.date" content="2026-11-11">
 
-<title>8&nbsp; R Function Glossary – Statistics for Biologists - Extension Coursebook</title>
+<title>9&nbsp; R Function Glossary – Statistics for Biologists - Extension Coursebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -73,17 +73,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./appendix.html" rel="next">
-<link href="./07-plots.html" rel="prev">
+<link href="./08-mv.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ffb2aa27e75d9f92b328ce451a986f2a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,17 +118,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./function-glossary.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Function Glossary</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./function-glossary.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Function Glossary</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -138,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistics for Biologists - Extension Coursebook</a> 
@@ -195,14 +196,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-mv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop 8 - Multivariate Linear Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./function-glossary.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -211,30 +218,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link active" data-scroll-target="#loading-packages"><span class="header-section-number">8.1</span> Loading Packages</a></li>
-  <li><a href="#reading-in-data" id="toc-reading-in-data" class="nav-link" data-scroll-target="#reading-in-data"><span class="header-section-number">8.2</span> Reading in Data</a></li>
-  <li><a href="#checking-and-inspecting-data" id="toc-checking-and-inspecting-data" class="nav-link" data-scroll-target="#checking-and-inspecting-data"><span class="header-section-number">8.3</span> Checking and Inspecting Data</a></li>
-  <li><a href="#cleaning-and-wrangling-data" id="toc-cleaning-and-wrangling-data" class="nav-link" data-scroll-target="#cleaning-and-wrangling-data"><span class="header-section-number">8.4</span> Cleaning and Wrangling Data</a></li>
-  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">8.5</span> Summary Statistics</a></li>
-  <li><a href="#statistical-tests" id="toc-statistical-tests" class="nav-link" data-scroll-target="#statistical-tests"><span class="header-section-number">8.6</span> Statistical Tests</a></li>
-  <li><a href="#model-outputs-and-predictions" id="toc-model-outputs-and-predictions" class="nav-link" data-scroll-target="#model-outputs-and-predictions"><span class="header-section-number">8.7</span> Model Outputs and Predictions</a></li>
-  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">8.8</span> Visualisation</a></li>
-  <li><a href="#combining-plots" id="toc-combining-plots" class="nav-link" data-scroll-target="#combining-plots"><span class="header-section-number">8.9</span> Combining Plots</a></li>
-  <li><a href="#randomisation-and-simulation" id="toc-randomisation-and-simulation" class="nav-link" data-scroll-target="#randomisation-and-simulation"><span class="header-section-number">8.10</span> Randomisation and Simulation</a></li>
-  <li><a href="#formatted-tables" id="toc-formatted-tables" class="nav-link" data-scroll-target="#formatted-tables"><span class="header-section-number">8.11</span> Formatted Tables</a></li>
+  <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link active" data-scroll-target="#loading-packages"><span class="header-section-number">9.1</span> Loading Packages</a></li>
+  <li><a href="#reading-in-data" id="toc-reading-in-data" class="nav-link" data-scroll-target="#reading-in-data"><span class="header-section-number">9.2</span> Reading in Data</a></li>
+  <li><a href="#checking-and-inspecting-data" id="toc-checking-and-inspecting-data" class="nav-link" data-scroll-target="#checking-and-inspecting-data"><span class="header-section-number">9.3</span> Checking and Inspecting Data</a></li>
+  <li><a href="#cleaning-and-wrangling-data" id="toc-cleaning-and-wrangling-data" class="nav-link" data-scroll-target="#cleaning-and-wrangling-data"><span class="header-section-number">9.4</span> Cleaning and Wrangling Data</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">9.5</span> Summary Statistics</a></li>
+  <li><a href="#statistical-tests" id="toc-statistical-tests" class="nav-link" data-scroll-target="#statistical-tests"><span class="header-section-number">9.6</span> Statistical Tests</a></li>
+  <li><a href="#model-outputs-and-predictions" id="toc-model-outputs-and-predictions" class="nav-link" data-scroll-target="#model-outputs-and-predictions"><span class="header-section-number">9.7</span> Model Outputs and Predictions</a></li>
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">9.8</span> Visualisation</a></li>
+  <li><a href="#combining-plots" id="toc-combining-plots" class="nav-link" data-scroll-target="#combining-plots"><span class="header-section-number">9.9</span> Combining Plots</a></li>
+  <li><a href="#randomisation-and-simulation" id="toc-randomisation-and-simulation" class="nav-link" data-scroll-target="#randomisation-and-simulation"><span class="header-section-number">9.10</span> Randomisation and Simulation</a></li>
+  <li><a href="#formatted-tables" id="toc-formatted-tables" class="nav-link" data-scroll-target="#formatted-tables"><span class="header-section-number">9.11</span> Formatted Tables</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Function Glossary</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Function Glossary</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -245,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 4, 2026</p>
+      <p class="date">November 11, 2026</p>
     </div>
   </div>
   
@@ -258,8 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>A LOT of functions have been learnt in this module, and it can be hard to remember them all. This glossary is intended to be a reference for the functions that have been used in this module. It is not an exhaustive list of all functions in R, but it does cover the most commonly used functions in this module.</p>
-<section id="loading-packages" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="loading-packages"><span class="header-section-number">8.1</span> Loading Packages</h2>
+<section id="loading-packages" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="loading-packages"><span class="header-section-number">9.1</span> Loading Packages</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -305,8 +312,8 @@ Note
 </div>
 </div>
 </section>
-<section id="reading-in-data" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="reading-in-data"><span class="header-section-number">8.2</span> Reading in Data</h2>
+<section id="reading-in-data" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="reading-in-data"><span class="header-section-number">9.2</span> Reading in Data</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -340,8 +347,8 @@ Note
 <hr>
 <hr>
 </section>
-<section id="checking-and-inspecting-data" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="checking-and-inspecting-data"><span class="header-section-number">8.3</span> Checking and Inspecting Data</h2>
+<section id="checking-and-inspecting-data" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="checking-and-inspecting-data"><span class="header-section-number">9.3</span> Checking and Inspecting Data</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -416,8 +423,8 @@ Note
 </table>
 <hr>
 </section>
-<section id="cleaning-and-wrangling-data" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="cleaning-and-wrangling-data"><span class="header-section-number">8.4</span> Cleaning and Wrangling Data</h2>
+<section id="cleaning-and-wrangling-data" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="cleaning-and-wrangling-data"><span class="header-section-number">9.4</span> Cleaning and Wrangling Data</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -615,8 +622,8 @@ Show example: the pipe operator %&gt;%
 </div>
 <hr>
 </section>
-<section id="summary-statistics" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">8.5</span> Summary Statistics</h2>
+<section id="summary-statistics" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">9.5</span> Summary Statistics</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -703,8 +710,8 @@ Show example: the pipe operator %&gt;%
 </table>
 <hr>
 </section>
-<section id="statistical-tests" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="statistical-tests"><span class="header-section-number">8.6</span> Statistical Tests</h2>
+<section id="statistical-tests" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="statistical-tests"><span class="header-section-number">9.6</span> Statistical Tests</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -761,8 +768,8 @@ Show example: the pipe operator %&gt;%
 </table>
 <hr>
 </section>
-<section id="model-outputs-and-predictions" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="model-outputs-and-predictions"><span class="header-section-number">8.7</span> Model Outputs and Predictions</h2>
+<section id="model-outputs-and-predictions" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="model-outputs-and-predictions"><span class="header-section-number">9.7</span> Model Outputs and Predictions</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -807,8 +814,8 @@ Show example: the pipe operator %&gt;%
 </table>
 <hr>
 </section>
-<section id="visualisation" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="visualisation"><span class="header-section-number">8.8</span> Visualisation</h2>
+<section id="visualisation" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="visualisation"><span class="header-section-number">9.8</span> Visualisation</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1037,8 +1044,8 @@ Show example: jittered boxplot
 </div>
 </div>
 </section>
-<section id="combining-plots" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="combining-plots"><span class="header-section-number">8.9</span> Combining Plots</h2>
+<section id="combining-plots" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="combining-plots"><span class="header-section-number">9.9</span> Combining Plots</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1071,8 +1078,8 @@ Show example: jittered boxplot
 </table>
 <hr>
 </section>
-<section id="randomisation-and-simulation" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="randomisation-and-simulation"><span class="header-section-number">8.10</span> Randomisation and Simulation</h2>
+<section id="randomisation-and-simulation" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="randomisation-and-simulation"><span class="header-section-number">9.10</span> Randomisation and Simulation</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1117,8 +1124,8 @@ Show example: jittered boxplot
 </table>
 <hr>
 </section>
-<section id="formatted-tables" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="formatted-tables"><span class="header-section-number">8.11</span> Formatted Tables</h2>
+<section id="formatted-tables" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="formatted-tables"><span class="header-section-number">9.11</span> Formatted Tables</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1572,7 +1579,8 @@ window.onload = function() {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1581,8 +1589,69 @@ window.onload = function() {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1596,6 +1665,7 @@ window.onload = function() {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1758,44 +1828,54 @@ window.onload = function() {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1894,15 +1974,18 @@ window.onload = function() {
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="./07-plots.html" class="pagination-link" aria-label="Workshop 7 - Data Visualisation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workshop 7 - Data Visualisation</span></span>
+      <a href="./08-mv.html" class="pagination-link" aria-label="Workshop 8 - Multivariate Linear Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop 8 - Multivariate Linear Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./appendix.html" class="pagination-link" aria-label="Appendix - Knowing your R &amp; Statistics">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

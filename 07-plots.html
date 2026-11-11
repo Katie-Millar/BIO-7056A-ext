@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-11-04">
+<meta name="dcterms.date" content="2026-11-11">
 
 <title>7&nbsp; Workshop 7 - Data Visualisation – Statistics for Biologists - Extension Coursebook</title>
 <style>
@@ -72,18 +72,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./function-glossary.html" rel="next">
+<link href="./08-mv.html" rel="next">
 <link href="./06-prob-para.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d5e493902b20b0c650a9e858f11e2762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ffb2aa27e75d9f92b328ce451a986f2a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,17 +118,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-plots.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workshop 7 - Data Visualisation</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-plots.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workshop 7 - Data Visualisation</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -138,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistics for Biologists - Extension Coursebook</a> 
@@ -195,14 +196,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-mv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop 8 - Multivariate Linear Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./function-glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
   </div>
 </li>
     </ul>
@@ -211,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
   <ul>
@@ -253,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -268,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 4, 2026</p>
+      <p class="date">November 11, 2026</p>
     </div>
   </div>
   
@@ -417,12 +424,12 @@ Tip
 <p><strong>Which line of code adds the points to the plot?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="">ggplot(data = otter_data)</option><option value="">aes(x = fish_index, y = spraints)</option><option value="answer">geom_point()</option><option value="">labs(x = ‘Fish index’)</option></select></p>
 <p><strong>What does <code>aes()</code> do?</strong></p>
-<div id="radio_TUPXAFTIUG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value=""> <span>It chooses the shape that is drawn, such as points, bars or boxes, for each observation.</span></label><label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value=""> <span>It changes the appearance of the plot, such as the background, font size and gridlines.</span></label><label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value="answer"> <span>It maps variables in the data frame to features of the plot, such as the x axis, y axis or colour.</span></label><label><input type="radio" autocomplete="off" name="radio_TUPXAFTIUG" value=""> <span>It adds the axis titles and the plot title so that the figure can be read by others.</span></label>
+<div id="radio_DDIRPVYDIA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DDIRPVYDIA" value=""> <span>It chooses the shape that is drawn, such as points, bars or boxes, for each observation.</span></label><label><input type="radio" autocomplete="off" name="radio_DDIRPVYDIA" value=""> <span>It changes the appearance of the plot, such as the background, font size and gridlines.</span></label><label><input type="radio" autocomplete="off" name="radio_DDIRPVYDIA" value="answer"> <span>It maps variables in the data frame to features of the plot, such as the x axis, y axis or colour.</span></label><label><input type="radio" autocomplete="off" name="radio_DDIRPVYDIA" value=""> <span>It adds the axis titles and the plot title so that the figure can be read by others.</span></label>
 </div>
 <p><strong>What happens if you run <code>ggplot(otter_data, aes(x = fish_index, y = spraints))</code> without adding a geom?</strong></p>
-<div id="radio_LJGPZKIJUE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value=""> <span>R draws a scatterplot by default, because both variables are continuous numeric columns.</span></label><label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value=""> <span>R returns an error, because a plot cannot be created without at least one geom layer.</span></label><label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value="answer"> <span>R draws the axes but nothing else, because no instruction has been given for how to display the data.</span></label><label><input type="radio" autocomplete="off" name="radio_LJGPZKIJUE" value=""> <span>R draws a histogram of fish_index, because the first variable is always plotted on its own.</span></label>
+<div id="radio_QNLFWGAEUM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QNLFWGAEUM" value=""> <span>R draws a scatterplot by default, because both variables are continuous numeric columns.</span></label><label><input type="radio" autocomplete="off" name="radio_QNLFWGAEUM" value=""> <span>R returns an error, because a plot cannot be created without at least one geom layer.</span></label><label><input type="radio" autocomplete="off" name="radio_QNLFWGAEUM" value="answer"> <span>R draws the axes but nothing else, because no instruction has been given for how to display the data.</span></label><label><input type="radio" autocomplete="off" name="radio_QNLFWGAEUM" value=""> <span>R draws a histogram of fish_index, because the first variable is always plotted on its own.</span></label>
 </div>
 </section>
 <section id="your-turn" class="level3" data-number="7.2.3">
@@ -464,8 +471,8 @@ Click to show the solution
 </div>
 </div>
 <p><strong>A student puts <code>length_cm</code> on both axes. What will the plot show?</strong></p>
-<div id="radio_DDHNGJNGZW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value=""> <span>A scatterplot with a weak positive relationship, because body length varies between otters.</span></label><label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value="answer"> <span>Every point falls on a perfect diagonal line, because each otter's length is plotted against itself.</span></label><label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value=""> <span>An error message, because the same variable cannot be used for both the x and y axes.</span></label><label><input type="radio" autocomplete="off" name="radio_DDHNGJNGZW" value=""> <span>A histogram of body length, because only one variable has been supplied to the plot.</span></label>
+<div id="radio_IYFQYLFWLW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IYFQYLFWLW" value=""> <span>A scatterplot with a weak positive relationship, because body length varies between otters.</span></label><label><input type="radio" autocomplete="off" name="radio_IYFQYLFWLW" value="answer"> <span>Every point falls on a perfect diagonal line, because each otter's length is plotted against itself.</span></label><label><input type="radio" autocomplete="off" name="radio_IYFQYLFWLW" value=""> <span>An error message, because the same variable cannot be used for both the x and y axes.</span></label><label><input type="radio" autocomplete="off" name="radio_IYFQYLFWLW" value=""> <span>A histogram of body length, because only one variable has been supplied to the plot.</span></label>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -564,8 +571,8 @@ Tip
 </div>
 </div>
 <p><strong>A student wants every point in a scatterplot to be red, whatever the data say. Where should <code>colour = "red"</code> go?</strong></p>
-<div id="radio_UVRFVRQTMM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value="answer"> <span>Inside geom_point() but outside aes(), because it is a fixed value and not a variable in the data.</span></label><label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value=""> <span>Inside aes(), because every colour setting has to be written inside the aes() function.</span></label><label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value=""> <span>Inside ggplot() as a separate argument, because the data frame must be told which colour to use.</span></label><label><input type="radio" autocomplete="off" name="radio_UVRFVRQTMM" value=""> <span>Inside labs(), because the colour is part of the labels that describe the plot to readers.</span></label>
+<div id="radio_YRCTVFGOQU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YRCTVFGOQU" value="answer"> <span>Inside geom_point() but outside aes(), because it is a fixed value and not a variable in the data.</span></label><label><input type="radio" autocomplete="off" name="radio_YRCTVFGOQU" value=""> <span>Inside aes(), because every colour setting has to be written inside the aes() function.</span></label><label><input type="radio" autocomplete="off" name="radio_YRCTVFGOQU" value=""> <span>Inside ggplot() as a separate argument, because the data frame must be told which colour to use.</span></label><label><input type="radio" autocomplete="off" name="radio_YRCTVFGOQU" value=""> <span>Inside labs(), because the colour is part of the labels that describe the plot to readers.</span></label>
 </div>
 </section>
 <section id="geoms" class="level3" data-number="7.3.2">
@@ -787,12 +794,12 @@ Tip
 <p><strong>Which geom would you use to show how many otters were recorded in each age class?</strong></p>
 <p><select class="webex-select"><option value="blank"></option><option value="answer">geom_bar()</option><option value="">geom_histogram()</option><option value="">geom_smooth()</option><option value="">geom_boxplot()</option></select></p>
 <p><strong>What is the difference between <code>geom_bar()</code> and <code>geom_col()</code>?</strong></p>
-<div id="radio_DOWCTCPEIK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value="answer"> <span>geom_bar() counts the rows in each category for you, while geom_col() draws bars at heights you supply.</span></label><label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value=""> <span>geom_bar() draws horizontal bars, while geom_col() draws vertical bars of the same type of data.</span></label><label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value=""> <span>geom_bar() needs a numeric x variable, while geom_col() needs a categorical x variable to work.</span></label><label><input type="radio" autocomplete="off" name="radio_DOWCTCPEIK" value=""> <span>geom_bar() is used for means, while geom_col() is used for counts of the number of rows.</span></label>
+<div id="radio_EZTGKTDIEV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EZTGKTDIEV" value="answer"> <span>geom_bar() counts the rows in each category for you, while geom_col() draws bars at heights you supply.</span></label><label><input type="radio" autocomplete="off" name="radio_EZTGKTDIEV" value=""> <span>geom_bar() draws horizontal bars, while geom_col() draws vertical bars of the same type of data.</span></label><label><input type="radio" autocomplete="off" name="radio_EZTGKTDIEV" value=""> <span>geom_bar() needs a numeric x variable, while geom_col() needs a categorical x variable to work.</span></label><label><input type="radio" autocomplete="off" name="radio_EZTGKTDIEV" value=""> <span>geom_bar() is used for means, while geom_col() is used for counts of the number of rows.</span></label>
 </div>
 <p><strong>A student writes <code>ggplot(otter_data, aes(x = spraints)) + geom_point()</code>. Why does this give an error?</strong></p>
-<div id="radio_RONSTYIGTX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value=""> <span>geom_point() can only be used with categorical variables, but spraints is a numeric count.</span></label><label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value=""> <span>geom_point() must always be followed by geom_smooth() or it cannot draw the plot properly.</span></label><label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value=""> <span>geom_point() cannot be used when the data frame contains more than one grouping variable.</span></label><label><input type="radio" autocomplete="off" name="radio_RONSTYIGTX" value="answer"> <span>geom_point() needs both an x and a y, and only an x has been supplied in aes().</span></label>
+<div id="radio_UGPTXCWXZT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UGPTXCWXZT" value=""> <span>geom_point() can only be used with categorical variables, but spraints is a numeric count.</span></label><label><input type="radio" autocomplete="off" name="radio_UGPTXCWXZT" value=""> <span>geom_point() must always be followed by geom_smooth() or it cannot draw the plot properly.</span></label><label><input type="radio" autocomplete="off" name="radio_UGPTXCWXZT" value=""> <span>geom_point() cannot be used when the data frame contains more than one grouping variable.</span></label><label><input type="radio" autocomplete="off" name="radio_UGPTXCWXZT" value="answer"> <span>geom_point() needs both an x and a y, and only an x has been supplied in aes().</span></label>
 </div>
 <p>To draw a regression line over a scatterplot, you add <input class="webex-solveme nospaces" size="13" data-answer="[&quot;geom_smooth&quot;,&quot;geom_smooth()&quot;]"> with <code>method = "lm"</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1183,8 +1190,8 @@ Click to show the code and plot
 <h3 data-number="7.4.5" class="anchored" data-anchor-id="challenge-5-does-the-effect-of-season-depend-on-the-site"><span class="header-section-number">7.4.5</span> Challenge 5: Does the effect of season depend on the site?</h3>
 <p>You have one count variable (<code>spraints</code>) and <strong>two</strong> categorical variables (<code>site</code> and <code>season</code>).</p>
 <p><strong>What is the best way to show both categorical variables at once?</strong></p>
-<div id="radio_OXIUBAKTJM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value=""> <span>Make two separate histograms of spraints, one for each site, and ignore season entirely.</span></label><label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value=""> <span>Draw a scatterplot of site against season, with each point representing one otter.</span></label><label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value="answer"> <span>Put site on the x axis and use fill to show season, so each site has one box per season.</span></label><label><input type="radio" autocomplete="off" name="radio_OXIUBAKTJM" value=""> <span>Draw a single bar chart of the total spraints, which combines every site and season together.</span></label>
+<div id="radio_OBOHXWDPWE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OBOHXWDPWE" value=""> <span>Make two separate histograms of spraints, one for each site, and ignore season entirely.</span></label><label><input type="radio" autocomplete="off" name="radio_OBOHXWDPWE" value=""> <span>Draw a scatterplot of site against season, with each point representing one otter.</span></label><label><input type="radio" autocomplete="off" name="radio_OBOHXWDPWE" value="answer"> <span>Put site on the x axis and use fill to show season, so each site has one box per season.</span></label><label><input type="radio" autocomplete="off" name="radio_OBOHXWDPWE" value=""> <span>Draw a single bar chart of the total spraints, which combines every site and season together.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1260,8 +1267,8 @@ Click to show the code and plot
 <h3 data-number="7.4.6" class="anchored" data-anchor-id="challenge-6-does-the-length-and-mass-relationship-differ-between-the-sexes"><span class="header-section-number">7.4.6</span> Challenge 6: Does the length and mass relationship differ between the sexes?</h3>
 <p>You have two continuous variables (<code>length_cm</code> and <code>mass_kg</code>) and a categorical variable (<code>sex</code>).</p>
 <p><strong>How could you show all three variables on one plot?</strong></p>
-<div id="radio_JXKWQXIMXX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value="answer"> <span>Draw a scatterplot of one continuous variable against the other, and colour the points by sex.</span></label><label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value=""> <span>Draw a histogram of both continuous variables, and use a separate bar for each sex.</span></label><label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value=""> <span>Draw a bar chart of sex, and use the height of each bar to show the mean length.</span></label><label><input type="radio" autocomplete="off" name="radio_JXKWQXIMXX" value=""> <span>Draw a boxplot of sex on the x axis, and plot both continuous variables on the same y axis.</span></label>
+<div id="radio_DLCFWUWVHF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DLCFWUWVHF" value="answer"> <span>Draw a scatterplot of one continuous variable against the other, and colour the points by sex.</span></label><label><input type="radio" autocomplete="off" name="radio_DLCFWUWVHF" value=""> <span>Draw a histogram of both continuous variables, and use a separate bar for each sex.</span></label><label><input type="radio" autocomplete="off" name="radio_DLCFWUWVHF" value=""> <span>Draw a bar chart of sex, and use the height of each bar to show the mean length.</span></label><label><input type="radio" autocomplete="off" name="radio_DLCFWUWVHF" value=""> <span>Draw a boxplot of sex on the x axis, and plot both continuous variables on the same y axis.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1333,8 +1340,8 @@ Click to show the code and plot
 <h3 data-number="7.4.7" class="anchored" data-anchor-id="challenge-7-is-tick-count-normally-distributed"><span class="header-section-number">7.4.7</span> Challenge 7: Is tick count normally distributed?</h3>
 <p><code>tick_count</code> is a count variable and you suspect it is right skewed. You also want to check whether a log transformation would help.</p>
 <p><strong>What is the most useful way to show this?</strong></p>
-<div id="radio_ILHVBTEMID" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value=""> <span>Draw a boxplot of the raw counts only, because boxplots always show skew more clearly.</span></label><label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value=""> <span>Draw a scatterplot of tick count against otter ID, so that each otter is shown separately.</span></label><label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value=""> <span>Draw a bar chart of the total number of ticks, so that the overall burden is easy to see.</span></label><label><input type="radio" autocomplete="off" name="radio_ILHVBTEMID" value="answer"> <span>Draw a histogram of the raw counts next to a histogram of the log transformed counts.</span></label>
+<div id="radio_QUMPYMUVHA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QUMPYMUVHA" value=""> <span>Draw a boxplot of the raw counts only, because boxplots always show skew more clearly.</span></label><label><input type="radio" autocomplete="off" name="radio_QUMPYMUVHA" value=""> <span>Draw a scatterplot of tick count against otter ID, so that each otter is shown separately.</span></label><label><input type="radio" autocomplete="off" name="radio_QUMPYMUVHA" value=""> <span>Draw a bar chart of the total number of ticks, so that the overall burden is easy to see.</span></label><label><input type="radio" autocomplete="off" name="radio_QUMPYMUVHA" value="answer"> <span>Draw a histogram of the raw counts next to a histogram of the log transformed counts.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1408,8 +1415,8 @@ Click to show the code and plot
 <li>Ask yourself whether the plot actually answers a question.</li>
 </ol>
 <p><strong>A student plots <code>site</code> against <code>season</code> using <code>geom_point()</code>. Why is this a poor choice?</strong></p>
-<div id="radio_HAHVJLJRIO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value=""> <span>Both variables are continuous, so a scatterplot cannot show the full range of values for each otter.</span></label><label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value=""> <span>Scatterplots can only be drawn when one of the variables has been transformed using a logarithm.</span></label><label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value="answer"> <span>Both variables are categorical, so the points can only sit on a few grid positions and many otters would overlap.</span></label><label><input type="radio" autocomplete="off" name="radio_HAHVJLJRIO" value=""> <span>The geom_point function cannot be used with text variables, so R would return an error message.</span></label>
+<div id="radio_QPHLHWTZUN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QPHLHWTZUN" value=""> <span>Both variables are continuous, so a scatterplot cannot show the full range of values for each otter.</span></label><label><input type="radio" autocomplete="off" name="radio_QPHLHWTZUN" value=""> <span>Scatterplots can only be drawn when one of the variables has been transformed using a logarithm.</span></label><label><input type="radio" autocomplete="off" name="radio_QPHLHWTZUN" value="answer"> <span>Both variables are categorical, so the points can only sit on a few grid positions and many otters would overlap.</span></label><label><input type="radio" autocomplete="off" name="radio_QPHLHWTZUN" value=""> <span>The geom_point function cannot be used with text variables, so R would return an error message.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1569,8 +1576,8 @@ Tip
 </tbody>
 </table>
 <p><strong>What does the height of the box tell you?</strong></p>
-<div id="radio_NOQHOXUVQP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value="answer"> <span>How spread out the middle half of the otters are, because the box runs from the first to the third quartile.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value=""> <span>How spread out every otter in the group is, because the box runs from the smallest to the largest value.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value=""> <span>How many otters were measured in the group, because a taller box means that more otters were included.</span></label><label><input type="radio" autocomplete="off" name="radio_NOQHOXUVQP" value=""> <span>Where the average value sits, because the box is drawn around the mean of the group.</span></label>
+<div id="radio_CGXKAPVQHK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CGXKAPVQHK" value="answer"> <span>How spread out the middle half of the otters are, because the box runs from the first to the third quartile.</span></label><label><input type="radio" autocomplete="off" name="radio_CGXKAPVQHK" value=""> <span>How spread out every otter in the group is, because the box runs from the smallest to the largest value.</span></label><label><input type="radio" autocomplete="off" name="radio_CGXKAPVQHK" value=""> <span>How many otters were measured in the group, because a taller box means that more otters were included.</span></label><label><input type="radio" autocomplete="off" name="radio_CGXKAPVQHK" value=""> <span>Where the average value sits, because the box is drawn around the mean of the group.</span></label>
 </div>
 </section>
 <section id="one-variable-five-views" class="level3" data-number="7.5.2">
@@ -1668,12 +1675,12 @@ Tip
 </div>
 </div>
 <p><strong>You want to know how many otters of each sex were measured. Which view shows this best?</strong></p>
-<div id="radio_SHCPTCQTYH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value="answer"> <span>Boxplot and points, because every otter is drawn as its own point and the points can be counted.</span></label><label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value=""> <span>Boxplot, because the height of each box is proportional to the number of otters in that group.</span></label><label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value=""> <span>Violin, because the total area of each violin is always scaled to the number of otters measured.</span></label><label><input type="radio" autocomplete="off" name="radio_SHCPTCQTYH" value=""> <span>Density, because the height of each curve at its peak shows how many otters were in the group.</span></label>
+<div id="radio_BLYSUDTMNK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BLYSUDTMNK" value="answer"> <span>Boxplot and points, because every otter is drawn as its own point and the points can be counted.</span></label><label><input type="radio" autocomplete="off" name="radio_BLYSUDTMNK" value=""> <span>Boxplot, because the height of each box is proportional to the number of otters in that group.</span></label><label><input type="radio" autocomplete="off" name="radio_BLYSUDTMNK" value=""> <span>Violin, because the total area of each violin is always scaled to the number of otters measured.</span></label><label><input type="radio" autocomplete="off" name="radio_BLYSUDTMNK" value=""> <span>Density, because the height of each curve at its peak shows how many otters were in the group.</span></label>
 </div>
 <p><strong>Which view would you choose to see whether the two sexes overlap in body mass?</strong></p>
-<div id="radio_NQVHJXNHZG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value=""> <span>Boxplot, because the whiskers show the full range of each group and make the overlap obvious.</span></label><label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value=""> <span>Bar chart, because the height of each bar shows the average mass of each group of otters.</span></label><label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value=""> <span>Scatterplot, because each otter is plotted against the order in which it was measured.</span></label><label><input type="radio" autocomplete="off" name="radio_NQVHJXNHZG" value="answer"> <span>Density, because both curves share one axis and the region where they overlap is easy to see.</span></label>
+<div id="radio_GTDJPUXREF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GTDJPUXREF" value=""> <span>Boxplot, because the whiskers show the full range of each group and make the overlap obvious.</span></label><label><input type="radio" autocomplete="off" name="radio_GTDJPUXREF" value=""> <span>Bar chart, because the height of each bar shows the average mass of each group of otters.</span></label><label><input type="radio" autocomplete="off" name="radio_GTDJPUXREF" value=""> <span>Scatterplot, because each otter is plotted against the order in which it was measured.</span></label><label><input type="radio" autocomplete="off" name="radio_GTDJPUXREF" value="answer"> <span>Density, because both curves share one axis and the region where they overlap is easy to see.</span></label>
 </div>
 </section>
 <section id="what-a-plot-can-hide" class="level3" data-number="7.5.3">
@@ -1693,8 +1700,8 @@ Tip
 </div>
 </div>
 <p><strong>This histogram is not a clean bell shape. What is the most likely explanation?</strong></p>
-<div id="radio_ZASAQWPTJL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value="answer"> <span>Two groups with different average masses have been mixed together, so the histogram shows both groups at once.</span></label><label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value=""> <span>The otters were measured badly, so the values are scattered randomly and no real shape can be found.</span></label><label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value=""> <span>The binwidth is too small, so any dataset would look uneven and nothing can be said about it.</span></label><label><input type="radio" autocomplete="off" name="radio_ZASAQWPTJL" value=""> <span>Body mass is always bimodal in wild animals, so this shape is expected for any species.</span></label>
+<div id="radio_HWTMZHGWMU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HWTMZHGWMU" value="answer"> <span>Two groups with different average masses have been mixed together, so the histogram shows both groups at once.</span></label><label><input type="radio" autocomplete="off" name="radio_HWTMZHGWMU" value=""> <span>The otters were measured badly, so the values are scattered randomly and no real shape can be found.</span></label><label><input type="radio" autocomplete="off" name="radio_HWTMZHGWMU" value=""> <span>The binwidth is too small, so any dataset would look uneven and nothing can be said about it.</span></label><label><input type="radio" autocomplete="off" name="radio_HWTMZHGWMU" value=""> <span>Body mass is always bimodal in wild animals, so this shape is expected for any species.</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1749,8 +1756,8 @@ Note
 </div>
 <p>The white diamond is the <strong>mean</strong> and the thick line is the <strong>median</strong>.</p>
 <p><strong>In a right skewed variable such as <code>tick_count</code>, where do you expect the mean to sit compared with the median?</strong></p>
-<div id="radio_AKEEZYUUNC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value=""> <span>Below the median, because a large number of zero counts pull the mean towards the bottom.</span></label><label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value=""> <span>On the median, because the mean and median are always equal for count data of this type.</span></label><label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value="answer"> <span>Above the median, because a small number of very high counts pull the mean upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_AKEEZYUUNC" value=""> <span>Outside the box, because the mean is always further from the centre than the median is.</span></label>
+<div id="radio_PCZRUVZKBL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PCZRUVZKBL" value=""> <span>Below the median, because a large number of zero counts pull the mean towards the bottom.</span></label><label><input type="radio" autocomplete="off" name="radio_PCZRUVZKBL" value=""> <span>On the median, because the mean and median are always equal for count data of this type.</span></label><label><input type="radio" autocomplete="off" name="radio_PCZRUVZKBL" value="answer"> <span>Above the median, because a small number of very high counts pull the mean upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_PCZRUVZKBL" value=""> <span>Outside the box, because the mean is always further from the centre than the median is.</span></label>
 </div>
 </section>
 <section id="choosing-between-them" class="level3" data-number="7.5.5">
@@ -2222,7 +2229,8 @@ window.onload = function() {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -2231,8 +2239,69 @@ window.onload = function() {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -2246,6 +2315,7 @@ window.onload = function() {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -2408,44 +2478,54 @@ window.onload = function() {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -2544,15 +2624,18 @@ window.onload = function() {
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="./06-prob-para.html" class="pagination-link" aria-label="Workshop 6 - Issues with Probability and Parametric Analysis">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Workshop 6 - Issues with Probability and Parametric Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./function-glossary.html" class="pagination-link" aria-label="R Function Glossary">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-mv.html" class="pagination-link" aria-label="Workshop 8 - Multivariate Linear Models">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop 8 - Multivariate Linear Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

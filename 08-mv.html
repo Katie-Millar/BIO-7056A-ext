@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-11">
+
+<title>8&nbsp; Workshop 8 - Multivariate Linear Models – Statistics for Biologists - Extension Coursebook</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./function-glossary.html" rel="next">
+<link href="./07-plots.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ffb2aa27e75d9f92b328ce451a986f2a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-mv.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop 8 - Multivariate Linear Models</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics for Biologists - Extension Coursebook</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducing this Workbook</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-ext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Workshop 2 - Exploratory Data Analysis - Extension</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-ext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop 3 - Sampling Distributions and Testing for Differences - Extension</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop 4 - Introduction to Design and Analysis of Experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-testing-and-measuring-relationships.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Workshop 5 - Testing and Measuring Relationships Extension</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-prob-para.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Workshop 6 - Issues with Probability and Parametric Analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workshop 7 - Data Visualisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-mv.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop 8 - Multivariate Linear Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./function-glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendix - Knowing your R &amp; Statistics</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link active" data-scroll-target="#multiple-linear-regression"><span class="header-section-number">8.1</span> Multiple Linear Regression</a>
+  <ul class="collapse">
+  <li><a href="#packages-and-data" id="toc-packages-and-data" class="nav-link" data-scroll-target="#packages-and-data"><span class="header-section-number">8.1.1</span> Packages and data</a></li>
+  <li><a href="#a-quick-recap" id="toc-a-quick-recap" class="nav-link" data-scroll-target="#a-quick-recap"><span class="header-section-number">8.1.2</span> A quick recap</a></li>
+  </ul></li>
+  <li><a href="#case-study-what-drives-spraint-counts" id="toc-case-study-what-drives-spraint-counts" class="nav-link" data-scroll-target="#case-study-what-drives-spraint-counts"><span class="header-section-number">8.2</span> Case Study: What Drives Spraint Counts?</a>
+  <ul class="collapse">
+  <li><a href="#step-1-check-the-data" id="toc-step-1-check-the-data" class="nav-link" data-scroll-target="#step-1-check-the-data"><span class="header-section-number">8.2.1</span> Step 1: Check the data</a></li>
+  <li><a href="#step-2-visualise-the-relationships" id="toc-step-2-visualise-the-relationships" class="nav-link" data-scroll-target="#step-2-visualise-the-relationships"><span class="header-section-number">8.2.2</span> Step 2: Visualise the relationships</a></li>
+  <li><a href="#step-3-start-with-the-simple-model" id="toc-step-3-start-with-the-simple-model" class="nav-link" data-scroll-target="#step-3-start-with-the-simple-model"><span class="header-section-number">8.2.3</span> Step 3: Start with the simple model</a></li>
+  <li><a href="#step-4-add-the-covariates" id="toc-step-4-add-the-covariates" class="nav-link" data-scroll-target="#step-4-add-the-covariates"><span class="header-section-number">8.2.4</span> Step 4: Add the covariates</a></li>
+  <li><a href="#step-5-read-the-coefficients" id="toc-step-5-read-the-coefficients" class="nav-link" data-scroll-target="#step-5-read-the-coefficients"><span class="header-section-number">8.2.5</span> Step 5: Read the coefficients</a></li>
+  <li><a href="#step-6-compare-the-models" id="toc-step-6-compare-the-models" class="nav-link" data-scroll-target="#step-6-compare-the-models"><span class="header-section-number">8.2.6</span> Step 6: Compare the models</a></li>
+  <li><a href="#step-7-should-we-add-more-predictors" id="toc-step-7-should-we-add-more-predictors" class="nav-link" data-scroll-target="#step-7-should-we-add-more-predictors"><span class="header-section-number">8.2.7</span> Step 7: Should we add more predictors?</a></li>
+  <li><a href="#step-8-check-the-assumptions" id="toc-step-8-check-the-assumptions" class="nav-link" data-scroll-target="#step-8-check-the-assumptions"><span class="header-section-number">8.2.8</span> Step 8: Check the assumptions</a></li>
+  <li><a href="#step-9-why-is-river-a-fixed-effect" id="toc-step-9-why-is-river-a-fixed-effect" class="nav-link" data-scroll-target="#step-9-why-is-river-a-fixed-effect"><span class="header-section-number">8.2.9</span> Step 9: Why is river a fixed effect?</a></li>
+  <li><a href="#step-10-write-up-the-result" id="toc-step-10-write-up-the-result" class="nav-link" data-scroll-target="#step-10-write-up-the-result"><span class="header-section-number">8.2.10</span> Step 10: Write up the result</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop 8 - Multivariate Linear Models</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 11, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="multiple-linear-regression" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="multiple-linear-regression"><span class="header-section-number">8.1</span> Multiple Linear Regression</h2>
+<p>So far, our linear models have had <strong>one predictor</strong> (independent variable) and one <strong>dependent variable</strong>. In Workshop 5, for example, we used fish availability to predict spraint count. But most outcomes in biology have more than one influence. Spraint count might depend on fish availability, but also on body length, the season or the river.</p>
+<p><strong>Multiple linear regression</strong> extends the linear model to <strong>two or more predictors</strong> used together to explain a single dependent variable. The process is very similar to the regression you already know. We fit the model with <code>lm()</code>, read a coefficients table, and check R² and the F-statistic. The main new idea is how to read each slope.</p>
+<p>By the end of this section you will be able to:</p>
+<ul>
+<li>Write the equation for a model with more than one predictor</li>
+<li>fit a multiple regression in R and read the output</li>
+<li>explain what it means for a slope to be estimated <strong>holding the other predictors constant</strong></li>
+<li>explain why a predictor can add very little to a model</li>
+</ul>
+<section id="packages-and-data" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="packages-and-data"><span class="header-section-number">8.1.1</span> Packages and data</h3>
+<p>Today you will need the package <code>tidyverse</code>. It is a new workspace, so please install it from the <strong>console</strong> using <code>install.packages()</code> before loading it into your script with <code>library()</code>.</p>
+<p>We will use the otter data again, so please read in <code>otter_data_v2.csv</code> from the data folder and call it <code>otter_data</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Posit Cloud, packages need to be reinstalled each time you start a new session. If you use RStudio Desktop or Positron, you only install them once, but you still load them each session with <code>library()</code>.</p>
+</div>
+</div>
+</section>
+<section id="a-quick-recap" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="a-quick-recap"><span class="header-section-number">8.1.2</span> A quick recap</h3>
+<p><strong>In a simple linear regression of spraint count on fish index, what does the slope tell us?</strong></p>
+<div id="radio_ORCMPJVFRX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ORCMPJVFRX" value="answer"> <span>How much the predicted spraint count changes for each one unit increase in fish index.</span></label><label><input type="radio" autocomplete="off" name="radio_ORCMPJVFRX" value=""> <span>The predicted spraint count for an otter when the fish index is equal to zero.</span></label><label><input type="radio" autocomplete="off" name="radio_ORCMPJVFRX" value=""> <span>The proportion of the variation in spraint count that is explained by fish index.</span></label><label><input type="radio" autocomplete="off" name="radio_ORCMPJVFRX" value=""> <span>Whether the relationship between fish index and spraint count is statistically significant.</span></label>
+</div>
+<section id="step-1-the-equation-you-already-know" class="level4" data-number="8.1.2.1">
+<h4 data-number="8.1.2.1" class="anchored" data-anchor-id="step-1-the-equation-you-already-know"><span class="header-section-number">8.1.2.1</span> Step 1: The equation you already know</h4>
+<p>In Workshop 5 we described the relationship between fish index and spraints with a straight line:</p>
+<p><span class="math display">\text{spraints} = a + b \times \text{fish index}</span></p>
+<p>Fitting this to the otter data gives:</p>
+<p><span class="math display">\text{spraints} = 0.25 + 1.81 \times \text{fish index}</span></p>
+<ul>
+<li>The <strong>intercept</strong>, 0.25, is the predicted spraint count when fish index is 0.</li>
+<li>The <strong>slope</strong>, 1.81, is how much the predicted spraint count increases for each 1 unit increase in fish index.</li>
+</ul>
+<p>Read it as a recipe. Start at 0.25 spraints, then add 1.81 more for every 1 unit of fish index.</p>
+</section>
+<section id="step-2-add-a-second-predictor" class="level4" data-number="8.1.2.2">
+<h4 data-number="8.1.2.2" class="anchored" data-anchor-id="step-2-add-a-second-predictor"><span class="header-section-number">8.1.2.2</span> Step 2: Add a second predictor</h4>
+<p>Now suppose we also think body length might matter. We do not change the recipe, we just add one more ingredient: another slope multiplied by the new predictor.</p>
+<p><span class="math display">\text{spraints} = a + b_1 \times \text{fish index} + b_2 \times \text{body length}</span></p>
+<p>The only changes are that the slope <span class="math inline">b</span> is now called <span class="math inline">b_1</span>, and there is a new term for body length with its own slope, <span class="math inline">b_2</span>. The numbering just tells the slopes apart.</p>
+<p>Fitting this to the otter data gives:</p>
+<p><span class="math display">\text{spraints} = -1.24 + 1.84 \times \text{fish index} + 0.012 \times \text{body length}</span></p>
+</section>
+<section id="step-3-use-it-to-make-a-prediction" class="level4" data-number="8.1.2.3">
+<h4 data-number="8.1.2.3" class="anchored" data-anchor-id="step-3-use-it-to-make-a-prediction"><span class="header-section-number">8.1.2.3</span> Step 3: Use it to make a prediction</h4>
+<p>For an otter with a fish index of 7 and a body length of 105 cm:</p>
+<p><span class="math display">-1.24 + (1.84 \times 7) + (0.012 \times 105) \approx 12.9 \text{ spraints}</span></p>
+<p><strong>What does the 0.012 tell us?</strong></p>
+<div id="radio_NCEUOZMGZK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NCEUOZMGZK" value=""> <span>For every 0.012 cm of body length, the model predicts one extra spraint, whatever the fish index is.</span></label><label><input type="radio" autocomplete="off" name="radio_NCEUOZMGZK" value=""> <span>Body length explains 1.2% of the variation in spraint count, with fish index held at its average value.</span></label><label><input type="radio" autocomplete="off" name="radio_NCEUOZMGZK" value="answer"> <span>For two otters with the same fish index, the longer one is predicted to have 0.012 more spraints for each extra cm of body length.</span></label><label><input type="radio" autocomplete="off" name="radio_NCEUOZMGZK" value=""> <span>For every extra spraint, an otter's body length is predicted to increase by 0.012 cm, with fish index fixed.</span></label>
+</div>
+</section>
+<section id="step-4-add-as-many-predictors-as-you-like" class="level4" data-number="8.1.2.4">
+<h4 data-number="8.1.2.4" class="anchored" data-anchor-id="step-4-add-as-many-predictors-as-you-like"><span class="header-section-number">8.1.2.4</span> Step 4: Add as many predictors as you like</h4>
+<p>The pattern never changes. Each extra predictor adds one more slope multiplied by that predictor. Written in general, with <span class="math inline">x_1</span>, <span class="math inline">x_2</span> and so on standing for the predictors, it looks like this:</p>
+<div class="webex-solution">
+<button>
+Click to show the general equation
+</button>
+<p><span class="math display">y = a + b_1x_1 + b_2x_2 + b_3x_3 + \dots</span></p>
+<p>Where <span class="math inline">y</span> is the dependent variable, <span class="math inline">a</span> is the intercept, and each <span class="math inline">b</span> is the slope for the predictor next to it. For our otter model, <span class="math inline">y</span> is spraints, <span class="math inline">x_1</span> is fish index and <span class="math inline">x_2</span> is body length, so it is the same equation as in Step 2.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Each slope is the effect of <strong>that predictor while holding the other predictors constant</strong>. In Step 2, <span class="math inline">b_1</span> is the effect of fish index among otters of the same body length.</p>
+</div>
+</div>
+</section>
+<section id="step-5-fit-the-model-in-r" class="level4" data-number="8.1.2.5">
+<h4 data-number="8.1.2.5" class="anchored" data-anchor-id="step-5-fit-the-model-in-r"><span class="header-section-number">8.1.2.5</span> Step 5: Fit the model in R</h4>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember, you can use functions such as <code>col_names</code> to see the names of the variables in your data frame.</p>
+</div>
+</div>
+<p>To add a second predictor, join it to the first with <code>+</code> on the right of the <code>~</code>. Complete the code below.</p>
+<p>The dependent variable is: <input class="webex-solveme nospaces" size="8" data-answer="[&quot;spraints&quot;]"></p>
+<p>The two predictors are: <input class="webex-solveme nospaces" size="10" data-answer="[&quot;fish_index&quot;,&quot;length_cm&quot;]"> and <input class="webex-solveme nospaces" size="10" data-answer="[&quot;length_cm&quot;,&quot;fish_index&quot;]"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lm_multiple <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> ___ <span class="sc">+</span> ___, <span class="at">data =</span> otter_data)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_multiple)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="webex-solution">
+<button>
+Click to show the solution
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lm_multiple <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index <span class="sc">+</span> length_cm, <span class="at">data =</span> otter_data)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_multiple)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = spraints ~ fish_index + length_cm, data = otter_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.5841 -1.1611 -0.2729  1.1137  3.8368 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -1.24261    2.58360  -0.481    0.632    
+fish_index   1.83979    0.16586  11.093 7.34e-16 ***
+length_cm    0.01240    0.01945   0.638    0.526    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.825 on 57 degrees of freedom
+Multiple R-squared:  0.692, Adjusted R-squared:  0.6812 
+F-statistic: 64.04 on 2 and 57 DF,  p-value: 2.645e-15</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-6-read-the-output" class="level4" data-number="8.1.2.6">
+<h4 data-number="8.1.2.6" class="anchored" data-anchor-id="step-6-read-the-output"><span class="header-section-number">8.1.2.6</span> Step 6: Read the output</h4>
+<p>The output looks like the simple regression output, with one row for each predictor in the coefficients table.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part of the output</th>
+<th>What it tells us here</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>(Intercept)</code></td>
+<td>The predicted spraint count when both predictors are 0, the starting point of the equation</td>
+</tr>
+<tr class="even">
+<td><code>fish_index</code></td>
+<td>1.84 more spraints per unit of fish index, with body length held constant (p &lt; 0.001)</td>
+</tr>
+<tr class="odd">
+<td><code>length_cm</code></td>
+<td>0.012 more spraints per cm of body length, with fish index held constant (p = 0.526)</td>
+</tr>
+<tr class="even">
+<td><code>Multiple R-squared</code></td>
+<td>The proportion of variation explained by <strong>both predictors together</strong> (0.692)</td>
+</tr>
+<tr class="odd">
+<td><code>F-statistic</code></td>
+<td>Tests whether the predictors <strong>together</strong> explain a significant amount of variation (p &lt; 0.001)</td>
+</tr>
+</tbody>
+</table>
+<p>The output looks like the simple regression output, with one row for each predictor in the coefficients table.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part of the output</th>
+<th>What it tells us here</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>(Intercept)</code></td>
+<td>The predicted spraint count when both predictors are 0, the starting point of the equation</td>
+</tr>
+<tr class="even">
+<td><code>fish_index</code></td>
+<td>1.84 more spraints per unit of fish index, with body length held constant (p &lt; 0.001)</td>
+</tr>
+<tr class="odd">
+<td><code>length_cm</code></td>
+<td>0.012 more spraints per cm of body length, with fish index held constant (p = 0.526)</td>
+</tr>
+<tr class="even">
+<td><code>Multiple R-squared</code></td>
+<td>The proportion of variation explained by <strong>both predictors together</strong> (0.692)</td>
+</tr>
+<tr class="odd">
+<td><code>F-statistic</code></td>
+<td>Tests whether the predictors <strong>together</strong> explain a significant amount of variation (p &lt; 0.001)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What do the p-values in the coefficients table tell us?</strong></p>
+<div id="radio_UOPWQNXEQB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UOPWQNXEQB" value=""> <span>Body length is a significant predictor (p = 0.526), but fish index is not (p &lt; 0.001), once body length is in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_UOPWQNXEQB" value="answer"> <span>Fish index is a significant predictor (p &lt; 0.001), but body length is not (p = 0.526), once fish index is in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_UOPWQNXEQB" value=""> <span>Both predictors are significant, because the F-statistic for the whole model has a p-value below 0.05.</span></label><label><input type="radio" autocomplete="off" name="radio_UOPWQNXEQB" value=""> <span>Neither predictor is significant, because the intercept has a p-value above 0.05 in the coefficients table.</span></label>
+</div>
+</section>
+<section id="step-7-why-did-body-length-add-so-little" class="level4" data-number="8.1.2.7">
+<h4 data-number="8.1.2.7" class="anchored" data-anchor-id="step-7-why-did-body-length-add-so-little"><span class="header-section-number">8.1.2.7</span> Step 7: Why did body length add so little?</h4>
+<p>Compare the model with fish index on its own to the model with both predictors:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Slope for fish index</th>
+<th>R²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fish index only</td>
+<td>1.81</td>
+<td>0.690</td>
+</tr>
+<tr class="even">
+<td>Fish index and body length</td>
+<td>1.84</td>
+<td>0.692</td>
+</tr>
+</tbody>
+</table>
+<p>The fish index slope hardly changes, and R² barely rises. This is because of how the predictors share out the variance in spraint count:</p>
+<ul>
+<li>Each predictor may explain a <strong>unique</strong> part of the variance, which no other predictor explains.</li>
+<li>Predictors may also <strong>share</strong> some of the variance they explain, because they are related to each other and carry some of the same information.</li>
+</ul>
+<p>Here, body length explains almost nothing that fish index does not already explain, so its unique part is tiny. It is also only weakly related to fish index, so there is very little shared variance either.</p>
+<p><strong>Adding body length changed R² from 0.690 to 0.692. What does this tell us?</strong></p>
+<div id="radio_XXNEXACQZX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XXNEXACQZX" value=""> <span>Body length explains a large share of the variation, but this is hidden because it is shared with fish index.</span></label><label><input type="radio" autocomplete="off" name="radio_XXNEXACQZX" value=""> <span>The model has become worse, because any rise in R² of less than 0.05 means the predictor should be removed.</span></label><label><input type="radio" autocomplete="off" name="radio_XXNEXACQZX" value=""> <span>Body length must be a poor predictor in general, so it should never be used to model spraint counts.</span></label><label><input type="radio" autocomplete="off" name="radio_XXNEXACQZX" value="answer"> <span>Body length explains very little unique variation in spraint count that fish index does not already explain.</span></label>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>When predictors share a lot of variance</strong></p>
+<p>If two predictors are strongly related to each other, much of what each explains is the same information. Their slopes can then change a lot when both are in the model, and become unstable. This is called <strong>multicollinearity</strong>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Adjusted R²</strong></p>
+<p>R² can only go up when you add a predictor, even a useless one. <strong>Adjusted R²</strong> corrects for this by penalising each extra predictor. Here it goes <strong>down</strong> slightly, from 0.684 to 0.681, which also suggests body length is not improving the model. Use adjusted R² when comparing models with different numbers of predictors.</p>
+</div>
+</div>
+</section>
+<section id="some-terms-you-will-meet" class="level4" data-number="8.1.2.8">
+<h4 data-number="8.1.2.8" class="anchored" data-anchor-id="some-terms-you-will-meet"><span class="header-section-number">8.1.2.8</span> Some terms you will meet</h4>
+<p>Several of these terms are used for the same thing, so here is what each one means.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Dependent variable</strong></td>
+<td>The outcome we are trying to explain (also called the response variable). In our model, spraint count.</td>
+</tr>
+<tr class="even">
+<td><strong>Predictor</strong></td>
+<td>A variable used to explain the dependent variable (also called an independent or explanatory variable). Fish index and body length.</td>
+</tr>
+<tr class="odd">
+<td><strong>Covariate</strong></td>
+<td>A predictor included to <strong>account for its effect</strong>, usually while we focus on a different predictor.</td>
+</tr>
+<tr class="even">
+<td><strong>Fixed effect</strong></td>
+<td>A predictor whose effect we estimate directly, with its own slope or group difference.</td>
+</tr>
+<tr class="odd">
+<td><strong>Random effect</strong></td>
+<td>A grouping variable whose levels are a <strong>sample</strong> from a larger set, included to account for non independence, not to estimate each level.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Covariates:</strong><br>
+Suppose our question is whether fish availability predicts spraint count, but we know larger otters might leave more spraints. We add body length to the model so that the fish index slope is estimated <strong>among otters of the same size</strong>. Body length is then a covariate. The model is the same as before, and only the role of the variable has changed.</p>
+<p><strong>Fixed effects:</strong><br>
+Every predictor in the models we have fitted so far is a <strong>fixed effect</strong>. Each one gets its own estimate, such as a slope of 1.84 for fish index, and we interpret that estimate directly. Fixed effects can be continuous predictors, like fish index, or categories, like sex or site, where the estimate is the difference between groups.</p>
+<p><strong>Random effects:</strong><br>
+Sometimes the data contain groups that are not of interest in themselves. If every otter in a survey were measured several times, measurements from the same otter would be similar to each other, so they would <strong>not</strong> be independent. Rather than estimating a separate effect for each otter, we treat <code>otter_id</code> as a <strong>random effect</strong>. This accounts for the clustering by estimating how much otters vary overall. Random effects need a different function from <code>lm()</code>, and models that contain both fixed and random effects are called <strong>mixed effects models</strong>. We do not fit them here, but you will meet them in later work.</p>
+<p><strong>In our model, we mainly care whether fish index predicts spraint count, and we add body length only to account for otter size. What is body length?</strong></p>
+<div id="radio_PSGKELCENJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PSGKELCENJ" value=""> <span>A random effect, because it varies from one otter to the next in the survey.</span></label><label><input type="radio" autocomplete="off" name="radio_PSGKELCENJ" value=""> <span>A dependent variable, because it is measured on every otter in the data set.</span></label><label><input type="radio" autocomplete="off" name="radio_PSGKELCENJ" value="answer"> <span>A covariate, because it is included to account for its effect while we focus on fish index.</span></label><label><input type="radio" autocomplete="off" name="radio_PSGKELCENJ" value=""> <span>An interaction, because it is combined with fish index in the model equation.</span></label>
+</div>
+<p><strong>Which of these situations would call for a random effect?</strong></p>
+<div id="radio_KTKZLDEAGY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KTKZLDEAGY" value="answer"> <span>Every otter was surveyed several times, so measurements from the same otter are not independent.</span></label><label><input type="radio" autocomplete="off" name="radio_KTKZLDEAGY" value=""> <span>A researcher chose two specific habitats because the difference between them is of direct interest.</span></label><label><input type="radio" autocomplete="off" name="radio_KTKZLDEAGY" value=""> <span>A continuous predictor such as fish index is added to explain differences in spraint counts.</span></label><label><input type="radio" autocomplete="off" name="radio_KTKZLDEAGY" value=""> <span>A one off survey measured every otter once and compared the body mass of males and females.</span></label>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>lm()</code> function can only fit <strong>fixed effects</strong>. This is why the models in this workshop contain no random effects, and why the otter data are not suitable for one: each otter appears in the data only once.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="case-study-what-drives-spraint-counts" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="case-study-what-drives-spraint-counts"><span class="header-section-number">8.2</span> Case Study: What Drives Spraint Counts?</h2>
+<p>In Workshop 5 we found that fish availability is a strong predictor of spraint count. But the otters in our data were surveyed across <strong>three rivers</strong> and in <strong>two seasons</strong>, and these might also influence spraint counts. They could even be tangled up with fish availability itself, if some rivers simply have more fish.</p>
+<p><strong>Our question:</strong> does fish availability still predict spraint count after accounting for river and season?</p>
+<p>In this model, spraint count is the dependent variable, fish index is the predictor we care about, and river and season are <strong>covariates</strong> included to account for their effects. All three are <strong>fixed effects</strong>.</p>
+<section id="step-1-check-the-data" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="step-1-check-the-data"><span class="header-section-number">8.2.1</span> Step 1: Check the data</h3>
+<p>Can you remember how to check the variable type of our variables? You can use the <a href="./function-glossary.html">Function Glossary</a> to remind yourself of this.</p>
+<p>You should be able to see if you ran one of the checking functions that <code>site</code>, <code>season</code> and <code>sex</code> are currently <strong>characters</strong> (<code>&lt;chr&gt;</code>), which means R treats them as plain text. As we did in Workshop 4, we convert them to <strong>factors</strong> before modelling. A factor is a categorical variable with a fixed set of <strong>levels</strong>, and the order of those levels decides which one the model uses as the reference.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task</strong>: Use <code>mutate()</code> to convert <code>site</code>, <code>season</code> and <code>sex</code> to factors in <code>otter_data</code>, then use <code>count()</code> to check how many otters there are in each site and season. Label this as a new object, and call it otter_data_v2</p>
+</div>
+</div>
+<p>As this one is a bit new; I’ve hidden the code below - but do attempt to do it first!</p>
+<div class="webex-solution">
+<button>
+Reveal the code
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>otter_data_v2 <span class="ot">&lt;-</span> otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">site   =</span> <span class="fu">as.factor</span>(site),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">season =</span> <span class="fu">as.factor</span>(season),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex    =</span> <span class="fu">as.factor</span>(sex)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>otter_data_v2 <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(site, season)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>The data should now like this, notice how it now says “fct” and not “chr”?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>otter_data_v2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 60 × 11
+   otter_id site    season sex   age_class length_cm mass_kg spraints fish_index
+   &lt;chr&gt;    &lt;fct&gt;   &lt;fct&gt;  &lt;fct&gt; &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+ 1 OT001    River … summer male  sub_adult     120.    11.3        13        6.3
+ 2 OT002    River … summer male  sub_adult     128.    10.4        14        6.1
+ 3 OT003    River … summer male  juvenile      117.     7.2        11        5.1
+ 4 OT004    River … summer fema… juvenile       88.6    5.23       15        7.7
+ 5 OT005    River … summer male  adult         111.     9.63       13        5.6
+ 6 OT006    River … summer male  sub_adult     110.     9.15       15        6  
+ 7 OT007    River … summer male  adult         122.     8.03       12        6.7
+ 8 OT008    River … summer male  juvenile      121.     9.71       13        6.4
+ 9 OT009    River … summer male  adult         111.    10.8        12        6.8
+10 OT010    River … summer male  sub_adult     110.    10.2        16        7.3
+# ℹ 50 more rows
+# ℹ 2 more variables: tick_count &lt;dbl&gt;, log_tick_count &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2-visualise-the-relationships" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="step-2-visualise-the-relationships"><span class="header-section-number">8.2.2</span> Step 2: Visualise the relationships</h3>
+<p><strong>Remembering what we learnt last week, what plot do you think we could use for this?</strong></p>
+<div id="radio_DXEJPYZZNP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DXEJPYZZNP" value=""> <span>A bar chart of river, so that the height of each bar shows how many otters were surveyed at each river.</span></label><label><input type="radio" autocomplete="off" name="radio_DXEJPYZZNP" value="answer"> <span>A boxplot, with river on the x axis and fish index on the y axis, so the rivers can be compared side by side.</span></label><label><input type="radio" autocomplete="off" name="radio_DXEJPYZZNP" value=""> <span>A scatterplot of river against fish index, so that each otter is drawn as a single point on the plot.</span></label><label><input type="radio" autocomplete="off" name="radio_DXEJPYZZNP" value=""> <span>A histogram of fish index for all otters together, so that the overall shape of the distribution is shown.</span></label>
+</div>
+<div class="webex-solution">
+<button>
+Click to show explanation
+</button>
+<p>Fish index is <strong>continuous</strong> and river is <strong>categorical</strong>, so a boxplot compares the centre and spread of fish index across the rivers. This is the same reasoning as Challenge 3 in the visualisation workshop.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task</strong>: Code the relevant plot to see if fish index differs between rivers. Remember, the <a href="./function-glossary.html">Function Glossary</a> is there to help you!</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-mv_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What does the plot suggest about fish index and river?</strong></p>
+<div id="radio_EPCTEIEKIU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EPCTEIEKIU" value=""> <span>Fish index is highest at the River Yare and lowest at the River Wensum, so fish index and river are related.</span></label><label><input type="radio" autocomplete="off" name="radio_EPCTEIEKIU" value=""> <span>Fish index is about the same at every river, so fish index and river are not related to each other.</span></label><label><input type="radio" autocomplete="off" name="radio_EPCTEIEKIU" value=""> <span>Fish index varies only within each river, so the rivers themselves cannot differ in fish availability.</span></label><label><input type="radio" autocomplete="off" name="radio_EPCTEIEKIU" value="answer"> <span>Fish index is highest at the River Wensum and lowest at the River Yare, so fish index and river are related.</span></label>
+</div>
+<p><strong>Why does this matter for our question?</strong></p>
+<div id="radio_ZEFTSNJVYW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZEFTSNJVYW" value=""> <span>Rivers with more fish must have more otters, so the number of otters should be added to the model.</span></label><label><input type="radio" autocomplete="off" name="radio_ZEFTSNJVYW" value=""> <span>The rivers differ in fish index, so the model should be fitted separately for each river on its own.</span></label><label><input type="radio" autocomplete="off" name="radio_ZEFTSNJVYW" value="answer"> <span>Part of the link between fish index and spraints could really be a river effect, so river should be accounted for.</span></label><label><input type="radio" autocomplete="off" name="radio_ZEFTSNJVYW" value=""> <span>Fish index can no longer be a predictor, because predictors are not allowed to differ between groups.</span></label>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task</strong>: Code the relevant plot spraints against fish index, coloured by river, with a separate points and line for each river. Use the <a href="./function-glossary.html">Function Glossary</a> to help you.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-mv_files/figure-html/mlr-scatter-1.png" class="img-fluid figure-img" width="624"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Within each river the lines slope upwards, but each river also sits at a different height. Rivers with more fish also tend to have more spraints.</p>
+</section>
+<section id="step-3-start-with-the-simple-model" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="step-3-start-with-the-simple-model"><span class="header-section-number">8.2.3</span> Step 3: Start with the simple model</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task</strong>: Fit a simple regression of <code>spraints</code> on <code>fish_index</code> and save it as <code>lm_simple</code>. Then look at the <code>summary()</code>.</p>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click to show the results of the model
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_simple)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = spraints ~ fish_index, data = otter_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.5767 -1.2375 -0.2637  1.3212  3.8737 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.2483     1.0938   0.227    0.821    
+fish_index    1.8130     0.1596  11.358 2.25e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.815 on 58 degrees of freedom
+Multiple R-squared:  0.6898,    Adjusted R-squared:  0.6845 
+F-statistic:   129 on 1 and 58 DF,  p-value: 2.249e-16</code></pre>
+</div>
+</div>
+</div>
+<p>This is the model from Workshop 5. The slope is 1.81 and R² is 0.690.</p>
+</section>
+<section id="step-4-add-the-covariates" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="step-4-add-the-covariates"><span class="header-section-number">8.2.4</span> Step 4: Add the covariates</h3>
+<p>Now we add river and season. We join them to fish index with <code>+</code>, exactly as in the two predictor model. Remember to use the actual dataset variable names, and use one of the checking functions to see this.</p>
+<p>The dependent variable is: <input class="webex-solveme nospaces" size="8" data-answer="[&quot;spraints&quot;]"></p>
+<p>The three predictors are: <input class="webex-solveme nospaces" size="10" data-answer="[&quot;fish_index&quot;,&quot;season&quot;,&quot;site&quot;]">, <input class="webex-solveme nospaces" size="10" data-answer="[&quot;season&quot;,&quot;site&quot;,&quot;fish_index&quot;]"> and <input class="webex-solveme nospaces" size="10" data-answer="[&quot;site&quot;,&quot;fish_index&quot;,&quot;season&quot;]"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lm_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> ___ <span class="sc">+</span> ___ <span class="sc">+</span> ___, <span class="at">data =</span> otter_data)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="webex-solution">
+<button>
+Click to show the results of the model
+</button>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = spraints ~ fish_index + season + site, data = otter_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7059 -0.9611 -0.2209  0.9264  3.1679 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        6.5723     1.9476   3.374 0.001361 ** 
+fish_index         0.8766     0.2982   2.940 0.004793 ** 
+seasonwinter       0.7504     0.4215   1.780 0.080531 .  
+siteRiver Wensum   1.2782     0.7501   1.704 0.094015 .  
+siteRiver Yare    -2.5735     0.6365  -4.043 0.000166 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.607 on 55 degrees of freedom
+Multiple R-squared:  0.7694,    Adjusted R-squared:  0.7526 
+F-statistic: 45.87 on 4 and 55 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-read-the-coefficients" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="step-5-read-the-coefficients"><span class="header-section-number">8.2.5</span> Step 5: Read the coefficients</h3>
+<p>Fish index is numeric, so it has one row and one slope. <code>season</code> and <code>site</code> are categories, so R compares each level with a <strong>reference level</strong>. By default the reference is the first level in alphabetical order, which is <strong>summer</strong> for season and <strong>River Bure</strong> for site.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Row</th>
+<th>What it tells us</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>(Intercept)</code></td>
+<td>The predicted spraint count for a <strong>summer</strong> otter at the <strong>River Bure</strong> with fish index 0 (6.57)</td>
+</tr>
+<tr class="even">
+<td><code>fish_index</code></td>
+<td>0.88 more spraints per unit of fish index, with season and river held constant (p = 0.005)</td>
+</tr>
+<tr class="odd">
+<td><code>seasonwinter</code></td>
+<td>Winter otters are predicted to leave 0.75 more spraints than summer otters, at the same fish index and river (p = 0.081)</td>
+</tr>
+<tr class="even">
+<td><code>siteRiver Wensum</code></td>
+<td>1.28 more spraints than at the River Bure, at the same fish index and season (p = 0.094)</td>
+</tr>
+<tr class="odd">
+<td><code>siteRiver Yare</code></td>
+<td>2.57 fewer spraints than at the River Bure, at the same fish index and season (p &lt; 0.001)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why is there no row for <code>River Bure</code> in the output?</strong></p>
+<div id="radio_ANWKUOPPXM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ANWKUOPPXM" value=""> <span>River Bure was removed from the model, because it had too few otters to produce a reliable estimate.</span></label><label><input type="radio" autocomplete="off" name="radio_ANWKUOPPXM" value="answer"> <span>River Bure is the reference level, so the other rivers are compared with it and its effect is in the intercept.</span></label><label><input type="radio" autocomplete="off" name="radio_ANWKUOPPXM" value=""> <span>River Bure has no effect on spraint counts, so R left it out of the model automatically.</span></label><label><input type="radio" autocomplete="off" name="radio_ANWKUOPPXM" value=""> <span>River Bure is the dependent variable, so it cannot also appear as a predictor in the coefficients table.</span></label>
+</div>
+<p><strong>What does the <code>siteRiver Yare</code> coefficient of -2.57 tell us?</strong></p>
+<div id="radio_QNSBOQVTPM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QNSBOQVTPM" value="answer"> <span>At the same fish index and season, otters at the River Yare are predicted to leave about 2.57 fewer spraints than at the River Bure.</span></label><label><input type="radio" autocomplete="off" name="radio_QNSBOQVTPM" value=""> <span>At the same fish index and season, otters at the River Yare are predicted to leave about 2.57 fewer spraints than at the River Wensum.</span></label><label><input type="radio" autocomplete="off" name="radio_QNSBOQVTPM" value=""> <span>Otters at the River Yare are predicted to leave 2.57 spraints on average, whatever the fish index and season happen to be.</span></label><label><input type="radio" autocomplete="off" name="radio_QNSBOQVTPM" value=""> <span>For each additional unit of river, the predicted spraint count falls by 2.57, with fish index and season held constant.</span></label>
+</div>
+</section>
+<section id="step-6-compare-the-models" class="level3" data-number="8.2.6">
+<h3 data-number="8.2.6" class="anchored" data-anchor-id="step-6-compare-the-models"><span class="header-section-number">8.2.6</span> Step 6: Compare the models</h3>
+<p>The table below compares the fish index slope across models as covariates are added. Notice what happens to the slope.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Fish index slope</th>
+<th>p</th>
+<th>R²</th>
+<th>Adjusted R²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fish index only</td>
+<td>1.81</td>
+<td>&lt; 0.001</td>
+<td>0.690</td>
+<td>0.684</td>
+</tr>
+<tr class="even">
+<td>Plus season</td>
+<td>1.80</td>
+<td>&lt; 0.001</td>
+<td>0.696</td>
+<td>0.686</td>
+</tr>
+<tr class="odd">
+<td>Plus river</td>
+<td>0.97</td>
+<td>0.002</td>
+<td>0.756</td>
+<td>0.743</td>
+</tr>
+<tr class="even">
+<td>Plus season and river</td>
+<td>0.88</td>
+<td>0.005</td>
+<td>0.769</td>
+<td>0.753</td>
+</tr>
+</tbody>
+</table>
+<p>Adding season changes almost nothing. Adding river nearly halves the slope and raises R² noticeably.</p>
+<p><strong>The fish index slope fell from 1.81 to 0.88 after adding river and season. What is the best explanation?</strong></p>
+<div id="radio_LTHXUMAIXT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LTHXUMAIXT" value=""> <span>Adding predictors always makes every slope smaller, because the model has more terms to share the variation between.</span></label><label><input type="radio" autocomplete="off" name="radio_LTHXUMAIXT" value=""> <span>Fish index has become a worse predictor, so it is no longer significant now that river and season are in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_LTHXUMAIXT" value=""> <span>The model has been fitted incorrectly, because a slope should not change when other predictors are added to the model.</span></label><label><input type="radio" autocomplete="off" name="radio_LTHXUMAIXT" value="answer"> <span>Fish index and river share variance in spraint count, so part of the original slope was really a difference between rivers.</span></label>
+</div>
+<div class="webex-solution">
+<button>
+Click to show the explanation
+</button>
+<p>Rivers differ in both fish index and spraint count. The River Wensum has the highest fish index (about 8.4) and the River Yare has the lowest (about 5.2), and spraint counts follow the same pattern (you can check the plots you’ve generated to see this). In the simple model, the fish index slope was doing two jobs at once. It picked up the effect of fish index, and it also picked up the differences between rivers, because fish index acts as a stand in for river.</p>
+<p>Once river is in the model, the comparison changes. The slope is now estimated <strong>among otters at the same river</strong>, so the between river differences no longer inflate it. This is what “holding the other predictors constant” means in practice. You can see the same thing in the scatterplot coloured by river, where the lines within each river are flatter than the overall trend.</p>
+<p><strong>Why the other options are wrong:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Why it is wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adding predictors always makes every slope smaller</td>
+<td>This is false. Adding season changed the slope from 1.81 to only 1.80, because season is barely related to fish index. A slope only changes much when the new predictor shares variance with it.</td>
+</tr>
+<tr class="even">
+<td>Fish index has become a worse predictor and is no longer significant</td>
+<td>This is false. The slope is smaller, but fish index is still significant (p = 0.005). A smaller slope is not the same as a weaker effect.</td>
+</tr>
+<tr class="odd">
+<td>The model has been fitted incorrectly</td>
+<td>This is false. Slopes are expected to change when predictors are related. The slope in a multiple regression answers a different question from the slope in a simple one.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If two predictors were <strong>completely unrelated</strong>, adding one would not change the other’s slope at all. The size of the change is a rough guide to how much variance the predictors share.</p>
+</div>
+</div>
+</div>
+<p><strong>Is fish index still a useful predictor of spraint count?</strong></p>
+<div id="radio_UPGRCHHEMM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UPGRCHHEMM" value="answer"> <span>Yes, it remains a significant positive predictor (p = 0.005), although its effect is about half the size we first estimated.</span></label><label><input type="radio" autocomplete="off" name="radio_UPGRCHHEMM" value=""> <span>No, the slope fell by about half, so fish index no longer has any meaningful effect on spraint count.</span></label><label><input type="radio" autocomplete="off" name="radio_UPGRCHHEMM" value=""> <span>Yes, because its slope is still larger than the slopes for season and river, which are each below one.</span></label><label><input type="radio" autocomplete="off" name="radio_UPGRCHHEMM" value=""> <span>No, because the model with extra predictors always replaces the simple model's conclusion about fish index.</span></label>
+</div>
+</section>
+<section id="step-7-should-we-add-more-predictors" class="level3" data-number="8.2.7">
+<h3 data-number="8.2.7" class="anchored" data-anchor-id="step-7-should-we-add-more-predictors"><span class="header-section-number">8.2.7</span> Step 7: Should we add more predictors?</h3>
+<p>We could also add <code>sex</code>. Let us see whether it helps.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lm_sex <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index <span class="sc">+</span> season <span class="sc">+</span> site <span class="sc">+</span> sex, <span class="at">data =</span> otter_data)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sex)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Estimate Std. Error    t value     Pr(&gt;|t|)
+(Intercept)       6.0087778  2.1636540  2.7771436 0.0075237909
+fish_index        0.9247117  0.3099720  2.9832106 0.0042753302
+seasonwinter      0.8160615  0.4372054  1.8665404 0.0673995236
+siteRiver Wensum  1.2909894  0.7546952  1.7106102 0.0928930354
+siteRiver Yare   -2.4245687  0.6847236 -3.5409454 0.0008300707
+sexmale           0.2905889  0.4738752  0.6132182 0.5423064139</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sex)<span class="sc">$</span>r.squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7709773</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sex)<span class="sc">$</span>adj.r.squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7497714</code></pre>
+</div>
+</div>
+<p>Sex is not significant (p = 0.542). R² rises very slightly, from 0.769 to 0.771, but adjusted R² falls from 0.753 to 0.750.</p>
+<p><strong>What should we conclude about adding <code>sex</code> to the model?</strong></p>
+<div id="radio_KSIZORBYMB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KSIZORBYMB" value="answer"> <span>Sex adds almost nothing, and adjusted R² falls, so the simpler model without sex is preferred.</span></label><label><input type="radio" autocomplete="off" name="radio_KSIZORBYMB" value=""> <span>Sex should stay in the model, because R² went up and R² never decreases when a predictor is added.</span></label><label><input type="radio" autocomplete="off" name="radio_KSIZORBYMB" value=""> <span>Sex should be added, because every measured variable should be included to get the best possible model.</span></label><label><input type="radio" autocomplete="off" name="radio_KSIZORBYMB" value=""> <span>Sex should be removed, because its coefficient is positive and positive coefficients make the model worse.</span></label>
+</div>
+</section>
+<section id="step-8-check-the-assumptions" class="level3" data-number="8.2.8">
+<h3 data-number="8.2.8" class="anchored" data-anchor-id="step-8-check-the-assumptions"><span class="header-section-number">8.2.8</span> Step 8: Check the assumptions</h3>
+<p>The assumptions are the same as for simple regression. Our model has several predictors, so we check the residuals against the <strong>fitted values</strong> from the whole model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>resid_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fitted =</span> <span class="fu">fitted</span>(lm_full),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">resid  =</span> <span class="fu">resid</span>(lm_full)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resid_data, <span class="fu">aes</span>(<span class="at">x =</span> fitted, <span class="at">y =</span> resid)) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted values"</span>, <span class="at">y =</span> <span class="st">"Residuals"</span>) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-mv_files/figure-html/mlr-resid-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">resid</span>(lm_full))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  resid(lm_full)
+W = 0.97316, p-value = 0.2078</code></pre>
+</div>
+</div>
+<p>The residuals show no clear pattern, and the Shapiro-Wilk test on them is not significant (p = 0.208), so the assumptions are reasonably met.</p>
+</section>
+<section id="step-9-why-is-river-a-fixed-effect" class="level3" data-number="8.2.9">
+<h3 data-number="8.2.9" class="anchored" data-anchor-id="step-9-why-is-river-a-fixed-effect"><span class="header-section-number">8.2.9</span> Step 9: Why is river a fixed effect?</h3>
+<p>You might wonder whether river should be a <strong>random effect</strong>, since the otters are grouped within rivers. Here it is better as a fixed effect, for two reasons:</p>
+<ul>
+<li>There are only <strong>three</strong> rivers, which is too few to estimate how much rivers vary in general.</li>
+<li>These are the <strong>specific rivers we are interested in</strong>, so we want to estimate the difference between them directly.</li>
+</ul>
+<p><strong>Why do we treat river as a fixed effect and not a random effect in this model?</strong></p>
+<div id="radio_VPWGJCLUGR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VPWGJCLUGR" value="answer"> <span>There are only three rivers and they are the specific rivers of interest, so we estimate each river's effect directly.</span></label><label><input type="radio" autocomplete="off" name="radio_VPWGJCLUGR" value=""> <span>Random effects can only be used for numeric variables, and river is a categorical variable in the otter data.</span></label><label><input type="radio" autocomplete="off" name="radio_VPWGJCLUGR" value=""> <span>Rivers cannot be random effects, because the otters were all sampled in the same year and in the same two seasons.</span></label><label><input type="radio" autocomplete="off" name="radio_VPWGJCLUGR" value=""> <span>A random effect would need to be fitted with lm(), and the function lm() cannot be used for a categorical variable.</span></label>
+</div>
+</section>
+<section id="step-10-write-up-the-result" class="level3" data-number="8.2.10">
+<h3 data-number="8.2.10" class="anchored" data-anchor-id="step-10-write-up-the-result"><span class="header-section-number">8.2.10</span> Step 10: Write up the result</h3>
+<p>Here is how you might report the model:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>“A multiple regression including fish index, season and river explained 76.9% of the variation in spraint count (R² = 0.769, adjusted R² = 0.753; F(4, 55) = 45.9, p &lt; 0.001). After accounting for season and river, fish index remained a significant positive predictor of spraint count (b = 0.88, p = 0.005): each one unit increase in fish index was associated with 0.88 more spraints. Spraint counts were significantly lower at the River Yare than at the River Bure (b = -2.57, p &lt; 0.001). Season and the River Wensum did not differ significantly from their reference levels.”</em></p>
+</div>
+</div>
+<p><strong>In the write-up, why do we say “after accounting for season and river”?</strong></p>
+<div id="radio_CVYBZCHUYF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CVYBZCHUYF" value="answer"> <span>The fish index slope is estimated with season and river held constant, so it can differ from the slope in a simple model.</span></label><label><input type="radio" autocomplete="off" name="radio_CVYBZCHUYF" value=""> <span>The journal requires every covariate in the model to be named in the write-up, whether or not it matters to the result.</span></label><label><input type="radio" autocomplete="off" name="radio_CVYBZCHUYF" value=""> <span>Season and river are the dependent variables of the model, so they must be named when the results are reported.</span></label><label><input type="radio" autocomplete="off" name="radio_CVYBZCHUYF" value=""> <span>The phrase shows that fish index was the only significant predictor of spraint count in the final model.</span></label>
+</div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+var update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+
+  for (var i = 0; i < t.length; i++) {
+    var p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML =
+      correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+};
+
+
+/* webex-solution button toggling function */
+var b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains("open")) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+};
+
+
+/* check answers */
+var check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains("unchecked")) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+};
+
+
+/* function for checking solveme answers */
+var solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "");
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+
+  /* match numeric answers within a specified tolerance */
+  if (Number(this.dataset.tol) > 0) {
+
+    var tol = Number(this.dataset.tol);
+
+    var matches = real_answers.map(function(x) {
+      return Math.abs(x - my_answer) < tol;
+    });
+
+    if (matches.reduce(function(a, b) {
+      return a + b;
+    }, 0) > 0) {
+
+      cl.add("webex-correct");
+
+    } else {
+
+      cl.remove("webex-correct");
+    }
+  }
+
+
+  /* regex checking */
+  if (cl.contains("regex")) {
+
+    var answer_regex = RegExp(real_answers.join("|"));
+
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+};
+
+
+/* function for checking select answers */
+var select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList;
+
+  /* remove previous styles */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+
+  /* add appropriate style */
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+};
+
+
+/* function for checking radiogroups answers */
+var radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector(
+    "input[name=" + this.id + "]:checked"
+  );
+
+  /* make sure something is selected */
+  if (!checked_button) {
+    return;
+  }
+
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of previous styles */
+  for (var i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add appropriate style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+};
+
+
+/* initialise WebEx when page loads */
+window.onload = function() {
+  console.log("webex onload");
+
+
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+
+    if (
+      buttons[i].parentElement &&
+      buttons[i].parentElement.classList.contains("webex-solution")
+    ) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+
+  /* set up WebEx check sections */
+  var check_sections =
+    document.getElementsByClassName("webex-check");
+
+  console.log("check:", check_sections.length);
+
+  for (var i = 0; i < check_sections.length; i++) {
+
+    check_sections[i].classList.add("unchecked");
+
+    var btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+
+    check_sections[i].appendChild(btn);
+
+    var spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+
+    check_sections[i].appendChild(spn);
+  }
+
+
+  /* set up webex-solveme inputs */
+  var solveme =
+    document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete", "off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+
+    solveme[i].value = "";
+
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+
+    solveme[i].dataset.answer = real_answer;
+
+
+    /* attach checking functions */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+
+    /* add WebEx icon */
+    solveme[i].insertAdjacentHTML(
+      "afterend",
+      " <span class='webex-icon'></span>"
+    );
+  }
+
+
+  /* set up radiogroups */
+  var radiogroups =
+    document.getElementsByClassName("webex-radiogroup");
+
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+
+  /* set up selects */
+  var selects =
+    document.getElementsByClassName("webex-select");
+
+  for (var i = 0; i < selects.length; i++) {
+
+    selects[i].onchange = select_func;
+
+    selects[i].insertAdjacentHTML(
+      "afterend",
+      " <span class='webex-icon'></span>"
+    );
+  }
+
+
+  /* update total score */
+  update_total_correct();
+};
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./07-plots.html" class="pagination-link" aria-label="Workshop 7 - Data Visualisation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Workshop 7 - Data Visualisation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./function-glossary.html" class="pagination-link" aria-label="R Function Glossary">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Function Glossary</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Workshop 8 - Multivariate Linear Models"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: yeti</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-title: "Contents"</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">    css: [style.css, include/webex.css]</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: include/webex.js</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: katex</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE, echo=FALSE}</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(webexercises)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>otter_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/otter_data_v2.csv"</span>)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple Linear Regression</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>So far, our linear models have had **one predictor** (independent variable) and one **dependent variable**. In Workshop 5, for example, we used fish availability to predict spraint count. But most outcomes in biology have more than one influence. Spraint count might depend on fish availability, but also on body length, the season or the river.</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>**Multiple linear regression** extends the linear model to **two or more predictors** used together to explain a single dependent variable. The process is very similar to the regression you already know. We fit the model with <span class="in">`lm()`</span>, read a coefficients table, and check R² and the F-statistic. The main new idea is how to read each slope.</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>By the end of this section you will be able to:</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write the equation for a model with more than one predictor</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>fit a multiple regression in R and read the output</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>explain what it means for a slope to be estimated **holding the other predictors constant**</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>explain why a predictor can add very little to a model</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### Packages and data</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>Today you will need the package <span class="in">`tidyverse`</span>. It is a new workspace, so please install it from the **console** using <span class="in">`install.packages()`</span> before loading it into your script with <span class="in">`library()`</span>.</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>We will use the otter data again, so please read in <span class="in">`otter_data_v2.csv`</span> from the data folder and call it <span class="in">`otter_data`</span>.</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE, echo=FALSE}</span></span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>otter_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/otter_data_v2.csv"</span>)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>In Posit Cloud, packages need to be reinstalled each time you start a new session. If you use RStudio Desktop or Positron, you only install them once, but you still load them each session with <span class="in">`library()`</span>.</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### A quick recap</span></span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>**In a simple linear regression of spraint count on fish index, what does the slope tell us?**</span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>answer = "How much the predicted spraint count changes for each one unit increase in fish index.",</span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>"The predicted spraint count for an otter when the fish index is equal to zero.",</span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>"The proportion of the variation in spraint count that is explained by fish index.",</span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>"Whether the relationship between fish index and spraint count is statistically significant."</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 1: The equation you already know</span></span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>In Workshop 5 we described the relationship between fish index and spraints with a straight line:</span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>$$\text{spraints} = a + b \times \text{fish index}$$</span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a>Fitting this to the otter data gives:</span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>$$\text{spraints} = 0.25 + 1.81 \times \text{fish index}$$</span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **intercept**, 0.25, is the predicted spraint count when fish index is 0.</span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The **slope**, 1.81, is how much the predicted spraint count increases for each 1 unit increase in fish index.</span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a>Read it as a recipe. Start at 0.25 spraints, then add 1.81 more for every 1 unit of fish index.</span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 2: Add a second predictor</span></span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a>Now suppose we also think body length might matter. We do not change the recipe, we just add one more ingredient: another slope multiplied by the new predictor.</span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a>$$\text{spraints} = a + b_1 \times \text{fish index} + b_2 \times \text{body length}$$</span>
+<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-88"><a href="#cb21-88" aria-hidden="true" tabindex="-1"></a>The only changes are that the slope $b$ is now called $b_1$, and there is a new term for body length with its own slope, $b_2$. The numbering just tells the slopes apart.</span>
+<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-90"><a href="#cb21-90" aria-hidden="true" tabindex="-1"></a>Fitting this to the otter data gives:</span>
+<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-92"><a href="#cb21-92" aria-hidden="true" tabindex="-1"></a>$$\text{spraints} = -1.24 + 1.84 \times \text{fish index} + 0.012 \times \text{body length}$$</span>
+<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 3: Use it to make a prediction</span></span>
+<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a>For an otter with a fish index of 7 and a body length of 105 cm:</span>
+<span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a>$$-1.24 + (1.84 \times 7) + (0.012 \times 105) \approx 12.9 \text{ spraints}$$</span>
+<span id="cb21-99"><a href="#cb21-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a>**What does the 0.012 tell us?**</span>
+<span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-103"><a href="#cb21-103" aria-hidden="true" tabindex="-1"></a>"For every 0.012 cm of body length, the model predicts one extra spraint, whatever the fish index is.",</span>
+<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a>"Body length explains 1.2% of the variation in spraint count, with fish index held at its average value.",</span>
+<span id="cb21-105"><a href="#cb21-105" aria-hidden="true" tabindex="-1"></a>answer = "For two otters with the same fish index, the longer one is predicted to have 0.012 more spraints for each extra cm of body length.",</span>
+<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a>"For every extra spraint, an otter's body length is predicted to increase by 0.012 cm, with fish index fixed."</span>
+<span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-109"><a href="#cb21-109" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 4: Add as many predictors as you like</span></span>
+<span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-111"><a href="#cb21-111" aria-hidden="true" tabindex="-1"></a>The pattern never changes. Each extra predictor adds one more slope multiplied by that predictor. Written in general, with $x_1$, $x_2$ and so on standing for the predictors, it looks like this:</span>
+<span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-113"><a href="#cb21-113" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the general equation")`</span></span>
+<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a>$$y = a + b_1x_1 + b_2x_2 + b_3x_3 + \dots$$</span>
+<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a>Where $y$ is the dependent variable, $a$ is the intercept, and each $b$ is the slope for the predictor next to it. For our otter model, $y$ is spraints, $x_1$ is fish index and $x_2$ is body length, so it is the same equation as in Step 2.</span>
+<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a>Each slope is the effect of **that predictor while holding the other predictors constant**. In Step 2, $b_1$ is the effect of fish index among otters of the same body length.</span>
+<span id="cb21-123"><a href="#cb21-123" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-124"><a href="#cb21-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 5: Fit the model in R</span></span>
+<span id="cb21-126"><a href="#cb21-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-127"><a href="#cb21-127" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb21-128"><a href="#cb21-128" aria-hidden="true" tabindex="-1"></a>Remember, you can use functions such as <span class="in">`col_names`</span> to see the names of the variables in your data frame. </span>
+<span id="cb21-129"><a href="#cb21-129" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-130"><a href="#cb21-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a>To add a second predictor, join it to the first with <span class="in">`+`</span> on the right of the <span class="in">`~`</span>. Complete the code below.</span>
+<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a>The dependent variable is: <span class="in">`r fitb("spraints")`</span></span>
+<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a>The two predictors are: <span class="in">`r fitb(c("fish_index", "length_cm"))`</span> and <span class="in">`r fitb(c("length_cm", "fish_index"))`</span></span>
+<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a>lm_multiple <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> ___ <span class="sc">+</span> ___, <span class="at">data =</span> otter_data)</span>
+<span id="cb21-139"><a href="#cb21-139" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_multiple)</span>
+<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-142"><a href="#cb21-142" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the solution")`</span></span>
+<span id="cb21-143"><a href="#cb21-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r lm-multiple}</span></span>
+<span id="cb21-145"><a href="#cb21-145" aria-hidden="true" tabindex="-1"></a>lm_multiple <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index <span class="sc">+</span> length_cm, <span class="at">data =</span> otter_data)</span>
+<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_multiple)</span>
+<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-149"><a href="#cb21-149" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 6: Read the output</span></span>
+<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-153"><a href="#cb21-153" aria-hidden="true" tabindex="-1"></a>The output looks like the simple regression output, with one row for each predictor in the coefficients table.</span>
+<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Part of the output <span class="pp">|</span> What it tells us here <span class="pp">|</span></span>
+<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb21-157"><a href="#cb21-157" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`(Intercept)`</span> <span class="pp">|</span> The predicted spraint count when both predictors are 0, the starting point of the equation <span class="pp">|</span></span>
+<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> 1.84 more spraints per unit of fish index, with body length held constant (p &lt; 0.001) <span class="pp">|</span></span>
+<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`length_cm`</span> <span class="pp">|</span> 0.012 more spraints per cm of body length, with fish index held constant (p = 0.526) <span class="pp">|</span></span>
+<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Multiple R-squared`</span> <span class="pp">|</span> The proportion of variation explained by **both predictors together** (0.692) <span class="pp">|</span></span>
+<span id="cb21-161"><a href="#cb21-161" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`F-statistic`</span> <span class="pp">|</span> Tests whether the predictors **together** explain a significant amount of variation (p &lt; 0.001) <span class="pp">|</span></span>
+<span id="cb21-162"><a href="#cb21-162" aria-hidden="true" tabindex="-1"></a>The output looks like the simple regression output, with one row for each predictor in the coefficients table.</span>
+<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Part of the output <span class="pp">|</span> What it tells us here <span class="pp">|</span></span>
+<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`(Intercept)`</span> <span class="pp">|</span> The predicted spraint count when both predictors are 0, the starting point of the equation <span class="pp">|</span></span>
+<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> 1.84 more spraints per unit of fish index, with body length held constant (p &lt; 0.001) <span class="pp">|</span></span>
+<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`length_cm`</span> <span class="pp">|</span> 0.012 more spraints per cm of body length, with fish index held constant (p = 0.526) <span class="pp">|</span></span>
+<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Multiple R-squared`</span> <span class="pp">|</span> The proportion of variation explained by **both predictors together** (0.692) <span class="pp">|</span></span>
+<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`F-statistic`</span> <span class="pp">|</span> Tests whether the predictors **together** explain a significant amount of variation (p &lt; 0.001) <span class="pp">|</span></span>
+<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a>**What do the p-values in the coefficients table tell us?**</span>
+<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a>"Body length is a significant predictor (p = 0.526), but fish index is not (p &lt; 0.001), once body length is in the model.",</span>
+<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a>answer = "Fish index is a significant predictor (p &lt; 0.001), but body length is not (p = 0.526), once fish index is in the model.",</span>
+<span id="cb21-177"><a href="#cb21-177" aria-hidden="true" tabindex="-1"></a>"Both predictors are significant, because the F-statistic for the whole model has a p-value below 0.05.",</span>
+<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a>"Neither predictor is significant, because the intercept has a p-value above 0.05 in the coefficients table."</span>
+<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-180"><a href="#cb21-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-181"><a href="#cb21-181" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 7: Why did body length add so little?</span></span>
+<span id="cb21-182"><a href="#cb21-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-183"><a href="#cb21-183" aria-hidden="true" tabindex="-1"></a>Compare the model with fish index on its own to the model with both predictors:</span>
+<span id="cb21-184"><a href="#cb21-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-185"><a href="#cb21-185" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Model <span class="pp">|</span> Slope for fish index <span class="pp">|</span> R² <span class="pp">|</span></span>
+<span id="cb21-186"><a href="#cb21-186" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb21-187"><a href="#cb21-187" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Fish index only <span class="pp">|</span> 1.81 <span class="pp">|</span> 0.690 <span class="pp">|</span></span>
+<span id="cb21-188"><a href="#cb21-188" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Fish index and body length <span class="pp">|</span> 1.84 <span class="pp">|</span> 0.692 <span class="pp">|</span></span>
+<span id="cb21-189"><a href="#cb21-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-190"><a href="#cb21-190" aria-hidden="true" tabindex="-1"></a>The fish index slope hardly changes, and R² barely rises. This is because of how the predictors share out the variance in spraint count:</span>
+<span id="cb21-191"><a href="#cb21-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-192"><a href="#cb21-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each predictor may explain a **unique** part of the variance, which no other predictor explains.</span>
+<span id="cb21-193"><a href="#cb21-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Predictors may also **share** some of the variance they explain, because they are related to each other and carry some of the same information.</span>
+<span id="cb21-194"><a href="#cb21-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-195"><a href="#cb21-195" aria-hidden="true" tabindex="-1"></a>Here, body length explains almost nothing that fish index does not already explain, so its unique part is tiny. It is also only weakly related to fish index, so there is very little shared variance either.</span>
+<span id="cb21-196"><a href="#cb21-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-197"><a href="#cb21-197" aria-hidden="true" tabindex="-1"></a>**Adding body length changed R² from 0.690 to 0.692. What does this tell us?**</span>
+<span id="cb21-198"><a href="#cb21-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-199"><a href="#cb21-199" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-200"><a href="#cb21-200" aria-hidden="true" tabindex="-1"></a>"Body length explains a large share of the variation, but this is hidden because it is shared with fish index.",</span>
+<span id="cb21-201"><a href="#cb21-201" aria-hidden="true" tabindex="-1"></a>"The model has become worse, because any rise in R² of less than 0.05 means the predictor should be removed.",</span>
+<span id="cb21-202"><a href="#cb21-202" aria-hidden="true" tabindex="-1"></a>"Body length must be a poor predictor in general, so it should never be used to model spraint counts.",</span>
+<span id="cb21-203"><a href="#cb21-203" aria-hidden="true" tabindex="-1"></a>answer = "Body length explains very little unique variation in spraint count that fish index does not already explain."</span>
+<span id="cb21-204"><a href="#cb21-204" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-205"><a href="#cb21-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb21-207"><a href="#cb21-207" aria-hidden="true" tabindex="-1"></a>**When predictors share a lot of variance**</span>
+<span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a>If two predictors are strongly related to each other, much of what each explains is the same information. Their slopes can then change a lot when both are in the model, and become unstable. This is called **multicollinearity**.</span>
+<span id="cb21-210"><a href="#cb21-210" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb21-213"><a href="#cb21-213" aria-hidden="true" tabindex="-1"></a>**Adjusted R²**</span>
+<span id="cb21-214"><a href="#cb21-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-215"><a href="#cb21-215" aria-hidden="true" tabindex="-1"></a>R² can only go up when you add a predictor, even a useless one. **Adjusted R²** corrects for this by penalising each extra predictor. Here it goes **down** slightly, from 0.684 to 0.681, which also suggests body length is not improving the model. Use adjusted R² when comparing models with different numbers of predictors.</span>
+<span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Some terms you will meet</span></span>
+<span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-221"><a href="#cb21-221" aria-hidden="true" tabindex="-1"></a>Several of these terms are used for the same thing, so here is what each one means.</span>
+<span id="cb21-222"><a href="#cb21-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-223"><a href="#cb21-223" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Term <span class="pp">|</span> Meaning <span class="pp">|</span></span>
+<span id="cb21-224"><a href="#cb21-224" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb21-225"><a href="#cb21-225" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Dependent variable** <span class="pp">|</span> The outcome we are trying to explain (also called the response variable). In our model, spraint count. <span class="pp">|</span></span>
+<span id="cb21-226"><a href="#cb21-226" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Predictor** <span class="pp">|</span> A variable used to explain the dependent variable (also called an independent or explanatory variable). Fish index and body length. <span class="pp">|</span></span>
+<span id="cb21-227"><a href="#cb21-227" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Covariate** | A predictor included to **account for its effect**, usually while we focus on a different predictor. <span class="pp">|</span></span>
+<span id="cb21-228"><a href="#cb21-228" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Fixed effect** <span class="pp">|</span> A predictor whose effect we estimate directly, with its own slope or group difference. <span class="pp">|</span></span>
+<span id="cb21-229"><a href="#cb21-229" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Random effect** | A grouping variable whose levels are a **sample** from a larger set, included to account for non independence, not to estimate each level. <span class="pp">|</span></span>
+<span id="cb21-230"><a href="#cb21-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-231"><a href="#cb21-231" aria-hidden="true" tabindex="-1"></a>**Covariates:**                                          </span>
+<span id="cb21-232"><a href="#cb21-232" aria-hidden="true" tabindex="-1"></a>Suppose our question is whether fish availability predicts spraint count, but we know larger otters might leave more spraints. We add body length to the model so that the fish index slope is estimated **among otters of the same size**. Body length is then a covariate. The model is the same as before, and only the role of the variable has changed.</span>
+<span id="cb21-233"><a href="#cb21-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-234"><a href="#cb21-234" aria-hidden="true" tabindex="-1"></a>**Fixed effects:**                        </span>
+<span id="cb21-235"><a href="#cb21-235" aria-hidden="true" tabindex="-1"></a> Every predictor in the models we have fitted so far is a **fixed effect**. Each one gets its own estimate, such as a slope of 1.84 for fish index, and we interpret that estimate directly. Fixed effects can be continuous predictors, like fish index, or categories, like sex or site, where the estimate is the difference between groups.</span>
+<span id="cb21-236"><a href="#cb21-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-237"><a href="#cb21-237" aria-hidden="true" tabindex="-1"></a>**Random effects:**        </span>
+<span id="cb21-238"><a href="#cb21-238" aria-hidden="true" tabindex="-1"></a> Sometimes the data contain groups that are not of interest in themselves. If every otter in a survey were measured several times, measurements from the same otter would be similar to each other, so they would **not** be independent. Rather than estimating a separate effect for each otter, we treat `otter_id` as a **random effect**. This accounts for the clustering by estimating how much otters vary overall. Random effects need a different function from `lm()`, and models that contain both fixed and random effects are called **mixed effects models**. We do not fit them here, but you will meet them in later work.</span>
+<span id="cb21-239"><a href="#cb21-239" aria-hidden="true" tabindex="-1"></a>                                  </span>
+<span id="cb21-240"><a href="#cb21-240" aria-hidden="true" tabindex="-1"></a>**In our model, we mainly care whether fish index predicts spraint count, and we add body length only to account for otter size. What is body length?**                        </span>
+<span id="cb21-241"><a href="#cb21-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-242"><a href="#cb21-242" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-243"><a href="#cb21-243" aria-hidden="true" tabindex="-1"></a>"A random effect, because it varies from one otter to the next in the survey.",</span>
+<span id="cb21-244"><a href="#cb21-244" aria-hidden="true" tabindex="-1"></a>"A dependent variable, because it is measured on every otter in the data set.",</span>
+<span id="cb21-245"><a href="#cb21-245" aria-hidden="true" tabindex="-1"></a>answer = "A covariate, because it is included to account for its effect while we focus on fish index.",</span>
+<span id="cb21-246"><a href="#cb21-246" aria-hidden="true" tabindex="-1"></a>"An interaction, because it is combined with fish index in the model equation."</span>
+<span id="cb21-247"><a href="#cb21-247" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-248"><a href="#cb21-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-249"><a href="#cb21-249" aria-hidden="true" tabindex="-1"></a>**Which of these situations would call for a random effect?**</span>
+<span id="cb21-250"><a href="#cb21-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-251"><a href="#cb21-251" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-252"><a href="#cb21-252" aria-hidden="true" tabindex="-1"></a>answer = "Every otter was surveyed several times, so measurements from the same otter are not independent.",</span>
+<span id="cb21-253"><a href="#cb21-253" aria-hidden="true" tabindex="-1"></a>"A researcher chose two specific habitats because the difference between them is of direct interest.",</span>
+<span id="cb21-254"><a href="#cb21-254" aria-hidden="true" tabindex="-1"></a>"A continuous predictor such as fish index is added to explain differences in spraint counts.",</span>
+<span id="cb21-255"><a href="#cb21-255" aria-hidden="true" tabindex="-1"></a>"A one off survey measured every otter once and compared the body mass of males and females."</span>
+<span id="cb21-256"><a href="#cb21-256" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-257"><a href="#cb21-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-258"><a href="#cb21-258" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb21-259"><a href="#cb21-259" aria-hidden="true" tabindex="-1"></a>The <span class="in">`lm()`</span> function can only fit **fixed effects**. This is why the models in this workshop contain no random effects, and why the otter data are not suitable for one: each otter appears in the data only once.</span>
+<span id="cb21-260"><a href="#cb21-260" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-261"><a href="#cb21-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-262"><a href="#cb21-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-263"><a href="#cb21-263" aria-hidden="true" tabindex="-1"></a><span class="fu">## Case Study: What Drives Spraint Counts?</span></span>
+<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-265"><a href="#cb21-265" aria-hidden="true" tabindex="-1"></a>In Workshop 5 we found that fish availability is a strong predictor of spraint count. But the otters in our data were surveyed across **three rivers** and in **two seasons**, and these might also influence spraint counts. They could even be tangled up with fish availability itself, if some rivers simply have more fish.</span>
+<span id="cb21-266"><a href="#cb21-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a>**Our question:** does fish availability still predict spraint count after accounting for river and season?</span>
+<span id="cb21-268"><a href="#cb21-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-269"><a href="#cb21-269" aria-hidden="true" tabindex="-1"></a>In this model, spraint count is the dependent variable, fish index is the predictor we care about, and river and season are **covariates** included to account for their effects. All three are **fixed effects**.</span>
+<span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 1: Check the data</span></span>
+<span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-273"><a href="#cb21-273" aria-hidden="true" tabindex="-1"></a>Can you remember how to check the variable type of our variables? You can use the <span class="co">[</span><span class="ot">Function Glossary</span><span class="co">](function-glossary.qmd)</span> to remind yourself of this. </span>
+<span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-275"><a href="#cb21-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE, echo=FALSE}</span></span>
+<span id="cb21-276"><a href="#cb21-276" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(otter_data)</span>
+<span id="cb21-277"><a href="#cb21-277" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(otter_data)</span>
+<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-280"><a href="#cb21-280" aria-hidden="true" tabindex="-1"></a>You should be able to see if you ran one of the checking functions that <span class="in">`site`</span>, <span class="in">`season`</span> and <span class="in">`sex`</span> are currently **characters** (`&lt;chr&gt;`), which means R treats them as plain text. As we did in Workshop 4, we convert them to **factors** before modelling. A factor is a categorical variable with a fixed set of **levels**, and the order of those levels decides which one the model uses as the reference.</span>
+<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a>**Task**: Use <span class="in">`mutate()`</span> to convert <span class="in">`site`</span>, <span class="in">`season`</span> and <span class="in">`sex`</span> to factors in <span class="in">`otter_data`</span>, then use <span class="in">`count()`</span> to check how many otters there are in each site and season. Label this as a new object, and call it otter_data_v2</span>
+<span id="cb21-284"><a href="#cb21-284" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-286"><a href="#cb21-286" aria-hidden="true" tabindex="-1"></a>As this one is a bit new; I've hidden the code below - but do attempt to do it first! </span>
+<span id="cb21-287"><a href="#cb21-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-288"><a href="#cb21-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-289"><a href="#cb21-289" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Reveal the code")`</span></span>
+<span id="cb21-290"><a href="#cb21-290" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results='hide', message=FALSE, warning=FALSE}</span></span>
+<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a>otter_data_v2 <span class="ot">&lt;-</span> otter_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-292"><a href="#cb21-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-293"><a href="#cb21-293" aria-hidden="true" tabindex="-1"></a>    <span class="at">site   =</span> <span class="fu">as.factor</span>(site),</span>
+<span id="cb21-294"><a href="#cb21-294" aria-hidden="true" tabindex="-1"></a>    <span class="at">season =</span> <span class="fu">as.factor</span>(season),</span>
+<span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex    =</span> <span class="fu">as.factor</span>(sex)</span>
+<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a>otter_data_v2 <span class="sc">%&gt;%</span></span>
+<span id="cb21-299"><a href="#cb21-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(site, season)</span>
+<span id="cb21-300"><a href="#cb21-300" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-301"><a href="#cb21-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-302"><a href="#cb21-302" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb21-303"><a href="#cb21-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-304"><a href="#cb21-304" aria-hidden="true" tabindex="-1"></a>The data should now like this, notice how it now says "fct" and not "chr"? </span>
+<span id="cb21-305"><a href="#cb21-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-308"><a href="#cb21-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-309"><a href="#cb21-309" aria-hidden="true" tabindex="-1"></a>otter_data_v2</span>
+<span id="cb21-310"><a href="#cb21-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-311"><a href="#cb21-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-312"><a href="#cb21-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-313"><a href="#cb21-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-314"><a href="#cb21-314" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2: Visualise the relationships</span></span>
+<span id="cb21-315"><a href="#cb21-315" aria-hidden="true" tabindex="-1"></a>**Remembering what we learnt last week, what plot do you think we could use for this?**</span>
+<span id="cb21-316"><a href="#cb21-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-317"><a href="#cb21-317" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-318"><a href="#cb21-318" aria-hidden="true" tabindex="-1"></a>"A bar chart of river, so that the height of each bar shows how many otters were surveyed at each river.",</span>
+<span id="cb21-319"><a href="#cb21-319" aria-hidden="true" tabindex="-1"></a>answer = "A boxplot, with river on the x axis and fish index on the y axis, so the rivers can be compared side by side.",</span>
+<span id="cb21-320"><a href="#cb21-320" aria-hidden="true" tabindex="-1"></a>"A scatterplot of river against fish index, so that each otter is drawn as a single point on the plot.",</span>
+<span id="cb21-321"><a href="#cb21-321" aria-hidden="true" tabindex="-1"></a>"A histogram of fish index for all otters together, so that the overall shape of the distribution is shown."</span>
+<span id="cb21-322"><a href="#cb21-322" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-323"><a href="#cb21-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-324"><a href="#cb21-324" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show explanation")`</span></span>
+<span id="cb21-325"><a href="#cb21-325" aria-hidden="true" tabindex="-1"></a>Fish index is **continuous** and river is **categorical**, so a boxplot compares the centre and spread of fish index across the rivers. This is the same reasoning as Challenge 3 in the visualisation workshop.</span>
+<span id="cb21-326"><a href="#cb21-326" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb21-327"><a href="#cb21-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-328"><a href="#cb21-328" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb21-329"><a href="#cb21-329" aria-hidden="true" tabindex="-1"></a>**Task**: Code the relevant plot to see if fish index differs between rivers. Remember, the <span class="co">[</span><span class="ot">Function Glossary</span><span class="co">](function-glossary.qmd)</span> is there to help you! </span>
+<span id="cb21-330"><a href="#cb21-330" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-331"><a href="#cb21-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-332"><a href="#cb21-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-333"><a href="#cb21-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-334"><a href="#cb21-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-335"><a href="#cb21-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, fig.width=6, fig.height=4}</span></span>
+<span id="cb21-336"><a href="#cb21-336" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> site, <span class="at">y =</span> fish_index, <span class="at">fill =</span> site)) <span class="sc">+</span></span>
+<span id="cb21-337"><a href="#cb21-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb21-338"><a href="#cb21-338" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb21-339"><a href="#cb21-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"River"</span>, <span class="at">y =</span> <span class="st">"Fish availability index"</span>) <span class="sc">+</span></span>
+<span id="cb21-340"><a href="#cb21-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb21-341"><a href="#cb21-341" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb21-342"><a href="#cb21-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-343"><a href="#cb21-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-344"><a href="#cb21-344" aria-hidden="true" tabindex="-1"></a>**What does the plot suggest about fish index and river?**</span>
+<span id="cb21-345"><a href="#cb21-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-346"><a href="#cb21-346" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-347"><a href="#cb21-347" aria-hidden="true" tabindex="-1"></a>"Fish index is highest at the River Yare and lowest at the River Wensum, so fish index and river are related.",</span>
+<span id="cb21-348"><a href="#cb21-348" aria-hidden="true" tabindex="-1"></a>"Fish index is about the same at every river, so fish index and river are not related to each other.",</span>
+<span id="cb21-349"><a href="#cb21-349" aria-hidden="true" tabindex="-1"></a>"Fish index varies only within each river, so the rivers themselves cannot differ in fish availability.", </span>
+<span id="cb21-350"><a href="#cb21-350" aria-hidden="true" tabindex="-1"></a>answer = "Fish index is highest at the River Wensum and lowest at the River Yare, so fish index and river are related."</span>
+<span id="cb21-351"><a href="#cb21-351" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-352"><a href="#cb21-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-353"><a href="#cb21-353" aria-hidden="true" tabindex="-1"></a>**Why does this matter for our question?**</span>
+<span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-355"><a href="#cb21-355" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a>"Rivers with more fish must have more otters, so the number of otters should be added to the model.",</span>
+<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a>"The rivers differ in fish index, so the model should be fitted separately for each river on its own.",</span>
+<span id="cb21-358"><a href="#cb21-358" aria-hidden="true" tabindex="-1"></a>answer = "Part of the link between fish index and spraints could really be a river effect, so river should be accounted for.",</span>
+<span id="cb21-359"><a href="#cb21-359" aria-hidden="true" tabindex="-1"></a>"Fish index can no longer be a predictor, because predictors are not allowed to differ between groups."</span>
+<span id="cb21-360"><a href="#cb21-360" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-361"><a href="#cb21-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-362"><a href="#cb21-362" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb21-363"><a href="#cb21-363" aria-hidden="true" tabindex="-1"></a>**Task**: Code the relevant plot spraints against fish index, coloured by river, with a separate points and line for each river. Use the <span class="co">[</span><span class="ot">Function Glossary</span><span class="co">](function-glossary.qmd)</span> to help you. </span>
+<span id="cb21-364"><a href="#cb21-364" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-365"><a href="#cb21-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-366"><a href="#cb21-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mlr-scatter, fig.width=6.5, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}</span></span>
+<span id="cb21-367"><a href="#cb21-367" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(otter_data, <span class="fu">aes</span>(<span class="at">x =</span> fish_index, <span class="at">y =</span> spraints, <span class="at">colour =</span> site)) <span class="sc">+</span></span>
+<span id="cb21-368"><a href="#cb21-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb21-369"><a href="#cb21-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb21-370"><a href="#cb21-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fish availability index"</span>, <span class="at">y =</span> <span class="st">"Spraint count"</span>, <span class="at">colour =</span> <span class="st">"River"</span>) <span class="sc">+</span></span>
+<span id="cb21-371"><a href="#cb21-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb21-372"><a href="#cb21-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-373"><a href="#cb21-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-374"><a href="#cb21-374" aria-hidden="true" tabindex="-1"></a>Within each river the lines slope upwards, but each river also sits at a different height. Rivers with more fish also tend to have more spraints.</span>
+<span id="cb21-375"><a href="#cb21-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-376"><a href="#cb21-376" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3: Start with the simple model</span></span>
+<span id="cb21-377"><a href="#cb21-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-378"><a href="#cb21-378" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb21-379"><a href="#cb21-379" aria-hidden="true" tabindex="-1"></a>**Task**: Fit a simple regression of <span class="in">`spraints`</span> on <span class="in">`fish_index`</span> and save it as <span class="in">`lm_simple`</span>. Then look at the <span class="in">`summary()`</span>.</span>
+<span id="cb21-380"><a href="#cb21-380" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-381"><a href="#cb21-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-382"><a href="#cb21-382" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the results of the model")`</span></span>
+<span id="cb21-383"><a href="#cb21-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-384"><a href="#cb21-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb21-385"><a href="#cb21-385" aria-hidden="true" tabindex="-1"></a>lm_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index, <span class="at">data =</span> otter_data)</span>
+<span id="cb21-386"><a href="#cb21-386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-387"><a href="#cb21-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-388"><a href="#cb21-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mlr-simple}</span></span>
+<span id="cb21-389"><a href="#cb21-389" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_simple)</span>
+<span id="cb21-390"><a href="#cb21-390" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-391"><a href="#cb21-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-392"><a href="#cb21-392" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb21-393"><a href="#cb21-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-394"><a href="#cb21-394" aria-hidden="true" tabindex="-1"></a>This is the model from Workshop 5. The slope is 1.81 and R² is 0.690.</span>
+<span id="cb21-395"><a href="#cb21-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-396"><a href="#cb21-396" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4: Add the covariates</span></span>
+<span id="cb21-397"><a href="#cb21-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-398"><a href="#cb21-398" aria-hidden="true" tabindex="-1"></a>Now we add river and season. We join them to fish index with <span class="in">`+`</span>, exactly as in the two predictor model. Remember to use the actual dataset variable names, and use one of the checking functions to see this. </span>
+<span id="cb21-399"><a href="#cb21-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-400"><a href="#cb21-400" aria-hidden="true" tabindex="-1"></a>The dependent variable is: <span class="in">`r fitb("spraints")`</span></span>
+<span id="cb21-401"><a href="#cb21-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-402"><a href="#cb21-402" aria-hidden="true" tabindex="-1"></a>The three predictors are: <span class="in">`r fitb(c("fish_index", "season", "site"))`</span>, <span class="in">`r fitb(c("season", "site", "fish_index"))`</span> and <span class="in">`r fitb(c("site", "fish_index", "season"))`</span></span>
+<span id="cb21-403"><a href="#cb21-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-404"><a href="#cb21-404" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb21-405"><a href="#cb21-405" aria-hidden="true" tabindex="-1"></a>lm_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> ___ <span class="sc">+</span> ___ <span class="sc">+</span> ___, <span class="at">data =</span> otter_data)</span>
+<span id="cb21-406"><a href="#cb21-406" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span>
+<span id="cb21-407"><a href="#cb21-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-408"><a href="#cb21-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-409"><a href="#cb21-409" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the results of the model")`</span></span>
+<span id="cb21-410"><a href="#cb21-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-411"><a href="#cb21-411" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb21-412"><a href="#cb21-412" aria-hidden="true" tabindex="-1"></a>lm_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index <span class="sc">+</span> season <span class="sc">+</span> site, <span class="at">data =</span> otter_data)</span>
+<span id="cb21-413"><a href="#cb21-413" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-414"><a href="#cb21-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-415"><a href="#cb21-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-418"><a href="#cb21-418" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-419"><a href="#cb21-419" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span>
+<span id="cb21-420"><a href="#cb21-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-421"><a href="#cb21-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-422"><a href="#cb21-422" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb21-423"><a href="#cb21-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-424"><a href="#cb21-424" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 5: Read the coefficients</span></span>
+<span id="cb21-425"><a href="#cb21-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-426"><a href="#cb21-426" aria-hidden="true" tabindex="-1"></a>Fish index is numeric, so it has one row and one slope. <span class="in">`season`</span> and <span class="in">`site`</span> are categories, so R compares each level with a **reference level**. By default the reference is the first level in alphabetical order, which is **summer** for season and **River Bure** for site.</span>
+<span id="cb21-427"><a href="#cb21-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-428"><a href="#cb21-428" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Row <span class="pp">|</span> What it tells us <span class="pp">|</span></span>
+<span id="cb21-429"><a href="#cb21-429" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb21-430"><a href="#cb21-430" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`(Intercept)`</span> <span class="pp">|</span> The predicted spraint count for a **summer** otter at the **River Bure** with fish index 0 (6.57) <span class="pp">|</span></span>
+<span id="cb21-431"><a href="#cb21-431" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`fish_index`</span> <span class="pp">|</span> 0.88 more spraints per unit of fish index, with season and river held constant (p = 0.005) <span class="pp">|</span></span>
+<span id="cb21-432"><a href="#cb21-432" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`seasonwinter`</span> <span class="pp">|</span> Winter otters are predicted to leave 0.75 more spraints than summer otters, at the same fish index and river (p = 0.081) <span class="pp">|</span></span>
+<span id="cb21-433"><a href="#cb21-433" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`siteRiver Wensum`</span> <span class="pp">|</span> 1.28 more spraints than at the River Bure, at the same fish index and season (p = 0.094) <span class="pp">|</span></span>
+<span id="cb21-434"><a href="#cb21-434" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`siteRiver Yare`</span> <span class="pp">|</span> 2.57 fewer spraints than at the River Bure, at the same fish index and season (p &lt; 0.001) <span class="pp">|</span></span>
+<span id="cb21-435"><a href="#cb21-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-436"><a href="#cb21-436" aria-hidden="true" tabindex="-1"></a>**Why is there no row for `River Bure` in the output?**</span>
+<span id="cb21-437"><a href="#cb21-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-438"><a href="#cb21-438" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-439"><a href="#cb21-439" aria-hidden="true" tabindex="-1"></a>"River Bure was removed from the model, because it had too few otters to produce a reliable estimate.",</span>
+<span id="cb21-440"><a href="#cb21-440" aria-hidden="true" tabindex="-1"></a>answer = "River Bure is the reference level, so the other rivers are compared with it and its effect is in the intercept.",</span>
+<span id="cb21-441"><a href="#cb21-441" aria-hidden="true" tabindex="-1"></a>"River Bure has no effect on spraint counts, so R left it out of the model automatically.",</span>
+<span id="cb21-442"><a href="#cb21-442" aria-hidden="true" tabindex="-1"></a>"River Bure is the dependent variable, so it cannot also appear as a predictor in the coefficients table."</span>
+<span id="cb21-443"><a href="#cb21-443" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-444"><a href="#cb21-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-445"><a href="#cb21-445" aria-hidden="true" tabindex="-1"></a>**What does the `siteRiver Yare` coefficient of -2.57 tell us?**</span>
+<span id="cb21-446"><a href="#cb21-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-447"><a href="#cb21-447" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-448"><a href="#cb21-448" aria-hidden="true" tabindex="-1"></a>answer = "At the same fish index and season, otters at the River Yare are predicted to leave about 2.57 fewer spraints than at the River Bure.",</span>
+<span id="cb21-449"><a href="#cb21-449" aria-hidden="true" tabindex="-1"></a>"At the same fish index and season, otters at the River Yare are predicted to leave about 2.57 fewer spraints than at the River Wensum.",</span>
+<span id="cb21-450"><a href="#cb21-450" aria-hidden="true" tabindex="-1"></a>"Otters at the River Yare are predicted to leave 2.57 spraints on average, whatever the fish index and season happen to be.",</span>
+<span id="cb21-451"><a href="#cb21-451" aria-hidden="true" tabindex="-1"></a>"For each additional unit of river, the predicted spraint count falls by 2.57, with fish index and season held constant."</span>
+<span id="cb21-452"><a href="#cb21-452" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-453"><a href="#cb21-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-454"><a href="#cb21-454" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 6: Compare the models</span></span>
+<span id="cb21-455"><a href="#cb21-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-456"><a href="#cb21-456" aria-hidden="true" tabindex="-1"></a>The table below compares the fish index slope across models as covariates are added. Notice what happens to the slope.</span>
+<span id="cb21-457"><a href="#cb21-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-458"><a href="#cb21-458" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Model <span class="pp">|</span> Fish index slope <span class="pp">|</span> p <span class="pp">|</span> R² <span class="pp">|</span> Adjusted R² <span class="pp">|</span></span>
+<span id="cb21-459"><a href="#cb21-459" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|---|</span></span>
+<span id="cb21-460"><a href="#cb21-460" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Fish index only <span class="pp">|</span> 1.81 <span class="pp">|</span> &lt; 0.001 <span class="pp">|</span> 0.690 <span class="pp">|</span> 0.684 <span class="pp">|</span></span>
+<span id="cb21-461"><a href="#cb21-461" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Plus season <span class="pp">|</span> 1.80 <span class="pp">|</span> &lt; 0.001 <span class="pp">|</span> 0.696 <span class="pp">|</span> 0.686 <span class="pp">|</span></span>
+<span id="cb21-462"><a href="#cb21-462" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Plus river <span class="pp">|</span> 0.97 <span class="pp">|</span> 0.002 <span class="pp">|</span> 0.756 <span class="pp">|</span> 0.743 <span class="pp">|</span></span>
+<span id="cb21-463"><a href="#cb21-463" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Plus season and river <span class="pp">|</span> 0.88 <span class="pp">|</span> 0.005 <span class="pp">|</span> 0.769 <span class="pp">|</span> 0.753 <span class="pp">|</span></span>
+<span id="cb21-464"><a href="#cb21-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-465"><a href="#cb21-465" aria-hidden="true" tabindex="-1"></a>Adding season changes almost nothing. Adding river nearly halves the slope and raises R² noticeably.</span>
+<span id="cb21-466"><a href="#cb21-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-467"><a href="#cb21-467" aria-hidden="true" tabindex="-1"></a>**The fish index slope fell from 1.81 to 0.88 after adding river and season. What is the best explanation?**</span>
+<span id="cb21-468"><a href="#cb21-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-469"><a href="#cb21-469" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-470"><a href="#cb21-470" aria-hidden="true" tabindex="-1"></a>"Adding predictors always makes every slope smaller, because the model has more terms to share the variation between.",</span>
+<span id="cb21-471"><a href="#cb21-471" aria-hidden="true" tabindex="-1"></a>"Fish index has become a worse predictor, so it is no longer significant now that river and season are in the model.",</span>
+<span id="cb21-472"><a href="#cb21-472" aria-hidden="true" tabindex="-1"></a>"The model has been fitted incorrectly, because a slope should not change when other predictors are added to the model.", </span>
+<span id="cb21-473"><a href="#cb21-473" aria-hidden="true" tabindex="-1"></a>answer = "Fish index and river share variance in spraint count, so part of the original slope was really a difference between rivers."</span>
+<span id="cb21-474"><a href="#cb21-474" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-475"><a href="#cb21-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-476"><a href="#cb21-476" aria-hidden="true" tabindex="-1"></a><span class="in">`r hide("Click to show the explanation")`</span></span>
+<span id="cb21-477"><a href="#cb21-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-478"><a href="#cb21-478" aria-hidden="true" tabindex="-1"></a>Rivers differ in both fish index and spraint count. The River Wensum has the highest fish index (about 8.4) and the River Yare has the lowest (about 5.2), and spraint counts follow the same pattern (you can check the plots you've generated to see this). In the simple model, the fish index slope was doing two jobs at once. It picked up the effect of fish index, and it also picked up the differences between rivers, because fish index acts as a stand in for river.</span>
+<span id="cb21-479"><a href="#cb21-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-480"><a href="#cb21-480" aria-hidden="true" tabindex="-1"></a>Once river is in the model, the comparison changes. The slope is now estimated **among otters at the same river**, so the between river differences no longer inflate it. This is what "holding the other predictors constant" means in practice. You can see the same thing in the scatterplot coloured by river, where the lines within each river are flatter than the overall trend.</span>
+<span id="cb21-481"><a href="#cb21-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-482"><a href="#cb21-482" aria-hidden="true" tabindex="-1"></a>**Why the other options are wrong:**</span>
+<span id="cb21-483"><a href="#cb21-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-484"><a href="#cb21-484" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Option <span class="pp">|</span> Why it is wrong <span class="pp">|</span></span>
+<span id="cb21-485"><a href="#cb21-485" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb21-486"><a href="#cb21-486" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Adding predictors always makes every slope smaller <span class="pp">|</span> This is false. Adding season changed the slope from 1.81 to only 1.80, because season is barely related to fish index. A slope only changes much when the new predictor shares variance with it. <span class="pp">|</span></span>
+<span id="cb21-487"><a href="#cb21-487" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Fish index has become a worse predictor and is no longer significant <span class="pp">|</span> This is false. The slope is smaller, but fish index is still significant (p = 0.005). A smaller slope is not the same as a weaker effect. <span class="pp">|</span></span>
+<span id="cb21-488"><a href="#cb21-488" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> The model has been fitted incorrectly <span class="pp">|</span> This is false. Slopes are expected to change when predictors are related. The slope in a multiple regression answers a different question from the slope in a simple one. <span class="pp">|</span></span>
+<span id="cb21-489"><a href="#cb21-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-490"><a href="#cb21-490" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb21-491"><a href="#cb21-491" aria-hidden="true" tabindex="-1"></a>If two predictors were **completely unrelated**, adding one would not change the other's slope at all. The size of the change is a rough guide to how much variance the predictors share.</span>
+<span id="cb21-492"><a href="#cb21-492" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-493"><a href="#cb21-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-494"><a href="#cb21-494" aria-hidden="true" tabindex="-1"></a><span class="in">`r unhide()`</span></span>
+<span id="cb21-495"><a href="#cb21-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-496"><a href="#cb21-496" aria-hidden="true" tabindex="-1"></a>**Is fish index still a useful predictor of spraint count?**</span>
+<span id="cb21-497"><a href="#cb21-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-498"><a href="#cb21-498" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-499"><a href="#cb21-499" aria-hidden="true" tabindex="-1"></a>answer = "Yes, it remains a significant positive predictor (p = 0.005), although its effect is about half the size we first estimated.",</span>
+<span id="cb21-500"><a href="#cb21-500" aria-hidden="true" tabindex="-1"></a>"No, the slope fell by about half, so fish index no longer has any meaningful effect on spraint count.",</span>
+<span id="cb21-501"><a href="#cb21-501" aria-hidden="true" tabindex="-1"></a>"Yes, because its slope is still larger than the slopes for season and river, which are each below one.",</span>
+<span id="cb21-502"><a href="#cb21-502" aria-hidden="true" tabindex="-1"></a>"No, because the model with extra predictors always replaces the simple model's conclusion about fish index."</span>
+<span id="cb21-503"><a href="#cb21-503" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-504"><a href="#cb21-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-505"><a href="#cb21-505" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 7: Should we add more predictors?</span></span>
+<span id="cb21-506"><a href="#cb21-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-507"><a href="#cb21-507" aria-hidden="true" tabindex="-1"></a>We could also add <span class="in">`sex`</span>. Let us see whether it helps.</span>
+<span id="cb21-508"><a href="#cb21-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-509"><a href="#cb21-509" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mlr-sex}</span></span>
+<span id="cb21-510"><a href="#cb21-510" aria-hidden="true" tabindex="-1"></a>lm_sex <span class="ot">&lt;-</span> <span class="fu">lm</span>(spraints <span class="sc">~</span> fish_index <span class="sc">+</span> season <span class="sc">+</span> site <span class="sc">+</span> sex, <span class="at">data =</span> otter_data)</span>
+<span id="cb21-511"><a href="#cb21-511" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sex)<span class="sc">$</span>coefficients</span>
+<span id="cb21-512"><a href="#cb21-512" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sex)<span class="sc">$</span>r.squared</span>
+<span id="cb21-513"><a href="#cb21-513" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sex)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb21-514"><a href="#cb21-514" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-515"><a href="#cb21-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-516"><a href="#cb21-516" aria-hidden="true" tabindex="-1"></a>Sex is not significant (p = 0.542). R² rises very slightly, from 0.769 to 0.771, but adjusted R² falls from 0.753 to 0.750.</span>
+<span id="cb21-517"><a href="#cb21-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-518"><a href="#cb21-518" aria-hidden="true" tabindex="-1"></a>**What should we conclude about adding `sex` to the model?**</span>
+<span id="cb21-519"><a href="#cb21-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-520"><a href="#cb21-520" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-521"><a href="#cb21-521" aria-hidden="true" tabindex="-1"></a>answer = "Sex adds almost nothing, and adjusted R² falls, so the simpler model without sex is preferred.",</span>
+<span id="cb21-522"><a href="#cb21-522" aria-hidden="true" tabindex="-1"></a>"Sex should stay in the model, because R² went up and R² never decreases when a predictor is added.",</span>
+<span id="cb21-523"><a href="#cb21-523" aria-hidden="true" tabindex="-1"></a>"Sex should be added, because every measured variable should be included to get the best possible model.",</span>
+<span id="cb21-524"><a href="#cb21-524" aria-hidden="true" tabindex="-1"></a>"Sex should be removed, because its coefficient is positive and positive coefficients make the model worse."</span>
+<span id="cb21-525"><a href="#cb21-525" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-526"><a href="#cb21-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-527"><a href="#cb21-527" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 8: Check the assumptions</span></span>
+<span id="cb21-528"><a href="#cb21-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-529"><a href="#cb21-529" aria-hidden="true" tabindex="-1"></a>The assumptions are the same as for simple regression. Our model has several predictors, so we check the residuals against the **fitted values** from the whole model.</span>
+<span id="cb21-530"><a href="#cb21-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-531"><a href="#cb21-531" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mlr-resid, fig.width=6, fig.height=4}</span></span>
+<span id="cb21-532"><a href="#cb21-532" aria-hidden="true" tabindex="-1"></a>resid_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb21-533"><a href="#cb21-533" aria-hidden="true" tabindex="-1"></a>  <span class="at">fitted =</span> <span class="fu">fitted</span>(lm_full),</span>
+<span id="cb21-534"><a href="#cb21-534" aria-hidden="true" tabindex="-1"></a>  <span class="at">resid  =</span> <span class="fu">resid</span>(lm_full)</span>
+<span id="cb21-535"><a href="#cb21-535" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-536"><a href="#cb21-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-537"><a href="#cb21-537" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resid_data, <span class="fu">aes</span>(<span class="at">x =</span> fitted, <span class="at">y =</span> resid)) <span class="sc">+</span></span>
+<span id="cb21-538"><a href="#cb21-538" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#F8766D"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb21-539"><a href="#cb21-539" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb21-540"><a href="#cb21-540" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted values"</span>, <span class="at">y =</span> <span class="st">"Residuals"</span>) <span class="sc">+</span></span>
+<span id="cb21-541"><a href="#cb21-541" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb21-542"><a href="#cb21-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-543"><a href="#cb21-543" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">resid</span>(lm_full))</span>
+<span id="cb21-544"><a href="#cb21-544" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-545"><a href="#cb21-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-546"><a href="#cb21-546" aria-hidden="true" tabindex="-1"></a>The residuals show no clear pattern, and the Shapiro-Wilk test on them is not significant (p = 0.208), so the assumptions are reasonably met.</span>
+<span id="cb21-547"><a href="#cb21-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-548"><a href="#cb21-548" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 9: Why is river a fixed effect?</span></span>
+<span id="cb21-549"><a href="#cb21-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-550"><a href="#cb21-550" aria-hidden="true" tabindex="-1"></a>You might wonder whether river should be a **random effect**, since the otters are grouped within rivers. Here it is better as a fixed effect, for two reasons:</span>
+<span id="cb21-551"><a href="#cb21-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-552"><a href="#cb21-552" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>There are only **three** rivers, which is too few to estimate how much rivers vary in general.</span>
+<span id="cb21-553"><a href="#cb21-553" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>These are the **specific rivers we are interested in**, so we want to estimate the difference between them directly.</span>
+<span id="cb21-554"><a href="#cb21-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-555"><a href="#cb21-555" aria-hidden="true" tabindex="-1"></a>**Why do we treat river as a fixed effect and not a random effect in this model?**</span>
+<span id="cb21-556"><a href="#cb21-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-557"><a href="#cb21-557" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-558"><a href="#cb21-558" aria-hidden="true" tabindex="-1"></a>answer = "There are only three rivers and they are the specific rivers of interest, so we estimate each river's effect directly.",</span>
+<span id="cb21-559"><a href="#cb21-559" aria-hidden="true" tabindex="-1"></a>"Random effects can only be used for numeric variables, and river is a categorical variable in the otter data.",</span>
+<span id="cb21-560"><a href="#cb21-560" aria-hidden="true" tabindex="-1"></a>"Rivers cannot be random effects, because the otters were all sampled in the same year and in the same two seasons.",</span>
+<span id="cb21-561"><a href="#cb21-561" aria-hidden="true" tabindex="-1"></a>"A random effect would need to be fitted with lm(), and the function lm() cannot be used for a categorical variable."</span>
+<span id="cb21-562"><a href="#cb21-562" aria-hidden="true" tabindex="-1"></a>))`</span>
+<span id="cb21-563"><a href="#cb21-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-564"><a href="#cb21-564" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 10: Write up the result</span></span>
+<span id="cb21-565"><a href="#cb21-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-566"><a href="#cb21-566" aria-hidden="true" tabindex="-1"></a>Here is how you might report the model:</span>
+<span id="cb21-567"><a href="#cb21-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-568"><a href="#cb21-568" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb21-569"><a href="#cb21-569" aria-hidden="true" tabindex="-1"></a>*"A multiple regression including fish index, season and river explained 76.9% of the variation in spraint count (R² = 0.769, adjusted R² = 0.753; F(4, 55) = 45.9, p &lt; 0.001). After accounting for season and river, fish index remained a significant positive predictor of spraint count (b = 0.88, p = 0.005): each one unit increase in fish index was associated with 0.88 more spraints. Spraint counts were significantly lower at the River Yare than at the River Bure (b = -2.57, p &lt; 0.001). Season and the River Wensum did not differ significantly from their reference levels."*</span>
+<span id="cb21-570"><a href="#cb21-570" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-571"><a href="#cb21-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-572"><a href="#cb21-572" aria-hidden="true" tabindex="-1"></a>**In the write-up, why do we say "after accounting for season and river"?**</span>
+<span id="cb21-573"><a href="#cb21-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-574"><a href="#cb21-574" aria-hidden="true" tabindex="-1"></a>`r longmcq(c(</span>
+<span id="cb21-575"><a href="#cb21-575" aria-hidden="true" tabindex="-1"></a>answer = "The fish index slope is estimated with season and river held constant, so it can differ from the slope in a simple model.",</span>
+<span id="cb21-576"><a href="#cb21-576" aria-hidden="true" tabindex="-1"></a>"The journal requires every covariate in the model to be named in the write-up, whether or not it matters to the result.",</span>
+<span id="cb21-577"><a href="#cb21-577" aria-hidden="true" tabindex="-1"></a>"Season and river are the dependent variables of the model, so they must be named when the results are reported.",</span>
+<span id="cb21-578"><a href="#cb21-578" aria-hidden="true" tabindex="-1"></a>"The phrase shows that fish index was the only significant predictor of spraint count in the final model."</span>
+<span id="cb21-579"><a href="#cb21-579" aria-hidden="true" tabindex="-1"></a>))`</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
